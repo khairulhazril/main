@@ -8,6 +8,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
@@ -31,13 +32,17 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private BrowserPanel browserPanel;
+    //private BrowserPanel browserPanel;
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private CalendarPanel calendarPanel;
+
+    //@FXML
+    //private StackPane browserPlaceholder;
 
     @FXML
-    private StackPane browserPlaceholder;
+    private GridPane calendarPlaceholder;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -111,8 +116,11 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        browserPanel = new BrowserPanel(logic.selectedPersonProperty());
-        browserPlaceholder.getChildren().add(browserPanel.getRoot());
+        //browserPanel = new BrowserPanel(logic.selectedPersonProperty());
+        //browserPlaceholder.getChildren().add(browserPanel.getRoot());
+
+        calendarPanel = new CalendarPanel();
+        calendarPlaceholder.getChildren().add(calendarPanel.getRoot());
 
         personListPanel = new PersonListPanel(logic.getFilteredPersonList(), logic.selectedPersonProperty(),
                 logic::setSelectedPerson);
@@ -152,6 +160,18 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Opens the calendar window or focuses on it if it's already opened.
+     */
+/*    @FXML
+    public void handleCalendar() {
+        if (!calendarWindow.isShowing()) {
+            calendarWindow.show();
+        } else {
+            calendarWindow.focus();
+        }
+    }
+*/
     void show() {
         primaryStage.show();
     }

@@ -11,8 +11,9 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.layout.GridPane?>
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-         title="Address App" minWidth="450" minHeight="600" onCloseRequest="#handleExit">
+         title="Address App" minWidth="1125" minHeight="700" onCloseRequest="#handleExit">
   <icons>
     <Image url="@/images/address_book_32.png" />
   </icons>
@@ -54,11 +55,17 @@
             <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
           </VBox>
 
-          <StackPane fx:id="browserPlaceholder" prefWidth="340" >
+          <!--<StackPane fx:id="browserPlaceholder" prefWidth="340" >
             <padding>
               <Insets top="10" right="10" bottom="10" left="10" />
             </padding>
-          </StackPane>
+          </StackPane>-->
+
+          <GridPane fx:id="calendarPlaceholder" minWidth = "765" prefWidth="765" >
+            <padding>
+              <Insets top="10" right="10" bottom="10" left="10" />
+            </padding>
+          </GridPane>
         </SplitPane>
 
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
