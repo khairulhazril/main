@@ -16,8 +16,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.RowConstraints;
-import javafx.scene.layout.VBox;
 import javafx.scene.Node;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import seedu.address.commons.core.LogsCenter;
@@ -32,7 +32,7 @@ public class CalendarPanel extends UiPart<Region> {
     private static final int ROW_HEIGHT = 80;
     private static final int COL_WIDTH = 105;
     private static final String[] HEADERS = new String[] { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday",
-            "Friday", "Saturday" };
+        "Friday", "Saturday" };
 
     private final Logger logger = LogsCenter.getLogger(CalendarPanel.class);
 

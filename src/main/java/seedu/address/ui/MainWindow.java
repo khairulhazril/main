@@ -163,15 +163,15 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Opens the calendar window or focuses on it if it's already opened.
      */
-/*    @FXML
+    /*@FXML
     public void handleCalendar() {
         if (!calendarWindow.isShowing()) {
             calendarWindow.show();
         } else {
             calendarWindow.focus();
         }
-    }
-*/
+    }*/
+
     void show() {
         primaryStage.show();
     }
