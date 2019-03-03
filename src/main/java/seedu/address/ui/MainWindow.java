@@ -32,14 +32,10 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    //private BrowserPanel browserPanel;
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
     private CalendarPanel calendarPanel;
-
-    //@FXML
-    //private StackPane browserPlaceholder;
 
     @FXML
     private GridPane calendarPlaceholder;
@@ -116,9 +112,6 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        //browserPanel = new BrowserPanel(logic.selectedPersonProperty());
-        //browserPlaceholder.getChildren().add(browserPanel.getRoot());
-
         calendarPanel = new CalendarPanel();
         calendarPlaceholder.getChildren().add(calendarPanel.getRoot());
 

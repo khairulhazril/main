@@ -70,7 +70,7 @@ public class CalendarPanel extends UiPart<Region> {
     }
 
     /**
-     * Populates grid with boxes.
+     * Populates grid with content cells.
      */
     private void writeBox() {
         BackgroundFill backgroundFill = new BackgroundFill(Paint.valueOf("#FFFFFF"), CornerRadii.EMPTY, Insets.EMPTY);
