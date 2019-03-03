@@ -37,7 +37,7 @@ Responsibilities: Interface
 '''
 
 === Justin
-image::justin-Ong.png[width="150", align="left"]
+image::justin-ong.png[width="150", align="left"]
 {empty}[http://github.com/Justin-Ong/[github]]
 
 Role: Developer +
