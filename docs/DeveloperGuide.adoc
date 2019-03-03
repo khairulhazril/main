@@ -1,4 +1,4 @@
-= AddressBook Level 4 - Developer Guide
+= Task Manager - Developer Guide
 :site-section: DeveloperGuide
 :toc:
 :toc-title:
@@ -827,17 +827,30 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 [width="59%",cols="22%,<23%,<25%,<30%",options="header",]
 |=======================================================================
 |Priority |As a ... |I want to ... |So that I can...
-|`* * *` |new user |see usage instructions |refer to instructions when I forget how to use the App
+|`* * *` |new user |see usage instructions |remember how to accomplish tasks in the program
 
-|`* * *` |user |add a new person |
+|`* * *` |user |add a new event |
 
-|`* * *` |user |delete a person |remove entries that I no longer need
+|`* * *` |user |delete a event |remove entries that I no longer need
 
-|`* * *` |user |find a person by name |locate details of persons without having to go through the entire list
+|`* * *` |user |edit an event |keep entries up to date
 
-|`* *` |user |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
+|`* * *` |user |find a event by name |locate details of event without having to go through the entire list
 
-|`*` |user with many persons in the address book |sort persons by name |locate a person easily
+|`* *` |user |have multiple events with different tags for a single entry |combine duplicate events and prevent cofusion for multiple same events
+
+|`* *` |user |find tasks by due date, tags, etc. |still find an important task if I forget their name
+
+|`* *` |user |find a task even if I mistype (e.g. incorrect capitalisation) |save time by not having to rewrite the query
+
+|`* *` |user |change the colours and sizes of the text |make things easier to read
+
+|`* *` |user |secure my task manager via a username and password to hide contacts by default |keep my events and due dates private and secure to minimize the chances of someone seeing them by accident
+
+|`* *` |user |change the theme of the GUI |
+
+|`*` |user |have the program autocomplete my inputs |save time by not having to write out the entire command or search query
+
 |=======================================================================
 
 _{More to be added}_
@@ -845,17 +858,55 @@ _{More to be added}_
 [appendix]
 == Use Cases
 
-(For all use cases below, the *System* is the `AddressBook` and the *Actor* is the `user`, unless specified otherwise)
+(For all use cases below, the *System* is the `TaskManager` and the *Actor* is the `user`, unless specified otherwise)
 
 [discrete]
-=== Use case: Delete person
+=== Use case: Help
 
 *MSS*
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User requests for help
+2. Task Manger shows all the commands with the purpose of the command
++
+Use case ends.
+
+[discrete]
+=== Use case: Add task
+
+*MSS*
+
+1. User requests to add a new event with given fields
+2. Task Manager adds the event
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. The given fields are invalid
++
+[none]
+** 1ai. Task Manager shows an error message
++
+Use case resumes at step 1.
+
+[none]
+* 1b. The given fields are invalid
++
+[none]
+** 1bi. Task Manager shows an error message
++
+Use case resumes at step 1.
+
+[discrete]
+=== Use case: Delete task
+
+*MSS*
+
+1.  User requests to list tasks
+2.  Task Manager shows a list of tasks
+3.  User requests to delete a specific task in the list
+4.  Task Manager deletes the person
 +
 Use case ends.
 
@@ -866,10 +917,72 @@ Use case ends.
 +
 Use case ends.
 
+[none]
 * 3a. The given index is invalid.
 +
 [none]
-** 3a1. AddressBook shows an error message.
+** 3ai. Task Manager shows an error message.
++
+Use case resumes at step 2.
+
+[discrete]
+=== Use case: Edit task
+
+*MSS*
+
+1. User requests to list tasks
+2. Task Manager shows a list of tasks
+3. User requests to edit a specific task in the list with the given fields
+4. Task Manager edits the task
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The list is empty
++
+Use case ends.
+
+[none]
+* 3a. The given index is invalid
++
+[none]
+** 3ai. Task manager shows an error
++
+Use case resumes at step 2.
+
+[none]
+* 3b. The given fields are invalid
++
+[none]
+** 3bi. Task manager shows an error
++
+Use case resumes at step 2.
+
+
+[discrete]
+=== Use case: Find task
+
+*MSS*
+
+1. User requests to find a task
+2. Task Manager shows the tasks according to user's input
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The list is empty
++
+Use case ends.
+
+[none]
+* 2b. The given index is invalid
++
+[none]
+** 2bi. Task manager shows an error
 +
 Use case resumes at step 2.
 
@@ -890,25 +1003,17 @@ _{More to be added}_
 [[mainstream-os]] Mainstream OS::
 Windows, Linux, Unix, OS-X
 
-[[private-contact-detail]] Private contact detail::
-A contact detail that is not meant to be shared with others
+[[private-task-information]] Private Task Information::
+A task information that is not meant to be shared with others
 
-[appendix]
-== Product Survey
+[[cli]] CLI::
+A means of interacting with a computer program where the user issues commands to the program in the form of texts
 
-*Product Name*
+[[gui]] GUI::
+A form of user interface that allows users to interact with electronic devices through graphical icons and visual indicators
 
-Author: ...
-
-Pros:
-
-* ...
-* ...
-
-Cons:
-
-* ...
-* ...
+[[mss]] MSS::
+Main success scenario
 
 [appendix]
 == Instructions for Manual Testing
@@ -934,15 +1039,15 @@ These instructions only provide a starting point for testers to work on; testers
 
 _{ more test cases ... }_
 
-=== Deleting a person
+=== Deleting a task
 
-. Deleting a person while all persons are listed
+. Deleting a task while all tasks are listed
 
-.. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+.. Prerequisites: List all tasks using the `list` command. Multiple tasks in the list.
 .. Test case: `delete 1` +
-   Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   Expected: First task is deleted from the list. Details of the deleted task shown in the status message. Timestamp in the status bar is updated.
 .. Test case: `delete 0` +
-   Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+   Expected: No task is deleted. Error details shown in the status message. Status bar remains the same.
 .. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) _{give more}_ +
    Expected: Similar to previous.
 
