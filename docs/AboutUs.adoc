@@ -28,7 +28,7 @@ Responsibilities: Code Refining
 '''
 
 === Kayden
-image::Shengkok.png[width="150", align="left"]
+image::shengkok.png[width="150", align="left"]
 {empty}[http://github.com/Shengkok[github]]
 
 Role: Developer +
@@ -37,7 +37,7 @@ Responsibilities: Interface
 '''
 
 === Justin
-image::Justin-Ong.png[width="150", align="left"]
+image::justin-Ong.png[width="150", align="left"]
 {empty}[http://github.com/Justin-Ong/[github]]
 
 Role: Developer +
