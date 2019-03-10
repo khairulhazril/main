@@ -2,7 +2,11 @@ package seedu.address.model.person;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.*;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_TUTORIAL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_TUTORIAL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_TUTORIAL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PRIORITY_TUTORIAL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_GRADED;
 import static seedu.address.testutil.TypicalTasks.SLIDES;
 import static seedu.address.testutil.TypicalTasks.TUTORIAL;
 
@@ -32,7 +36,8 @@ public class TaskTest {
         assertFalse(SLIDES.isSameTask(null));
 
         // different phone and email -> returns false
-        Task editedAlice = new TaskBuilder(SLIDES).withModule(VALID_MODULE_TUTORIAL).withDate(VALID_DATE_TUTORIAL).build();
+        Task editedAlice = new TaskBuilder(SLIDES).withModule(VALID_MODULE_TUTORIAL)
+                .withDate(VALID_DATE_TUTORIAL).build();
         assertFalse(SLIDES.isSameTask(editedAlice));
 
         // different name -> returns false

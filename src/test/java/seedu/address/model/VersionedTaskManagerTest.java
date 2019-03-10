@@ -1,8 +1,12 @@
 package seedu.address.model;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static seedu.address.testutil.TypicalTasks.*;
+import static seedu.address.testutil.TypicalTasks.LECTURE;
+import static seedu.address.testutil.TypicalTasks.PROJECT;
+import static seedu.address.testutil.TypicalTasks.TUTORIAL;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -205,7 +209,8 @@ public class VersionedTaskManagerTest {
 
     @Test
     public void equals() {
-        VersionedTaskManager versionedAddressBook = prepareTaskManagerList(taskManagerWithProject, taskManagerWithTutorial);
+        VersionedTaskManager versionedAddressBook =
+                prepareTaskManagerList(taskManagerWithProject, taskManagerWithTutorial);
 
         // same values -> returns true
         VersionedTaskManager copy = prepareTaskManagerList(taskManagerWithProject, taskManagerWithTutorial);
@@ -221,7 +226,8 @@ public class VersionedTaskManagerTest {
         assertFalse(versionedAddressBook.equals(1));
 
         // different state list -> returns false
-        VersionedTaskManager differentAddressBookList = prepareTaskManagerList(taskManagerWithTutorial, taskManagerWithLecture);
+        VersionedTaskManager differentAddressBookList =
+                prepareTaskManagerList(taskManagerWithTutorial, taskManagerWithLecture);
         assertFalse(versionedAddressBook.equals(differentAddressBookList));
 
         // different current pointer index -> returns false

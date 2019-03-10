@@ -1,6 +1,15 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.commands.CommandTestUtil.*;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_PROJECT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_TUTORIAL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_PROJECT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_TUTORIAL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_PROJECT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_TUTORIAL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PRIORITY_PROJECT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PRIORITY_TUTORIAL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_GRADED;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_UNGRADED;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -34,9 +43,9 @@ public class TypicalTasks {
     // Manually added - Task's details found in {@code CommandTestUtil}
     public static final Task PROJECT = new TaskBuilder().withName(VALID_NAME_PROJECT).withModule(VALID_MODULE_PROJECT)
             .withDate(VALID_DATE_PROJECT).withPriority(VALID_PRIORITY_PROJECT).withTags(VALID_TAG_UNGRADED).build();
-    public static final Task TUTORIAL = new TaskBuilder().withName(VALID_NAME_TUTORIAL).withModule(VALID_MODULE_TUTORIAL)
-            .withDate(VALID_DATE_TUTORIAL).withPriority(VALID_PRIORITY_TUTORIAL).withTags(VALID_TAG_GRADED, VALID_TAG_UNGRADED)
-            .build();
+    public static final Task TUTORIAL = new TaskBuilder().withName(VALID_NAME_TUTORIAL)
+            .withModule(VALID_MODULE_TUTORIAL).withDate(VALID_DATE_TUTORIAL).withPriority(VALID_PRIORITY_TUTORIAL)
+            .withTags(VALID_TAG_GRADED, VALID_TAG_UNGRADED).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Lab"; // A keyword that matches LAB
 
