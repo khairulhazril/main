@@ -27,12 +27,22 @@ import seedu.address.commons.core.LogsCenter;
  */
 public class CalendarPanel extends UiPart<Region> {
     private static final String FXML = "CalendarPanel.fxml";
+
+    private static Text monthLabel = new Text();
+
     private static final int COLS = 7; // 7 Days in a week
-    private static final int ROWS = 6; // 5 Rows + header
+    private static final int ROWS = 8; // 6 Rows + Day Header + Month Header
     private static final int ROW_HEIGHT = 80;
     private static final int COL_WIDTH = 105;
+    private static final int HEADER_HEIGHT = 20;
     private static final String[] HEADERS = new String[] { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday",
         "Friday", "Saturday" };
+
+    private static final BackgroundFill backgroundFill = new BackgroundFill(Paint.valueOf("#FFFFFF"),
+        CornerRadii.EMPTY, Insets.EMPTY);
+    private static final Background background = new Background(backgroundFill);
+    private static final Border border = new Border(new BorderStroke(Paint.valueOf("#0F0F0F"), BorderStrokeStyle.SOLID,
+            CornerRadii.EMPTY, BorderStroke.THIN));
 
     private final Logger logger = LogsCenter.getLogger(CalendarPanel.class);
 
@@ -41,26 +51,27 @@ public class CalendarPanel extends UiPart<Region> {
 
     public CalendarPanel() {
         super(FXML);
-        buildGridPane();
+        buildCalendarPane();
     }
 
     /**
      * Builds calendar grid.
      */
-    private void buildGridPane() {
+    private void buildCalendarPane() {
         buildGrid();
         writeBox();
-        writeHeaders();
+        writeMonthHeader("Month");
+        writeDayHeaders();
         writeContents();
     }
 
     /**
-     * Writes headers to top row of grid.
+     * Writes day headers to second-highest row of grid.
      */
-    private void writeHeaders() {
+    private void writeDayHeaders() {
         for (int i = 0; i < COLS; i++) {
             for (Node node : taskGridPane.getChildren()) {
-                if (GridPane.getRowIndex(node) == 0 && GridPane.getColumnIndex(node) == i) {
+                if (GridPane.getRowIndex(node) == 1 && GridPane.getColumnIndex(node) == i) {
                     VBox box = (VBox) node;
                     Text header = new Text(HEADERS[i]);
                     box.setAlignment(Pos.CENTER);
@@ -71,7 +82,24 @@ public class CalendarPanel extends UiPart<Region> {
     }
 
     /**
-     * Writes contents to each cell of the grid.
+     * Writes month to top row of grid.
+     */
+    private void writeMonthHeader(String month) {
+        for (Node node : taskGridPane.getChildren()) {
+            if (GridPane.getRowIndex(node) == 0 && GridPane.getColumnIndex(node) == 0) {
+                VBox box = (VBox) node;
+                monthLabel.setText(month);
+
+                box.setAlignment(Pos.CENTER);
+                box.getChildren().add(monthLabel);
+
+                break;
+            }
+        }
+    }
+
+    /**
+     * Writes event information to each cell of the grid.
      */
     private void writeContents() {
         return;
@@ -81,18 +109,19 @@ public class CalendarPanel extends UiPart<Region> {
      * Populates grid with content cells.
      */
     private void writeBox() {
-        BackgroundFill backgroundFill = new BackgroundFill(Paint.valueOf("#FFFFFF"), CornerRadii.EMPTY, Insets.EMPTY);
-        Background background = new Background(backgroundFill);
-
-        Border border = new Border(new BorderStroke(Paint.valueOf("#0F0F0F"), BorderStrokeStyle.SOLID,
-                CornerRadii.EMPTY, BorderStroke.THIN));
-
         for (int i = 0; i < COLS; i++) {
             for (int j = 0; j < ROWS; j++) {
                 VBox box = new VBox();
                 box.setBackground(background);
                 box.setBorder(border);
-                taskGridPane.add(box, i, j);
+
+                if (i == 0 && j == 0) {
+                    taskGridPane.add(box, i, j, ROWS, 1);
+                } else if (j == 0) {
+                    continue;
+                } else {
+                    taskGridPane.add(box, i, j);
+                }
             }
         }
     }
@@ -111,8 +140,8 @@ public class CalendarPanel extends UiPart<Region> {
         }
 
         for (int i = 0; i < ROWS; i++) {
-            if (i == 0) {
-                row = new RowConstraints();
+            if (i == 0 || i == 1) {
+                row = new RowConstraints(HEADER_HEIGHT);
             } else {
                 row = new RowConstraints(ROW_HEIGHT);
             }
