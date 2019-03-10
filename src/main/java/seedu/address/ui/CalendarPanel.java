@@ -51,6 +51,7 @@ public class CalendarPanel extends UiPart<Region> {
         buildGrid();
         writeBox();
         writeHeaders();
+        writeContents();
     }
 
     /**
@@ -67,6 +68,13 @@ public class CalendarPanel extends UiPart<Region> {
                 }
             }
         }
+    }
+
+    /**
+     * Writes contents to each cell of the grid.
+     */
+    private void writeContents() {
+        return;
     }
 
     /**
