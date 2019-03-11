@@ -8,11 +8,11 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; is valid as declared in {@link #isValidModule(String)}
  */
 public class Module {
-
-
+    
     public static final String MESSAGE_CONSTRAINTS =
-            "Module code should be of the format AAXXXX, where A is an alphabet and X is a number";
-    public static final String VALIDATION_REGEX = "[a-zA-z]{2}[\\d]{4}";
+            "Module code should be of the format AA[A]XXXX[B], where A and B are alphabets and X is a number, " +
+                    "[A] is optional for 3 letter module codes and [B] is optional for module codes with a suffix";
+    public static final String VALIDATION_REGEX = "[a-zA-Z]{2,3}[\\d]{4}[a-zA-Z]{0,1}";
     public final String value;
 
     /**
