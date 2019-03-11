@@ -15,50 +15,50 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.person.Task;
-import seedu.address.model.person.exceptions.TaskNotFoundException;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
- * Represents the in-memory model of the task manager data.
+ * Represents the in-memory model of the address book data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final VersionedTaskManager versionedTaskManager;
+    private final VersionedAddressBook versionedAddressBook;
     private final UserPrefs userPrefs;
-    private final FilteredList<Task> filteredTasks;
-    private final SimpleObjectProperty<Task> selectedTask = new SimpleObjectProperty<>();
+    private final FilteredList<Person> filteredPersons;
+    private final SimpleObjectProperty<Person> selectedPerson = new SimpleObjectProperty<>();
 
     /**
-     * Initializes a ModelManager with the given taskManager and userPrefs.
+     * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyTaskManager taskManager, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
         super();
-        requireAllNonNull(taskManager, userPrefs);
+        requireAllNonNull(addressBook, userPrefs);
 
-        logger.fine("Initializing with task manager: " + taskManager + " and user prefs " + userPrefs);
+        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
-        versionedTaskManager = new VersionedTaskManager(taskManager);
+        versionedAddressBook = new VersionedAddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredTasks = new FilteredList<>(versionedTaskManager.getTaskList());
-        filteredTasks.addListener(this::ensureSelectedTaskIsValid);
+        filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
+        filteredPersons.addListener(this::ensureSelectedPersonIsValid);
     }
 
     public ModelManager() {
-        this(new TaskManager(), new UserPrefs());
+        this(new AddressBook(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
 
     @Override
-    public ReadOnlyUserPrefs getUserPrefs() {
-        return userPrefs;
-    }
-
-    @Override
     public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
         requireNonNull(userPrefs);
         this.userPrefs.resetData(userPrefs);
+    }
+
+    @Override
+    public ReadOnlyUserPrefs getUserPrefs() {
+        return userPrefs;
     }
 
     @Override
@@ -73,141 +73,141 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getTaskManagerFilePath() {
-        return userPrefs.getTaskManagerFilePath();
+    public Path getAddressBookFilePath() {
+        return userPrefs.getAddressBookFilePath();
     }
 
     @Override
-    public void setTaskManagerFilePath(Path taskManagerFilePath) {
-        requireNonNull(taskManagerFilePath);
-        userPrefs.setTaskManagerFilePath(taskManagerFilePath);
+    public void setAddressBookFilePath(Path addressBookFilePath) {
+        requireNonNull(addressBookFilePath);
+        userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
 
-    //=========== TaskManager ================================================================================
+    //=========== AddressBook ================================================================================
 
     @Override
-    public ReadOnlyTaskManager getTaskManager() {
-        return versionedTaskManager;
-    }
-
-    @Override
-    public void setTaskManager(ReadOnlyTaskManager taskManager) {
-        versionedTaskManager.resetData(taskManager);
+    public void setAddressBook(ReadOnlyAddressBook addressBook) {
+        versionedAddressBook.resetData(addressBook);
     }
 
     @Override
-    public boolean hasTask(Task task) {
-        requireNonNull(task);
-        return versionedTaskManager.hasTask(task);
+    public ReadOnlyAddressBook getAddressBook() {
+        return versionedAddressBook;
     }
 
     @Override
-    public void deleteTask(Task target) {
-        versionedTaskManager.removeTask(target);
+    public boolean hasPerson(Person person) {
+        requireNonNull(person);
+        return versionedAddressBook.hasPerson(person);
     }
 
     @Override
-    public void addTask(Task task) {
-        versionedTaskManager.addTask(task);
-        updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
+    public void deletePerson(Person target) {
+        versionedAddressBook.removePerson(target);
     }
 
     @Override
-    public void setTask(Task target, Task editedTask) {
-        requireAllNonNull(target, editedTask);
-
-        versionedTaskManager.setTask(target, editedTask);
+    public void addPerson(Person person) {
+        versionedAddressBook.addPerson(person);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
-    //=========== Filtered Task List Accessors =============================================================
+    @Override
+    public void setPerson(Person target, Person editedPerson) {
+        requireAllNonNull(target, editedPerson);
+
+        versionedAddressBook.setPerson(target, editedPerson);
+    }
+
+    //=========== Filtered Person List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Task} backed by the internal list of
-     * {@code versionedTaskManager}
+     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Task> getFilteredTaskList() {
-        return filteredTasks;
+    public ObservableList<Person> getFilteredPersonList() {
+        return filteredPersons;
     }
 
     @Override
-    public void updateFilteredTaskList(Predicate<Task> predicate) {
+    public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
-        filteredTasks.setPredicate(predicate);
+        filteredPersons.setPredicate(predicate);
     }
 
     //=========== Undo/Redo =================================================================================
 
     @Override
-    public boolean canUndoTaskManager() {
-        return versionedTaskManager.canUndo();
+    public boolean canUndoAddressBook() {
+        return versionedAddressBook.canUndo();
     }
 
     @Override
-    public boolean canRedoTaskManager() {
-        return versionedTaskManager.canRedo();
+    public boolean canRedoAddressBook() {
+        return versionedAddressBook.canRedo();
     }
 
     @Override
-    public void undoTaskManager() {
-        versionedTaskManager.undo();
+    public void undoAddressBook() {
+        versionedAddressBook.undo();
     }
 
     @Override
-    public void redoTaskManager() {
-        versionedTaskManager.redo();
+    public void redoAddressBook() {
+        versionedAddressBook.redo();
     }
 
     @Override
-    public void commitTaskManager() {
-        versionedTaskManager.commit();
+    public void commitAddressBook() {
+        versionedAddressBook.commit();
     }
 
-    //=========== Selected task ===========================================================================
+    //=========== Selected person ===========================================================================
 
     @Override
-    public ReadOnlyProperty<Task> selectedTaskProperty() {
-        return selectedTask;
-    }
-
-    @Override
-    public Task getSelectedTask() {
-        return selectedTask.getValue();
+    public ReadOnlyProperty<Person> selectedPersonProperty() {
+        return selectedPerson;
     }
 
     @Override
-    public void setSelectedTask(Task task) {
-        if (task != null && !filteredTasks.contains(task)) {
-            throw new TaskNotFoundException();
+    public Person getSelectedPerson() {
+        return selectedPerson.getValue();
+    }
+
+    @Override
+    public void setSelectedPerson(Person person) {
+        if (person != null && !filteredPersons.contains(person)) {
+            throw new PersonNotFoundException();
         }
-        selectedTask.setValue(task);
+        selectedPerson.setValue(person);
     }
 
     /**
-     * Ensures {@code selectedTask} is a valid task in {@code filteredTasks}.
+     * Ensures {@code selectedPerson} is a valid person in {@code filteredPersons}.
      */
-    private void ensureSelectedTaskIsValid(ListChangeListener.Change<? extends Task> change) {
+    private void ensureSelectedPersonIsValid(ListChangeListener.Change<? extends Person> change) {
         while (change.next()) {
-            if (selectedTask.getValue() == null) {
-                // null is always a valid selected task, so we do not need to check that it is valid anymore.
+            if (selectedPerson.getValue() == null) {
+                // null is always a valid selected person, so we do not need to check that it is valid anymore.
                 return;
             }
 
-            boolean wasSelectedTaskReplaced = change.wasReplaced() && change.getAddedSize() == change.getRemovedSize()
-                    && change.getRemoved().contains(selectedTask.getValue());
-            if (wasSelectedTaskReplaced) {
-                // Update selectedTask to its new value.
-                int index = change.getRemoved().indexOf(selectedTask.getValue());
-                selectedTask.setValue(change.getAddedSubList().get(index));
+            boolean wasSelectedPersonReplaced = change.wasReplaced() && change.getAddedSize() == change.getRemovedSize()
+                    && change.getRemoved().contains(selectedPerson.getValue());
+            if (wasSelectedPersonReplaced) {
+                // Update selectedPerson to its new value.
+                int index = change.getRemoved().indexOf(selectedPerson.getValue());
+                selectedPerson.setValue(change.getAddedSubList().get(index));
                 continue;
             }
 
-            boolean wasSelectedTaskRemoved = change.getRemoved().stream()
-                    .anyMatch(removedTask -> selectedTask.getValue().isSameTask(removedTask));
-            if (wasSelectedTaskRemoved) {
-                // Select the task that came before it in the list,
-                // or clear the selection if there is no such task.
-                selectedTask.setValue(change.getFrom() > 0 ? change.getList().get(change.getFrom() - 1) : null);
+            boolean wasSelectedPersonRemoved = change.getRemoved().stream()
+                    .anyMatch(removedPerson -> selectedPerson.getValue().isSamePerson(removedPerson));
+            if (wasSelectedPersonRemoved) {
+                // Select the person that came before it in the list,
+                // or clear the selection if there is no such person.
+                selectedPerson.setValue(change.getFrom() > 0 ? change.getList().get(change.getFrom() - 1) : null);
             }
         }
     }
@@ -226,10 +226,10 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return versionedTaskManager.equals(other.versionedTaskManager)
+        return versionedAddressBook.equals(other.versionedAddressBook)
                 && userPrefs.equals(other.userPrefs)
-                && filteredTasks.equals(other.filteredTasks)
-                && Objects.equals(selectedTask.get(), other.selectedTask.get());
+                && filteredPersons.equals(other.filteredPersons)
+                && Objects.equals(selectedPerson.get(), other.selectedPerson.get());
     }
 
 }

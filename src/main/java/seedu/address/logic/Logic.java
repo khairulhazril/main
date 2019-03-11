@@ -8,8 +8,8 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.ReadOnlyTaskManager;
-import seedu.address.model.person.Task;
+import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.person.Person;
 
 /**
  * API of the Logic component
@@ -17,25 +17,22 @@ import seedu.address.model.person.Task;
 public interface Logic {
     /**
      * Executes the command and returns the result.
-     *
      * @param commandText The command as entered by the user.
      * @return the result of the command execution.
      * @throws CommandException If an error occurs during command execution.
-     * @throws ParseException   If an error occurs during parsing.
+     * @throws ParseException If an error occurs during parsing.
      */
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
     /**
-     * Returns the TaskManager.
+     * Returns the AddressBook.
      *
-     * @see seedu.address.model.Model#getTaskManager()
+     * @see seedu.address.model.Model#getAddressBook()
      */
-    ReadOnlyTaskManager getTaskManager();
+    ReadOnlyAddressBook getAddressBook();
 
-    /**
-     * Returns an unmodifiable view of the filtered list of tasks
-     */
-    ObservableList<Task> getFilteredTaskList();
+    /** Returns an unmodifiable view of the filtered list of persons */
+    ObservableList<Person> getFilteredPersonList();
 
     /**
      * Returns an unmodifiable view of the list of commands entered by the user.
@@ -44,9 +41,9 @@ public interface Logic {
     ObservableList<String> getHistory();
 
     /**
-     * Returns the user prefs' task manager file path.
+     * Returns the user prefs' address book file path.
      */
-    Path getTaskManagerFilePath();
+    Path getAddressBookFilePath();
 
     /**
      * Returns the user prefs' GUI settings.
@@ -59,17 +56,17 @@ public interface Logic {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Selected task in the filtered task list.
-     * null if no task is selected.
+     * Selected person in the filtered person list.
+     * null if no person is selected.
      *
-     * @see seedu.address.model.Model#selectedTaskProperty()
+     * @see seedu.address.model.Model#selectedPersonProperty()
      */
-    ReadOnlyProperty<Task> selectedTaskProperty();
+    ReadOnlyProperty<Person> selectedPersonProperty();
 
     /**
-     * Sets the selected task in the filtered task list.
+     * Sets the selected person in the filtered person list.
      *
-     * @see seedu.address.model.Model#setSelectedTask(Task)
+     * @see seedu.address.model.Model#setSelectedPerson(Person)
      */
-    void setSelectedTask(Task task);
+    void setSelectedPerson(Person person);
 }

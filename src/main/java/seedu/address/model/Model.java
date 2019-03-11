@@ -6,26 +6,24 @@ import java.util.function.Predicate;
 import javafx.beans.property.ReadOnlyProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.person.Task;
+import seedu.address.model.person.Person;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
-    /**
-     * {@code Predicate} that always evaluate to true
-     */
-    Predicate<Task> PREDICATE_SHOW_ALL_TASKS = unused -> true;
-
-    /**
-     * Returns the user prefs.
-     */
-    ReadOnlyUserPrefs getUserPrefs();
+    /** {@code Predicate} that always evaluate to true */
+    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
     void setUserPrefs(ReadOnlyUserPrefs userPrefs);
+
+    /**
+     * Returns the user prefs.
+     */
+    ReadOnlyUserPrefs getUserPrefs();
 
     /**
      * Returns the user prefs' GUI settings.
@@ -38,100 +36,95 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' task manager file path.
+     * Returns the user prefs' address book file path.
      */
-    Path getTaskManagerFilePath();
+    Path getAddressBookFilePath();
 
     /**
-     * Sets the user prefs' task manager file path.
+     * Sets the user prefs' address book file path.
      */
-    void setTaskManagerFilePath(Path taskManagerFilePath);
+    void setAddressBookFilePath(Path addressBookFilePath);
 
     /**
-     * Returns the TaskManager
+     * Replaces address book data with the data in {@code addressBook}.
      */
-    ReadOnlyTaskManager getTaskManager();
+    void setAddressBook(ReadOnlyAddressBook addressBook);
+
+    /** Returns the AddressBook */
+    ReadOnlyAddressBook getAddressBook();
 
     /**
-     * Replaces task manager data with the data in {@code taskManager}.
+     * Returns true if a person with the same identity as {@code person} exists in the address book.
      */
-    void setTaskManager(ReadOnlyTaskManager taskManager);
+    boolean hasPerson(Person person);
 
     /**
-     * Returns true if a task with the same identity as {@code task} exists in the task manager.
+     * Deletes the given person.
+     * The person must exist in the address book.
      */
-    boolean hasTask(Task task);
+    void deletePerson(Person target);
 
     /**
-     * Deletes the given task.
-     * The task must exist in the task manager.
+     * Adds the given person.
+     * {@code person} must not already exist in the address book.
      */
-    void deleteTask(Task target);
+    void addPerson(Person person);
 
     /**
-     * Adds the given task.
-     * {@code task} must not already exist in the task manager.
+     * Replaces the given person {@code target} with {@code editedPerson}.
+     * {@code target} must exist in the address book.
+     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
-    void addTask(Task task);
+    void setPerson(Person target, Person editedPerson);
+
+    /** Returns an unmodifiable view of the filtered person list */
+    ObservableList<Person> getFilteredPersonList();
 
     /**
-     * Replaces the given task {@code target} with {@code editedTask}.
-     * {@code target} must exist in the task manager.
-     * The task identity of {@code editedTask} must not be the same as another existing task in the task manager.
-     */
-    void setTask(Task target, Task editedTask);
-
-    /**
-     * Returns an unmodifiable view of the filtered task list
-     */
-    ObservableList<Task> getFilteredTaskList();
-
-    /**
-     * Updates the filter of the filtered task list to filter by the given {@code predicate}.
-     *
+     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredTaskList(Predicate<Task> predicate);
+    void updateFilteredPersonList(Predicate<Person> predicate);
 
     /**
-     * Returns true if the model has previous task manager states to restore.
+     * Returns true if the model has previous address book states to restore.
      */
-    boolean canUndoTaskManager();
+    boolean canUndoAddressBook();
 
     /**
-     * Returns true if the model has undone task manager states to restore.
+     * Returns true if the model has undone address book states to restore.
      */
-    boolean canRedoTaskManager();
+    boolean canRedoAddressBook();
 
     /**
-     * Restores the model's task manger to its previous state.
+     * Restores the model's address book to its previous state.
      */
-    void undoTaskManager();
+    void undoAddressBook();
 
     /**
-     * Restores the model's task manager to its previously undone state.
+     * Restores the model's address book to its previously undone state.
      */
-    void redoTaskManager();
+    void redoAddressBook();
 
     /**
-     * Saves the current task manager state for undo/redo.
+     * Saves the current address book state for undo/redo.
      */
-    void commitTaskManager();
+    void commitAddressBook();
 
     /**
-     * Selected task in the filtered task list.
-     * null if no task is selected.
+     * Selected person in the filtered person list.
+     * null if no person is selected.
      */
-    ReadOnlyProperty<Task> selectedTaskProperty();
+    ReadOnlyProperty<Person> selectedPersonProperty();
 
     /**
-     * Returns the selected task in the filtered task list.
-     * null if no task is selected.
+     * Returns the selected person in the filtered person list.
+     * null if no person is selected.
      */
-    Task getSelectedTask();
+    Person getSelectedPerson();
 
     /**
-     * Sets the selected task in the filtered task list.
+     * Sets the selected person in the filtered person list.
      */
-    void setSelectedTask(Task task);
+    void setSelectedPerson(Person person);
 }
