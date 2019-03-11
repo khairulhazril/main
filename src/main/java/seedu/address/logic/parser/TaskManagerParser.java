@@ -16,6 +16,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.LogoutCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
@@ -47,6 +48,12 @@ public class TaskManagerParser {
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
+
+            //case SignupCommand.COMMAND_WORD:
+              //  return new SignupParser().parse(arguments);
+
+            case LogoutCommand.COMMAND_WORD:
+                return new LogoutCommand();
 
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
