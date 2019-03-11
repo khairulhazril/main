@@ -3,11 +3,11 @@ package seedu.address.model;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_TUTORIAL;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TASKS;
-import static seedu.address.testutil.TypicalTasks.LAB;
-import static seedu.address.testutil.TypicalTasks.SLIDES;
-import static seedu.address.testutil.TypicalTasks.TUTORIAL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.BOB;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -20,10 +20,10 @@ import org.junit.rules.ExpectedException;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.Task;
-import seedu.address.model.person.exceptions.TaskNotFoundException;
-import seedu.address.testutil.TaskBuilder;
-import seedu.address.testutil.TaskManagerBuilder;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.PersonBuilder;
 
 public class ModelManagerTest {
     @Rule
@@ -35,8 +35,8 @@ public class ModelManagerTest {
     public void constructor() {
         assertEquals(new UserPrefs(), modelManager.getUserPrefs());
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());
-        assertEquals(new TaskManager(), new TaskManager(modelManager.getTaskManager()));
-        assertEquals(null, modelManager.getSelectedTask());
+        assertEquals(new AddressBook(), new AddressBook(modelManager.getAddressBook()));
+        assertEquals(null, modelManager.getSelectedPerson());
     }
 
     @Test
@@ -48,14 +48,14 @@ public class ModelManagerTest {
     @Test
     public void setUserPrefs_validUserPrefs_copiesUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
-        userPrefs.setTaskManagerFilePath(Paths.get("address/book/file/path"));
+        userPrefs.setAddressBookFilePath(Paths.get("address/book/file/path"));
         userPrefs.setGuiSettings(new GuiSettings(1, 2, 3, 4));
         modelManager.setUserPrefs(userPrefs);
         assertEquals(userPrefs, modelManager.getUserPrefs());
 
         // Modifying userPrefs should not modify modelManager's userPrefs
         UserPrefs oldUserPrefs = new UserPrefs(userPrefs);
-        userPrefs.setTaskManagerFilePath(Paths.get("new/address/book/file/path"));
+        userPrefs.setAddressBookFilePath(Paths.get("new/address/book/file/path"));
         assertEquals(oldUserPrefs, modelManager.getUserPrefs());
     }
 
@@ -75,89 +75,89 @@ public class ModelManagerTest {
     @Test
     public void setAddressBookFilePath_nullPath_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        modelManager.setTaskManagerFilePath(null);
+        modelManager.setAddressBookFilePath(null);
     }
 
     @Test
     public void setAddressBookFilePath_validPath_setsAddressBookFilePath() {
         Path path = Paths.get("address/book/file/path");
-        modelManager.setTaskManagerFilePath(path);
-        assertEquals(path, modelManager.getTaskManagerFilePath());
+        modelManager.setAddressBookFilePath(path);
+        assertEquals(path, modelManager.getAddressBookFilePath());
     }
 
     @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        modelManager.hasTask(null);
+        modelManager.hasPerson(null);
     }
 
     @Test
     public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(modelManager.hasTask(SLIDES));
+        assertFalse(modelManager.hasPerson(ALICE));
     }
 
     @Test
     public void hasPerson_personInAddressBook_returnsTrue() {
-        modelManager.addTask(SLIDES);
-        assertTrue(modelManager.hasTask(SLIDES));
+        modelManager.addPerson(ALICE);
+        assertTrue(modelManager.hasPerson(ALICE));
     }
 
     @Test
     public void deletePerson_personIsSelectedAndFirstPersonInFilteredPersonList_selectionCleared() {
-        modelManager.addTask(SLIDES);
-        modelManager.setSelectedTask(SLIDES);
-        modelManager.deleteTask(SLIDES);
-        assertEquals(null, modelManager.getSelectedTask());
+        modelManager.addPerson(ALICE);
+        modelManager.setSelectedPerson(ALICE);
+        modelManager.deletePerson(ALICE);
+        assertEquals(null, modelManager.getSelectedPerson());
     }
 
     @Test
     public void deletePerson_personIsSelectedAndSecondPersonInFilteredPersonList_firstPersonSelected() {
-        modelManager.addTask(SLIDES);
-        modelManager.addTask(TUTORIAL);
-        assertEquals(Arrays.asList(SLIDES, TUTORIAL), modelManager.getFilteredTaskList());
-        modelManager.setSelectedTask(TUTORIAL);
-        modelManager.deleteTask(TUTORIAL);
-        assertEquals(SLIDES, modelManager.getSelectedTask());
+        modelManager.addPerson(ALICE);
+        modelManager.addPerson(BOB);
+        assertEquals(Arrays.asList(ALICE, BOB), modelManager.getFilteredPersonList());
+        modelManager.setSelectedPerson(BOB);
+        modelManager.deletePerson(BOB);
+        assertEquals(ALICE, modelManager.getSelectedPerson());
     }
 
     @Test
     public void setPerson_personIsSelected_selectedPersonUpdated() {
-        modelManager.addTask(SLIDES);
-        modelManager.setSelectedTask(SLIDES);
-        Task updatedAlice = new TaskBuilder(SLIDES).withDate(VALID_DATE_TUTORIAL).build();
-        modelManager.setTask(SLIDES, updatedAlice);
-        assertEquals(updatedAlice, modelManager.getSelectedTask());
+        modelManager.addPerson(ALICE);
+        modelManager.setSelectedPerson(ALICE);
+        Person updatedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
+        modelManager.setPerson(ALICE, updatedAlice);
+        assertEquals(updatedAlice, modelManager.getSelectedPerson());
     }
 
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
-        modelManager.getFilteredTaskList().remove(0);
+        modelManager.getFilteredPersonList().remove(0);
     }
 
     @Test
     public void setSelectedPerson_personNotInFilteredPersonList_throwsPersonNotFoundException() {
-        thrown.expect(TaskNotFoundException.class);
-        modelManager.setSelectedTask(SLIDES);
+        thrown.expect(PersonNotFoundException.class);
+        modelManager.setSelectedPerson(ALICE);
     }
 
     @Test
     public void setSelectedPerson_personInFilteredPersonList_setsSelectedPerson() {
-        modelManager.addTask(SLIDES);
-        assertEquals(Collections.singletonList(SLIDES), modelManager.getFilteredTaskList());
-        modelManager.setSelectedTask(SLIDES);
-        assertEquals(SLIDES, modelManager.getSelectedTask());
+        modelManager.addPerson(ALICE);
+        assertEquals(Collections.singletonList(ALICE), modelManager.getFilteredPersonList());
+        modelManager.setSelectedPerson(ALICE);
+        assertEquals(ALICE, modelManager.getSelectedPerson());
     }
 
     @Test
     public void equals() {
-        TaskManager taskManager = new TaskManagerBuilder().withTask(SLIDES).withTask(LAB).build();
-        TaskManager differentTaskManager = new TaskManager();
+        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        AddressBook differentAddressBook = new AddressBook();
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
-        modelManager = new ModelManager(taskManager, userPrefs);
-        ModelManager modelManagerCopy = new ModelManager(taskManager, userPrefs);
+        modelManager = new ModelManager(addressBook, userPrefs);
+        ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs);
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -169,20 +169,20 @@ public class ModelManagerTest {
         // different types -> returns false
         assertFalse(modelManager.equals(5));
 
-        // different taskManager -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentTaskManager, userPrefs)));
+        // different addressBook -> returns false
+        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
 
         // different filteredList -> returns false
-        String[] keywords = SLIDES.getName().fullName.split("\\s+");
-        modelManager.updateFilteredTaskList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(taskManager, userPrefs)));
+        String[] keywords = ALICE.getName().fullName.split("\\s+");
+        modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
-        modelManager.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
+        modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
-        differentUserPrefs.setTaskManagerFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(taskManager, differentUserPrefs)));
+        differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
     }
 }

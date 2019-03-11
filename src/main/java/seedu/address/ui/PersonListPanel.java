@@ -11,7 +11,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.person.Task;
+import seedu.address.model.person.Person;
 
 /**
  * Panel containing the list of persons.
@@ -21,21 +21,21 @@ public class PersonListPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
 
     @FXML
-    private ListView<Task> personListView;
+    private ListView<Person> personListView;
 
-    public PersonListPanel(ObservableList<Task> taskList, ObservableValue<Task> selectedTask,
-                           Consumer<Task> onSelectedTaskChange) {
+    public PersonListPanel(ObservableList<Person> personList, ObservableValue<Person> selectedPerson,
+            Consumer<Person> onSelectedPersonChange) {
         super(FXML);
-        personListView.setItems(taskList);
-        personListView.setCellFactory(listView -> new TaskListViewCell());
+        personListView.setItems(personList);
+        personListView.setCellFactory(listView -> new PersonListViewCell());
         personListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            logger.fine("Selection in task list panel changed to : '" + newValue + "'");
-            onSelectedTaskChange.accept(newValue);
+            logger.fine("Selection in person list panel changed to : '" + newValue + "'");
+            onSelectedPersonChange.accept(newValue);
         });
-        selectedTask.addListener((observable, oldValue, newValue) -> {
-            logger.fine("Selected task changed to: " + newValue);
+        selectedPerson.addListener((observable, oldValue, newValue) -> {
+            logger.fine("Selected person changed to: " + newValue);
 
-            // Don't modify selection if we are already selecting the selected task,
+            // Don't modify selection if we are already selecting the selected person,
             // otherwise we would have an infinite loop.
             if (Objects.equals(personListView.getSelectionModel().getSelectedItem(), newValue)) {
                 return;
@@ -52,18 +52,18 @@ public class PersonListPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Task} using a {@code PersonCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
      */
-    class TaskListViewCell extends ListCell<Task> {
+    class PersonListViewCell extends ListCell<Person> {
         @Override
-        protected void updateItem(Task task, boolean empty) {
-            super.updateItem(task, empty);
+        protected void updateItem(Person person, boolean empty) {
+            super.updateItem(person, empty);
 
-            if (empty || task == null) {
+            if (empty || person == null) {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new PersonCard(task, getIndex() + 1).getRoot());
+                setGraphic(new PersonCard(person, getIndex() + 1).getRoot());
             }
         }
     }

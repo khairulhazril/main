@@ -2,7 +2,7 @@ package seedu.address.storage;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static seedu.address.testutil.TypicalTasks.getTypicalTaskManager;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.nio.file.Path;
 
@@ -12,8 +12,8 @@ import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.ReadOnlyTaskManager;
-import seedu.address.model.TaskManager;
+import seedu.address.model.AddressBook;
+import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
 
 public class StorageManagerTest {
@@ -25,7 +25,7 @@ public class StorageManagerTest {
 
     @Before
     public void setUp() {
-        JsonTaskManagerStorage addressBookStorage = new JsonTaskManagerStorage(getTempFilePath("ab"));
+        JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(getTempFilePath("ab"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
         storageManager = new StorageManager(addressBookStorage, userPrefsStorage);
     }
@@ -53,18 +53,18 @@ public class StorageManagerTest {
     public void addressBookReadSave() throws Exception {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
-         * {@link JsonTaskManagerStorage} class.
-         * More extensive testing of UserPref saving/reading is done in {@link JsonTaskManagerStorageTest} class.
+         * {@link JsonAddressBookStorage} class.
+         * More extensive testing of UserPref saving/reading is done in {@link JsonAddressBookStorageTest} class.
          */
-        TaskManager original = getTypicalTaskManager();
-        storageManager.saveTaskManager(original);
-        ReadOnlyTaskManager retrieved = storageManager.readTaskManager().get();
-        assertEquals(original, new TaskManager(retrieved));
+        AddressBook original = getTypicalAddressBook();
+        storageManager.saveAddressBook(original);
+        ReadOnlyAddressBook retrieved = storageManager.readAddressBook().get();
+        assertEquals(original, new AddressBook(retrieved));
     }
 
     @Test
     public void getAddressBookFilePath() {
-        assertNotNull(storageManager.getTaskManagerFilePath());
+        assertNotNull(storageManager.getAddressBookFilePath());
     }
 
 }
