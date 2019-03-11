@@ -8,7 +8,7 @@ import java.util.Date;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyTaskManager;
 
 /**
  * A ui for the status bar that is displayed at the footer of the application.
@@ -17,26 +17,23 @@ public class StatusBarFooter extends UiPart<Region> {
 
     public static final String SYNC_STATUS_INITIAL = "Not updated yet in this session";
     public static final String SYNC_STATUS_UPDATED = "Last Updated: %s";
-
+    private static final String FXML = "StatusBarFooter.fxml";
     /**
      * Used to generate time stamps.
-     *
+     * <p>
      * TODO: change clock to an instance variable.
      * We leave it as a static variable because manual dependency injection
      * will require passing down the clock reference all the way from MainApp,
      * but it should be easier once we have factories/DI frameworks.
      */
     private static Clock clock = Clock.systemDefaultZone();
-
-    private static final String FXML = "StatusBarFooter.fxml";
-
     @FXML
     private Label syncStatus;
     @FXML
     private Label saveLocationStatus;
 
 
-    public StatusBarFooter(Path saveLocation, ReadOnlyAddressBook addressBook) {
+    public StatusBarFooter(Path saveLocation, ReadOnlyTaskManager addressBook) {
         super(FXML);
         addressBook.addListener(observable -> updateSyncStatus());
         syncStatus.setText(SYNC_STATUS_INITIAL);
@@ -44,17 +41,17 @@ public class StatusBarFooter extends UiPart<Region> {
     }
 
     /**
-     * Sets the clock used to determine the current time.
-     */
-    public static void setClock(Clock clock) {
-        StatusBarFooter.clock = clock;
-    }
-
-    /**
      * Returns the clock currently in use.
      */
     public static Clock getClock() {
         return clock;
+    }
+
+    /**
+     * Sets the clock used to determine the current time.
+     */
+    public static void setClock(Clock clock) {
+        StatusBarFooter.clock = clock;
     }
 
     /**
