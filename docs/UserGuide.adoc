@@ -10,7 +10,7 @@
 :experimental:
 ifdef::env-github[]
 :tip-caption: :bulb:
-:note-caption: :information_source:
+= :note-caption: :information_source:
 endif::[]
 :repoURL: https://github.com/se-edu/addressbook-level4
 
@@ -34,8 +34,8 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
 * *`list`* : shows a list of all tasks in the Task Manager
-* **`add`**`add CG2027 Assignment d/12.02.19 t/urgent` : adds a task named `CG2027` to the Task Manager.
-* **`delete`**`3` : deletes the 3rd task shown in the current list
+* *`add n/Assignment m/CG2027 d/12-02 p/1`* : adds a task named `Assignment` of module `CG2023`, submission date `12-02` and priority level `1` to the Task Manager.
+* *`delete`*`3` : deletes the 3rd task shown in the current list
 * *`exit`* : exits the app
 
 .  Refer to <<Features>> for details of each command.
@@ -59,15 +59,15 @@ Format: `help`
 === Adding a task: `add`
 
 Adds a task to the address book +
-Format: `add n/NAME d/DATE [t/TAG]...`
+Format: `add n/NAME m/MODULE d/DATE p/PRIORITY [t/TAG]...`
 
 [TIP]
 A task can have any number of tags (including 0)
 
 Examples:
 
-* `add n/CG1112 Tutorial 3 d/21.02.19 t/urgent`
-* `add n/CG2113T Tutorial d/11.02.19 t/recurring weekly t/assignment due`
+* `add n/Tutorial 3 m/CG1112 d/21-02 t/urgent`
+* `add n/Tutorial m/CS2113T d/11-02 t/recurring weekly t/assignment`
 
 === Listing all tasks : `list`
 
@@ -77,7 +77,7 @@ Format: `list`
 === Editing a task : `edit`
 
 Edits an existing task in the Task Manager. +
-Format: `edit INDEX [n/NAME] [d/DATE] [t/TAG]...`
+Format: `edit INDEX [n/NAME] [m/MODULE] [d/DATE] [p/PRIORITY] [t/TAG]...`
 
 ****
 * Edits the task at the specified `INDEX`. The index refers to the index number shown in the displayed task list. The index *must be a positive integer* 1, 2, 3, ...
@@ -89,10 +89,10 @@ Format: `edit INDEX [n/NAME] [d/DATE] [t/TAG]...`
 
 Examples:
 
-* `edit 1 n/CG1112 Tutorial 4 d/21.03.19 t/urgent` +
-Edits the name and date of the 1st task to be `Tutorial 4` and `21.03.19` respectively.
-* `edit 2 n/CG2023 t/` +
-Edits the name of the 2nd person to be `CG2023` and clears all existing tags.
+* `edit 1 n/Tutorial 4 d/21-03 t/urgent` +
+Edits the name and date of the 1st task to be `Tutorial 4` and `21-03` respectively.
+* `edit 2 n/Project1 t/` +
+Edits the name of the 2nd person to be `Project1` and clears all existing tags.
 
 === Locating tasks by name: `find`
 
@@ -100,7 +100,7 @@ Finds tasks whose names contain any of the given keywords. +
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 ****
-* The search is case insensitive. e.g `CS2113` will match `cs2113`
+* The search is case insensitive. e.g `HOMEWORK` will match `homework`
 * The order of the keywords does not matter. e.g. `CS2113 Tutorial` will match `Tutorial CS2113`
 * Only the name is searched.
 * Only full words will be matched e.g. `Assignments` will not match `Assignment`
@@ -109,8 +109,8 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 
-* `find CS2113` +
-Returns `CS2113` and `CS2113 Hw`
+* `find CS2113 task` +
+Returns `CS2113 task` and `CS2113 Hw`
 * `find CS2113 Hw Tutorial` +
 Returns any task having names `CS2113`, `Hw`, or `Tutorial`
 
@@ -242,13 +242,13 @@ _{explain how the user can enable/disable data encryption}_
 
 == Command Summary
 
-* *Add* `add n/NAME d/DATE [t/TAG]...` +
-e.g. `add n/CG1112 Tutorial 3 d/21.02.19 t/urgent`
+* *Add* `add n/NAME m/MODULE d/DATE p/PRIORITY [t/TAG]...` +
+e.g. `add n/Tutorial 3 m/CG2023 d/21-02 p/3 t/urgent`
 * *Clear* : `clear`
 * *Delete* : `delete INDEX` +
 e.g. `delete 3`
-* *Edit* : `edit INDEX [n/NAME] [d/DATE] [t/TAG]...` +
-e.g. `edit 2 n/CG2027 Hw d/23.04.19`
+* *Edit* : `edit INDEX [n/NAME] [m/MODULE] [d/DATE] [p/PRIORITY] [t/TAG]...` +
+e.g. `edit 2 n/CG2027 Hw d/23-04`
 * *Find* : `find KEYWORD [MORE_KEYWORDS]` +
 e.g. `find CS2113 Project`
 * *List* : `list`
