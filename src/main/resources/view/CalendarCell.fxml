@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox fx:id="calendarCell" alignment="TOP_RIGHT" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" >
+    <Text fx:id="cellDate"/>
+    <ListView fx:id="cellTasks" VBox.vgrow="ALWAYS"/>
+</VBox>

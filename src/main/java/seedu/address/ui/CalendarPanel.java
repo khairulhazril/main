@@ -3,22 +3,14 @@ package seedu.address.ui;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.BorderStroke;
-import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import seedu.address.commons.core.LogsCenter;
 
@@ -37,12 +29,6 @@ public class CalendarPanel extends UiPart<Region> {
     private static final int HEADER_HEIGHT = 20;
     private static final String[] HEADERS = new String[] { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday",
         "Friday", "Saturday" };
-
-    private static final BackgroundFill backgroundFill = new BackgroundFill(Paint.valueOf("#FFFFFF"),
-        CornerRadii.EMPTY, Insets.EMPTY);
-    private static final Background background = new Background(backgroundFill);
-    private static final Border border = new Border(new BorderStroke(Paint.valueOf("#0F0F0F"), BorderStrokeStyle.SOLID,
-            CornerRadii.EMPTY, BorderStroke.THIN));
 
     private final Logger logger = LogsCenter.getLogger(CalendarPanel.class);
 
@@ -63,6 +49,13 @@ public class CalendarPanel extends UiPart<Region> {
         writeMonthHeader("Month");
         writeDayHeaders();
         writeContents();
+    }
+
+    /**
+     * Writes event information to each cell of the grid.
+     */
+    private void writeContents() {
+        return;
     }
 
     /**
@@ -99,28 +92,19 @@ public class CalendarPanel extends UiPart<Region> {
     }
 
     /**
-     * Writes event information to each cell of the grid.
-     */
-    private void writeContents() {
-        return;
-    }
-
-    /**
      * Populates grid with content cells.
      */
     private void writeBox() {
-        for (int i = 0; i < COLS; i++) {
-            for (int j = 0; j < ROWS; j++) {
-                VBox box = new VBox();
-                box.setBackground(background);
-                box.setBorder(border);
-
-                if (i == 0 && j == 0) {
-                    taskGridPane.add(box, i, j, ROWS, 1);
-                } else if (j == 0) {
+        for (int col = 0; col < COLS; col++) {
+            for (int row = 0; row < ROWS; row++) {
+                if (col == 0 && row == 0) {
+                    taskGridPane.add(new VBox(), col, row, COLS, 1);
+                } else if (row == 0) {
                     continue;
+                } else if (row == 1) {
+                    taskGridPane.add(new VBox(), col, row, 1, 1);
                 } else {
-                    taskGridPane.add(box, i, j);
+                    taskGridPane.add(new CalendarCell(row, col).getRoot(), col, row);
                 }
             }
         }
