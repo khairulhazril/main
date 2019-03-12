@@ -140,7 +140,7 @@ Selects the task identified by the index number used in the displayed task list.
 Format: `select INDEX`
 
 ****
-* Selects the task and loads the Google search page of the task at the specified `INDEX`.
+* Selects the task and displays the task on the calendar.
 * The index refers to the index number shown in the displayed task list.
 * The index *must be a positive integer* `1, 2, 3, ...`
 ****
