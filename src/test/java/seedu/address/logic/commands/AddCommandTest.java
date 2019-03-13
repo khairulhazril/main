@@ -23,7 +23,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyTaskManager;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.TaskManager;
-import seedu.address.model.person.Task;
+import seedu.address.model.task.Task;
 import seedu.address.testutil.TaskBuilder;
 
 public class AddCommandTest {

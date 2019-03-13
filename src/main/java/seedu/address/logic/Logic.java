@@ -9,7 +9,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyTaskManager;
-import seedu.address.model.person.Task;
+import seedu.address.model.task.Task;
 
 /**
  * API of the Logic component

@@ -28,7 +28,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyTaskManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Task;
+import seedu.address.model.task.Task;
 import seedu.address.storage.JsonTaskManagerStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
