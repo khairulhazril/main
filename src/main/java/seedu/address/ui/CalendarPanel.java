@@ -89,6 +89,7 @@ public class CalendarPanel extends UiPart<Region> {
                 if (GridPane.getRowIndex(node) == 1 && GridPane.getColumnIndex(node) == i) {
                     VBox box = (VBox) node;
                     Text header = new Text(HEADERS[i]);
+
                     box.setAlignment(Pos.CENTER);
                     box.getChildren().add(header);
                     box.setBackground(background);

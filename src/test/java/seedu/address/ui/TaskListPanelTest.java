@@ -18,7 +18,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Priority;
 import seedu.address.model.person.Task;
 
-public class PersonListPanelTest extends GuiUnitTest {
+public class TaskListPanelTest extends GuiUnitTest {
     private static final ObservableList<Task> TYPICAL_TASKS =
             FXCollections.observableList(getTypicalTasks());
 
@@ -55,7 +55,7 @@ public class PersonListPanelTest extends GuiUnitTest {
     */
 
     /**
-     * Verifies that creating and deleting large number of persons in {@code PersonListPanel} requires lesser than
+     * Verifies that creating and deleting large number of persons in {@code TaskListPanel} requires lesser than
      * {@code CARD_CREATION_AND_DELETION_TIMEOUT} milliseconds to execute.
      */
     @Test
@@ -70,7 +70,7 @@ public class PersonListPanelTest extends GuiUnitTest {
 
     /**
      * Returns a list of persons containing {@code personCount} persons that is used to populate the
-     * {@code PersonListPanel}.
+     * {@code TaskListPanel}.
      */
     private ObservableList<Task> createBackingList(int personCount) {
         ObservableList<Task> backingList = FXCollections.observableArrayList();
@@ -86,15 +86,15 @@ public class PersonListPanelTest extends GuiUnitTest {
     }
 
     /**
-     * Initializes {@code personListPanelHandle} with a {@code PersonListPanel} backed by {@code backingList}.
-     * Also shows the {@code Stage} that displays only {@code PersonListPanel}.
+     * Initializes {@code personListPanelHandle} with a {@code TaskListPanel} backed by {@code backingList}.
+     * Also shows the {@code Stage} that displays only {@code TaskListPanel}.
      */
     private void initUi(ObservableList<Task> backingList) {
-        PersonListPanel personListPanel =
-                new PersonListPanel(backingList, selectedTask, selectedTask::set);
-        uiPartRule.setUiPart(personListPanel);
+        TaskListPanel taskListPanel =
+                new TaskListPanel(backingList, selectedTask, selectedTask::set);
+        uiPartRule.setUiPart(taskListPanel);
 
-        personListPanelHandle = new PersonListPanelHandle(getChildNode(personListPanel.getRoot(),
+        personListPanelHandle = new PersonListPanelHandle(getChildNode(taskListPanel.getRoot(),
                 PersonListPanelHandle.PERSON_LIST_VIEW_ID));
     }
 }

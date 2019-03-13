@@ -33,7 +33,7 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private CalendarPanel calendarPanel;
-    private PersonListPanel personListPanel;
+    private TaskListPanel taskListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -116,9 +116,9 @@ public class MainWindow extends UiPart<Stage> {
         calendarPanel = new CalendarPanel(); //to replace with CalendarPanel(logic.selectedTaskProperty());
         calendarPlaceholder.getChildren().add(calendarPanel.getRoot());
 
-        personListPanel = new PersonListPanel(logic.getFilteredTaskList(), logic.selectedTaskProperty(),
+        taskListPanel = new TaskListPanel(logic.getFilteredTaskList(), logic.selectedTaskProperty(),
                 logic::setSelectedTask);
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        personListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -170,8 +170,8 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+    public TaskListPanel getTaskListPanel() {
+        return taskListPanel;
     }
 
     /**

@@ -134,7 +134,7 @@
 //        /* Case: find while a task is selected -> selected card deselected */
 //        showAllPersons();
 //        selectPerson(Index.fromOneBased(1));
-//        assertFalse(getPersonListPanel().getHandleToSelectedCard().getName().equals(LAB.getName().fullName));
+//        assertFalse(getTaskListPanel().getHandleToSelectedCard().getName().equals(LAB.getName().fullName));
 //        command = FindCommand.COMMAND_WORD + " Lab";
 //        ModelHelper.setFilteredList(expectedModel, LAB);
 //        assertCommandSuccess(command, expectedModel);

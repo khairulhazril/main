@@ -46,6 +46,6 @@
 //    @Test
 //    public void addressBook_dataFileDoesNotExist_loadSampleData() {
 //        Task[] expectedList = SampleDataUtil.getSampleTasks();
-//        assertListMatching(getPersonListPanel(), expectedList);
+//        assertListMatching(getTaskListPanel(), expectedList);
 //    }
 //}
