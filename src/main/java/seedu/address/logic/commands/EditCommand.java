@@ -20,12 +20,12 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Date;
 import seedu.address.model.task.Module;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.Priority;
 import seedu.address.model.task.Task;
-import seedu.address.model.tag.Tag;
 
 /**
  * Edits the details of an existing task in the task manager.

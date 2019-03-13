@@ -125,7 +125,7 @@ public class CalendarPanel extends UiPart<Region> {
      * Populate grid with calendar cells to correspond to the appropriate date
      */
     public void createCalendarCells() {
-        while (!calendarDate.getDayOfWeek().toString().equals("SUNDAY") ) {
+        while (!calendarDate.getDayOfWeek().toString().equals("SUNDAY")) {
             calendarDate = calendarDate.minusDays(1);
         }
 
