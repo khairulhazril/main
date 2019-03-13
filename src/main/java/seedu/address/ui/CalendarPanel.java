@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import java.time.LocalDate;
+import java.time.YearMonth;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
@@ -27,12 +29,27 @@ import seedu.address.commons.core.LogsCenter;
  */
 public class CalendarPanel extends UiPart<Region> {
     private static final String FXML = "CalendarPanel.fxml";
+
+    private static Text monthLabel = new Text();
+
+    private static int currDate = 0;
+
     private static final int COLS = 7; // 7 Days in a week
-    private static final int ROWS = 6; // 5 Rows + header
+    private static final int ROWS = 8; // 6 Rows + Day Header + Month Header
     private static final int ROW_HEIGHT = 80;
     private static final int COL_WIDTH = 105;
-    private static final String[] HEADERS = new String[] { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday",
-        "Friday", "Saturday" };
+    private static final int HEADER_HEIGHT = 20;
+    private static final String[] HEADERS = new String[] { "SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY",
+        "FRIDAY", "SATURDAY" };
+
+    private static final BackgroundFill backgroundFill = new BackgroundFill(Paint.valueOf("#FFFFFF"),
+            CornerRadii.EMPTY, Insets.EMPTY);
+    private static final Background background = new Background(backgroundFill);
+    private static final Border border = new Border(new BorderStroke(Paint.valueOf("#0F0F0F"), BorderStrokeStyle.SOLID,
+            CornerRadii.EMPTY, BorderStroke.THIN));
+
+    private static final YearMonth yearMonth = YearMonth.now();
+    private static LocalDate calendarDate = LocalDate.of(yearMonth.getYear(), yearMonth.getMonthValue(), 1);
 
     private final Logger logger = LogsCenter.getLogger(CalendarPanel.class);
 
@@ -41,50 +58,99 @@ public class CalendarPanel extends UiPart<Region> {
 
     public CalendarPanel() {
         super(FXML);
-        buildGridPane();
+        buildCalendarPane();
     }
 
     /**
      * Builds calendar grid.
      */
-    private void buildGridPane() {
+    private void buildCalendarPane() {
         buildGrid();
-        writeBox();
-        writeHeaders();
+        createHeaderCells();
+        writeMonthHeader();
+        writeDayHeaders();
+        createCalendarCells();
+        writeContents();
     }
 
     /**
-     * Writes headers to top row of grid.
+     * Writes event information to each cell of the grid.
      */
-    private void writeHeaders() {
+    private void writeContents() {
+        return;
+    }
+
+    /**
+     * Writes day headers to second-highest row of grid.
+     */
+    private void writeDayHeaders() {
         for (int i = 0; i < COLS; i++) {
             for (Node node : taskGridPane.getChildren()) {
-                if (GridPane.getRowIndex(node) == 0 && GridPane.getColumnIndex(node) == i) {
+                if (GridPane.getRowIndex(node) == 1 && GridPane.getColumnIndex(node) == i) {
                     VBox box = (VBox) node;
                     Text header = new Text(HEADERS[i]);
+
                     box.setAlignment(Pos.CENTER);
                     box.getChildren().add(header);
+                    box.setBackground(background);
+                    box.setBorder(border);
                 }
             }
         }
     }
 
     /**
-     * Populates grid with content cells.
+     * Writes month to top row of grid.
      */
-    private void writeBox() {
-        BackgroundFill backgroundFill = new BackgroundFill(Paint.valueOf("#FFFFFF"), CornerRadii.EMPTY, Insets.EMPTY);
-        Background background = new Background(backgroundFill);
+    private void writeMonthHeader() {
+        String month = String.valueOf(calendarDate.getMonth());
+        String year = String.valueOf(calendarDate.getYear());
 
-        Border border = new Border(new BorderStroke(Paint.valueOf("#0F0F0F"), BorderStrokeStyle.SOLID,
-                CornerRadii.EMPTY, BorderStroke.THIN));
+        for (Node node : taskGridPane.getChildren()) {
+            if (GridPane.getRowIndex(node) == 0 && GridPane.getColumnIndex(node) == 0) {
+                VBox box = (VBox) node;
+                monthLabel.setText(month + " " + year);
 
-        for (int i = 0; i < COLS; i++) {
-            for (int j = 0; j < ROWS; j++) {
-                VBox box = new VBox();
+                box.setAlignment(Pos.CENTER);
+                box.getChildren().add(monthLabel);
                 box.setBackground(background);
                 box.setBorder(border);
-                taskGridPane.add(box, i, j);
+
+                break;
+            }
+        }
+    }
+
+    /**
+     * Populate grid with calendar cells to correspond to the appropriate date
+     */
+    public void createCalendarCells() {
+        while (!calendarDate.getDayOfWeek().toString().equals("SUNDAY")) {
+            calendarDate = calendarDate.minusDays(1);
+        }
+
+        for (int row = 2; row < ROWS; row++) {
+            for (int col = 0; col < COLS; col++) {
+                String date = String.valueOf(calendarDate.getDayOfMonth());
+                taskGridPane.add(new CalendarCell(row, col, date).getRoot(), col, row);
+                calendarDate = calendarDate.plusDays(1);
+            }
+        }
+    }
+
+    /**
+     * Populates grid with header cells.
+     */
+    private void createHeaderCells() {
+        for (int col = 0; col < COLS; col++) {
+            for (int row = 0; row < ROWS; row++) {
+                if (col == 0 && row == 0) {
+                    taskGridPane.add(new VBox(), col, row, COLS, 1);
+                } else if (row == 0) {
+                    continue;
+                } else if (row == 1) {
+                    taskGridPane.add(new VBox(), col, row, 1, 1);
+                }
             }
         }
     }
@@ -103,8 +169,8 @@ public class CalendarPanel extends UiPart<Region> {
         }
 
         for (int i = 0; i < ROWS; i++) {
-            if (i == 0) {
-                row = new RowConstraints();
+            if (i == 0 || i == 1) {
+                row = new RowConstraints(HEADER_HEIGHT);
             } else {
                 row = new RowConstraints(ROW_HEIGHT);
             }
