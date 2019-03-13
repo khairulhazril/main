@@ -4,7 +4,7 @@ import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
-import javafx.scene.control.ListView;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Border;
@@ -12,6 +12,7 @@ import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import seedu.address.commons.core.LogsCenter;
@@ -37,7 +38,10 @@ public class CalendarCell extends UiPart<Region> {
     private Text cellDate;
 
     @FXML
-    private ListView<Text> cellTasks;
+    private ScrollPane cellTasks;
+
+    @FXML
+    private VBox cellContent;
 
     public CalendarCell(int row, int col) {
         super(FXML);
@@ -45,20 +49,35 @@ public class CalendarCell extends UiPart<Region> {
         setCol(col);
         setDate();
         addTask();
+        setBackground();
     }
 
     /**
      * Adds the name of a task to the cell
      */
     public void addTask() {
-        Text newTask = new Text();
-        newTask.setText("Test Task");
+        Text newTask1 = new Text();
+        newTask1.setText("Test Task 1");
+        Text newTask2 = new Text();
+        newTask2.setText("Test Task 2");
+        Text newTask3 = new Text();
+        newTask3.setText("Test Task 3");
+        Text newTask4 = new Text();
+        newTask4.setText("Test Task 4");
 
-        cellTasks.getItems().add(newTask);
+        cellContent.getChildren().add(newTask1);
+        cellContent.getChildren().add(newTask2);
+        cellContent.getChildren().add(newTask3);
+        cellContent.getChildren().add(newTask4);
+    }
+
+    private void setBackground() {
+        getRoot().setBackground(background);
+        getRoot().setBorder(border);
     }
 
     private void setDate() {
-        cellDate.setText("Test Date");
+        cellDate.setText("01");
     }
 
     private void setRow(int row) {

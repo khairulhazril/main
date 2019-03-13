@@ -3,14 +3,22 @@ package seedu.address.ui;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import seedu.address.commons.core.LogsCenter;
 
@@ -29,6 +37,12 @@ public class CalendarPanel extends UiPart<Region> {
     private static final int HEADER_HEIGHT = 20;
     private static final String[] HEADERS = new String[] { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday",
         "Friday", "Saturday" };
+
+    private static final BackgroundFill backgroundFill = new BackgroundFill(Paint.valueOf("#FFFFFF"),
+            CornerRadii.EMPTY, Insets.EMPTY);
+    private static final Background background = new Background(backgroundFill);
+    private static final Border border = new Border(new BorderStroke(Paint.valueOf("#0F0F0F"), BorderStrokeStyle.SOLID,
+            CornerRadii.EMPTY, BorderStroke.THIN));
 
     private final Logger logger = LogsCenter.getLogger(CalendarPanel.class);
 
@@ -69,6 +83,8 @@ public class CalendarPanel extends UiPart<Region> {
                     Text header = new Text(HEADERS[i]);
                     box.setAlignment(Pos.CENTER);
                     box.getChildren().add(header);
+                    box.setBackground(background);
+                    box.setBorder(border);
                 }
             }
         }
@@ -85,6 +101,8 @@ public class CalendarPanel extends UiPart<Region> {
 
                 box.setAlignment(Pos.CENTER);
                 box.getChildren().add(monthLabel);
+                box.setBackground(background);
+                box.setBorder(border);
 
                 break;
             }
