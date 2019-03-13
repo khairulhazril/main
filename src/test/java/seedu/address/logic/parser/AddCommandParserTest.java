@@ -32,12 +32,12 @@ import static seedu.address.testutil.TypicalTasks.TUTORIAL;
 import org.junit.Test;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Date;
 import seedu.address.model.task.Module;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.Priority;
 import seedu.address.model.task.Task;
-import seedu.address.model.tag.Tag;
 import seedu.address.testutil.TaskBuilder;
 
 public class AddCommandParserTest {
