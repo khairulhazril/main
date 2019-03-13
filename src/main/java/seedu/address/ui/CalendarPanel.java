@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import java.time.LocalDate;
+import java.time.YearMonth;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
@@ -30,19 +32,24 @@ public class CalendarPanel extends UiPart<Region> {
 
     private static Text monthLabel = new Text();
 
+    private static int currDate = 0;
+
     private static final int COLS = 7; // 7 Days in a week
     private static final int ROWS = 8; // 6 Rows + Day Header + Month Header
     private static final int ROW_HEIGHT = 80;
     private static final int COL_WIDTH = 105;
     private static final int HEADER_HEIGHT = 20;
-    private static final String[] HEADERS = new String[] { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday",
-        "Friday", "Saturday" };
+    private static final String[] HEADERS = new String[] { "SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY",
+        "FRIDAY", "SATURDAY" };
 
     private static final BackgroundFill backgroundFill = new BackgroundFill(Paint.valueOf("#FFFFFF"),
             CornerRadii.EMPTY, Insets.EMPTY);
     private static final Background background = new Background(backgroundFill);
     private static final Border border = new Border(new BorderStroke(Paint.valueOf("#0F0F0F"), BorderStrokeStyle.SOLID,
             CornerRadii.EMPTY, BorderStroke.THIN));
+
+    private static final YearMonth yearMonth = YearMonth.now();
+    private static LocalDate calendarDate = LocalDate.of(yearMonth.getYear(), yearMonth.getMonthValue(), 1);
 
     private final Logger logger = LogsCenter.getLogger(CalendarPanel.class);
 
@@ -59,9 +66,10 @@ public class CalendarPanel extends UiPart<Region> {
      */
     private void buildCalendarPane() {
         buildGrid();
-        writeBox();
-        writeMonthHeader("Month");
+        createHeaderCells();
+        writeMonthHeader();
         writeDayHeaders();
+        createCalendarCells();
         writeContents();
     }
 
@@ -93,11 +101,14 @@ public class CalendarPanel extends UiPart<Region> {
     /**
      * Writes month to top row of grid.
      */
-    private void writeMonthHeader(String month) {
+    private void writeMonthHeader() {
+        String month = String.valueOf(calendarDate.getMonth());
+        String year = String.valueOf(calendarDate.getYear());
+
         for (Node node : taskGridPane.getChildren()) {
             if (GridPane.getRowIndex(node) == 0 && GridPane.getColumnIndex(node) == 0) {
                 VBox box = (VBox) node;
-                monthLabel.setText(month);
+                monthLabel.setText(month + " " + year);
 
                 box.setAlignment(Pos.CENTER);
                 box.getChildren().add(monthLabel);
@@ -110,9 +121,26 @@ public class CalendarPanel extends UiPart<Region> {
     }
 
     /**
-     * Populates grid with content cells.
+     * Populate grid with calendar cells to correspond to the appropriate date
      */
-    private void writeBox() {
+    public void createCalendarCells() {
+        while (!calendarDate.getDayOfWeek().toString().equals("SUNDAY") ) {
+            calendarDate = calendarDate.minusDays(1);
+        }
+
+        for (int row = 2; row < ROWS; row++) {
+            for (int col = 0; col < COLS; col++) {
+                String date = String.valueOf(calendarDate.getDayOfMonth());
+                taskGridPane.add(new CalendarCell(row, col, date).getRoot(), col, row);
+                calendarDate = calendarDate.plusDays(1);
+            }
+        }
+    }
+
+    /**
+     * Populates grid with header cells.
+     */
+    private void createHeaderCells() {
         for (int col = 0; col < COLS; col++) {
             for (int row = 0; row < ROWS; row++) {
                 if (col == 0 && row == 0) {
@@ -121,8 +149,6 @@ public class CalendarPanel extends UiPart<Region> {
                     continue;
                 } else if (row == 1) {
                     taskGridPane.add(new VBox(), col, row, 1, 1);
-                } else {
-                    taskGridPane.add(new CalendarCell(row, col).getRoot(), col, row);
                 }
             }
         }

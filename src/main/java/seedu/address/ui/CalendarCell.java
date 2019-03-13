@@ -43,11 +43,11 @@ public class CalendarCell extends UiPart<Region> {
     @FXML
     private VBox cellContent;
 
-    public CalendarCell(int row, int col) {
+    public CalendarCell(int row, int col, String date) {
         super(FXML);
         setRow(row);
         setCol(col);
-        setDate();
+        setDate(date);
         addTask();
         setBackground();
     }
@@ -71,19 +71,31 @@ public class CalendarCell extends UiPart<Region> {
         cellContent.getChildren().add(newTask4);
     }
 
+    /**
+     * Sets the background and border of the cell
+     */
     private void setBackground() {
         getRoot().setBackground(background);
         getRoot().setBorder(border);
     }
 
-    private void setDate() {
-        cellDate.setText("01");
+    /**
+     * Adds the date to the cell
+     */
+    private void setDate(String date) {
+        cellDate.setText(date);
     }
 
+    /**
+     * Sets the row attribute of the cell
+     */
     private void setRow(int row) {
         this.row = row;
     }
 
+    /**
+     * Sets the col attribute of the cell
+     */
     private void setCol(int row) {
         this.row = row;
     }
