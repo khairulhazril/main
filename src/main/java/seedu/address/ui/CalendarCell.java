@@ -56,19 +56,10 @@ public class CalendarCell extends UiPart<Region> {
      * Adds the name of a task to the cell
      */
     public void addTask() {
-        Text newTask1 = new Text();
-        newTask1.setText("Test Task 1");
-        Text newTask2 = new Text();
-        newTask2.setText("Test Task 2");
-        Text newTask3 = new Text();
-        newTask3.setText("Test Task 3");
-        Text newTask4 = new Text();
-        newTask4.setText("Test Task 4");
+        Text newTask = new Text();
+        newTask.setText("Test Task");
 
-        cellContent.getChildren().add(newTask1);
-        cellContent.getChildren().add(newTask2);
-        cellContent.getChildren().add(newTask3);
-        cellContent.getChildren().add(newTask4);
+        cellContent.getChildren().add(newTask);
     }
 
     /**
