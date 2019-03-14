@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.YearMonth;
 import java.util.logging.Logger;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -23,6 +24,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.task.Task;
 
 /**
  * Panel that displays a calendar in grid format.
@@ -57,21 +59,20 @@ public class CalendarPanel extends UiPart<Region> {
     @FXML
     private GridPane taskGridPane;
 
-    public CalendarPanel() {
+    public CalendarPanel(ObservableList<Task> taskList) {
         super(FXML);
-        buildCalendarPane();
+        buildCalendarPane(taskList);
     }
 
     /**
      * Builds calendar.
      */
-    private void buildCalendarPane() {
+    private void buildCalendarPane(ObservableList<Task> taskList) {
         buildGrid();
         createHeaderCells();
         writeMonthHeader();
         writeDayHeaders();
-        createCalendarCells();
-        writeContents();
+        createCalendarCells(taskList);
     }
 
     /**
@@ -159,7 +160,7 @@ public class CalendarPanel extends UiPart<Region> {
     /**
      * Populate grid with calendar cells to correspond to the appropriate date
      */
-    public void createCalendarCells() {
+    public void createCalendarCells(ObservableList<Task> taskList) {
         while (!calendarDate.getDayOfWeek().toString().equals("SUNDAY")) { //get previous month's dates to be displayed
             calendarDate = calendarDate.minusDays(1);
         }
@@ -167,18 +168,11 @@ public class CalendarPanel extends UiPart<Region> {
         for (int row = 2; row < ROWS; row++) {
             for (int col = 0; col < COLS; col++) {
                 String date = String.valueOf(calendarDate.getDayOfMonth());
-                taskGridPane.add(new CalendarCell(row, col, date).getRoot(), col, row);
+                String month = String.valueOf(calendarDate.getMonthValue());
+                taskGridPane.add(new CalendarCell(date, month, taskList).getRoot(), col, row);
                 calendarDate = calendarDate.plusDays(1);
             }
         }
-    }
-
-
-    /**
-     * Writes event information to each cell of the grid.
-     */
-    private void writeContents() {
-        return;
     }
 
 }
