@@ -38,11 +38,18 @@ public class CalendarCell extends UiPart<Region> {
     private Text cellDate;
 
     @FXML
-    private ScrollPane cellTasks;
+    private ScrollPane cellTasksPane;
 
     @FXML
     private VBox cellContent;
 
+    /**
+     * Creates a cell for CalendarPanel.
+     *
+     * @param row Row index of the cell on the panel
+     * @param col Column index of the cell on the panel
+     * @param date Date to be displayed on the cell
+     */
     public CalendarCell(int row, int col, String date) {
         super(FXML);
         setRow(row);
@@ -50,6 +57,13 @@ public class CalendarCell extends UiPart<Region> {
         setDate(date);
         addTask();
         setBackground();
+    }
+
+    /**
+     * Adds the date to the cell
+     */
+    private void setDate(String date) {
+        cellDate.setText(date);
     }
 
     /**
@@ -68,13 +82,6 @@ public class CalendarCell extends UiPart<Region> {
     private void setBackground() {
         getRoot().setBackground(background);
         getRoot().setBorder(border);
-    }
-
-    /**
-     * Adds the date to the cell
-     */
-    private void setDate(String date) {
-        cellDate.setText(date);
     }
 
     /**
