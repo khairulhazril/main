@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.ScrollPane;
@@ -16,6 +17,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.task.Task;
 
 /**
  * Individual cell for CalendarPanel.
@@ -31,44 +33,67 @@ public class CalendarCell extends UiPart<Region> {
 
     private final Logger logger = LogsCenter.getLogger(CalendarCell.class);
 
-    private int row;
-    private int col;
+    private String date;
+    private String month;
 
     @FXML
     private Text cellDate;
 
     @FXML
-    private ScrollPane cellTasks;
+    private ScrollPane cellTasksPane;
 
     @FXML
     private VBox cellContent;
 
-    public CalendarCell(int row, int col, String date) {
+    /**
+     * Creates a cell for CalendarPanel.
+     *
+     * @param date Date to be displayed on the cell
+     * @param taskList list of tasks currently being displayed
+     */
+    public CalendarCell(String date, String month, ObservableList<Task> taskList) {
         super(FXML);
-        setRow(row);
-        setCol(col);
+
         setDate(date);
-        addTask();
+        setMonth(month);
+        addTask(taskList);
         setBackground();
+    }
+
+    /**
+     * Adds the date to the cell
+     */
+    private void setDate(String date) {
+        this.date = date;
+        cellDate.setText(date);
+    }
+
+    /**
+     * Sets the month parameter of the cell
+     */
+    private void setMonth(String month) {
+        this.month = month;
     }
 
     /**
      * Adds the name of a task to the cell
      */
-    public void addTask() {
-        Text newTask1 = new Text();
-        newTask1.setText("Test Task 1");
-        Text newTask2 = new Text();
-        newTask2.setText("Test Task 2");
-        Text newTask3 = new Text();
-        newTask3.setText("Test Task 3");
-        Text newTask4 = new Text();
-        newTask4.setText("Test Task 4");
+    public void addTask(ObservableList<Task> taskList) {
+        for (Task task : taskList) {
+            String currFullDate = task.getDate().toString();
+            String currDateString = currFullDate.substring(0, currFullDate.indexOf("-"));
+            String currMonthString = currFullDate.substring(currFullDate.indexOf("-") + 1);
 
-        cellContent.getChildren().add(newTask1);
-        cellContent.getChildren().add(newTask2);
-        cellContent.getChildren().add(newTask3);
-        cellContent.getChildren().add(newTask4);
+            int currDate = Integer.parseInt(currDateString);
+            int currMonth = Integer.parseInt(currMonthString);
+
+            if (currDate == Integer.parseInt(date) && currMonth == Integer.parseInt(month)) {
+                Text newTask = new Text();
+                newTask.setText(task.getName().toString());
+
+                cellContent.getChildren().add(newTask);
+            }
+        }
     }
 
     /**
@@ -77,27 +102,6 @@ public class CalendarCell extends UiPart<Region> {
     private void setBackground() {
         getRoot().setBackground(background);
         getRoot().setBorder(border);
-    }
-
-    /**
-     * Adds the date to the cell
-     */
-    private void setDate(String date) {
-        cellDate.setText(date);
-    }
-
-    /**
-     * Sets the row attribute of the cell
-     */
-    private void setRow(int row) {
-        this.row = row;
-    }
-
-    /**
-     * Sets the col attribute of the cell
-     */
-    private void setCol(int row) {
-        this.row = row;
     }
 
 }

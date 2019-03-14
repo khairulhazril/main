@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.YearMonth;
 import java.util.logging.Logger;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -23,6 +24,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.task.Task;
 
 /**
  * Panel that displays a calendar in grid format.
@@ -48,6 +50,7 @@ public class CalendarPanel extends UiPart<Region> {
     private static final Border border = new Border(new BorderStroke(Paint.valueOf("#0F0F0F"), BorderStrokeStyle.SOLID,
             CornerRadii.EMPTY, BorderStroke.THIN));
 
+    //get current year and month and date as set by system clock
     private static final YearMonth yearMonth = YearMonth.now();
     private static LocalDate calendarDate = LocalDate.of(yearMonth.getYear(), yearMonth.getMonthValue(), 1);
 
@@ -56,44 +59,58 @@ public class CalendarPanel extends UiPart<Region> {
     @FXML
     private GridPane taskGridPane;
 
-    public CalendarPanel() {
+    public CalendarPanel(ObservableList<Task> taskList) {
         super(FXML);
-        buildCalendarPane();
+        buildCalendarPane(taskList);
     }
 
     /**
-     * Builds calendar grid.
+     * Builds calendar.
      */
-    private void buildCalendarPane() {
+    private void buildCalendarPane(ObservableList<Task> taskList) {
         buildGrid();
         createHeaderCells();
         writeMonthHeader();
         writeDayHeaders();
-        createCalendarCells();
-        writeContents();
+        createCalendarCells(taskList);
     }
 
     /**
-     * Writes event information to each cell of the grid.
+     * Assigns row/col dimension constraints to grid.
      */
-    private void writeContents() {
-        return;
-    }
+    private void buildGrid() {
+        RowConstraints row;
+        ColumnConstraints column;
 
-    /**
-     * Writes day headers to second-highest row of grid.
-     */
-    private void writeDayHeaders() {
+        //create empty rows and columns
         for (int i = 0; i < COLS; i++) {
-            for (Node node : taskGridPane.getChildren()) {
-                if (GridPane.getRowIndex(node) == 1 && GridPane.getColumnIndex(node) == i) {
-                    VBox box = (VBox) node;
-                    Text header = new Text(HEADERS[i]);
+            column = new ColumnConstraints(COL_WIDTH);
+            column.setHgrow(Priority.ALWAYS);
+            taskGridPane.getColumnConstraints().add(column);
+        }
 
-                    box.setAlignment(Pos.CENTER);
-                    box.getChildren().add(header);
-                    box.setBackground(background);
-                    box.setBorder(border);
+        for (int i = 0; i < ROWS; i++) {
+            if (i == 0 || i == 1) {
+                row = new RowConstraints(HEADER_HEIGHT);
+            } else {
+                row = new RowConstraints(ROW_HEIGHT);
+            }
+            taskGridPane.getRowConstraints().add(row);
+        }
+    }
+
+    /**
+     * Populates grid with header cells.
+     */
+    private void createHeaderCells() {
+        for (int col = 0; col < COLS; col++) {
+            for (int row = 0; row < ROWS; row++) {
+                if (col == 0 && row == 0) {
+                    taskGridPane.add(new VBox(), col, row, COLS, 1); //month header
+                } else if (row == 0) {
+                    continue;
+                } else if (row == 1) {
+                    taskGridPane.add(new VBox(), col, row, 1, 1); //day headers
                 }
             }
         }
@@ -122,59 +139,39 @@ public class CalendarPanel extends UiPart<Region> {
     }
 
     /**
-     * Populate grid with calendar cells to correspond to the appropriate date
+     * Writes day headers to second-highest row of grid.
      */
-    public void createCalendarCells() {
-        while (!calendarDate.getDayOfWeek().toString().equals("SUNDAY")) {
-            calendarDate = calendarDate.minusDays(1);
-        }
+    private void writeDayHeaders() {
+        for (int i = 0; i < COLS; i++) {
+            for (Node node : taskGridPane.getChildren()) {
+                if (GridPane.getRowIndex(node) == 1 && GridPane.getColumnIndex(node) == i) {
+                    VBox box = (VBox) node;
+                    Text header = new Text(HEADERS[i]);
 
-        for (int row = 2; row < ROWS; row++) {
-            for (int col = 0; col < COLS; col++) {
-                String date = String.valueOf(calendarDate.getDayOfMonth());
-                taskGridPane.add(new CalendarCell(row, col, date).getRoot(), col, row);
-                calendarDate = calendarDate.plusDays(1);
-            }
-        }
-    }
-
-    /**
-     * Populates grid with header cells.
-     */
-    private void createHeaderCells() {
-        for (int col = 0; col < COLS; col++) {
-            for (int row = 0; row < ROWS; row++) {
-                if (col == 0 && row == 0) {
-                    taskGridPane.add(new VBox(), col, row, COLS, 1);
-                } else if (row == 0) {
-                    continue;
-                } else if (row == 1) {
-                    taskGridPane.add(new VBox(), col, row, 1, 1);
+                    box.setAlignment(Pos.CENTER);
+                    box.getChildren().add(header);
+                    box.setBackground(background);
+                    box.setBorder(border);
                 }
             }
         }
     }
 
     /**
-     * Assigns row/col dimension constraints to grid.
+     * Populate grid with calendar cells to correspond to the appropriate date
      */
-    private void buildGrid() {
-        RowConstraints row;
-        ColumnConstraints column;
-
-        for (int i = 0; i < COLS; i++) {
-            column = new ColumnConstraints(COL_WIDTH);
-            column.setHgrow(Priority.ALWAYS);
-            taskGridPane.getColumnConstraints().add(column);
+    public void createCalendarCells(ObservableList<Task> taskList) {
+        while (!calendarDate.getDayOfWeek().toString().equals("SUNDAY")) { //get previous month's dates to be displayed
+            calendarDate = calendarDate.minusDays(1);
         }
 
-        for (int i = 0; i < ROWS; i++) {
-            if (i == 0 || i == 1) {
-                row = new RowConstraints(HEADER_HEIGHT);
-            } else {
-                row = new RowConstraints(ROW_HEIGHT);
+        for (int row = 2; row < ROWS; row++) {
+            for (int col = 0; col < COLS; col++) {
+                String date = String.valueOf(calendarDate.getDayOfMonth());
+                String month = String.valueOf(calendarDate.getMonthValue());
+                taskGridPane.add(new CalendarCell(date, month, taskList).getRoot(), col, row);
+                calendarDate = calendarDate.plusDays(1);
             }
-            taskGridPane.getRowConstraints().add(row);
         }
     }
 
