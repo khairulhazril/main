@@ -58,7 +58,6 @@ public class UniqueTaskList implements Iterable<Task> {
         requireAllNonNull(target, editedTask);
 
         int index = internalList.indexOf(target);
-        
         if (index == -1) {
             throw new TaskNotFoundException();
         }
