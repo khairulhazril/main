@@ -54,9 +54,9 @@ public class AddNotesCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-        || (other instanceof seedu.address.logic.commands.AddNotesCommand // instanceof handles nulls
-        && wantAdd.equals(((AddNotesCommand) other).wantAdd));
-        }
+            || (other instanceof seedu.address.logic.commands.AddNotesCommand // instanceof handles nulls
+            && wantAdd.equals(((AddNotesCommand) other).wantAdd));
     }
+}
 
 
