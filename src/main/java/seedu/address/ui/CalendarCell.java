@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Border;
@@ -16,6 +17,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextBoundsType;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.task.Task;
 
@@ -30,6 +32,8 @@ public class CalendarCell extends UiPart<Region> {
     private static final Background background = new Background(backgroundFill);
     private static final Border border = new Border(new BorderStroke(Paint.valueOf("#0F0F0F"), BorderStrokeStyle.SOLID,
             CornerRadii.EMPTY, BorderStroke.THIN));
+
+    private static final int CELL_WIDTH = 105;
 
     private final Logger logger = LogsCenter.getLogger(CalendarCell.class);
 
@@ -57,7 +61,7 @@ public class CalendarCell extends UiPart<Region> {
         setDate(date);
         setMonth(month);
         addTask(taskList);
-        setBackground();
+        setAppearance();
     }
 
     /**
@@ -89,7 +93,8 @@ public class CalendarCell extends UiPart<Region> {
 
             if (currDate == Integer.parseInt(date) && currMonth == Integer.parseInt(month)) {
                 Text newTask = new Text();
-                newTask.setText(task.getName().toString());
+                newTask.setText("- " + task.getName().toString());
+                newTask.setWrappingWidth(CELL_WIDTH);
 
                 cellContent.getChildren().add(newTask);
             }
@@ -97,11 +102,13 @@ public class CalendarCell extends UiPart<Region> {
     }
 
     /**
-     * Sets the background and border of the cell
+     * Sets the background, border and scrollbars of the cell
      */
-    private void setBackground() {
+    private void setAppearance() {
         getRoot().setBackground(background);
         getRoot().setBorder(border);
+        cellTasksPane.setHbarPolicy(ScrollBarPolicy.NEVER);
+        cellTasksPane.setVbarPolicy(ScrollBarPolicy.NEVER);
     }
 
 }
