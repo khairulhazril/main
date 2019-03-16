@@ -17,7 +17,6 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextBoundsType;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.task.Task;
 
