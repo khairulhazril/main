@@ -7,6 +7,7 @@ import java.util.List;
 import javafx.beans.InvalidationListener;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.InvalidationListenerManager;
+import seedu.address.model.task.SortTaskList;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
 
@@ -94,6 +95,15 @@ public class TaskManager implements ReadOnlyTaskManager {
         indicateModified();
     }
 
+    public void sortTask(String method) {
+        requireNonNull(method);
+        SortTaskList sortList = new SortTaskList();
+        ObservableList<Task> copyList = sortList.sortTask(obtainModifiableObservableList(), method);
+        UniqueTaskList updateList = new UniqueTaskList();
+        updateList.setTasks(copyList);
+        tasks.setTasks(updateList);
+    }
+
     @Override
     public void addListener(InvalidationListener listener) {
         invalidationListenerManager.addListener(listener);
@@ -122,6 +132,10 @@ public class TaskManager implements ReadOnlyTaskManager {
     @Override
     public ObservableList<Task> getTaskList() {
         return tasks.asUnmodifiableObservableList();
+    }
+
+    public ObservableList<Task> obtainModifiableObservableList() {
+        return tasks.obtainObservableList();
     }
 
     @Override

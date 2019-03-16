@@ -36,9 +36,7 @@ public class Task {
         this.tags.addAll(tags);
     }
 
-    public Name getName() {
-        return name;
-    }
+    public Name getName() { return name; }
 
     public Module getModule() {
         return module;
@@ -48,10 +46,13 @@ public class Task {
         return date;
     }
 
-    public Priority getPriority() {
-        return priority;
-    }
+    public Priority getPriority() { return priority; }
 
+    public String getMonth() { return date.toString().substring(3, 5); }
+
+    public String getDay() {
+        return date.toString().substring(0, 2);
+    }
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
