@@ -18,7 +18,6 @@ import seedu.address.model.ReadOnlyTaskManager;
 
 import seedu.address.model.notes.Notes;
 
-
 import seedu.address.model.task.Task;
 
 import seedu.address.storage.Storage;
@@ -112,7 +111,5 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ObservableList<Notes> getFilteredNotesList(){
-        return model.getFilteredNotesList();
-    }
+    public ObservableList<Notes> getFilteredNotesList(){ return model.getFilteredNotesList(); }
 }

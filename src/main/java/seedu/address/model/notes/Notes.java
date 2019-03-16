@@ -1,16 +1,20 @@
 package seedu.address.model.notes;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.util.Objects;
 
-
+/**
+ * Represents a Note in the task manager.
+ * Guarantees: details are present and not null, field values are validated, immutable.
+ */
 public class Notes {
 
     private final Heading heading;
     private final Content content;
 
-    public Notes(Heading heading, Content content){
-        requireAllNonNull(heading,content);
+    public Notes(Heading heading, Content content) {
+        requireAllNonNull(heading, content);
         this.heading = heading;
         this.content = content;
 
@@ -35,7 +39,7 @@ public class Notes {
 
         return otherNotes != null
                 && otherNotes.getHeading().equals(getHeading())
-                && (otherNotes.getContent().equals(getContent()) );
+                && (otherNotes.getContent().equals(getContent()));
     }
 
     /**
@@ -60,7 +64,7 @@ public class Notes {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(heading,content);
+        return Objects.hash(heading, content);
     }
 
     @Override

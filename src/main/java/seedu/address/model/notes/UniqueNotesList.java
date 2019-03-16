@@ -9,6 +9,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.notes.exceptions.DuplicateNotesException;
 
+/**
+ * A list of notes that enforces uniqueness between its elements and does not allow nulls.
+ * A note is considered unique by comparing using {@code Notes#isSameNotes(Notes)}. As such, adding and updating of
+ * notes uses Notes#isSameNotes(Notes) for equality so as to ensure that the note being added or updated is
+ * unique in terms of identity in the UniqueNotesList.
+ * <p>
+ * Supports a minimal set of list operations.
+ *
+ * @see Notes#isSameNotes(Notes)
+ */
 public class UniqueNotesList implements Iterable<Notes> {
 
     private final ObservableList<Notes> internalList = FXCollections.observableArrayList();
