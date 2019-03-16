@@ -11,20 +11,20 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.person.Task;
+import seedu.address.model.task.Task;
 
 /**
  * Panel containing the list of persons.
  */
-public class PersonListPanel extends UiPart<Region> {
-    private static final String FXML = "PersonListPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
+public class TaskListPanel extends UiPart<Region> {
+    private static final String FXML = "TaskListPanel.fxml";
+    private final Logger logger = LogsCenter.getLogger(TaskListPanel.class);
 
     @FXML
     private ListView<Task> personListView;
 
-    public PersonListPanel(ObservableList<Task> taskList, ObservableValue<Task> selectedTask,
-                           Consumer<Task> onSelectedTaskChange) {
+    public TaskListPanel(ObservableList<Task> taskList, ObservableValue<Task> selectedTask,
+                         Consumer<Task> onSelectedTaskChange) {
         super(FXML);
         personListView.setItems(taskList);
         personListView.setCellFactory(listView -> new TaskListViewCell());
@@ -52,7 +52,7 @@ public class PersonListPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Task} using a {@code PersonCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Task} using a {@code TaskCard}.
      */
     class TaskListViewCell extends ListCell<Task> {
         @Override
@@ -63,7 +63,7 @@ public class PersonListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new PersonCard(task, getIndex() + 1).getRoot());
+                setGraphic(new TaskCard(task, getIndex() + 1).getRoot());
             }
         }
     }

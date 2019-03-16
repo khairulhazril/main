@@ -9,7 +9,7 @@
 //import org.junit.Test;
 //
 //import seedu.address.model.TaskManager;
-//import seedu.address.model.person.Task;
+//import seedu.address.model.task.Task;
 //import seedu.address.model.util.SampleDataUtil;
 //import seedu.address.testutil.TestUtil;
 //
@@ -46,6 +46,6 @@
 //    @Test
 //    public void addressBook_dataFileDoesNotExist_loadSampleData() {
 //        Task[] expectedList = SampleDataUtil.getSampleTasks();
-//        assertListMatching(getPersonListPanel(), expectedList);
+//        assertListMatching(getTaskListPanel(), expectedList);
 //    }
 //}

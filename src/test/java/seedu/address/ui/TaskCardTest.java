@@ -8,23 +8,23 @@ import static seedu.address.ui.testutil.GuiTestAssert.assertCardDisplaysPerson;
 import org.junit.Test;
 
 import guitests.guihandles.PersonCardHandle;
-import seedu.address.model.person.Task;
+import seedu.address.model.task.Task;
 import seedu.address.testutil.TaskBuilder;
 
-public class PersonCardTest extends GuiUnitTest {
+public class TaskCardTest extends GuiUnitTest {
 
     /*
     @Test
     public void display() {
     // no tags
     Task taskWithNoTags = new TaskBuilder().withTags(new String[0]).build();
-    PersonCard personCard = new PersonCard(taskWithNoTags, 1);
+    TaskCard personCard = new TaskCard(taskWithNoTags, 1);
     uiPartRule.setUiPart(personCard);
     assertCardDisplay(personCard, taskWithNoTags, 1);
 
     // with tags
     Task taskWithTags = new TaskBuilder().build();
-    personCard = new PersonCard(taskWithTags, 2);
+    personCard = new TaskCard(taskWithTags, 2);
     uiPartRule.setUiPart(personCard);
     assertCardDisplay(personCard, taskWithTags, 2);
     }
@@ -33,37 +33,37 @@ public class PersonCardTest extends GuiUnitTest {
     @Test
     public void equals() {
         Task task = new TaskBuilder().build();
-        PersonCard personCard = new PersonCard(task, 0);
+        TaskCard taskCard = new TaskCard(task, 0);
 
         // same task, same index -> returns true
-        PersonCard copy = new PersonCard(task, 0);
-        assertTrue(personCard.equals(copy));
+        TaskCard copy = new TaskCard(task, 0);
+        assertTrue(taskCard.equals(copy));
 
         // same object -> returns true
-        assertTrue(personCard.equals(personCard));
+        assertTrue(taskCard.equals(taskCard));
 
         // null -> returns false
-        assertFalse(personCard.equals(null));
+        assertFalse(taskCard.equals(null));
 
         // different types -> returns false
-        assertFalse(personCard.equals(0));
+        assertFalse(taskCard.equals(0));
 
         // different task, same index -> returns false
         Task differentTask = new TaskBuilder().withName("differentName").build();
-        assertFalse(personCard.equals(new PersonCard(differentTask, 0)));
+        assertFalse(taskCard.equals(new TaskCard(differentTask, 0)));
 
         // same task, different index -> returns false
-        assertFalse(personCard.equals(new PersonCard(task, 1)));
+        assertFalse(taskCard.equals(new TaskCard(task, 1)));
     }
 
     /**
-     * Asserts that {@code personCard} displays the details of {@code expectedTask} correctly and matches
+     * Asserts that {@code taskCard} displays the details of {@code expectedTask} correctly and matches
      * {@code expectedId}.
      */
-    private void assertCardDisplay(PersonCard personCard, Task expectedTask, int expectedId) {
+    private void assertCardDisplay(TaskCard taskCard, Task expectedTask, int expectedId) {
         guiRobot.pauseForHuman();
 
-        PersonCardHandle personCardHandle = new PersonCardHandle(personCard.getRoot());
+        PersonCardHandle personCardHandle = new PersonCardHandle(taskCard.getRoot());
 
         // verify id is displayed correctly
         assertEquals(expectedId + ". ", personCardHandle.getId());

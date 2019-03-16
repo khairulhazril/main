@@ -11,11 +11,11 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.notes.Content;
 import seedu.address.model.notes.Heading;
-import seedu.address.model.person.Date;
-import seedu.address.model.person.Module;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Priority;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.Date;
+import seedu.address.model.task.Module;
+import seedu.address.model.task.Name;
+import seedu.address.model.task.Priority;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.

@@ -9,8 +9,9 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.util.InvalidationListenerManager;
 import seedu.address.model.notes.Notes;
 import seedu.address.model.notes.UniqueNotesList;
-import seedu.address.model.person.Task;
-import seedu.address.model.person.UniqueTaskList;
+
+import seedu.address.model.task.Task;
+import seedu.address.model.task.UniqueTaskList;
 
 /**
  * Wraps all data at the task-manager level
