@@ -9,7 +9,11 @@ import javafx.collections.ObservableList;
  * Sorts the task list according to the attribute
  */
 public class SortTaskList {
-
+    /**
+     * @param internalList
+     * @param attribute
+     * @return sorted internalList
+     */
     public ObservableList<Task> sortTask(ObservableList<Task> internalList, String attribute) {
 
         FXCollections.sort(internalList, new Comparator<Task>() {
