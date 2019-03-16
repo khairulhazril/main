@@ -3,8 +3,6 @@ package seedu.address.model.task;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -56,9 +54,11 @@ public class UniqueTaskList implements Iterable<Task> {
      * The task identity of {@code editedTask} must not be the same as another existing task in the list.
      */
     public void setTask(Task target, Task editedTask) {
+
         requireAllNonNull(target, editedTask);
 
         int index = internalList.indexOf(target);
+        
         if (index == -1) {
             throw new TaskNotFoundException();
         }

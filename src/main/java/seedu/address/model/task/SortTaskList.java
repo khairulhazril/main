@@ -1,19 +1,21 @@
 package seedu.address.model.task;
 
-import java.util.Collections;
 import java.util.Comparator;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+/**
+ * Sorts the task list according to the attribute
+ */
 public class SortTaskList {
 
-    public ObservableList<Task> sortTask(ObservableList<Task> internalList, String method) {
+    public ObservableList<Task> sortTask(ObservableList<Task> internalList, String attribute) {
 
         FXCollections.sort(internalList, new Comparator<Task>() {
             @Override
             public int compare(Task self, Task other) {
-                switch(method) {
+                switch(attribute) {
                     case ("name"): {
                         return self.getName().toString().compareTo(other.getName().toString());
                     }

@@ -95,10 +95,13 @@ public class TaskManager implements ReadOnlyTaskManager {
         indicateModified();
     }
 
-    public void sortTask(String method) {
-        requireNonNull(method);
+    /**
+     * Sorts the task list according to the attribute
+     */
+    public void sortTask(String attribute) {
+        requireNonNull(attribute);
         SortTaskList sortList = new SortTaskList();
-        ObservableList<Task> copyList = sortList.sortTask(obtainModifiableObservableList(), method);
+        ObservableList<Task> copyList = sortList.sortTask(obtainModifiableObservableList(), attribute);
         UniqueTaskList updateList = new UniqueTaskList();
         updateList.setTasks(copyList);
         tasks.setTasks(updateList);
