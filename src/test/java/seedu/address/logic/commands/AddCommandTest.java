@@ -153,6 +153,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void sortTask(String attribute) {
+            
+        }
+
+        @Override
         public ObservableList<Task> getFilteredTaskList() {
             throw new AssertionError("This method should not be called.");
         }
