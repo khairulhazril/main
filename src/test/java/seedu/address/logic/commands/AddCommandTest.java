@@ -153,9 +153,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void sortTask(String attribute) {
-            
-        }
+        public void sortTask(String attribute) { }
 
         @Override
         public ObservableList<Task> getFilteredTaskList() {
