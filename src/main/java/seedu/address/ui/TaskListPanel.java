@@ -21,14 +21,14 @@ public class TaskListPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(TaskListPanel.class);
 
     @FXML
-    private ListView<Task> taskListView;
+    private ListView<Task> personListView;
 
     public TaskListPanel(ObservableList<Task> taskList, ObservableValue<Task> selectedTask,
                          Consumer<Task> onSelectedTaskChange) {
         super(FXML);
-        taskListView.setItems(taskList);
-        taskListView.setCellFactory(listView -> new TaskListViewCell());
-        taskListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+        personListView.setItems(taskList);
+        personListView.setCellFactory(listView -> new TaskListViewCell());
+        personListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             logger.fine("Selection in task list panel changed to : '" + newValue + "'");
             onSelectedTaskChange.accept(newValue);
         });
@@ -37,16 +37,16 @@ public class TaskListPanel extends UiPart<Region> {
 
             // Don't modify selection if we are already selecting the selected task,
             // otherwise we would have an infinite loop.
-            if (Objects.equals(taskListView.getSelectionModel().getSelectedItem(), newValue)) {
+            if (Objects.equals(personListView.getSelectionModel().getSelectedItem(), newValue)) {
                 return;
             }
 
             if (newValue == null) {
-                taskListView.getSelectionModel().clearSelection();
+                personListView.getSelectionModel().clearSelection();
             } else {
-                int index = taskListView.getItems().indexOf(newValue);
-                taskListView.scrollTo(index);
-                taskListView.getSelectionModel().clearAndSelect(index);
+                int index = personListView.getItems().indexOf(newValue);
+                personListView.scrollTo(index);
+                personListView.getSelectionModel().clearAndSelect(index);
             }
         });
     }
