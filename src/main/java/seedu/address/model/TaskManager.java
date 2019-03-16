@@ -7,6 +7,8 @@ import java.util.List;
 import javafx.beans.InvalidationListener;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.InvalidationListenerManager;
+import seedu.address.model.notes.Notes;
+import seedu.address.model.notes.UniqueNotesList;
 import seedu.address.model.person.Task;
 import seedu.address.model.person.UniqueTaskList;
 
@@ -17,10 +19,13 @@ import seedu.address.model.person.UniqueTaskList;
 public class TaskManager implements ReadOnlyTaskManager {
 
     private final UniqueTaskList tasks;
+    private final UniqueNotesList unotes;
     private final InvalidationListenerManager invalidationListenerManager = new InvalidationListenerManager();
 
     {
         tasks = new UniqueTaskList();
+        unotes = new UniqueNotesList();
+
     }
 
     public TaskManager() {
@@ -135,4 +140,23 @@ public class TaskManager implements ReadOnlyTaskManager {
     public int hashCode() {
         return tasks.hashCode();
     }
+
+    //================Notes==================================================
+
+    public boolean hasNotes(Notes notes){
+            requireNonNull(notes);
+            return unotes.contains(notes);
+    }
+
+    public void addNotes(Notes n) {
+        unotes.add(n);
+        indicateModified();
+    }
+
+    @Override
+    public ObservableList<Notes> getNotesList() {
+        return unotes.asUnmodifiableObservableList();
+    }
+
+
 }

@@ -28,7 +28,7 @@ import seedu.address.testutil.TaskBuilder;
 
 public class AddCommandTest {
 
-    private static final CommandHistory EMPTY_COMMAND_HISTORY = new CommandHistory();
+    /*private static final CommandHistory EMPTY_COMMAND_HISTORY = new CommandHistory();
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -91,7 +91,7 @@ public class AddCommandTest {
     /**
      * A default model stub that have all of the methods failing.
      */
-    private class ModelStub implements Model {
+    /*private class ModelStub implements Model {
         @Override
         public ReadOnlyUserPrefs getUserPrefs() {
             throw new AssertionError("This method should not be called.");
@@ -206,7 +206,7 @@ public class AddCommandTest {
     /**
      * A Model stub that contains a single task.
      */
-    private class ModelStubWithTask extends ModelStub {
+    /*private class ModelStubWithTask extends ModelStub {
         private final Task task;
 
         ModelStubWithTask(Task task) {
@@ -224,7 +224,7 @@ public class AddCommandTest {
     /**
      * A Model stub that always accept the task being added.
      */
-    private class ModelStubAcceptingTaskAdded extends ModelStub {
+    /*private class ModelStubAcceptingTaskAdded extends ModelStub {
         final ArrayList<Task> tasksAdded = new ArrayList<>();
 
         @Override
@@ -249,5 +249,5 @@ public class AddCommandTest {
             return new TaskManager();
         }
     }
-
+*/
 }

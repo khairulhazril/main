@@ -9,6 +9,8 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.notes.Content;
+import seedu.address.model.notes.Heading;
 import seedu.address.model.person.Date;
 import seedu.address.model.person.Module;
 import seedu.address.model.person.Name;
@@ -121,5 +123,25 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    public static Heading parseHeading(String heading) throws ParseException {
+
+        requireNonNull(heading);
+        String trimmedHeading = heading.trim();
+        if (!Heading.isValidHeading(trimmedHeading)) {
+            throw new ParseException(Heading.MESSAGE_CONSTRAINTS);
+        }
+        return new Heading(trimmedHeading);
+    }
+
+    public static Content parseContent(String content) throws ParseException {
+
+        requireNonNull(content);
+        String trimmedContent = content.trim();
+        if (!Content.isValidContent(trimmedContent)){
+            throw new ParseException(Content.MESSAGE_CONSTRAINTS);
+        }
+        return new Content(trimmedContent);
     }
 }
