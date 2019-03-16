@@ -4,13 +4,15 @@ import java.nio.file.Path;
 
 import javafx.beans.property.ReadOnlyProperty;
 import javafx.collections.ObservableList;
+import jdk.jfr.Name;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyTaskManager;
-import seedu.address.model.task.Task;
 
+import seedu.address.model.task.Task;
+import seedu.address.model.notes.Notes;
 /**
  * API of the Logic component
  */
@@ -36,6 +38,11 @@ public interface Logic {
      * Returns an unmodifiable view of the filtered list of tasks
      */
     ObservableList<Task> getFilteredTaskList();
+
+    /**
+     * Returns an unmodifiable view of the filtered list of notes
+     */
+    ObservableList<Notes> getFilteredNotesList();
 
     /**
      * Returns an unmodifiable view of the list of commands entered by the user.
