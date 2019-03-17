@@ -1,8 +1,11 @@
-package seedu.address.model.loginInfo;
+package seedu.address.model.login;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * UserName
+ */
 public class Username {
 
     public static final String MESSAGE_USERNAME_CONSTRAINTS = "It should not be blank!";
@@ -22,6 +25,8 @@ public class Username {
     }
 
     @Override
-    public String toString() { return enteredUsername; }
+    public String toString() {
+        return enteredUsername;
+    }
 
 }

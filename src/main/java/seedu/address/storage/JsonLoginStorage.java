@@ -1,11 +1,5 @@
 package seedu.address.storage;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import com.google.gson.reflect.TypeToken;
-
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -14,21 +8,28 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Map;
 
+import com.google.common.reflect.TypeToken;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
-// To access the loginEvent stored as a JSON file
-public class JsonLoginStorage implements loginStorage {
+/**
+ * To access the LoginEvent stored as a JSON file
+ */
+public class JsonLoginStorage implements LoginStorage {
 
     private String loginFilePath;
     private Map<String, String> accounts;
 
     public JsonLoginStorage(Path filePath) throws IOException {
-     loginFilePath = "./" + filePath.toString();
+        loginFilePath = "./" + filePath.toString();
 
-     if (Files.notExists(filePath)) {
-         createLoginInfoFile();
-     }
+        if (Files.notExists(filePath)) {
+            createLoginInfoFile();
+        }
 
-     setAccount();
+        setAccount();
     }
 
     // Adds properties into JSON files
@@ -61,12 +62,17 @@ public class JsonLoginStorage implements loginStorage {
     }
 
     //Creates user login account with JSON file
-    private void createLoginInfoFile() throws IOException  {
+    private void createLoginInfoFile() throws IOException {
         JsonObject jsonObject = new JsonObject();
         writeJson(new Gson(), jsonObject);
     }
 
-    // To write and store to JSON file
+    /**
+     * To write and store to JSON file
+     * @param gson
+     * @param jsonObject
+     * @throws IOException
+     */
     private void writeJson(Gson gson, JsonObject jsonObject) throws IOException {
         String json = gson.toJson(jsonObject);
         FileWriter file = new FileWriter(loginFilePath);

@@ -1,13 +1,16 @@
-package seedu.address.model.loginInfo;
-
-import seedu.address.logic.parser.generateHash;
+package seedu.address.model.login;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import seedu.address.logic.parser.GenerateHash;
+
+/**
+ * Password
+ */
 public class Password {
 
-    public static final String MESSAGE_PASSWORD_CONSTRAINTS = "It should not be blank!" ;
+    public static final String MESSAGE_PASSWORD_CONSTRAINTS = "It should not be blank!";
     private static final String PASSWORD_REGEX = "[\\w]*";
     public final String hashedPassword;
 
@@ -15,7 +18,7 @@ public class Password {
     public Password(String password) {
         requireNonNull(password);
         checkArgument(isValidPassword(password), MESSAGE_PASSWORD_CONSTRAINTS);
-        hashedPassword = generateHash.generateHash(password);
+        hashedPassword = GenerateHash.generateHash(password);
     }
 
     // Returns true of the password is valid
@@ -25,5 +28,7 @@ public class Password {
 
 
     @Override
-    public String toString() {return hashedPassword; }
+    public String toString() {
+        return hashedPassword;
+    }
 }

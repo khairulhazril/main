@@ -1,7 +1,10 @@
-package seedu.address.model.loginInfo;
+package seedu.address.model.login;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+/**
+ * User
+ */
 public class User {
 
     private final Username username;
@@ -14,7 +17,11 @@ public class User {
         this.password = password;
     }
 
-    public Username getUsername() { return username; }
+    public Username getUsername() {
+        return username;
+    }
 
-    public Password getPassword() { return password; }
+    public Password getPassword() {
+        return password;
+    }
 }

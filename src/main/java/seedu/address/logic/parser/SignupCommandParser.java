@@ -1,22 +1,32 @@
 package seedu.address.logic.parser;
 
-import seedu.address.logic.commands.SignupCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.loginInfo.Password;
-import seedu.address.model.loginInfo.User;
-import seedu.address.model.loginInfo.Username;
-
-import java.util.stream.Stream;
-
 import static seedu.address.logic.commands.LoginCommand.PREFIX_PASSWORD;
 import static seedu.address.logic.commands.LoginCommand.PREFIX_USERNAME;
 
+import java.util.stream.Stream;
 
+import seedu.address.logic.commands.SignupCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.login.Password;
+import seedu.address.model.login.User;
+import seedu.address.model.login.Username;
+
+/**
+ * Sign Up Command Parser
+ */
 public class SignupCommandParser implements Parser<SignupCommand> {
 
+    /**
+     * Sign Up Command Parser
+     */
     public static final String MESSAGE_INVALID_FORMAT = "Invalid format!";
 
-    // Parses arguments into command and passes username and password into User class
+    /**
+     * Parses arguments into command and passes username and password into User class
+     * @param args
+     * @return
+     * @throws ParseException
+     */
     public SignupCommand parse(String args) throws ParseException {
         ArgumentMultimap map = ArgumentTokenizer.tokenize(args, PREFIX_USERNAME, PREFIX_PASSWORD);
 
