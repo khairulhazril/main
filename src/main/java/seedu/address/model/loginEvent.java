@@ -1,25 +1,28 @@
 package seedu.address.model;
 
-import seedu.address.model.loginInfo.Password;
-import seedu.address.model.loginInfo.User;
-import seedu.address.model.loginInfo.Username;
-import seedu.address.storage.JsonLoginStorage;
-
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Map;
 
-public class loginEvent {
+import seedu.address.model.login.Password;
+import seedu.address.model.login.User;
+import seedu.address.model.login.Username;
+import seedu.address.storage.JsonLoginStorage;
+
+/**
+ * Login Event
+ */
+public class LoginEvent {
 
     private JsonLoginStorage loginStorage;
     private User user;
     private boolean loginStatus;
 
     // Constructor to start user with temp username and password
-    public loginEvent() {
+    public LoginEvent() {
 
-        final Path loginInfoPath = Paths.get("loginInfo.json");
+        final Path loginInfoPath = Paths.get("login.json");
         final Username username = new Username("test");
         final Password password = new Password("test");
         user = new User(username, password);
@@ -34,7 +37,10 @@ public class loginEvent {
         newUser(user);
     }
 
-    // Creates new user in JSON file
+    /**
+     * Creates new user in JSON file
+     * @param user
+     */
     public void newUser(User user) {
         String loginUsername = user.getUsername().toString();
         String loginPassword = user.getPassword().toString();
@@ -45,10 +51,13 @@ public class loginEvent {
         }
     }
 
-    // Checks if user exists and logs into account
+    /**
+     * Checks if user exists and logs into account
+     * @param user
+     */
     public void loginUser(User user) {
         String loginUsername = user.getUsername().toString();
-        Map<String,String> accounts = loginStorage.getAccounts();
+        Map<String, String> accounts = loginStorage.getAccounts();
 
         if (accounts.containsKey(loginUsername)) {
             boolean passwordValid = false;
@@ -61,7 +70,11 @@ public class loginEvent {
         }
     }
 
-    // Returns true if the user exists in the JSON file
+    /**
+     * Returns true if the user exists in the JSON file
+     * @param user
+     * @return
+     */
     public boolean userExists(User user) {
         String loginUsername = user.getUsername().toString();
         Map<String, String> accounts = loginStorage.getAccounts();

@@ -322,29 +322,28 @@ The login mechanism is facilitated by `TaskManager`, `SignupCommand`, `LoginComm
 
 Given below is an example usage scenario.
 
-Step 1. The user keys in username and password, the `LoginCommandParser` or `SignupCommandParser` will trim the command to get the string of username and password.
+Step 1. The user keys in `sort ATTRIBUTE`, the `SortCommandParser` will trim the command to get the attribute.
 
-Step 2. If the attribute is valid, username and password is stored in a User class, it will then pass the attribute to `loginEvent`.
+Step 2. If the attribute is valid, it will then pass the attribute to `SortCommand`.
 
-Step 3. `loginEvent` will then call `JsonLoginStorage` with attributes to read and write Json files or set Json properties.
+Step 3. `SortCommand` will then call `ModelManager#sortTask(attribute)`.
 
-Step 4. It will then return to `loginEvent` where it will return the user account details.
+Step 4. It will then call `TaskManager#sortTask(attribute)`.
+Then we convert the relevant attributes of the tasks in the Task List to string to compare using `string#compareTo()`.
 
-Step 5. Then we convert the relevant attributes of the user information to string to compare. This is used in login and signup. Here, `loginEvent` is able to check if the user exists, if user information matches or logs out of account.
-
-Step 6. After returning the user information, the user is then logged into or logged out of Task Manager.
+Step 5. This will sort `ObservableList<Task> sortedList`.
+After returning the sorted Task List, the Task Manager is then committed.
 
 ==== Design Considerations
 
-===== Aspect: How loginEvent executes
+===== Aspect: How sort executes
 
-* Write a class separately for handling the Json file reading of user information.
+* **Alternative 1 (current choice):** Write a class separately for handling the sorting of the task list.
 ** Pros: Easy to read and debug, Follows OOP coding and thus easier for other coders to modify.
 ** Cons: Difficult to implement.
-
-* Write a class separately for passing Json file attributes and follow OOP coding in loginEvent.
-** Pros: Able to debug easily if any error occurs. Most of the login function happens within this 2 files.
-** Cons: Difficult to implement. Does not follow OOP coding.
+* **Alternative 2:** Write a method for each attribute in `TaskManager`.
+** Pros: Easy to implement.
+** Cons: Does not follow OOP coding.
 
 
 // end::loginfunction[]
