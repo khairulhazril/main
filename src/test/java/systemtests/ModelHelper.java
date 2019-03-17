@@ -6,7 +6,7 @@
 //import java.util.function.Predicate;
 //
 //import seedu.address.model.Model;
-//import seedu.address.model.person.Task;
+//import seedu.address.model.task.Task;
 //
 ///**
 // * Contains helper methods to set up {@code Model} for testing.
@@ -34,6 +34,6 @@
 //     * Returns a predicate that evaluates to true if this {@code Task} equals to {@code other}.
 //     */
 //    private static Predicate<Task> getPredicateMatching(Task other) {
-//        return person -> person.equals(other);
+//        return task -> task.equals(other);
 //    }
 //}

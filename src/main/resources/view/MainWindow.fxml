@@ -2,22 +2,28 @@
 
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.*?>
+
 <?import javafx.scene.image.Image?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.Scene?>
-<?import javafx.stage.Stage?>
-<fx:root xmlns:fx="http://javafx.com/fxml/1" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8"
-         title="Address App" minWidth="450" minHeight="600" onCloseRequest="#handleExit">
-    <icons>
-        <Image url="@/images/address_book_32.png"/>
-    </icons>
-    <scene>
-        <Scene>
-            <stylesheets>
-                <URL value="@DarkTheme.css"/>
-                <URL value="@Extensions.css"/>
-            </stylesheets>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitPane?>
+
+<fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+         title="TaskManager" minWidth="1125" minHeight="800" onCloseRequest="#handleExit">
+  <icons>
+    <Image url="@/images/address_book_32.png" />
+  </icons>
+  <scene>
+    <Scene>
+      <stylesheets>
+        <URL value="@DarkTheme.css" />
+        <URL value="@Extensions.css" />
+      </stylesheets>
 
             <VBox>
                 <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
@@ -47,14 +53,14 @@
                         <padding>
                             <Insets top="10" right="10" bottom="10" left="10"/>
                         </padding>
-                        <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+                        <StackPane fx:id="taskListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
                     </VBox>
 
-                    <StackPane fx:id="browserPlaceholder" prefWidth="340">
+                    <GridPane fx:id="calendarPlaceholder" minWidth = "765" prefWidth="765" >
                         <padding>
-                            <Insets top="10" right="10" bottom="10" left="10"/>
+                            <Insets top="10" right="10" bottom="10" left="10" />
                         </padding>
-                    </StackPane>
+                    </GridPane>
                 </SplitPane>
 
                 <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER"/>

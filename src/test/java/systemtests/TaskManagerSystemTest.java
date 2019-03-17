@@ -98,8 +98,8 @@
 //        return mainWindowHandle.getCommandBox();
 //    }
 //
-//    public PersonListPanelHandle getPersonListPanel() {
-//        return mainWindowHandle.getPersonListPanel();
+//    public PersonListPanelHandle getTaskListPanel() {
+//        return mainWindowHandle.getTaskListPanel();
 //    }
 //
 //    public MainMenuHandle getMainMenu() {
@@ -154,7 +154,7 @@
 //     */
 //    protected void selectPerson(Index index) {
 //        executeCommand(SelectCommand.COMMAND_WORD + " " + index.getOneBased());
-//        assertEquals(index.getZeroBased(), getPersonListPanel().getSelectedCardIndex());
+//        assertEquals(index.getZeroBased(), getTaskListPanel().getSelectedCardIndex());
 //    }
 //
 //    /**
@@ -175,7 +175,7 @@
 //        assertEquals(expectedCommandInput, getCommandBox().getInput());
 //        assertEquals(expectedResultMessage, getResultDisplay().getText());
 //        assertEquals(new TaskManager(expectedModel.getTaskManager()), testApp.readStorageAddressBook());
-//        assertListMatching(getPersonListPanel(), expectedModel.getFilteredTaskList());
+//        assertListMatching(getTaskListPanel(), expectedModel.getFilteredTaskList());
 //    }
 //
 //    /**
@@ -187,7 +187,7 @@
 //        getBrowserPanel().rememberUrl();
 //        statusBarFooterHandle.rememberSaveLocation();
 //        statusBarFooterHandle.rememberSyncStatus();
-//        getPersonListPanel().rememberSelectedPersonCard();
+//        getTaskListPanel().rememberSelectedPersonCard();
 //    }
 //
 //    /**
@@ -197,7 +197,7 @@
 //     */
 //    protected void assertSelectedCardDeselected() {
 //        assertEquals(BrowserPanel.DEFAULT_PAGE, getBrowserPanel().getLoadedUrl());
-//        assertFalse(getPersonListPanel().isAnyCardSelected());
+//        assertFalse(getTaskListPanel().isAnyCardSelected());
 //    }
 //
 //    /**
@@ -207,8 +207,8 @@
 //     * @see PersonListPanelHandle#isSelectedPersonCardChanged()
 //     */
 //    protected void assertSelectedCardChanged(Index expectedSelectedCardIndex) {
-//        getPersonListPanel().navigateToCard(getPersonListPanel().getSelectedCardIndex());
-//        String selectedCardName = getPersonListPanel().getHandleToSelectedCard().getName();
+//        getTaskListPanel().navigateToCard(getTaskListPanel().getSelectedCardIndex());
+//        String selectedCardName = getTaskListPanel().getHandleToSelectedCard().getName();
 //        URL expectedUrl;
 //        try {
 //            expectedUrl = new URL(BrowserPanel.SEARCH_PAGE_URL + selectedCardName.replaceAll(" ", "%20"));
@@ -217,7 +217,7 @@
 //        }
 //        assertEquals(expectedUrl, getBrowserPanel().getLoadedUrl());
 //
-//        assertEquals(expectedSelectedCardIndex.getZeroBased(), getPersonListPanel().getSelectedCardIndex());
+//        assertEquals(expectedSelectedCardIndex.getZeroBased(), getTaskListPanel().getSelectedCardIndex());
 //    }
 //
 //    /**
@@ -227,7 +227,7 @@
 //     */
 //    protected void assertSelectedCardUnchanged() {
 //        assertFalse(getBrowserPanel().isUrlChanged());
-//        assertFalse(getPersonListPanel().isSelectedPersonCardChanged());
+//        assertFalse(getTaskListPanel().isSelectedPersonCardChanged());
 //    }
 //
 //    /**
@@ -271,7 +271,7 @@
 //    private void assertApplicationStartingStateIsCorrect() {
 //        assertEquals("", getCommandBox().getInput());
 //        assertEquals("", getResultDisplay().getText());
-//        assertListMatching(getPersonListPanel(), getModel().getFilteredTaskList());
+//        assertListMatching(getTaskListPanel(), getModel().getFilteredTaskList());
 //        assertEquals(BrowserPanel.DEFAULT_PAGE, getBrowserPanel().getLoadedUrl());
 //        assertEquals(Paths.get(".").resolve(testApp.getStorageSaveLocation()).toString(),
 //                getStatusBarFooter().getSaveLocation());

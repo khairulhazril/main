@@ -21,8 +21,8 @@
 //import javafx.beans.property.SimpleIntegerProperty;
 //import javafx.collections.FXCollections;
 //import javafx.collections.ObservableList;
-//import seedu.address.model.person.Task;
-//import seedu.address.model.person.exceptions.DuplicateTaskException;
+//import seedu.address.model.task.Task;
+//import seedu.address.model.task.exceptions.DuplicateTaskException;
 //import seedu.address.testutil.TaskBuilder;
 //
 //public class TaskManagerTest {

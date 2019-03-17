@@ -10,7 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Task;
+import seedu.address.model.task.Task;
 
 /**
  * Adds a task to the task manager.
@@ -28,8 +28,8 @@ public class AddCommand extends Command {
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Project Ver 1 "
-            + PREFIX_MODULE + "CS2113 "
-            + PREFIX_DATE + "03-03 "
+            + PREFIX_MODULE + "CS2113T "
+            + PREFIX_DATE + "21-01 "
             + PREFIX_PRIORITY + "1 "
             + PREFIX_TAG + "ungraded ";
 
