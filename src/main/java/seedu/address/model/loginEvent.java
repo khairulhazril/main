@@ -16,6 +16,7 @@ public class loginEvent {
     private User user;
     private boolean loginStatus;
 
+    // Constructor to start user with temp username and password
     public loginEvent() {
 
         final Path loginInfoPath = Paths.get("loginInfo.json");
@@ -33,6 +34,7 @@ public class loginEvent {
         newUser(user);
     }
 
+    // Creates new user in JSON file
     public void newUser(User user) {
         String loginUsername = user.getUsername().toString();
         String loginPassword = user.getPassword().toString();
@@ -43,6 +45,7 @@ public class loginEvent {
         }
     }
 
+    // Checks if user exists and logs into account
     public void loginUser(User user) {
         String loginUsername = user.getUsername().toString();
         Map<String,String> accounts = loginStorage.getAccounts();
@@ -58,6 +61,7 @@ public class loginEvent {
         }
     }
 
+    // Returns true if the user exists in the JSON file
     public boolean userExists(User user) {
         String loginUsername = user.getUsername().toString();
         Map<String, String> accounts = loginStorage.getAccounts();
@@ -69,10 +73,12 @@ public class loginEvent {
         return user.getUsername();
     }
 
+    // Remove user to prepare for next login
     public void logout() {
         loginStatus = false;
     }
 
+    // Returns true if user is logged in
     public boolean getLoginStatus() {
         return loginStatus;
     }

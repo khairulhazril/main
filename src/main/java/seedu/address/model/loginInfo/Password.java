@@ -11,12 +11,14 @@ public class Password {
     private static final String PASSWORD_REGEX = "[\\w]*";
     public final String hashedPassword;
 
+    // hashes password and makes sure it is valid
     public Password(String password) {
         requireNonNull(password);
         checkArgument(isValidPassword(password), MESSAGE_PASSWORD_CONSTRAINTS);
         hashedPassword = generateHash.generateHash(password);
     }
 
+    // Returns true of the password is valid
     public static Boolean isValidPassword(String test) {
         return test.matches(PASSWORD_REGEX);
     }

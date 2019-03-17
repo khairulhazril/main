@@ -20,6 +20,7 @@ public class LoginCommand extends Command{
 
     private final User loginInfo;
 
+    // Draws user info in command line
     public LoginCommand(User user) {
         requireNonNull(user);
         loginInfo = user;

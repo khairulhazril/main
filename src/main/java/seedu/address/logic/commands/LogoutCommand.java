@@ -1,11 +1,11 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
-
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.loginInfo.Username;
+
+import static java.util.Objects.requireNonNull;
 
 public class LogoutCommand extends Command {
 
@@ -24,8 +24,6 @@ public class LogoutCommand extends Command {
         Username loginUsername = model.getUsername();
         model.logout();
 
-
         return new CommandResult(String.format(MESSAGE_SUCCESS, loginUsername.toString()));
-
     }
 }

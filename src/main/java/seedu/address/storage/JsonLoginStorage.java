@@ -15,7 +15,7 @@ import java.nio.file.Path;
 import java.util.Map;
 
 
-
+// To access the loginEvent stored as a JSON file
 public class JsonLoginStorage implements loginStorage {
 
     private String loginFilePath;
@@ -31,6 +31,7 @@ public class JsonLoginStorage implements loginStorage {
      setAccount();
     }
 
+    // Adds properties into JSON files
     @Override
     public void newUser(String username, String password) throws IOException {
         JsonObject jsonObject = getJsonObject();
@@ -40,15 +41,18 @@ public class JsonLoginStorage implements loginStorage {
         setAccount();
     }
 
+    // Sets user accounts as maps
     @Override public Map<String, String> getAccounts() {
         return accounts;
     }
 
+    // Sets up user accounts
     private void setAccount() throws IOException {
         Type type = new TypeToken<Map<String, String>>(){}.getType();
         accounts = new Gson().fromJson(new FileReader(loginFilePath), type);
     }
 
+    // Returns user accounts as JSON objects
     private JsonObject getJsonObject() throws IOException {
         JsonParser parser = new JsonParser();
         JsonElement jsonElement = parser.parse(new FileReader(loginFilePath));
@@ -56,11 +60,13 @@ public class JsonLoginStorage implements loginStorage {
         return jsonElement.getAsJsonObject();
     }
 
+    //Creates user login account with JSON file
     private void createLoginInfoFile() throws IOException  {
         JsonObject jsonObject = new JsonObject();
         writeJson(new Gson(), jsonObject);
     }
 
+    // To write and store to JSON file
     private void writeJson(Gson gson, JsonObject jsonObject) throws IOException {
         String json = gson.toJson(jsonObject);
         FileWriter file = new FileWriter(loginFilePath);

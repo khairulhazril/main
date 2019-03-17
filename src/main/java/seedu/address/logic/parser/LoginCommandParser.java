@@ -14,6 +14,7 @@ import static seedu.address.logic.commands.LoginCommand.PREFIX_USERNAME;
 
 public class LoginCommandParser implements Parser<LoginCommand> {
 
+    // Parses arguments into login command and returns login command object to excute.
     public LoginCommand parse(String args) throws ParseException {
 
         ArgumentMultimap map = ArgumentTokenizer.tokenize(args, PREFIX_USERNAME, PREFIX_PASSWORD);
@@ -35,6 +36,7 @@ public class LoginCommandParser implements Parser<LoginCommand> {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
+    // Makes sure username is valid and in the right form
     public static Username parseUsername(String username) throws ParseException {
         requireNonNull(username);
         String trimUsername = username.trim();
@@ -45,6 +47,7 @@ public class LoginCommandParser implements Parser<LoginCommand> {
         return new Username(trimUsername);
     }
 
+    // Makes sure password is valid and in the right form
     public static Password parsePassword(String password) throws ParseException {
         requireNonNull(password);
         String trimPassword = password.trim();

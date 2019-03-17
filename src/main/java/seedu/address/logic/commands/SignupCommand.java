@@ -5,7 +5,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.loginInfo.User;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.commands.LoginCommand.PREFIX_PASSWORD;
 import static seedu.address.logic.commands.LoginCommand.PREFIX_USERNAME;
@@ -25,6 +24,7 @@ public class SignupCommand extends Command {
 
     private final User signingUp;
 
+    // Draws user info in command line
     public SignupCommand(User user) {
         requireNonNull(user);
         signingUp = user;
@@ -34,6 +34,7 @@ public class SignupCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
+
         if (model.getLoginStatus()) {
             throw new CommandException(String.format(MESSAGE_LOGGED, model.getUsername().toString()));
         }
@@ -42,6 +43,7 @@ public class SignupCommand extends Command {
             throw new CommandException(MESSAGE_EXISTS);
         }
 
+        // Signs up the user with a new account
         model.newUser(signingUp);
         return new CommandResult(String.format(MESSAGE_SUCCESS, signingUp.getUsername().toString()));
 

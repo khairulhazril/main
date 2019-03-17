@@ -9,12 +9,14 @@ public class Username {
     public static final String USERNAME_REGEX = "[\\w]*";
     public final String enteredUsername;
 
+    // Checks if username is valid and stores it.
     public Username(String username) {
         requireNonNull(username);
         checkArgument(isValidUsername(username), MESSAGE_USERNAME_CONSTRAINTS);
         enteredUsername = username;
     }
 
+    // Returns true of the username is valid
     public static boolean isValidUsername(String test) {
         return test.matches(USERNAME_REGEX);
     }

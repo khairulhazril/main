@@ -16,6 +16,7 @@ public class SignupCommandParser implements Parser<SignupCommand> {
 
     public static final String MESSAGE_INVALID_FORMAT = "Invalid format!";
 
+    // Parses arguments into command and passes username and password into User class
     public SignupCommand parse(String args) throws ParseException {
         ArgumentMultimap map = ArgumentTokenizer.tokenize(args, PREFIX_USERNAME, PREFIX_PASSWORD);
 

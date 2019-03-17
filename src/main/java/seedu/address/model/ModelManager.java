@@ -62,6 +62,7 @@ public class ModelManager implements Model {
     public boolean getLoginStatus(){
         return loginEvent.getLoginStatus();
     }
+
     @Override
     public boolean userExists(User user) {
         requireNonNull(user);
