@@ -1,8 +1,5 @@
 package seedu.address.model;
 
-import java.nio.file.Path;
-import java.util.function.Predicate;
-
 import javafx.beans.property.ReadOnlyProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
@@ -10,6 +7,9 @@ import seedu.address.model.loginInfo.User;
 import seedu.address.model.loginInfo.Username;
 import seedu.address.model.notes.Notes;
 import seedu.address.model.task.Task;
+
+import java.nio.file.Path;
+import java.util.function.Predicate;
 
 /**
  * The API of the Model component.
@@ -142,35 +142,37 @@ public interface Model {
      */
     void setSelectedTask(Task task);
 
+    //===================== Login Information ========================================================
+
     /**
      * Returns true if the user is logged in.
      */
-    //boolean getLoginStatus();
+    boolean getLoginStatus();
 
     /**
      * Return Username of logged in user.
      */
-    //Username getUsername();
+    Username getUsername();
 
     /**
      *  User logs out of Task Manager.
      */
-    //void logout();
+    void logout();
 
     /**
      * User login to Task Manager.
      */
-    //void loginUser(User loginInfo);
+    void loginUser(User loginInfo);
 
     /**
      *  Returns true if user exists
      */
-    //boolean userExists(User user);
+    boolean userExists(User user);
 
     /**
      * A new user is registered in Task Manager
      */
-    //void newUser(User user);
+    void newUser(User user);
 
     //=====================Notes========================================================
 

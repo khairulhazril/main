@@ -1,13 +1,5 @@
 package seedu.address.model;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-
-import java.nio.file.Path;
-import java.util.Objects;
-import java.util.function.Predicate;
-import java.util.logging.Logger;
-
 import javafx.beans.property.ReadOnlyProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ListChangeListener;
@@ -15,10 +7,19 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.loginInfo.User;
+import seedu.address.model.loginInfo.Username;
 import seedu.address.model.notes.Notes;
-
 import seedu.address.model.task.Task;
 import seedu.address.model.task.exceptions.TaskNotFoundException;
+
+import java.nio.file.Path;
+import java.util.Objects;
+import java.util.function.Predicate;
+import java.util.logging.Logger;
+
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 
 /**
@@ -32,6 +33,7 @@ public class ModelManager implements Model {
     private final FilteredList<Task> filteredTasks;
     private final FilteredList<Notes> filteredNotes;
     private final SimpleObjectProperty<Task> selectedTask = new SimpleObjectProperty<>();
+    private final loginEvent loginEvent;
 
     /**
      * Initializes a ModelManager with the given taskManager and userPrefs.
@@ -47,11 +49,45 @@ public class ModelManager implements Model {
         filteredTasks = new FilteredList<>(versionedTaskManager.getTaskList());
         filteredTasks.addListener(this::ensureSelectedTaskIsValid);
         filteredNotes = new FilteredList<>(versionedTaskManager.getNotesList());
-
+        loginEvent = new loginEvent();
     }
 
     public ModelManager() {
         this(new TaskManager(), new UserPrefs());
+    }
+
+    //=========== Login Information ==================================================================================
+
+    @Override
+    public boolean getLoginStatus(){
+        return loginEvent.getLoginStatus();
+    }
+    @Override
+    public boolean userExists(User user) {
+        requireNonNull(user);
+        return loginEvent.userExists(user);
+    }
+
+    @Override
+    public void newUser(User user) {
+        requireNonNull(user);
+        loginEvent.newUser(user);
+    }
+
+    @Override
+    public void loginUser(User loginInfo) {
+        requireNonNull(loginInfo);
+        loginEvent.loginUser(loginInfo);
+    }
+
+    @Override
+    public Username getUsername() {
+        return loginEvent.getUsername();
+    }
+
+    @Override
+    public void logout() {
+        loginEvent.logout();
     }
 
     //=========== UserPrefs ==================================================================================
