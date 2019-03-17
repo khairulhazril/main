@@ -84,6 +84,11 @@ public interface Model {
     void setTask(Task target, Task editedTask);
 
     /**
+     * Sorts the model's task manager according the chosen attribute
+     */
+    void sortTask(String attribute);
+
+    /**
      * Returns an unmodifiable view of the filtered task list
      */
     ObservableList<Task> getFilteredTaskList();

@@ -125,6 +125,12 @@ public class ModelManager implements Model {
         versionedTaskManager.setTask(target, editedTask);
     }
 
+    @Override
+    public void sortTask(String attribute) {
+        versionedTaskManager.sortTask(attribute);
+        updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
+    }
+
     //================= Notes==============================================================================
 
     @Override
@@ -138,7 +144,6 @@ public class ModelManager implements Model {
         versionedTaskManager.addNotes(notes);
         updateFilteredNotesList(PREDICATE_SHOW_ALL_NOTES);
     }
-
 
     //=========== Filtered Task List Accessors =============================================================
 
