@@ -324,7 +324,7 @@ _{Explain here how the data encryption feature will be implemented}_
 === Calendar feature
 ==== Current Implementation
 
-The Calendar extends `TaskManager`'s GUI with an easy to read interface for tracking task deadlines. It is composed of two classes, `CalendarPanel` and `CalendarCell`.
+The Calendar extends the `TaskManager` GUI with an easy to read interface for tracking task deadlines. It is composed of two classes, `CalendarPanel` and `CalendarCell`.
 
 `CalendarPanel` is the pane on which is drawn the headers and grid of the Calendar.
 `CalendarCell` represents each individual cell of the grid in the Calendar.
