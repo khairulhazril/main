@@ -331,7 +331,7 @@ The Calendar extends `TaskManager`'s GUI with an easy to read interface for trac
 
 The following sequence diagram shows how the Calendar is built:
 
-image::CalendarBuildSequenceDiagram.png
+image::CalendarBuildSequenceDiagram.png[width="698"]
 
 ==== Design Considerations
 
