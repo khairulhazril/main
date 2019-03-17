@@ -154,6 +154,15 @@ Selects the 2nd task in the Task Manager.
 `select 1` +
 Selects the 1st task in the results of the `find` command.
 
+=== Sorting the task list : `sort`
+
+Sorts the task list in the Task Manager according to the attribute.
+Format: `sort ATTRIBUTE`
+
+****
+* Sorts the task list according to the `ATTRIBUTE`.
+* The attribute *must be one of the following* `name, module, date, priority`.
+****
 === Listing entered commands : `history`
 
 Lists all the commands that you have entered in reverse chronological order. +
