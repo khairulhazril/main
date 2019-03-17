@@ -313,12 +313,45 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
 // end::undoredo[]
 
-// tag::dataencryption[]
-=== [Proposed] Data Encryption
+// tag::notes[]
+=== Notes Feature
 
-_{Explain here how the data encryption feature will be implemented}_
+This feature allow users to add and view notes regarding miscellaneous matters.
 
-// end::dataencryption[]
+==== Current Implementation
+
+The Notes mechanism is facilitated by AddNotesCommand. A Notes object is instantiated which contains of Heading and Content.
+
+Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+
+Step 1. The user enters the in a note with its associated parameters. e.g note h/popular c/buy pilot G-2 blue pens.
+
+Step 2. The LogicManager calls ParseCommand with that input.
+
+Step 3. The TaskManagerParser is called and returns a AddNotesCommand object to Logic Manager.
+
+Step 4. The LogicManager will call execute method on the AddNotesCommand object.
+
+Step 5. ModelManager is then called and will check if the note already exists.
+
+Step 6. If note already exists, DuplicateNotesException will be called.
+
+Step 7. Else, addNotes notes method is called and note is added.
+
+==== Design Considerations
+
+Aspect: Checking for duplicate notes
+
+* Alternative 1(current choice): IsSameNotes
+
+** Pros: Easy to implement
+
+** Cons: May neglect duplicate notes that mean the same as IsSameNotes check for the exact same heading and content. E.g 1. h/popular c/buy ring file 2.h/popular c/buy ring files
+
+//end::notes[]
+
+
+
 
 === Logging
 
