@@ -12,6 +12,9 @@ import seedu.address.model.notes.Content;
 import seedu.address.model.notes.Heading;
 import seedu.address.model.notes.Notes;
 
+/**
+ * Parses input arguments and creates a new AddNotesCommand object
+ */
 public class AddNotesCommandParser implements Parser<AddNotesCommand> {
 
     /**
@@ -40,7 +43,7 @@ public class AddNotesCommandParser implements Parser<AddNotesCommand> {
         Heading heading = ParserUtil.parseHeading(argMultimap.getValue(PREFIX_HEADING).get());
         Content content = ParserUtil.parseContent(argMultimap.getValue(PREFIX_CONTENT).get());
 
-        Notes notes = new Notes(heading,content);
+        Notes notes = new Notes(heading, content);
 
         return new AddNotesCommand(notes);
     }

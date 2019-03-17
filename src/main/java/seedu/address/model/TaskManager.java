@@ -160,11 +160,18 @@ public class TaskManager implements ReadOnlyTaskManager {
 
     //================Notes==================================================
 
-    public boolean hasNotes(Notes notes){
-            requireNonNull(notes);
-            return unotes.contains(notes);
+    /**
+     * Returns true if a note with the same identity as {@code note} exists in the task manager.
+     */
+    public boolean hasNotes(Notes notes) {
+        requireNonNull(notes);
+        return unotes.contains(notes);
     }
 
+    /**
+     * Adds a note to the task manager.
+     * The note must not already exist in the task manager.
+     */
     public void addNotes(Notes n) {
         unotes.add(n);
         indicateModified();
