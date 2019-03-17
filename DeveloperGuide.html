@@ -30,9 +30,11 @@
 <li><a href="#implementation">3. Implementation</a>
 <ul class="sectlevel2">
 <li><a href="#undo-redo-feature">3.1. Undo/Redo feature</a></li>
-<li><a href="#proposed-data-encryption">3.2. [Proposed] Data Encryption</a></li>
-<li><a href="#logging">3.3. Logging</a></li>
-<li><a href="#Implementation-Configuration">3.4. Configuration</a></li>
+<li><a href="#notes-feature">3.2. Notes Feature</a></li>
+<li><a href="#sort-task-list-feature">3.3. Sort Task List Feature</a></li>
+<li><a href="#calendar-feature">3.4. Calendar feature</a></li>
+<li><a href="#logging">3.5. Logging</a></li>
+<li><a href="#Implementation-Configuration">3.6. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a>
@@ -768,20 +770,241 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </div>
 </div>
 <div class="sect2">
-<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.2. [Proposed] Data Encryption</a></h3>
+<h3 id="notes-feature"><a class="link" href="#notes-feature">3.2. Notes Feature</a></h3>
 <div class="paragraph">
-<p><em>{Explain here how the data encryption feature will be implemented}</em></p>
+<p>This feature allow users to add and view notes regarding miscellaneous matters.</p>
+</div>
+<div class="sect3">
+<h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">3.2.1. Current Implementation</a></h4>
+<div class="paragraph">
+<p>The Notes mechanism is facilitated by AddNotesCommand. A Notes object is instantiated which contains of Heading and Content.</p>
+</div>
+<div class="paragraph">
+<p>Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.</p>
+</div>
+<div class="paragraph">
+<p>Step 1. The user enters the in a note with its associated parameters. e.g note h/popular c/buy pilot G-2 blue pens.</p>
+</div>
+<div class="paragraph">
+<p>Step 2. The LogicManager calls ParseCommand with that input.</p>
+</div>
+<div class="paragraph">
+<p>Step 3. The TaskManagerParser is called and returns a AddNotesCommand object to Logic Manager.</p>
+</div>
+<div class="paragraph">
+<p>Step 4. The LogicManager will call execute method on the AddNotesCommand object.</p>
+</div>
+<div class="paragraph">
+<p>Step 5. ModelManager is then called and will check if the note already exists.</p>
+</div>
+<div class="paragraph">
+<p>Step 6. If note already exists, DuplicateNotesException will be called.</p>
+</div>
+<div class="paragraph">
+<p>Step 7. Else, addNotes notes method is called and note is added.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.2.2. Design Considerations</a></h4>
+<div class="paragraph">
+<p>Aspect: Checking for duplicate notes</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Alternative 1(current choice): IsSameNotes</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement</p>
+</li>
+<li>
+<p>Cons: May neglect duplicate notes that mean the same because IsSameNotes check for the exact same heading and content. E.g 1. h/popular c/buy ring file 2.h/popular c/buy ring files</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.3. Logging</a></h3>
+<h3 id="sort-task-list-feature"><a class="link" href="#sort-task-list-feature">3.3. Sort Task List Feature</a></h3>
+<div class="sect3">
+<h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">3.3.1. Current Implementation</a></h4>
+<div class="paragraph">
+<p>The sorting mechanism is facilitated by <code>TaskManager</code>, <code>Model</code> and <code>SortTaskList</code>.</p>
+</div>
+<div class="paragraph">
+<p>Given below is an example usage scenario.</p>
+</div>
+<div class="paragraph">
+<p>Step 1. The user keys in <code>sort ATTRIBUTE</code>, the <code>SortCommandParser</code> will trim the command to get the attribute.</p>
+</div>
+<div class="paragraph">
+<p>Step 2. If the attribute is valid, it will then pass the attribute to <code>SortCommand</code>.</p>
+</div>
+<div class="paragraph">
+<p>Step 3. <code>SortCommand</code> will then call <code>ModelManager#sortTask(attribute)</code>.</p>
+</div>
+<div class="paragraph">
+<p>Step 4. It will then call <code>TaskManager#sortTask(attribute)</code>.
+Then we convert the relevant attributes of the tasks in the Task List to string to compare using <code>string#compareTo()</code>.</p>
+</div>
+<div class="paragraph">
+<p>Step 5. This will sort <code>ObservableList&lt;Task&gt; sortedList</code>.
+After returning the sorted Task List, the Task Manager is then committed.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.3.2. Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-how-sort-executes"><a class="link" href="#aspect-how-sort-executes">Aspect: How sort executes</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Write a class separately for handling the sorting of the task list.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to read and debug, Follows OOP coding and thus easier for other coders to modify.</p>
+</li>
+<li>
+<p>Cons: Difficult to implement.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Write a method for each attribute in <code>TaskManager</code>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement.</p>
+</li>
+<li>
+<p>Cons: Does not follow OOP coding.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="calendar-feature"><a class="link" href="#calendar-feature">3.4. Calendar feature</a></h3>
+<div class="sect3">
+<h4 id="current-implementation-4"><a class="link" href="#current-implementation-4">3.4.1. Current Implementation</a></h4>
+<div class="paragraph">
+<p>The Calendar extends the <code>TaskManager</code> GUI with an easy to read interface for tracking task deadlines. It is composed of two classes, <code>CalendarPanel</code> and <code>CalendarCell</code>.</p>
+</div>
+<div class="paragraph">
+<p><code>CalendarPanel</code> is the pane on which is drawn the headers and grid of the Calendar.
+<code>CalendarCell</code> represents each individual cell of the grid in the Calendar.</p>
+</div>
+<div class="paragraph">
+<p>The following sequence diagram shows how the Calendar is built:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/CalendarBuildSequenceDiagram.png" alt="CalendarBuildSequenceDiagram" width="698">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.4.2. Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-how-the-calendar-is-built"><a class="link" href="#aspect-how-the-calendar-is-built">Aspect: How the Calendar is built</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Separate the calendar cells into their own class.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Reduces complexity of CalendarPanel class, making it easier to understand how the calendar is built.</p>
+</li>
+<li>
+<p>Cons: May have performance issues in terms of memory usage.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Separate each component of the Calendar into their own classes (e.g. into CalendarPane, CalendarGrid, HeaderCell, ContentCell, etc).</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Follows the principles of Single Responsibility Principle and Separation of Concerns strictly.</p>
+</li>
+<li>
+<p>Cons: Even more memory usage, may make the code difficult to read and understand for future maintainers if they are unused to code spanning several files.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 3:</strong> Combine all Calendar related code into a single class.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: No need to navigate between different classes.</p>
+</li>
+<li>
+<p>Cons: The class will be very long and complex, possibly making the code difficult to read and understand for future maintainers. Violates the principles of Single Responsibility Principle and Separation of Concerns.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-how-to-update-the-calendar-in-real-time-coming-in-v1-3"><a class="link" href="#aspect-how-to-update-the-calendar-in-real-time-coming-in-v1-3">Aspect: How to update the calendar in real time (Coming in v1.3)</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1:</strong> Replace the old calendar with a newly built calendar when task list changes.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.</p>
+</li>
+<li>
+<p>Cons: Potential performance issues. If the list of tasks is very large, rebuilding the Calendar at every step may result in degraded performance manifested as a loss of responsiveness to user commands.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Implement a separate class to handle the contents of each Calendar cell.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: We do not need to rebuild the entire calendar when the task list changes, instead only updating the cell that is affected.</p>
+</li>
+<li>
+<p>Cons: Adds another layer of abstraction, which can cause difficulty in understanding how the Calendar works.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="logging"><a class="link" href="#logging">3.5. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.4, &#8220;Configuration&#8221;</a>)</p>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.6, &#8220;Configuration&#8221;</a>)</p>
 </li>
 <li>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
@@ -812,7 +1035,7 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.4. Configuration</a></h3>
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.6. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g user prefs file location, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -2476,4 +2699,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-03-12 15:51:54 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-03-17 15:55:44 UTC</div></div></div></body></html>
