@@ -1,13 +1,14 @@
 package seedu.address.model;
-import seedu.address.model.login.Password;
-import seedu.address.model.login.User;
-import seedu.address.model.login.Username;
-import seedu.address.storage.JsonLoginStorage;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Map;
+
+import seedu.address.model.login.Password;
+import seedu.address.model.login.User;
+import seedu.address.model.login.Username;
+import seedu.address.storage.JsonLoginStorage;
 
 /**
  * Login Event

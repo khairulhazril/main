@@ -1,8 +1,9 @@
 package seedu.address.logic.parser;
-import seedu.address.logic.commands.IncorrectCommand;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+
+import seedu.address.logic.commands.IncorrectCommand;
 
 /**
  * Generate Hash
