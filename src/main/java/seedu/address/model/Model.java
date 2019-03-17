@@ -1,15 +1,15 @@
 package seedu.address.model;
 
-import java.nio.file.Path;
-import java.util.function.Predicate;
-
 import javafx.beans.property.ReadOnlyProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.login.User;
-import seedu.address.model.login.Username;
+import seedu.address.model.loginInfo.User;
+import seedu.address.model.loginInfo.Username;
 import seedu.address.model.notes.Notes;
 import seedu.address.model.task.Task;
+
+import java.nio.file.Path;
+import java.util.function.Predicate;
 
 /**
  * The API of the Model component.

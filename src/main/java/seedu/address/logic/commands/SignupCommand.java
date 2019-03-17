@@ -1,17 +1,14 @@
 package seedu.address.logic.commands;
 
+import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
+import seedu.address.model.loginInfo.User;
+
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.commands.LoginCommand.PREFIX_PASSWORD;
 import static seedu.address.logic.commands.LoginCommand.PREFIX_USERNAME;
 
-import seedu.address.logic.CommandHistory;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
-import seedu.address.model.login.User;
-
-/**
- * SignUp Command
- */
 public class SignupCommand extends Command {
 
     public static final String COMMAND_WORD = "signup";
@@ -42,7 +39,7 @@ public class SignupCommand extends Command {
             throw new CommandException(String.format(MESSAGE_LOGGED, model.getUsername().toString()));
         }
 
-        if (model.userExists(signingUp)) {
+        if (model.userExists(signingUp)){
             throw new CommandException(MESSAGE_EXISTS);
         }
 

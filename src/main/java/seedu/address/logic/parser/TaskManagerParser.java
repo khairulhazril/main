@@ -53,14 +53,14 @@ public class TaskManagerParser {
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
 
-        case SignupCommand.COMMAND_WORD:
-            return new SignupCommandParser().parse(arguments);
+            case SignupCommand.COMMAND_WORD:
+                return new SignupCommandParser().parse(arguments);
 
-        case LoginCommand.COMMAND_WORD:
-            return new LoginCommandParser().parse(arguments);
+            case LoginCommand.COMMAND_WORD:
+                return new LoginCommandParser().parse(arguments);
 
-        case LogoutCommand.COMMAND_WORD:
-            return new LogoutCommand();
+            case LogoutCommand.COMMAND_WORD:
+                return new LogoutCommand();
 
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
