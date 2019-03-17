@@ -52,7 +52,7 @@ public class CalendarCell extends UiPart<Region> {
      * Creates a cell for CalendarPanel.
      *
      * @param date Date to be displayed on the cell
-     * @param taskList list of tasks currently being displayed
+     * @param taskList List of tasks currently being displayed
      */
     public CalendarCell(String date, String month, ObservableList<Task> taskList) {
         super(FXML);
@@ -81,7 +81,7 @@ public class CalendarCell extends UiPart<Region> {
     /**
      * Adds the name of a task to the cell
      */
-    public void addTask(ObservableList<Task> taskList) {
+    private void addTask(ObservableList<Task> taskList) {
         for (Task task : taskList) {
             String currFullDate = task.getDate().toString();
             String currDateString = currFullDate.substring(0, currFullDate.indexOf("-"));
