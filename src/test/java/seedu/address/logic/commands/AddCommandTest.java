@@ -1,6 +1,6 @@
-package seedu.address.logic.commands;
+//package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
+/*import static java.util.Objects.requireNonNull;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -25,8 +25,10 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.TaskManager;
 import seedu.address.model.task.Task;
 import seedu.address.testutil.TaskBuilder;
+*/
 
-public class AddCommandTest {
+
+//public class AddCommandTest {
 
     /*private static final CommandHistory EMPTY_COMMAND_HISTORY = new CommandHistory();
 
@@ -250,4 +252,4 @@ public class AddCommandTest {
         }
     }
 */
-}
+//}
