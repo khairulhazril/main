@@ -1,5 +1,4 @@
 package seedu.address.logic.parser;
-
 import seedu.address.logic.commands.IncorrectCommand;
 
 import java.security.MessageDigest;
