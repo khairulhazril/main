@@ -52,6 +52,34 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * Parameters can be in any order e.g. if the command specifies `n/NAME d/DATE`, `d/DATE n/NAME` is also acceptable.
 ====
 
+=== Signing up for an account : `signup`
+
+Creates an account for the user +
+Format: `signup u/USERNAME p/PASSWORD` +
+====
+Eg: +
+| `signup u/nicholas p/abcdefg` +
+Creates account with the username `nicholas` with password `abcdefg`
+====
+
+=== Logging into an account : `login`
+
+Logs the user into their account +
+Format: `login u/USERNAME p/PASSWORD` +
+====
+Eg: +
+| `login u/nicholas p/abcdefg` +
+Logs in nicholas +
+====
+=== Logging out of an account : `logout`
+
+Logs user out of an account +
+Format: `logout` +
+====
+Eg: +
+| `logout` +
+Logs out from nicholas
+====
 === Viewing help : `help`
 
 Format: `help`
