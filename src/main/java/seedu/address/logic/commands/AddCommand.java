@@ -28,8 +28,8 @@ public class AddCommand extends Command {
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Project Ver 1 "
-            + PREFIX_MODULE + "CS2113 "
-            + PREFIX_DATE + "03-03 "
+            + PREFIX_MODULE + "CS2113T "
+            + PREFIX_DATE + "21-01 "
             + PREFIX_PRIORITY + "1 "
             + PREFIX_TAG + "ungraded ";
 
