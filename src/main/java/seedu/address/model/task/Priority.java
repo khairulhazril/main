@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Priority {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "TaskPriority should only contain one number";
+            "Priority Code should only contain one number ranging from 1 to 3";
     public static final String VALIDATION_REGEX = "[123]";
 
     public final String value;
