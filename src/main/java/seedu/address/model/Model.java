@@ -6,6 +6,8 @@ import java.util.function.Predicate;
 import javafx.beans.property.ReadOnlyProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.loginInfo.User;
+import seedu.address.model.loginInfo.Username;
 import seedu.address.model.person.Task;
 
 /**
@@ -134,4 +136,34 @@ public interface Model {
      * Sets the selected task in the filtered task list.
      */
     void setSelectedTask(Task task);
+
+    /**
+     * Returns true if the user is logged in.
+     */
+    boolean getLoginStatus();
+
+    /**
+     * Return Username of logged in user.
+     */
+    Username getUsername();
+
+    /**
+     *  User logs out of Task Manager.
+     */
+    void logout();
+
+    /**
+     * User login to Task Manager.
+     */
+    void loginUser(User loginInfo);
+
+    /**
+     *  Returns true if user exists
+     */
+    boolean userExists(User user);
+
+    /**
+     * A new user is registered in Task Manager
+     */
+    void newUser(User user);
 }
