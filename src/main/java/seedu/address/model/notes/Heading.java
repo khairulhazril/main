@@ -3,8 +3,10 @@ package seedu.address.model.notes;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-import seedu.address.model.person.Name;
-
+/**
+ * Represents a Note's heading in the task manager.
+ * Guarantees: immutable; is valid as declared in {@link #isValidHeading(String)}
+ */
 public class Heading {
 
     public static final String MESSAGE_CONSTRAINTS =
