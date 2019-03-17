@@ -347,10 +347,8 @@ Aspect: Checking for duplicate notes
 ** Pros: Easy to implement
 
 ** Cons: May neglect duplicate notes that mean the same because IsSameNotes check for the exact same heading and content. E.g 1. h/popular c/buy ring file 2.h/popular c/buy ring files
+// end::notes[]
 
-//end::notes[]
-
-=======
 // tag::sorttask[]
 === Sort Task List Feature
 
