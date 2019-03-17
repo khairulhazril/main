@@ -6,16 +6,18 @@ import java.util.function.Predicate;
 import javafx.beans.property.ReadOnlyProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.notes.Notes;
+
 import seedu.address.model.task.Task;
+
 
 /**
  * The API of the Model component.
  */
 public interface Model {
-    /**
-     * {@code Predicate} that always evaluate to true
-     */
+
     Predicate<Task> PREDICATE_SHOW_ALL_TASKS = unused -> true;
+    Predicate<Notes> PREDICATE_SHOW_ALL_NOTES = unused -> true;
 
     /**
      * Returns the user prefs.
@@ -134,4 +136,34 @@ public interface Model {
      * Sets the selected task in the filtered task list.
      */
     void setSelectedTask(Task task);
+
+    //=====================Notes========================================================
+
+    /**
+     * Returns true if a note with the same identity as {@code notes} exists in the task manager.
+     */
+    boolean hasNotes(Notes notes);
+
+
+    /**
+     * Adds the given note.
+     * {@code notes} must not already exist in the task manager.
+     */
+    void addNotes(Notes notes);
+
+
+    /**
+     * Returns an unmodifiable view of the filtered notes list
+     */
+    ObservableList<Notes> getFilteredNotesList();
+
+
+    /**
+     * Updates the filter of the filtered task list to filter by the given {@code predicate}.
+     *
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredNotesList(Predicate<Notes> predicate);
+
+
 }

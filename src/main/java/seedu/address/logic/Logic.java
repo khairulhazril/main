@@ -9,6 +9,8 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyTaskManager;
+
+import seedu.address.model.notes.Notes;
 import seedu.address.model.task.Task;
 
 /**
@@ -36,6 +38,11 @@ public interface Logic {
      * Returns an unmodifiable view of the filtered list of tasks
      */
     ObservableList<Task> getFilteredTaskList();
+
+    /**
+     * Returns an unmodifiable view of the filtered list of notes
+     */
+    ObservableList<Notes> getFilteredNotesList();
 
     /**
      * Returns an unmodifiable view of the list of commands entered by the user.
