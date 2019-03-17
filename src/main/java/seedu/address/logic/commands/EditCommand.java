@@ -20,12 +20,12 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Date;
-import seedu.address.model.person.Module;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Priority;
-import seedu.address.model.person.Task;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.Date;
+import seedu.address.model.task.Module;
+import seedu.address.model.task.Name;
+import seedu.address.model.task.Priority;
+import seedu.address.model.task.Task;
 
 /**
  * Edits the details of an existing task in the task manager.
@@ -44,8 +44,8 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PRIORITY + "PRIORITY] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_MODULE + "91234567 "
-            + PREFIX_DATE + "johndoe@example.com";
+            + PREFIX_MODULE + "CS2113T "
+            + PREFIX_DATE + "21-01";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";

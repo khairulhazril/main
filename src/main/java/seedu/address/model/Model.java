@@ -8,16 +8,16 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.loginInfo.User;
 import seedu.address.model.loginInfo.Username;
-import seedu.address.model.person.Task;
+import seedu.address.model.notes.Notes;
+import seedu.address.model.task.Task;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
-    /**
-     * {@code Predicate} that always evaluate to true
-     */
+
     Predicate<Task> PREDICATE_SHOW_ALL_TASKS = unused -> true;
+    Predicate<Notes> PREDICATE_SHOW_ALL_NOTES = unused -> true;
 
     /**
      * Returns the user prefs.
@@ -84,6 +84,11 @@ public interface Model {
     void setTask(Task target, Task editedTask);
 
     /**
+     * Sorts the model's task manager according the chosen attribute
+     */
+    void sortTask(String attribute);
+
+    /**
      * Returns an unmodifiable view of the filtered task list
      */
     ObservableList<Task> getFilteredTaskList();
@@ -140,30 +145,59 @@ public interface Model {
     /**
      * Returns true if the user is logged in.
      */
-    boolean getLoginStatus();
+    //boolean getLoginStatus();
 
     /**
      * Return Username of logged in user.
      */
-    Username getUsername();
+    //Username getUsername();
 
     /**
      *  User logs out of Task Manager.
      */
-    void logout();
+    //void logout();
 
     /**
      * User login to Task Manager.
      */
-    void loginUser(User loginInfo);
+    //void loginUser(User loginInfo);
 
     /**
      *  Returns true if user exists
      */
-    boolean userExists(User user);
+    //boolean userExists(User user);
 
     /**
      * A new user is registered in Task Manager
      */
-    void newUser(User user);
+    //void newUser(User user);
+
+    //=====================Notes========================================================
+
+    /**
+     * Returns true if a note with the same identity as {@code notes} exists in the task manager.
+     */
+    boolean hasNotes(Notes notes);
+
+
+    /**
+     * Adds the given note.
+     * {@code notes} must not already exist in the task manager.
+     */
+    void addNotes(Notes notes);
+
+
+    /**
+     * Returns an unmodifiable view of the filtered notes list
+     */
+    ObservableList<Notes> getFilteredNotesList();
+
+
+    /**
+     * Updates the filter of the filtered task list to filter by the given {@code predicate}.
+     *
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredNotesList(Predicate<Notes> predicate);
+
 }

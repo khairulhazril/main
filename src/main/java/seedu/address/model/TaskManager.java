@@ -7,8 +7,11 @@ import java.util.List;
 import javafx.beans.InvalidationListener;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.InvalidationListenerManager;
-import seedu.address.model.person.Task;
-import seedu.address.model.person.UniqueTaskList;
+import seedu.address.model.notes.Notes;
+import seedu.address.model.notes.UniqueNotesList;
+import seedu.address.model.task.SortTaskList;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.UniqueTaskList;
 
 /**
  * Wraps all data at the task-manager level
@@ -17,10 +20,13 @@ import seedu.address.model.person.UniqueTaskList;
 public class TaskManager implements ReadOnlyTaskManager {
 
     private final UniqueTaskList tasks;
+    private final UniqueNotesList unotes;
     private final InvalidationListenerManager invalidationListenerManager = new InvalidationListenerManager();
 
     {
         tasks = new UniqueTaskList();
+        unotes = new UniqueNotesList();
+
     }
 
     public TaskManager() {
@@ -94,6 +100,18 @@ public class TaskManager implements ReadOnlyTaskManager {
         indicateModified();
     }
 
+    /**
+     * Sorts the task list according to the attribute
+     */
+    public void sortTask(String attribute) {
+        requireNonNull(attribute);
+        SortTaskList sortTaskList = new SortTaskList();
+        ObservableList<Task> sortedList = sortTaskList.sortTask(obtainModifiableObservableList(), attribute);
+        UniqueTaskList updateTaskList = new UniqueTaskList();
+        updateTaskList.setTasks(sortedList);
+        tasks.setTasks(updateTaskList);
+    }
+
     @Override
     public void addListener(InvalidationListener listener) {
         invalidationListenerManager.addListener(listener);
@@ -124,6 +142,10 @@ public class TaskManager implements ReadOnlyTaskManager {
         return tasks.asUnmodifiableObservableList();
     }
 
+    public ObservableList<Task> obtainModifiableObservableList() {
+        return tasks.obtainObservableList();
+    }
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
@@ -135,4 +157,30 @@ public class TaskManager implements ReadOnlyTaskManager {
     public int hashCode() {
         return tasks.hashCode();
     }
+
+    //================Notes==================================================
+
+    /**
+     * Returns true if a note with the same identity as {@code note} exists in the task manager.
+     */
+    public boolean hasNotes(Notes notes) {
+        requireNonNull(notes);
+        return unotes.contains(notes);
+    }
+
+    /**
+     * Adds a note to the task manager.
+     * The note must not already exist in the task manager.
+     */
+    public void addNotes(Notes n) {
+        unotes.add(n);
+        indicateModified();
+    }
+
+    @Override
+    public ObservableList<Notes> getNotesList() {
+        return unotes.asUnmodifiableObservableList();
+    }
+
+
 }

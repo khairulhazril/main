@@ -15,8 +15,11 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.person.Task;
-import seedu.address.model.person.exceptions.TaskNotFoundException;
+import seedu.address.model.notes.Notes;
+
+import seedu.address.model.task.Task;
+import seedu.address.model.task.exceptions.TaskNotFoundException;
+
 
 /**
  * Represents the in-memory model of the task manager data.
@@ -27,6 +30,7 @@ public class ModelManager implements Model {
     private final VersionedTaskManager versionedTaskManager;
     private final UserPrefs userPrefs;
     private final FilteredList<Task> filteredTasks;
+    private final FilteredList<Notes> filteredNotes;
     private final SimpleObjectProperty<Task> selectedTask = new SimpleObjectProperty<>();
 
     /**
@@ -42,6 +46,8 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredTasks = new FilteredList<>(versionedTaskManager.getTaskList());
         filteredTasks.addListener(this::ensureSelectedTaskIsValid);
+        filteredNotes = new FilteredList<>(versionedTaskManager.getNotesList());
+
     }
 
     public ModelManager() {
@@ -119,6 +125,26 @@ public class ModelManager implements Model {
         versionedTaskManager.setTask(target, editedTask);
     }
 
+    @Override
+    public void sortTask(String attribute) {
+        versionedTaskManager.sortTask(attribute);
+        updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
+    }
+
+    //================= Notes==============================================================================
+
+    @Override
+    public boolean hasNotes(Notes notes) {
+        requireNonNull(notes);
+        return versionedTaskManager.hasNotes(notes);
+    }
+
+    @Override
+    public void addNotes(Notes notes) {
+        versionedTaskManager.addNotes(notes);
+        updateFilteredNotesList(PREDICATE_SHOW_ALL_NOTES);
+    }
+
     //=========== Filtered Task List Accessors =============================================================
 
     /**
@@ -135,6 +161,24 @@ public class ModelManager implements Model {
         requireNonNull(predicate);
         filteredTasks.setPredicate(predicate);
     }
+
+    //=================Filtered Notes List Accessors=========================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Task} backed by the internal list of
+     * {@code versionedTaskManager}
+     */
+    @Override
+    public ObservableList<Notes> getFilteredNotesList() {
+        return filteredNotes;
+    }
+
+    @Override
+    public void updateFilteredNotesList(Predicate<Notes> predicate) {
+        requireNonNull(predicate);
+        filteredNotes.setPredicate(predicate);
+    }
+
 
     //=========== Undo/Redo =================================================================================
 

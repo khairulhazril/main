@@ -37,11 +37,11 @@
 //import seedu.address.logic.commands.RedoCommand;
 //import seedu.address.logic.commands.UndoCommand;
 //import seedu.address.model.Model;
-//import seedu.address.model.person.Priority;
-//import seedu.address.model.person.Date;
-//import seedu.address.model.person.Module;
-//import seedu.address.model.person.Name;
-//import seedu.address.model.person.Task;
+//import seedu.address.model.task.Priority;
+//import seedu.address.model.task.Date;
+//import seedu.address.model.task.Module;
+//import seedu.address.model.task.Name;
+//import seedu.address.model.task.Task;
 //import seedu.address.model.tag.Tag;
 //import seedu.address.testutil.TaskBuilder;
 //import seedu.address.testutil.PersonUtil;
@@ -189,7 +189,7 @@
 //     * 2. Command box has the default style class.<br>
 //     * 3. Result display box displays the success message of executing {@code AddCommand} with the details of
 //     * {@code toAdd}.<br>
-//     * 4. {@code Storage} and {@code PersonListPanel} equal to the corresponding components in
+//     * 4. {@code Storage} and {@code TaskListPanel} equal to the corresponding components in
 //     * the current model added with {@code toAdd}.<br>
 //     * 5. Browser url and selected card remain unchanged.<br>
 //     * 6. Status bar's sync status changes.<br>
@@ -218,7 +218,7 @@
 //     * Performs the same verification as {@code assertCommandSuccess(String, Task)} except asserts that
 //     * the,<br>
 //     * 1. Result display box displays {@code expectedResultMessage}.<br>
-//     * 2. {@code Storage} and {@code PersonListPanel} equal to the corresponding components in
+//     * 2. {@code Storage} and {@code TaskListPanel} equal to the corresponding components in
 //     * {@code expectedModel}.<br>
 //     * @see AddCommandSystemTest#assertCommandSuccess(String, Task)
 //     */
@@ -235,7 +235,7 @@
 //     * 1. Command box displays {@code command}.<br>
 //     * 2. Command box has the error style class.<br>
 //     * 3. Result display box displays {@code expectedResultMessage}.<br>
-//     * 4. {@code Storage} and {@code PersonListPanel} remain unchanged.<br>
+//     * 4. {@code Storage} and {@code TaskListPanel} remain unchanged.<br>
 //     * 5. Browser url, selected card and status bar remain unchanged.<br>
 //     * Verifications 1, 3 and 4 are performed by
 //     * {@code TaskManagerSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>

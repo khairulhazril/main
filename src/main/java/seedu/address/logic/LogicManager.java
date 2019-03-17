@@ -15,7 +15,11 @@ import seedu.address.logic.parser.TaskManagerParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyTaskManager;
-import seedu.address.model.person.Task;
+
+import seedu.address.model.notes.Notes;
+
+import seedu.address.model.task.Task;
+
 import seedu.address.storage.Storage;
 
 /**
@@ -105,4 +109,8 @@ public class LogicManager implements Logic {
     public void setSelectedTask(Task task) {
         model.setSelectedTask(task);
     }
+
+    @Override
+    public ObservableList<Notes> getFilteredNotesList() {
+        return model.getFilteredNotesList(); }
 }

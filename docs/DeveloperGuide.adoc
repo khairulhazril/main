@@ -313,6 +313,41 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
 // end::undoredo[]
 
+// tag::sorttask[]
+=== Sort Task List Feature
+
+==== Current Implementation
+
+The sorting mechanism is facilitated by `TaskManager`, `Model` and `SortTaskList`.
+
+Given below is an example usage scenario.
+
+Step 1. The user keys in `sort ATTRIBUTE`, the `SortCommandParser` will trim the command to get the attribute.
+
+Step 2. If the attribute is valid, it will then pass the attribute to `SortCommand`.
+
+Step 3. `SortCommand` will then call `ModelManager#sortTask(attribute)`.
+
+Step 4. It will then call `TaskManager#sortTask(attribute)`.
+Then we convert the relevant attributes of the tasks in the Task List to string to compare using `string#compareTo()`.
+
+Step 5. This will sort `ObservableList<Task> sortedList`.
+After returning the sorted Task List, the Task Manager is then committed.
+
+==== Design Considerations
+
+===== Aspect: How sort executes
+
+* **Alternative 1 (current choice):** Write a class separately for handling the sorting of the task list.
+** Pros: Easy to read and debug, Follows OOP coding and thus easier for other coders to modify.
+** Cons: Difficult to implement.
+* **Alternative 2:** Write a method for each attribute in `TaskManager`.
+** Pros: Easy to implement.
+** Cons: Does not follow OOP coding.
+
+
+// end::sorttask[]
+
 // tag::dataencryption[]
 === [Proposed] Data Encryption
 
