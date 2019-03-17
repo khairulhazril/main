@@ -25,7 +25,7 @@ public class TaskListPanelTest extends GuiUnitTest {
     private static final long CARD_CREATION_AND_DELETION_TIMEOUT = 2500;
 
     private final SimpleObjectProperty<Task> selectedTask = new SimpleObjectProperty<>();
-    private PersonListPanelHandle personListPanelHandle;
+    private PersonListPanelHandle taskListPanelHandle;
 
     /*
     @Test
@@ -94,7 +94,7 @@ public class TaskListPanelTest extends GuiUnitTest {
                 new TaskListPanel(backingList, selectedTask, selectedTask::set);
         uiPartRule.setUiPart(taskListPanel);
 
-        personListPanelHandle = new PersonListPanelHandle(getChildNode(taskListPanel.getRoot(),
+        taskListPanelHandle = new PersonListPanelHandle(getChildNode(taskListPanel.getRoot(),
                 PersonListPanelHandle.PERSON_LIST_VIEW_ID));
     }
 }

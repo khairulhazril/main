@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Border;
@@ -31,6 +32,8 @@ public class CalendarCell extends UiPart<Region> {
     private static final Border border = new Border(new BorderStroke(Paint.valueOf("#0F0F0F"), BorderStrokeStyle.SOLID,
             CornerRadii.EMPTY, BorderStroke.THIN));
 
+    private static final int CELL_WIDTH = 105;
+
     private final Logger logger = LogsCenter.getLogger(CalendarCell.class);
 
     private String date;
@@ -49,7 +52,7 @@ public class CalendarCell extends UiPart<Region> {
      * Creates a cell for CalendarPanel.
      *
      * @param date Date to be displayed on the cell
-     * @param taskList list of tasks currently being displayed
+     * @param taskList List of tasks currently being displayed
      */
     public CalendarCell(String date, String month, ObservableList<Task> taskList) {
         super(FXML);
@@ -57,7 +60,7 @@ public class CalendarCell extends UiPart<Region> {
         setDate(date);
         setMonth(month);
         addTask(taskList);
-        setBackground();
+        setAppearance();
     }
 
     /**
@@ -78,7 +81,7 @@ public class CalendarCell extends UiPart<Region> {
     /**
      * Adds the name of a task to the cell
      */
-    public void addTask(ObservableList<Task> taskList) {
+    private void addTask(ObservableList<Task> taskList) {
         for (Task task : taskList) {
             String currFullDate = task.getDate().toString();
             String currDateString = currFullDate.substring(0, currFullDate.indexOf("-"));
@@ -89,7 +92,8 @@ public class CalendarCell extends UiPart<Region> {
 
             if (currDate == Integer.parseInt(date) && currMonth == Integer.parseInt(month)) {
                 Text newTask = new Text();
-                newTask.setText(task.getName().toString());
+                newTask.setText("- " + task.getName().toString());
+                newTask.setWrappingWidth(CELL_WIDTH);
 
                 cellContent.getChildren().add(newTask);
             }
@@ -97,11 +101,13 @@ public class CalendarCell extends UiPart<Region> {
     }
 
     /**
-     * Sets the background and border of the cell
+     * Sets the background, border and scrollbars of the cell
      */
-    private void setBackground() {
+    private void setAppearance() {
         getRoot().setBackground(background);
         getRoot().setBorder(border);
+        cellTasksPane.setHbarPolicy(ScrollBarPolicy.NEVER);
+        cellTasksPane.setVbarPolicy(ScrollBarPolicy.NEVER);
     }
 
 }
