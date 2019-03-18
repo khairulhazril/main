@@ -313,6 +313,42 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
 // end::undoredo[]
 
+// tag::loginfunction[]
+=== Login Feature
+
+==== Current Implementation
+
+The login mechanism is facilitated by `TaskManager`, `SignupCommand`, `LoginCommand`, `LogoutCommand`, `loginEvent`, `JsonLoginStorage`, .
+
+Given below is an example usage scenario.
+
+Step 1. The user keys in username and password, the `LoginCommandParser` or `SignupCommandParser` will trim the command to get the string of username and password.
+
+Step 2. If the attribute is valid, username and password is stored in a User class, it will then pass the attribute to `loginEvent`.
+
+Step 3. `loginEvent` will then call `JsonLoginStorage` with attributes to read and write Json files or set Json properties.
+
+Step 4. It will then return to `loginEvent` where it will return the user account details.
+
+Step 5. Then we convert the relevant attributes of the user information to string to compare. This is used in login and signup. Here, `loginEvent` is able to check if the user exists, if user information matches or logs out of account.
+
+Step 6. After returning the user information, the user is then logged into or logged out of Task Manager.
+
+==== Design Considerations
+
+===== Aspect: How loginEvent executes
+
+* Write a class separately for handling the Json file reading of user information.
+** Pros: Easy to read and debug, Follows OOP coding and thus easier for other coders to modify.
+** Cons: Difficult to implement.
+
+* Write a class separately for passing Json file attributes and follow OOP coding in loginEvent.
+** Pros: Able to debug easily if any error occurs. Most of the login function happens within this 2 files.
+** Cons: Difficult to implement. Does not follow OOP coding.
+
+
+// end::loginfunction[]
+
 // tag::notes[]
 === Notes Feature
 
@@ -344,10 +380,12 @@ Aspect: Checking for duplicate notes
 
 * Alternative 1(current choice): IsSameNotes
 
+
 ** Pros: Easy to implement
 
 ** Cons: May neglect duplicate notes that mean the same because IsSameNotes check for the exact same heading and content. E.g 1. h/popular c/buy ring file 2.h/popular c/buy ring files
 // end::notes[]
+
 
 // tag::sorttask[]
 === Sort Task List Feature
