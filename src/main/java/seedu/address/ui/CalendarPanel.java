@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.YearMonth;
 import java.util.logging.Logger;
 
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -24,6 +25,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.Logic;
 import seedu.address.model.task.Task;
 
 /**
@@ -56,12 +58,20 @@ public class CalendarPanel extends UiPart<Region> {
 
     private final Logger logger = LogsCenter.getLogger(CalendarPanel.class);
 
+    private Logic logic;
+
     @FXML
     private GridPane taskGridPane;
 
-    public CalendarPanel(ObservableList<Task> taskList) {
+    public CalendarPanel(ObservableList<Task> taskList, Logic logic) {
         super(FXML);
+        this.logic = logic;
         buildCalendarPane(taskList);
+
+        taskList.addListener((ListChangeListener<? super Task>) (observable) -> {
+            ObservableList<Task> newTaskList = logic.getFilteredTaskList();
+            createCalendarCells(newTaskList);
+        });
     }
 
     /**
@@ -159,8 +169,10 @@ public class CalendarPanel extends UiPart<Region> {
 
     /**
      * Populate grid with calendar cells to correspond to the appropriate date
+     *
+     * @param taskList List of tasks currently being displayed
      */
-    public void createCalendarCells(ObservableList<Task> taskList) {
+    private void createCalendarCells(ObservableList<Task> taskList) {
         while (!calendarDate.getDayOfWeek().toString().equals("SUNDAY")) { //get previous month's dates to be displayed
             calendarDate = calendarDate.minusDays(1);
         }
@@ -173,6 +185,8 @@ public class CalendarPanel extends UiPart<Region> {
                 calendarDate = calendarDate.plusDays(1);
             }
         }
+
+        calendarDate = LocalDate.of(yearMonth.getYear(), yearMonth.getMonthValue(), 1);
     }
 
 }
