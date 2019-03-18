@@ -6,7 +6,6 @@ import seedu.address.commons.core.Messages;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.task.ModuleContainsKeywordsPredicate;
-import seedu.address.model.task.NameContainsKeywordsPredicate;
 
 /**
  * Finds and lists all tasks in task manager whose module code contains any of the argument keywords.
