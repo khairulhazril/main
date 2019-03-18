@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.util.ArrayList;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -39,6 +40,8 @@ public class CalendarCell extends UiPart<Region> {
     private String date;
     private String month;
 
+    private ArrayList<CalendarCellTask> cellTasks = new ArrayList<CalendarCellTask>();
+
     @FXML
     private Text cellDate;
 
@@ -52,14 +55,14 @@ public class CalendarCell extends UiPart<Region> {
      * Creates a cell for CalendarPanel.
      *
      * @param date Date to be displayed on the cell
-     * @param taskList List of tasks currently being displayed
+     * @param taskList List of tasks currently in Task Manager
      */
     public CalendarCell(String date, String month, ObservableList<Task> taskList) {
         super(FXML);
 
         setDate(date);
         setMonth(month);
-        addTask(taskList);
+        getTasks(taskList);
         setAppearance();
     }
 
@@ -79,9 +82,11 @@ public class CalendarCell extends UiPart<Region> {
     }
 
     /**
-     * Adds the name of a task to the cell
+     * Compiles a list of tasks to be added to the cell
+     *
+     * @param taskList List of tasks currently in Task Manager
      */
-    private void addTask(ObservableList<Task> taskList) {
+    private void getTasks(ObservableList<Task> taskList) {
         for (Task task : taskList) {
             String currFullDate = task.getDate().toString();
             String currDateString = currFullDate.substring(0, currFullDate.indexOf("-"));
@@ -91,13 +96,15 @@ public class CalendarCell extends UiPart<Region> {
             int currMonth = Integer.parseInt(currMonthString);
 
             if (currDate == Integer.parseInt(date) && currMonth == Integer.parseInt(month)) {
-                Text newTask = new Text();
-                newTask.setText("- " + task.getName().toString());
+                int taskPriority = Integer.parseInt(task.getPriority().value);
+                CalendarCellTask newTask = new CalendarCellTask("- " + task.getName().toString(), taskPriority);
                 newTask.setWrappingWidth(CELL_WIDTH);
 
-                cellContent.getChildren().add(newTask);
+                cellTasks.add(newTask);
             }
         }
+
+        addTasksToCell();
     }
 
     /**
@@ -108,6 +115,19 @@ public class CalendarCell extends UiPart<Region> {
         getRoot().setBorder(border);
         cellTasksPane.setHbarPolicy(ScrollBarPolicy.NEVER);
         cellTasksPane.setVbarPolicy(ScrollBarPolicy.NEVER);
+    }
+
+    /**
+     * Adds tasks to the calendar cell, tasks sorted by priority in descending order
+     */
+    private void addTasksToCell() {
+        cellTasks.sort((o1, o2) -> { //sort tasks by priority
+            return o1.compareTo(o2);
+        });
+
+        for (CalendarCellTask newTask : cellTasks) {
+            cellContent.getChildren().add(newTask);
+        }
     }
 
 }
