@@ -30,11 +30,12 @@
 <li><a href="#implementation">3. Implementation</a>
 <ul class="sectlevel2">
 <li><a href="#undo-redo-feature">3.1. Undo/Redo feature</a></li>
-<li><a href="#notes-feature">3.2. Notes Feature</a></li>
-<li><a href="#sort-task-list-feature">3.3. Sort Task List Feature</a></li>
-<li><a href="#calendar-feature">3.4. Calendar feature</a></li>
-<li><a href="#logging">3.5. Logging</a></li>
-<li><a href="#Implementation-Configuration">3.6. Configuration</a></li>
+<li><a href="#login-feature">3.2. Login Feature</a></li>
+<li><a href="#notes-feature">3.3. Notes Feature</a></li>
+<li><a href="#sort-task-list-feature">3.4. Sort Task List Feature</a></li>
+<li><a href="#calendar-feature">3.5. Calendar feature</a></li>
+<li><a href="#logging">3.6. Logging</a></li>
+<li><a href="#Implementation-Configuration">3.7. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a>
@@ -770,12 +771,78 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </div>
 </div>
 <div class="sect2">
-<h3 id="notes-feature"><a class="link" href="#notes-feature">3.2. Notes Feature</a></h3>
+<h3 id="login-feature"><a class="link" href="#login-feature">3.2. Login Feature</a></h3>
+<div class="sect3">
+<h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">3.2.1. Current Implementation</a></h4>
+<div class="paragraph">
+<p>The login mechanism is facilitated by <code>TaskManager</code>, <code>SignupCommand</code>, <code>LoginCommand</code>, <code>LogoutCommand</code>, <code>loginEvent</code>, <code>JsonLoginStorage</code>, .</p>
+</div>
+<div class="paragraph">
+<p>Given below is an example usage scenario.</p>
+</div>
+<div class="paragraph">
+<p>Step 1. The user keys in username and password, the <code>LoginCommandParser</code> or <code>SignupCommandParser</code> will trim the command to get the string of username and password.</p>
+</div>
+<div class="paragraph">
+<p>Step 2. If the attribute is valid, username and password is stored in a User class, it will then pass the attribute to <code>loginEvent</code>.</p>
+</div>
+<div class="paragraph">
+<p>Step 3. <code>loginEvent</code> will then call <code>JsonLoginStorage</code> with attributes to read and write Json files or set Json properties.</p>
+</div>
+<div class="paragraph">
+<p>Step 4. It will then return to <code>loginEvent</code> where it will return the user account details.</p>
+</div>
+<div class="paragraph">
+<p>Step 5. Then we convert the relevant attributes of the user information to string to compare. This is used in login and signup. Here, <code>loginEvent</code> is able to check if the user exists, if user information matches or logs out of account.</p>
+</div>
+<div class="paragraph">
+<p>Step 6. After returning the user information, the user is then logged into or logged out of Task Manager.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.2.2. Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-how-loginevent-executes"><a class="link" href="#aspect-how-loginevent-executes">Aspect: How loginEvent executes</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Write a class separately for handling the Json file reading of user information.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to read and debug, Follows OOP coding and thus easier for other coders to modify.</p>
+</li>
+<li>
+<p>Cons: Difficult to implement.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Write a class separately for passing Json file attributes and follow OOP coding in loginEvent.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Able to debug easily if any error occurs. Most of the login function happens within this 2 files.</p>
+</li>
+<li>
+<p>Cons: Difficult to implement. Does not follow OOP coding.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="notes-feature"><a class="link" href="#notes-feature">3.3. Notes Feature</a></h3>
 <div class="paragraph">
 <p>This feature allow users to add and view notes regarding miscellaneous matters.</p>
 </div>
 <div class="sect3">
-<h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">3.2.1. Current Implementation</a></h4>
+<h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">3.3.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>The Notes mechanism is facilitated by AddNotesCommand. A Notes object is instantiated which contains of Heading and Content.</p>
 </div>
@@ -805,7 +872,7 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.2.2. Design Considerations</a></h4>
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.3.2. Design Considerations</a></h4>
 <div class="paragraph">
 <p>Aspect: Checking for duplicate notes</p>
 </div>
@@ -829,9 +896,9 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </div>
 </div>
 <div class="sect2">
-<h3 id="sort-task-list-feature"><a class="link" href="#sort-task-list-feature">3.3. Sort Task List Feature</a></h3>
+<h3 id="sort-task-list-feature"><a class="link" href="#sort-task-list-feature">3.4. Sort Task List Feature</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">3.3.1. Current Implementation</a></h4>
+<h4 id="current-implementation-4"><a class="link" href="#current-implementation-4">3.4.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>The sorting mechanism is facilitated by <code>TaskManager</code>, <code>Model</code> and <code>SortTaskList</code>.</p>
 </div>
@@ -857,7 +924,7 @@ After returning the sorted Task List, the Task Manager is then committed.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.3.2. Design Considerations</a></h4>
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.4.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-sort-executes"><a class="link" href="#aspect-how-sort-executes">Aspect: How sort executes</a></h5>
 <div class="ulist">
@@ -894,9 +961,9 @@ After returning the sorted Task List, the Task Manager is then committed.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="calendar-feature"><a class="link" href="#calendar-feature">3.4. Calendar feature</a></h3>
+<h3 id="calendar-feature"><a class="link" href="#calendar-feature">3.5. Calendar feature</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-4"><a class="link" href="#current-implementation-4">3.4.1. Current Implementation</a></h4>
+<h4 id="current-implementation-5"><a class="link" href="#current-implementation-5">3.5.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>The Calendar extends the <code>TaskManager</code> GUI with an easy to read interface for tracking task deadlines. It is composed of two classes, <code>CalendarPanel</code> and <code>CalendarCell</code>.</p>
 </div>
@@ -914,7 +981,7 @@ After returning the sorted Task List, the Task Manager is then committed.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.4.2. Design Considerations</a></h4>
+<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">3.5.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-how-the-calendar-is-built"><a class="link" href="#aspect-how-the-calendar-is-built">Aspect: How the Calendar is built</a></h5>
 <div class="ulist">
@@ -997,14 +1064,14 @@ After returning the sorted Task List, the Task Manager is then committed.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.5. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">3.6. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.6, &#8220;Configuration&#8221;</a>)</p>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.7, &#8220;Configuration&#8221;</a>)</p>
 </li>
 <li>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
@@ -1035,7 +1102,7 @@ After returning the sorted Task List, the Task Manager is then committed.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.6. Configuration</a></h3>
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.7. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g user prefs file location, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -2699,4 +2766,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-03-17 15:55:44 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2019-03-18 01:20:43 UTC</div></div></div></body></html>
