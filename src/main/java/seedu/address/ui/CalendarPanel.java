@@ -168,7 +168,7 @@ public class CalendarPanel extends UiPart<Region> {
     }
 
     /**
-     * Populate grid with calendar cells to correspond to the appropriate date
+     * Populates grid with calendar cells to correspond to the appropriate date
      *
      * @param taskList List of tasks currently being displayed
      */
