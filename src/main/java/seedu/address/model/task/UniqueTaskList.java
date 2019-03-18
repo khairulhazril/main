@@ -54,6 +54,7 @@ public class UniqueTaskList implements Iterable<Task> {
      * The task identity of {@code editedTask} must not be the same as another existing task in the list.
      */
     public void setTask(Task target, Task editedTask) {
+
         requireAllNonNull(target, editedTask);
 
         int index = internalList.indexOf(target);
@@ -102,6 +103,10 @@ public class UniqueTaskList implements Iterable<Task> {
      */
     public ObservableList<Task> asUnmodifiableObservableList() {
         return internalUnmodifiableList;
+    }
+
+    public ObservableList<Task> obtainObservableList() {
+        return internalList;
     }
 
     @Override

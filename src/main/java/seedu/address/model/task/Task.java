@@ -52,6 +52,14 @@ public class Task {
         return priority;
     }
 
+    public String getMonth() {
+        return date.toString().substring(3, 5);
+    }
+
+    public String getDay() {
+        return date.toString().substring(0, 2);
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.

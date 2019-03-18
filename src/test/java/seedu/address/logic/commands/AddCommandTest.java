@@ -155,6 +155,9 @@ import seedu.address.testutil.TaskBuilder;
         }
 
         @Override
+        public void sortTask(String attribute) { }
+
+        @Override
         public ObservableList<Task> getFilteredTaskList() {
             throw new AssertionError("This method should not be called.");
         }

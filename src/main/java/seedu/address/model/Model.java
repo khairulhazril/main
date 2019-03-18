@@ -6,10 +6,10 @@ import java.util.function.Predicate;
 import javafx.beans.property.ReadOnlyProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.login.User;
+import seedu.address.model.login.Username;
 import seedu.address.model.notes.Notes;
-
 import seedu.address.model.task.Task;
-
 
 /**
  * The API of the Model component.
@@ -84,6 +84,11 @@ public interface Model {
     void setTask(Task target, Task editedTask);
 
     /**
+     * Sorts the model's task manager according the chosen attribute
+     */
+    void sortTask(String attribute);
+
+    /**
      * Returns an unmodifiable view of the filtered task list
      */
     ObservableList<Task> getFilteredTaskList();
@@ -137,6 +142,38 @@ public interface Model {
      */
     void setSelectedTask(Task task);
 
+    //===================== Login Information ========================================================
+
+    /**
+     * Returns true if the user is logged in.
+     */
+    boolean getLoginStatus();
+
+    /**
+     * Return Username of logged in user.
+     */
+    Username getUsername();
+
+    /**
+     *  User logs out of Task Manager.
+     */
+    void logout();
+
+    /**
+     * User login to Task Manager.
+     */
+    void loginUser(User loginInfo);
+
+    /**
+     *  Returns true if user exists
+     */
+    boolean userExists(User user);
+
+    /**
+     * A new user is registered in Task Manager
+     */
+    void newUser(User user);
+
     //=====================Notes========================================================
 
     /**
@@ -164,6 +201,5 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredNotesList(Predicate<Notes> predicate);
-
 
 }
