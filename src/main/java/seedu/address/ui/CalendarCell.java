@@ -17,6 +17,8 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.task.Task;
@@ -40,6 +42,8 @@ public class CalendarCell extends UiPart<Region> {
     private String date;
     private String month;
 
+    private Task selectedTask;
+
     private ArrayList<CalendarCellTask> cellTasks = new ArrayList<CalendarCellTask>();
 
     @FXML
@@ -57,9 +61,9 @@ public class CalendarCell extends UiPart<Region> {
      * @param date Date to be displayed on the cell
      * @param taskList List of tasks currently in Task Manager
      */
-    public CalendarCell(String date, String month, ObservableList<Task> taskList) {
+    public CalendarCell(String date, String month, ObservableList<Task> taskList, Task selectedTask) {
         super(FXML);
-
+        this.selectedTask = selectedTask;
         setDate(date);
         setMonth(month);
         getTasks(taskList);
@@ -97,7 +101,7 @@ public class CalendarCell extends UiPart<Region> {
 
             if (currDate == Integer.parseInt(date) && currMonth == Integer.parseInt(month)) {
                 int taskPriority = Integer.parseInt(task.getPriority().value);
-                CalendarCellTask newTask = new CalendarCellTask("- " + task.getName().toString(), taskPriority);
+                CalendarCellTask newTask = new CalendarCellTask(task.getName().toString(), taskPriority);
                 newTask.setWrappingWidth(CELL_WIDTH);
 
                 cellTasks.add(newTask);
@@ -124,9 +128,15 @@ public class CalendarCell extends UiPart<Region> {
         cellTasks.sort((o1, o2) -> { //sort tasks by priority
             return o1.compareTo(o2);
         });
+        for (int i = 0; i < cellTasks.size(); i++) {
+            CalendarCellTask newTask = cellTasks.get(i);
 
-        for (CalendarCellTask newTask : cellTasks) {
             cellContent.getChildren().add(newTask);
+
+            if (selectedTask != null && newTask.getText().equals(selectedTask.getName().toString())) {
+                newTask.setUnderline(true);
+                newTask.setFont(Font.font(Font.getDefault().getName(), FontWeight.BOLD, Font.getDefault().getSize()));
+            }
         }
     }
 
