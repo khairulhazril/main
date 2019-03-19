@@ -1,11 +1,15 @@
 package seedu.address.ui;
 
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 
 /**
  * Individual text for filling CalendarCell
  */
 public class CalendarCellTask extends Text {
+    //Colours for priority, in order for highest to lowest. In order, red, orange, blue.
+    private static final String[] PRIORITYCOLOURS = new String[] { "#FF2D00", "#FFA000", "#0000FF" };
+
     private int priority;
 
     /**
@@ -18,6 +22,7 @@ public class CalendarCellTask extends Text {
         super();
         setPriority(priority);
         setText(text);
+        setTextColour();
     }
 
     /**
@@ -36,6 +41,13 @@ public class CalendarCellTask extends Text {
      */
     public int getPriority() {
         return priority;
+    }
+
+    /**
+     * Sets the colour of the text based on the priority of the task.
+     */
+    private void setTextColour() {
+        setFill(Paint.valueOf(PRIORITYCOLOURS[priority - 1]));
     }
 
     /**
