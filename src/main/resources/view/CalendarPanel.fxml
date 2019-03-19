@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.ScrollPane?>
 
-<GridPane fx:id="taskGridPane" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" />
+<ScrollPane xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" vbarPolicy="NEVER" hbarPolicy="NEVER">
+    <GridPane fx:id="taskGridPane" />
+</ScrollPane>

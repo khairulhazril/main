@@ -41,8 +41,6 @@ public class CalendarPanel extends UiPart<Region> {
 
     private static Text monthLabel = new Text();
 
-    private static int currDate = 0;
-
     private static final int COLS = 7; // 7 Days in a week
     private static final int ROWS = 8; // 6 Rows + Day Header + Month Header
     private static final int ROW_HEIGHT = 80;
