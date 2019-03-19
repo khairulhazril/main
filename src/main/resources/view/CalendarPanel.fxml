@@ -3,6 +3,6 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.control.ScrollPane?>
 
-<ScrollPane xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" hbarPolicy="AS_NEEDED" vbarPolicy="AS_NEEDED">
+<ScrollPane xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" vbarPolicy="NEVER" hbarPolicy="NEVER">
     <GridPane fx:id="taskGridPane" />
 </ScrollPane>
