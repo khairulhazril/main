@@ -54,14 +54,14 @@
 //    public void edit() {
 //        Model model = getModel();
 //
-//        /* ----------------- Performing edit operation while an unfiltered list is being shown ---------------------- */
+//        /* ---------------- Performing edit operation while an unfiltered list is being shown --------------------- */
 //
 //        /* Case: edit all fields, command with leading spaces, trailing spaces and multiple spaces between each field
 //        * -> edited
 //        */
 //        Index index = INDEX_FIRST_TASK;
-//        String command = " " + EditCommand.COMMAND_WORD + "  " + index.getOneBased() + "  " + NAME_DESC_TUTORIAL + "  "
-//        + MODULE_DESC_TUTORIAL + " " + DATE_DESC_TUTORIAL + "  " + PRIORITY_DESC_TUTORIAL + " "
+//        String command = " " + EditCommand.COMMAND_WORD + "  " + index.getOneBased() + "  " + NAME_DESC_TUTORIAL
+//        + "  " + MODULE_DESC_TUTORIAL + " " + DATE_DESC_TUTORIAL + "  " + PRIORITY_DESC_TUTORIAL + " "
 //        + TAG_DESC_UNGRADED + " ";
 //        Task editedTask = new TaskBuilder(TUTORIAL).withTags(VALID_TAG_GRADED).build();
 //        assertCommandSuccess(command, index, editedTask);
@@ -110,7 +110,7 @@
 //        editedTask = new TaskBuilder(taskToEdit).withTags().build();
 //        assertCommandSuccess(command, index, editedTask);
 //
-//        /* ------------------ Performing edit operation while a filtered list is being shown ------------------------ */
+//        /* ----------------- Performing edit operation while a filtered list is being shown ----------------------- */
 //
 //        /* Case: filtered task list, edit index within bounds of address book and task list -> edited */
 //        showPersonsWithName(KEYWORD_MATCHING_MEIER);
@@ -144,7 +144,7 @@
 //        // browser's url is updated to reflect the new task's name
 //        assertCommandSuccess(command, index, PROJECT, index);
 //
-//        /* --------------------------------- Performing invalid edit operation -------------------------------------- */
+//        /* -------------------------------- Performing invalid edit operation ------------------------------------- */
 //
 //        /* Case: invalid index (0) -> rejected */
 //        assertCommandFailure(EditCommand.COMMAND_WORD + " 0" + NAME_DESC_TUTORIAL,
@@ -228,14 +228,16 @@
 //    }
 //
 //    /**
-//    * Performs the same verification as {@code assertCommandSuccess(String, Model, String, Index)} and in addition,<br>
+//    * Performs the same verification as {@code assertCommandSuccess(String, Model, String, Index)} and in addition,
+//    * <br>
 //    * 1. Asserts that result display box displays the success message of executing {@code EditCommand}.<br>
 //    * 2. Asserts that the model related components are updated to reflect the task at index {@code toEdit} being
 //    * updated to values specified {@code editedTask}.<br>
 //    * @param toEdit the index of the current model's filtered list.
 //    * @see EditCommandSystemTest#assertCommandSuccess(String, Model, String, Index)
 //    */
-//    private void assertCommandSuccess(String command, Index toEdit, Task editedTask, Index expectedSelectedCardIndex) {
+//    private void assertCommandSuccess(String command, Index toEdit, Task editedTask,
+//        Index expectedSelectedCardIndex) {
 //        Model expectedModel = getModel();
 //        expectedModel.setTask(expectedModel.getFilteredTaskList().get(toEdit.getZeroBased()), editedTask);
 //        expectedModel.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
