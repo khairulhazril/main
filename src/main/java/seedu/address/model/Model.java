@@ -170,5 +170,29 @@ public interface Model {
      */
     void updateFilteredNotesList(Predicate<Notes> predicate);
 
+    /**
+     * Selected task in the filtered task list.
+     * null if no task is selected.
+     */
+    ReadOnlyProperty<Notes> selectedNotesProperty();
+
+    /**
+     * Sets the selected task in the filtered task list.
+     */
+    void setSelectedNotes(Notes notes);
+
+    /**
+     * Deletes the given task.
+     * The task must exist in the task manager.
+     */
+    void deleteNotes(Notes target);
+
+    /**
+     * Returns the selected task in the filtered task list.
+     * null if no task is selected.
+     */
+    Notes getSelectedNotes();
+
+
 
 }
