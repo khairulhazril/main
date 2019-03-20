@@ -53,7 +53,6 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 === Signing up for an account : `signup`
 
 Creates an account for the user +
-
 Format: `signup u/USERNAME p/PASSWORD` +
 
 Eg. Create an account with username `nicholas` and password `lee`.
@@ -71,7 +70,6 @@ Signed up: nicholas
 === Logging into an account : `login`
 
 Logs the user into their account +
-
 Format: `login u/USERNAME p/PASSWORD` +
 
 Eg. Login to an existing account with username `nicholas` and password `lee`.
@@ -88,7 +86,6 @@ Logged in as nicholas.
 === Logging out of an account : `logout`
 
 Logs user out of an account +
-
 Format: `logout`
 
 Eg: You are logged into nicholas account and would want to logout.
