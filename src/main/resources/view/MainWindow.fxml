@@ -49,7 +49,7 @@
                 </StackPane>
 
                 <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.4" VBox.vgrow="ALWAYS">
-                    <VBox fx:id="taskList" minWidth="340" prefWidth="340" SplitPane.resizableWithParent="false">
+                    <VBox fx:id="taskList" minWidth="230" prefWidth="230" SplitPane.resizableWithParent="false">
                         <padding>
                             <Insets top="10" right="10" bottom="10" left="10"/>
                         </padding>
@@ -62,11 +62,11 @@
                         </padding>
                     </GridPane>
 
-                    <VBox fx:id="NotesList" minWidth="340" prefWidth="340" SplitPane.resizableWithParent="false">
+                    <VBox fx:id="notesList" minWidth="300" prefWidth="300" SplitPane.resizableWithParent="false">
                         <padding>
                             <Insets top="10" right="10" bottom="10" left="10"/>
                         </padding>
-                        <StackPane fx:id="NotesListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+                        <StackPane fx:id="notesListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
                     </VBox>
                 </SplitPane>
 
