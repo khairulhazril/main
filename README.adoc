@@ -5,11 +5,11 @@ https://travis-ci.org/CS2113-AY1819S2-M11-2/main[image:https://travis-ci.org/CS2
 https://coveralls.io/github/CS2113-AY1819S2-M11-2/main?branch=master[image:https://coveralls.io/repos/github/CS2113-AY1819S2-M11-2/main/badge.svg?branch=master[Coverage Status]]
 
 ifdef::env-github[]
-image::docs/images/Ui.png[width="600"]
+image::docs/images/Ui.png[width="1000"]
 endif::[]
 
 ifndef::env-github[]
-image::images/Ui.png[width="600"]
+image::images/Ui.png[width="1000"]
 endif::[]
 
 == Welcome to Task Manager.
@@ -22,7 +22,6 @@ endif::[]
 
 * <<UserGuide#, User Guide>>
 * <<DeveloperGuide#, Developer Guide>>
-* <<LearningOutcomes#, Learning Outcomes>>
 * <<AboutUs#, About Us>>
 * <<ContactUs#, Contact Us>>
 

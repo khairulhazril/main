@@ -2,8 +2,11 @@ package seedu.address.ui;
 
 import java.time.LocalDate;
 import java.time.YearMonth;
+import java.util.Objects;
 import java.util.logging.Logger;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -23,6 +26,8 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
@@ -35,8 +40,6 @@ public class CalendarPanel extends UiPart<Region> {
     private static final String FXML = "CalendarPanel.fxml";
 
     private static Text monthLabel = new Text();
-
-    private static int currDate = 0;
 
     private static final int COLS = 7; // 7 Days in a week
     private static final int ROWS = 8; // 6 Rows + Day Header + Month Header
@@ -58,12 +61,14 @@ public class CalendarPanel extends UiPart<Region> {
 
     private final Logger logger = LogsCenter.getLogger(CalendarPanel.class);
 
+    private Task selectedTask;
+
     private Logic logic;
 
     @FXML
     private GridPane taskGridPane;
 
-    public CalendarPanel(ObservableList<Task> taskList, Logic logic) {
+    public CalendarPanel(ObservableList<Task> taskList, ObservableValue<Task> selectedTask, Logic logic) {
         super(FXML);
         this.logic = logic;
         buildCalendarPane(taskList);
@@ -71,6 +76,21 @@ public class CalendarPanel extends UiPart<Region> {
         taskList.addListener((ListChangeListener<? super Task>) (observable) -> {
             ObservableList<Task> newTaskList = logic.getFilteredTaskList();
             createCalendarCells(newTaskList);
+        });
+
+        selectedTask.addListener((ChangeListener<? super Task>) (observable, oldValue, newValue) -> {
+            // Don't modify selection if we are already selecting the selected task,
+            // otherwise we would have an infinite loop.
+            if (Objects.equals(oldValue, newValue)) {
+                return;
+            }
+
+            if (newValue == null) {
+                return;
+            } else {
+                this.selectedTask = newValue;
+                createCalendarCells(taskList);
+            }
         });
     }
 
@@ -137,6 +157,8 @@ public class CalendarPanel extends UiPart<Region> {
             if (GridPane.getRowIndex(node) == 0 && GridPane.getColumnIndex(node) == 0) {
                 VBox box = (VBox) node;
                 monthLabel.setText(month + " " + year);
+                monthLabel.setFont(Font.font(Font.getDefault().getName(), FontWeight.BOLD,
+                        Font.getDefault().getSize() + 5));
 
                 box.setAlignment(Pos.CENTER);
                 box.getChildren().add(monthLabel);
@@ -168,7 +190,7 @@ public class CalendarPanel extends UiPart<Region> {
     }
 
     /**
-     * Populate grid with calendar cells to correspond to the appropriate date
+     * Populates grid with calendar cells to correspond to the appropriate date
      *
      * @param taskList List of tasks currently being displayed
      */
@@ -181,7 +203,7 @@ public class CalendarPanel extends UiPart<Region> {
             for (int col = 0; col < COLS; col++) {
                 String date = String.valueOf(calendarDate.getDayOfMonth());
                 String month = String.valueOf(calendarDate.getMonthValue());
-                taskGridPane.add(new CalendarCell(date, month, taskList).getRoot(), col, row);
+                taskGridPane.add(new CalendarCell(date, month, taskList, selectedTask).getRoot(), col, row);
                 calendarDate = calendarDate.plusDays(1);
             }
         }
