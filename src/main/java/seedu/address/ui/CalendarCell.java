@@ -102,7 +102,7 @@ public class CalendarCell extends UiPart<Region> {
             if (currDate == Integer.parseInt(date) && currMonth == Integer.parseInt(month)) {
                 int taskPriority = Integer.parseInt(task.getPriority().value);
                 CalendarCellTask newTask = new CalendarCellTask(task.getName().toString(), taskPriority);
-                newTask.setWrappingWidth(CELL_WIDTH);
+                newTask.setWrappingWidth(CELL_WIDTH - 5); //add a bit of padding for better text wrapping
 
                 cellTasks.add(newTask);
             }
