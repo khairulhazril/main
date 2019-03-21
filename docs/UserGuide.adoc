@@ -60,10 +60,11 @@ Example: Create an account with username `nicholas` and password `lee`.
 * `signup u/nicholas p/lee` +
 Signed up: nicholas
 
-[TIP]
 ====
-* `Logged in: nicholas` You are already logged in and will need to logout in order to signup for a new account. +
-* `Please try another username` The username already exists, signup again with another username.
+* `Logged in: nicholas` +
+You are already logged in and will need to logout in order to signup for a new account. +
+* `Please try another username` +
+The username already exists, signup again with another username.
 ====
 
 
@@ -77,10 +78,11 @@ Example: Login to an existing account with username `nicholas` and password `lee
 * `login u/nicholas p/lee` +
 Logged in as nicholas.
 
-[TIP]
 ====
-* `You are already logged in!` You are already logged in and will need logout in order to login to another account. +
-* `Please Login again!` You have inserted an incorrect username or password. The login command has to be executed again
+* `You are already logged in!` +
+You are already logged in and will need logout in order to login to another account. +
+* `Please Login again!` +
+You have inserted an incorrect username or password. The login command has to be executed again
 ====
 
 === Logging out of an account : `logout`
@@ -93,9 +95,9 @@ Example: You are logged into nicholas account and would want to logout.
 * `logout` +
 Logged out of nicholas.
 
-[TIP]
 ====
-* `Please Login!` You did not login into any account.
+* `Please Login!` +
+You did not login into any account.
 ====
 
 === Viewing help : `help`
