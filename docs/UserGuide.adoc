@@ -55,7 +55,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 Creates an account for the user +
 Format: `signup u/USERNAME p/PASSWORD` +
 
-Eg. Create an account with username `nicholas` and password `lee`.
+Example: Create an account with username `nicholas` and password `lee`.
 
 * `signup u/nicholas p/lee` +
 Signed up: nicholas
@@ -72,7 +72,7 @@ Signed up: nicholas
 Logs the user into their account +
 Format: `login u/USERNAME p/PASSWORD` +
 
-Eg. Login to an existing account with username `nicholas` and password `lee`.
+Example: Login to an existing account with username `nicholas` and password `lee`.
 
 * `login u/nicholas p/lee` +
 Logged in as nicholas.
@@ -88,7 +88,7 @@ Logged in as nicholas.
 Logs user out of an account +
 Format: `logout`
 
-Eg: You are logged into nicholas account and would want to logout.
+Example: You are logged into nicholas account and would want to logout.
 
 * `logout` +
 Logged out of nicholas.
