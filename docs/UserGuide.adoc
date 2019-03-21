@@ -266,7 +266,7 @@ Format: `exit`
 Task Manager data is saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
-=== Monthly calendar view
+=== Viewing tasks on a calendar
 
 Tasks displayed in the task list are automatically displayed on a calendar display of the current month. If the task list is modified or filtered using `find`, the calendar will update accordingly.
 
