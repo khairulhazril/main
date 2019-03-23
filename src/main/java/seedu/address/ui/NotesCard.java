@@ -2,17 +2,15 @@ package seedu.address.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.task.Task;
+import seedu.address.model.notes.Notes;
 
 /**
  * An UI component that displays information of a {@code Task}.
  */
-public class TaskCard extends UiPart<Region> {
-
-    private static final String FXML = "TaskListCard.fxml";
+public class NotesCard extends UiPart<Region> {
+    private static final String FXML = "NotesListCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -22,32 +20,24 @@ public class TaskCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on TaskManager level 4</a>
      */
 
-    public final Task task;
+    public final Notes notes;
 
-    @FXML
+    @javafx.fxml.FXML
     private HBox cardPane;
     @FXML
-    private Label name;
+    private Label heading;
     @FXML
     private Label id;
     @FXML
-    private Label module;
-    @FXML
-    private Label due;
-    @FXML
-    private Label priority;
-    @FXML
-    private FlowPane tags;
+    private Label content;
 
-    public TaskCard(Task task, int displayedIndex) {
+
+    public NotesCard(Notes notes, int displayedIndex) {
         super(FXML);
-        this.task = task;
+        this.notes = notes;
         id.setText(displayedIndex + ". ");
-        name.setText(task.getName().fullName);
-        module.setText(task.getModule().value);
-        due.setText(task.getPriority().value);
-        priority.setText(task.getDue().value);
-        task.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        heading.setText(notes.getHeading().realHeading);
+        content.setText(notes.getContent().realContent);
     }
 
     @Override
@@ -58,13 +48,13 @@ public class TaskCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof TaskCard)) {
+        if (!(other instanceof NotesCard)) {
             return false;
         }
 
         // state check
-        TaskCard card = (TaskCard) other;
+        NotesCard card = (NotesCard) other;
         return id.getText().equals(card.id.getText())
-                && task.equals(card.task);
+                && notes.equals(card.notes);
     }
 }

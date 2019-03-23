@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.tag.Tag;
-import seedu.address.model.task.Date;
+import seedu.address.model.task.Due;
 import seedu.address.model.task.Module;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.Priority;
@@ -23,14 +23,14 @@ public class TaskBuilder {
 
     private Name name;
     private Module module;
-    private Date date;
+    private Due due;
     private Priority priority;
     private Set<Tag> tags;
 
     public TaskBuilder() {
         name = new Name(DEFAULT_NAME);
         module = new Module(DEFAULT_MODULE);
-        date = new Date(DEFAULT_DATE);
+        due = new Due(DEFAULT_DATE);
         priority = new Priority(DEFAULT_PRIORITY);
         tags = new HashSet<>();
     }
@@ -41,7 +41,7 @@ public class TaskBuilder {
     public TaskBuilder(Task taskToCopy) {
         name = taskToCopy.getName();
         module = taskToCopy.getModule();
-        date = taskToCopy.getDate();
+        due = taskToCopy.getDue();
         priority = taskToCopy.getPriority();
         tags = new HashSet<>(taskToCopy.getTags());
     }
@@ -79,15 +79,15 @@ public class TaskBuilder {
     }
 
     /**
-     * Sets the {@code Date} of the {@code Task} that we are building.
+     * Sets the {@code Due} of the {@code Task} that we are building.
      */
     public TaskBuilder withDate(String email) {
-        this.date = new Date(email);
+        this.due = new Due(email);
         return this;
     }
 
     public Task build() {
-        return new Task(name, module, date, priority, tags);
+        return new Task(name, module, due, priority, tags);
     }
 
 }

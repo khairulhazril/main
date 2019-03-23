@@ -34,6 +34,7 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private CalendarPanel calendarPanel;
     private TaskListPanel taskListPanel;
+    private NotesListPanel notesListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -54,6 +55,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private StackPane notesListPanelPlaceholder;
 
     public MainWindow(Stage primaryStage, Logic logic) {
         super(FXML, primaryStage);
@@ -128,6 +132,11 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand, logic.getHistory());
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        notesListPanel = new NotesListPanel(logic.getFilteredNotesList(), logic.selectedNotesProperty(),
+                logic::setSelectedNotes);
+        notesListPanelPlaceholder.getChildren().add(notesListPanel.getRoot());
+
     }
 
     /**
@@ -173,6 +182,9 @@ public class MainWindow extends UiPart<Stage> {
     public TaskListPanel getTaskListPanel() {
         return taskListPanel;
     }
+
+    public NotesListPanel getNotesListPanel() {
+        return notesListPanel; }
 
     /**
      * Executes the command and returns the result.

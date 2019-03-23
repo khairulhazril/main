@@ -14,7 +14,7 @@ import seedu.address.model.login.Username;
 import seedu.address.model.notes.Content;
 import seedu.address.model.notes.Heading;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.task.Date;
+import seedu.address.model.task.Due;
 import seedu.address.model.task.Module;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.Priority;
@@ -118,18 +118,18 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String email} into an {@code Date}.
+     * Parses a {@code String email} into an {@code Due}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code date} is invalid.
      */
-    public static Date parseDate(String date) throws ParseException {
+    public static Due parseDate(String date) throws ParseException {
         requireNonNull(date);
         String trimmedDate = date.trim();
-        if (!Date.isValidDate(trimmedDate)) {
-            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
+        if (!Due.isValidDate(trimmedDate)) {
+            throw new ParseException(Due.MESSAGE_CONSTRAINTS);
         }
-        return new Date(trimmedDate);
+        return new Due(trimmedDate);
     }
 
     /**
