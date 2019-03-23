@@ -122,7 +122,7 @@ public class UniqueNotesList implements Iterable<Notes> {
     }
 
     /**
-     * Returns true if {@code tasks} contains only unique notes.
+     * Returns true if {@code notes} contains only unique notes.
      */
     private boolean NotesAreUnique(List<Notes> notes) {
         for (int i = 0; i < notes.size() - 1; i++) {

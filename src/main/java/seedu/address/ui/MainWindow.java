@@ -133,7 +133,7 @@ public class MainWindow extends UiPart<Stage> {
         CommandBox commandBox = new CommandBox(this::executeCommand, logic.getHistory());
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
-        notesListPanel = new NotesListPanel(logic.getFilteredNotesList(),logic.selectedNotesProperty(),
+        notesListPanel = new NotesListPanel(logic.getFilteredNotesList(), logic.selectedNotesProperty(),
                 logic::setSelectedNotes);
         notesListPanelPlaceholder.getChildren().add(notesListPanel.getRoot());
 
@@ -183,7 +183,8 @@ public class MainWindow extends UiPart<Stage> {
         return taskListPanel;
     }
 
-    public NotesListPanel getNotesListPanel() { return notesListPanel; }
+    public NotesListPanel getNotesListPanel() {
+        return notesListPanel; }
 
     /**
      * Executes the command and returns the result.

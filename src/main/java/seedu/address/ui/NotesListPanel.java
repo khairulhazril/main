@@ -12,21 +12,23 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.notes.Notes;
-
+/**
+ * Panel containing the list of notes.
+ */
 public class NotesListPanel extends UiPart<Region> {
 
     private static final String FXML = "NotesListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(NotesListPanel.class);
 
     @javafx.fxml.FXML
-    private ListView<Notes> NotesListView;
+    private ListView<Notes> notesListView;
 
     public NotesListPanel(ObservableList<Notes> NotesList, ObservableValue<Notes> selectedNotes,
                          Consumer<Notes> onSelectedNotesChange) {
         super(FXML);
-        NotesListView.setItems(NotesList);
-        NotesListView.setCellFactory(listView -> new NotesListPanel.NotesListViewCell());
-        NotesListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+        notesListView.setItems(NotesList);
+        notesListView.setCellFactory(listView -> new NotesListPanel.NotesListViewCell());
+        notesListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             logger.fine("Selection in notes list panel changed to : '" + newValue + "'");
             onSelectedNotesChange.accept(newValue);
         });
@@ -35,16 +37,16 @@ public class NotesListPanel extends UiPart<Region> {
 
             // Don't modify selection if we are already selecting the selected task,
             // otherwise we would have an infinite loop.
-            if (Objects.equals(NotesListView.getSelectionModel().getSelectedItem(), newValue)) {
+            if (Objects.equals(notesListView.getSelectionModel().getSelectedItem(), newValue)) {
                 return;
             }
 
             if (newValue == null) {
-                NotesListView.getSelectionModel().clearSelection();
+                notesListView.getSelectionModel().clearSelection();
             } else {
-                int index = NotesListView.getItems().indexOf(newValue);
-                NotesListView.scrollTo(index);
-                NotesListView.getSelectionModel().clearAndSelect(index);
+                int index = notesListView.getItems().indexOf(newValue);
+                notesListView.scrollTo(index);
+                notesListView.getSelectionModel().clearAndSelect(index);
             }
         });
     }
