@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 import org.junit.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.task.Date;
+import seedu.address.model.task.Due;
 import seedu.address.model.task.Module;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.Priority;
@@ -26,7 +26,7 @@ public class JsonAdaptedTaskTest {
 
     private static final String VALID_NAME = LAB.getName().toString();
     private static final String VALID_PHONE = LAB.getModule().toString();
-    private static final String VALID_EMAIL = LAB.getDate().toString();
+    private static final String VALID_EMAIL = LAB.getDue().toString();
     private static final String VALID_ADDRESS = LAB.getPriority().toString();
     private static final List<JsonAdaptedTag> VALID_TAGS = LAB.getTags().stream()
             .map(JsonAdaptedTag::new)
@@ -72,14 +72,14 @@ public class JsonAdaptedTaskTest {
     public void toModelType_invalidEmail_throwsIllegalValueException() {
         JsonAdaptedTask person =
                 new JsonAdaptedTask(VALID_NAME, VALID_PHONE, INVALID_EMAIL, VALID_ADDRESS, VALID_TAGS);
-        String expectedMessage = Date.MESSAGE_CONSTRAINTS;
+        String expectedMessage = Due.MESSAGE_CONSTRAINTS;
         Assert.assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
     @Test
     public void toModelType_nullEmail_throwsIllegalValueException() {
         JsonAdaptedTask person = new JsonAdaptedTask(VALID_NAME, VALID_PHONE, null, VALID_ADDRESS, VALID_TAGS);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Date.class.getSimpleName());
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Due.class.getSimpleName());
         Assert.assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 

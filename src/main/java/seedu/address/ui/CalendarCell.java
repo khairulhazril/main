@@ -92,7 +92,7 @@ public class CalendarCell extends UiPart<Region> {
      */
     private void getTasks(ObservableList<Task> taskList) {
         for (Task task : taskList) {
-            String currFullDate = task.getDate().toString();
+            String currFullDate = task.getDue().toString();
             String currDateString = currFullDate.substring(0, currFullDate.indexOf("-"));
             String currMonthString = currFullDate.substring(currFullDate.indexOf("-") + 1);
 

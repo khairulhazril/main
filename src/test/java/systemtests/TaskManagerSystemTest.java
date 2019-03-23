@@ -13,7 +13,7 @@
 //import java.nio.file.Path;
 //import java.nio.file.Paths;
 //import java.util.Arrays;
-//import java.util.Date;
+//import java.util.Due;
 //import java.util.List;
 //
 //import org.junit.After;
@@ -259,7 +259,7 @@
 //     */
 //    protected void assertStatusBarUnchangedExceptSyncStatus() {
 //        StatusBarFooterHandle handle = getStatusBarFooter();
-//        String timestamp = new Date(clockRule.getInjectedClock().millis()).toString();
+//        String timestamp = new Due(clockRule.getInjectedClock().millis()).toString();
 //        String expectedSyncStatus = String.format(SYNC_STATUS_UPDATED, timestamp);
 //        assertEquals(expectedSyncStatus, handle.getSyncStatus());
 //        assertFalse(handle.isSaveLocationChanged());

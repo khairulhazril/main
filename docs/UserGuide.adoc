@@ -18,9 +18,12 @@ By: `M11-02`      Since: `Feb 2019`      Licence: `MIT`
 
 == Introduction
 
-Task Manager is for those who *prefer to use a desktop app for managing tasks*. More importantly, Task Manager is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). Do you want to organise and prioritise your tasks and never miss a single deadline again? Jump to the <<Quick Start>> to get started. Enjoy!
+Task Manager is for those who *prefer to use a desktop app for managing tasks*.
+More importantly, Task Manager is *optimized for those who prefer to work with a keyboard rather than a mouse*.
+Do you want to organise and prioritise your tasks and never miss a single deadline again? Enjoy!
 
 == Quick Start
+Here are the steps to get you started with the Task Manager.
 
 .  Ensure you have Java version `9` or later installed in your Computer.
 .  Download the latest `TaskManager.jar` link:{repoURL}/releases[here].
@@ -31,10 +34,10 @@ image::TaskManager.png[width="1000"]
 +
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
-.  Some example commands you can try:
+.  Try the following commands:
 
 * *`list`* : shows a list of all tasks in the Task Manager
-* *`add n/Assignment m/CG2027 d/12-02 p/1`* : adds a task named `Assignment` of module `CG2023`, submission date `12-02` and priority level `1` to the Task Manager.
+* *`add n/Assignment m/CG2027 d/12-02 p/1`* : adds a task named `Assignment` of module `CG2023`, due date `12-02` and priority level `1` to the Task Manager.
 * *`delete`*`3` : deletes the 3rd task shown in the current list
 * *`exit`* : exits the app
 
@@ -107,11 +110,14 @@ Format: `help`
 
 === Adding a task: `add`
 
-Adds a task to the address book +
+Adds a task to the Task Manager. +
 Format: `add n/NAME m/MODULE d/DATE p/PRIORITY [t/TAG]...`
 
 [TIP]
 A task can have any number of tags (including 0)
+
+[TIP]
+Date is in the format DD-MM.
 
 Examples:
 
@@ -184,7 +190,7 @@ Returns all tasks containing the module code `CS2113T`.
 * `find CS2113T CS2101` +
 Returns all tasks containing the module code `CS2113T` or `CS2101`.
 
-=== Locating tasks by date: `finddate` [Coming in v1.3]
+=== Locating tasks by date: `finddate`
 
 Finds tasks with dates containing any of the given keywords. +
 Format: `finddate KEYWORD [MORE_KEYWORDS]`
@@ -258,7 +264,7 @@ Selects the 1st task in the results of the `find` command.
 
 === Sorting the task list : `sort`
 
-Sorts the task list in the Task Manager according to the attribute.
+Sorts the task list in the Task Manager according to the attribute. +
 Format: `sort ATTRIBUTE`
 
 ****
@@ -267,6 +273,7 @@ Format: `sort ATTRIBUTE`
 ****
 
 Examples:
+
 * `sort module` +
 Sorts the task list lexicographically by module code.
 * `sort priority` +
@@ -384,13 +391,13 @@ e.g. `add n/Tutorial 3 m/CG2023 d/21-02 p/3 t/urgent`
 e.g. `delete 3`
 * *Edit* : `edit INDEX [n/NAME] [m/MODULE] [d/DATE] [p/PRIORITY] [t/TAG]...` +
 e.g. `edit 2 n/CG2027 Hw d/23-04`
-* *Finddate* : `finddate KEYWORD [MORE_KEYWORDS]` +
+* *Find Date* : `finddate KEYWORD [MORE_KEYWORDS]` +
 e.g. `finddate 21-03`
-* *Findmodule* : `findmodule KEYWROD [MORE_KEYWORDS]` +
+* *Find Module* : `findmodule KEYWROD [MORE_KEYWORDS]` +
 e.g. `findmodule CS2113T`
-* *Findname* : `findname KEYWORD [MORE_KEYWORDS]` +
+* *Find Name* : `findname KEYWORD [MORE_KEYWORDS]` +
 e.g. `findname Project`
-* *Findpriority* : `findpriority KEYWORD [MORE_KEYWORDS]` +
+* *Find Priority* : `findpriority KEYWORD [MORE_KEYWORDS]` +
 e.g. `findpriority 1`
 * *Help* : `help`
 * *History* : `history`
@@ -398,9 +405,9 @@ e.g. `findpriority 1`
 * *Login* : `login u/USERNAME p/PASSWORD` +
 e.g. `login u/nicholas p/abcdefg`
 * *Logout* : `logout`
+* *Redo* : `redo`
 * *Select* : `select INDEX` +
 e.g.`select 2`
 * *Sign-up* : `signup u/USERNAME p/PASSWORD` +
 e.g. `signup
 * *Undo* : `undo`
-* *Redo* : `redo`

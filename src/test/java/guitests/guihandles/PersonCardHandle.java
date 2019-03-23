@@ -79,7 +79,7 @@ public class PersonCardHandle extends NodeHandle<Node> {
         return getName().equals(task.getName().fullName)
                 && getPriority().equals(task.getPriority().value)
                 && getModule().equals(task.getModule().value)
-                && getDate().equals(task.getDate().value)
+                && getDate().equals(task.getDue().value)
                 && ImmutableMultiset.copyOf(getTags()).equals(ImmutableMultiset.copyOf(task.getTags().stream()
                 .map(tag -> tag.tagName)
                 .collect(Collectors.toList())));

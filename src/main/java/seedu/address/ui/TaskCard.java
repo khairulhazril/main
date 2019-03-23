@@ -33,7 +33,7 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label module;
     @FXML
-    private Label date;
+    private Label due;
     @FXML
     private Label priority;
     @FXML
@@ -45,8 +45,8 @@ public class TaskCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(task.getName().fullName);
         module.setText(task.getModule().value);
-        date.setText(task.getPriority().value);
-        priority.setText(task.getDate().value);
+        due.setText(task.getPriority().value);
+        priority.setText(task.getDue().value);
         task.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 

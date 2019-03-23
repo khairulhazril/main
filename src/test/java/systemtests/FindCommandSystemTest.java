@@ -121,7 +121,7 @@
 //        assertSelectedCardUnchanged();
 //
 //        /* Case: find email of task in address book -> 0 persons found */
-//        command = FindCommand.COMMAND_WORD + " " + LAB.getDate().value;
+//        command = FindCommand.COMMAND_WORD + " " + LAB.getDue().value;
 //        assertCommandSuccess(command, expectedModel);
 //        assertSelectedCardUnchanged();
 //

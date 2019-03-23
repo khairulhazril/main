@@ -7,7 +7,7 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditTaskDescriptor;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.task.Date;
+import seedu.address.model.task.Due;
 import seedu.address.model.task.Module;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.Priority;
@@ -35,7 +35,7 @@ public class EditTaskDescriptorBuilder {
         descriptor = new EditCommand.EditTaskDescriptor();
         descriptor.setName(task.getName());
         descriptor.setModule(task.getModule());
-        descriptor.setDate(task.getDate());
+        descriptor.setDue(task.getDue());
         descriptor.setPriority(task.getPriority());
         descriptor.setTags(task.getTags());
     }
@@ -57,10 +57,10 @@ public class EditTaskDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Date} of the {@code EditTaskDescriptor} that we are building.
+     * Sets the {@code Due} of the {@code EditTaskDescriptor} that we are building.
      */
     public EditTaskDescriptorBuilder withEmail(String email) {
-        descriptor.setDate(new Date(email));
+        descriptor.setDue(new Due(email));
         return this;
     }
 
