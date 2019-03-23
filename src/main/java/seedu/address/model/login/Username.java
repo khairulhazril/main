@@ -21,8 +21,7 @@ public class Username {
 
     // Returns true of the username is valid
     public static boolean isValidUsername(String test) {
-        return test.matches(USERNAME_REGEX);
-    }
+        return test.matches(USERNAME_REGEX); }
 
     @Override
     public String toString() {

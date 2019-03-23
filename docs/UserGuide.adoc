@@ -30,7 +30,7 @@ Here are the steps to get you started with the Task Manager.
 .  Copy the file to the folder you want to use as the home folder for your Task Manager.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
-image::Ui.png[width="1000"]
+image::TaskManager.png[width="1000"]
 +
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
@@ -278,6 +278,15 @@ Examples:
 Sorts the task list lexicographically by module code.
 * `sort priority` +
 Sorts the task list in ascending order by priority code.
+
+=== Adding miscellaneous notes : `note`
+
+Adds a note to the address book.
+Format: `note h/HEADING c/CONTENT`
+
+Example:
+*`note h/Popular c/buy blue pens` +
+Add a note with heading `Popular` and content `buy blue pens`.
 
 === Listing entered commands : `history`
 

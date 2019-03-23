@@ -79,4 +79,19 @@ public interface Logic {
      * @see seedu.address.model.Model#setSelectedTask(Task)
      */
     void setSelectedTask(Task task);
+
+    /**
+     * Selected notes in the filtered notes list.
+     * null if no notes is selected.
+     *
+     * @see seedu.address.model.Model#selectedNotesProperty()
+     */
+    ReadOnlyProperty<Notes> selectedNotesProperty();
+
+    /**
+     * Sets the selected task in the filtered notes list.
+     *
+     * @see seedu.address.model.Model#setSelectedNotes(Notes)
+     */
+    void setSelectedNotes(Notes notes);
 }
