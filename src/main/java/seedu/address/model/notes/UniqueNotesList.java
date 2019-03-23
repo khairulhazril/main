@@ -1,6 +1,7 @@
 package seedu.address.model.notes;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
@@ -8,6 +9,7 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.notes.exceptions.DuplicateNotesException;
+import seedu.address.model.notes.exceptions.NotesNotFoundException;
 
 /**
  * A list of notes that enforces uniqueness between its elements and does not allow nulls.
@@ -47,42 +49,53 @@ public class UniqueNotesList implements Iterable<Notes> {
     }
 
     /**
+     * Removes the equivalent note from the list.
+     * The note must exist in the list.
+     */
+    public void remove(Notes toRemove) {
+        requireNonNull(toRemove);
+        if (!internalList.remove(toRemove)) {
+            throw new NotesNotFoundException();
+        }
+    }
+
+    /**
      * Replaces the task {@code target} in the list with {@code editedTask}.
      * {@code target} must exist in the list.
      * The task identity of {@code editedTask} must not be the same as another existing task in the list.
      */
-    /*public void setTask(Task target, Task editedTask) {
-        requireAllNonNull(target, editedTask);
+    public void setNotes(Notes target, Notes editedNotes) {
+        requireAllNonNull(target, editedNotes);
 
         int index = internalList.indexOf(target);
         if (index == -1) {
-            throw new TaskNotFoundException();
+            throw new NotesNotFoundException();
         }
 
-        if (!target.isSameTask(editedTask) && contains(editedTask)) {
-            throw new DuplicateTaskException();
+        if (!target.isSameNotes(editedNotes) && contains(editedNotes)) {
+            throw new DuplicateNotesException();
         }
 
-        internalList.set(index, editedTask);
-    }*/
+        internalList.set(index, editedNotes);
+    }
 
-    /*public void setTasks(UniqueTaskList replacement) {
+    public void setNotes(UniqueNotesList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
-    }*/
+    }
 
     /**
      * Replaces the contents of this list with {@code tasks}.
      * {@code tasks} must not contain duplicate tasks.
      */
-    /*public void setTasks(List<Task> tasks) {
-        requireAllNonNull(tasks);
-        if (!tasksAreUnique(tasks)) {
-            throw new DuplicateTaskException();
+    public void setTasks(List<Notes> notes) {
+        requireAllNonNull(notes);
+        if (!NotesAreUnique(notes)) {
+            throw new DuplicateNotesException();
         }
 
-        internalList.setAll(tasks);
-    }*/
+        internalList.setAll(notes);
+    }
 
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
@@ -111,7 +124,7 @@ public class UniqueNotesList implements Iterable<Notes> {
     /**
      * Returns true if {@code tasks} contains only unique notes.
      */
-    private boolean notesAreUnique(List<Notes> notes) {
+    private boolean NotesAreUnique(List<Notes> notes) {
         for (int i = 0; i < notes.size() - 1; i++) {
             for (int j = i + 1; j < notes.size(); j++) {
                 if (notes.get(i).isSameNotes(notes.get(j))) {
