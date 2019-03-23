@@ -23,10 +23,10 @@ public class NotesListPanel extends UiPart<Region> {
     @javafx.fxml.FXML
     private ListView<Notes> notesListView;
 
-    public NotesListPanel(ObservableList<Notes> NotesList, ObservableValue<Notes> selectedNotes,
+    public NotesListPanel(ObservableList<Notes> notesList, ObservableValue<Notes> selectedNotes,
                          Consumer<Notes> onSelectedNotesChange) {
         super(FXML);
-        notesListView.setItems(NotesList);
+        notesListView.setItems(notesList);
         notesListView.setCellFactory(listView -> new NotesListPanel.NotesListViewCell());
         notesListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             logger.fine("Selection in notes list panel changed to : '" + newValue + "'");
@@ -35,8 +35,6 @@ public class NotesListPanel extends UiPart<Region> {
         selectedNotes.addListener((observable, oldValue, newValue) -> {
             logger.fine("Selected notes changed to: " + newValue);
 
-            // Don't modify selection if we are already selecting the selected task,
-            // otherwise we would have an infinite loop.
             if (Objects.equals(notesListView.getSelectionModel().getSelectedItem(), newValue)) {
                 return;
             }

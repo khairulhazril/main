@@ -90,7 +90,7 @@ public class UniqueNotesList implements Iterable<Notes> {
      */
     public void setTasks(List<Notes> notes) {
         requireAllNonNull(notes);
-        if (!NotesAreUnique(notes)) {
+        if (!notesAreUnique(notes)) {
             throw new DuplicateNotesException();
         }
 
@@ -124,7 +124,7 @@ public class UniqueNotesList implements Iterable<Notes> {
     /**
      * Returns true if {@code notes} contains only unique notes.
      */
-    private boolean NotesAreUnique(List<Notes> notes) {
+    private boolean notesAreUnique(List<Notes> notes) {
         for (int i = 0; i < notes.size() - 1; i++) {
             for (int j = i + 1; j < notes.size(); j++) {
                 if (notes.get(i).isSameNotes(notes.get(j))) {
