@@ -29,8 +29,12 @@ public class Username {
      * @param test
      * @return true if username is valid
      */
-    public static boolean isValidUsername(String test) { return test.matches(USERNAME_REGEX); }
+    public static boolean isValidUsername(String test) {
+        return test.matches(USERNAME_REGEX);
+    }
 
     @Override
-    public String toString() { return enteredUsername; }
+    public String toString() {
+        return enteredUsername;
+    }
 }

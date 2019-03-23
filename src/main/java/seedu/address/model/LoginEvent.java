@@ -4,10 +4,13 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.util.Map;
 import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.GenerateHash;
 import seedu.address.model.login.Password;
 import seedu.address.model.login.User;
@@ -56,9 +59,9 @@ public class LoginEvent {
             String hashedPassword = GenerateHash.signUp(loginPassword);
             loginStorage.newUser(loginUsername, hashedPassword);
         } catch (FileNotFoundException e) {
-            logger.warning("login.json cannot be found in file path");
+            logger.warning("login.json cannot be found in file path" + StringUtil.getDetails(e));
         } catch (IOException e) {
-           logger.warning("User storage is unable to read or write to Json file");
+           logger.warning("User storage is unable to read or write to Json file" + StringUtil.getDetails(e));
         }
     }
 
