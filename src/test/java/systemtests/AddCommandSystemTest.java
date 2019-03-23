@@ -38,7 +38,7 @@
 //import seedu.address.logic.commands.UndoCommand;
 //import seedu.address.model.Model;
 //import seedu.address.model.task.Priority;
-//import seedu.address.model.task.Date;
+//import seedu.address.model.task.Due;
 //import seedu.address.model.task.Module;
 //import seedu.address.model.task.Name;
 //import seedu.address.model.task.Task;
@@ -169,7 +169,7 @@
 //        /* Case: invalid email -> rejected */
 //        command = AddCommand.COMMAND_WORD + NAME_DESC_PROJECT + MODULE_DESC_PROJECT + INVALID_DATE_DESC
 //                + PRIORITY_DESC_PROJECT;
-//        assertCommandFailure(command, Date.MESSAGE_CONSTRAINTS);
+//        assertCommandFailure(command, Due.MESSAGE_CONSTRAINTS);
 //
 //        /* Case: invalid address -> rejected */
 //        command = AddCommand.COMMAND_WORD + NAME_DESC_PROJECT + MODULE_DESC_PROJECT + DATE_DESC_PROJECT
