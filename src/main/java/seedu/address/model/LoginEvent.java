@@ -58,10 +58,12 @@ public class LoginEvent {
         try {
             String hashedPassword = GenerateHash.signUp(loginPassword);
             loginStorage.newUser(loginUsername, hashedPassword);
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+            logger.warning("Password cannot be hashed");
         } catch (FileNotFoundException e) {
             logger.warning("login.json cannot be found in file path" + StringUtil.getDetails(e));
         } catch (IOException e) {
-           logger.warning("User storage is unable to read or write to Json file" + StringUtil.getDetails(e));
+            logger.warning("User storage is unable to read or write to Json file" + StringUtil.getDetails(e));
         }
     }
 

@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 
 import seedu.address.logic.commands.IncorrectCommand;
 
@@ -18,7 +19,7 @@ public class GenerateHash {
      * @param password
      * @return hashedPassword
      */
-    public static String signUp(String password) {
+    public static String signUp(String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
         String saltedPassword = SALT + password;
         String hashedPassword = generateHash(saltedPassword);
         return hashedPassword;
