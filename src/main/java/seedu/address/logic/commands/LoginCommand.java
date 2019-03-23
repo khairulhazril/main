@@ -16,11 +16,13 @@ import seedu.address.model.login.User;
 public class LoginCommand extends Command {
     public static final String COMMAND_WORD = "login";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + "USERNAME: " + PREFIX_USERNAME + "PASSWORD: " + PREFIX_PASSWORD;
+    public static final String MESSAGE_USAGE = COMMAND_WORD + "USERNAME: "
+                                             + PREFIX_USERNAME + "PASSWORD: "
+                                             + PREFIX_PASSWORD;
     public static final String MESSAGE_SUCCESS = "Logged in as %1$s";
     public static final String MESSAGE_LOGGED = "You are already logged in!";
-    public static final String MESSAGE_FAILURE = "Please Login again! " +
-                                                 "Command Format: [login u/USERNAME p/PASSWORD]";
+    public static final String MESSAGE_FAILURE = "Please Login again! "
+                                               + "Command Format: [login u/USERNAME p/PASSWORD]";
 
     private final User loginInfo;
 

@@ -1,18 +1,20 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.commands.LoginCommand.MESSAGE_FAILURE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
+import static seedu.address.logic.parser.ParserUtil.parsePassword;
+import static seedu.address.logic.parser.ParserUtil.parseUsername;
+
+import java.util.stream.Stream;
+
 import seedu.address.logic.commands.LoginCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.login.Password;
 import seedu.address.model.login.User;
 import seedu.address.model.login.Username;
 
-import java.util.stream.Stream;
 
-import static seedu.address.logic.commands.LoginCommand.MESSAGE_FAILURE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
-import static seedu.address.logic.parser.ParserUtil.parsePassword;
-import static seedu.address.logic.parser.ParserUtil.parseUsername;
 
 /**
  * Login Command Parser

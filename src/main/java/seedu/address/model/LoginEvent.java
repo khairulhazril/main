@@ -4,8 +4,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
 import java.util.Map;
 import java.util.logging.Logger;
 
@@ -98,11 +96,17 @@ public class LoginEvent {
         return accounts.containsKey(loginUsername);
     }
 
-    public Username getUsername() { return user.getUsername(); }
+    public Username getUsername() {
+        return user.getUsername();
+    }
 
     // Remove user to prepare for next login
-    public void logout() { loginStatus = false; }
+    public void logout() {
+        loginStatus = false;
+    }
 
     // Returns true if user is logged in
-    public boolean getLoginStatus() { return loginStatus; }
+    public boolean getLoginStatus() {
+        return loginStatus;
+    }
 }
