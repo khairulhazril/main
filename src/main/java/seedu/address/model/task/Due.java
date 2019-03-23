@@ -5,6 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -71,7 +72,7 @@ public class Due {
 
     public Date getDate() {
         DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-        String dateAsString = toString() + "-0000";
+        String dateAsString = toString() + "-" + Calendar.getInstance().get(Calendar.YEAR);
         Date date = null;
         try {
             date = dateFormat.parse(dateAsString);
@@ -79,6 +80,27 @@ public class Due {
             System.out.println(ex);
         }
         return date;
+    }
+
+    public Date getCurrentDate() {
+        return new Date();
+    }
+
+    public int daysDifference(Date currentDay, Date taskDay) {
+        long duration = taskDay.getTime() - currentDay.getTime();
+        return (int) (duration / (24 * 60 * 60 * 1000));
+    }
+
+    public int daysRemaining() {
+        int duration = daysDifference(getCurrentDate(), getDate());
+
+        if (duration < 0) {
+            return -1;
+        } else if (duration > 7) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 
     @Override

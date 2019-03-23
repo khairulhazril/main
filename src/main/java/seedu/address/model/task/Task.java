@@ -60,6 +60,10 @@ public class Task {
         return due.toString().substring(0, 2);
     }
 
+    public int getDaysRemaining() {
+        return due.daysRemaining();
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.

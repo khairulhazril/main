@@ -48,6 +48,22 @@ public class TaskCard extends UiPart<Region> {
         due.setText(task.getPriority().value);
         priority.setText(task.getDue().value);
         task.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+
+        int daysRemaining = task.getDaysRemaining();
+
+        if (daysRemaining == -1) {
+            id.setStyle("-fx-text-fill: red");
+            name.setStyle("-fx-text-fill: red");
+            module.setStyle("-fx-text-fill: red");
+            due.setStyle("-fx-text-fill: red");
+            priority.setStyle("-fx-text-fill: red");
+        } else if (daysRemaining == 0) {
+            id.setStyle("-fx-text-fill: lightgreen");
+            name.setStyle("-fx-text-fill: lightgreen");
+            module.setStyle("-fx-text-fill: lightgreen");
+            due.setStyle("-fx-text-fill: lightgreen");
+            priority.setStyle("-fx-text-fill: lightgreen");
+        }
     }
 
     @Override

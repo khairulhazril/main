@@ -285,7 +285,8 @@ Adds a note to the address book.
 Format: `note h/HEADING c/CONTENT`
 
 Example:
-*`note h/Popular c/buy blue pens` +
+
+* `note h/Popular c/buy blue pens` +
 Add a note with heading `Popular` and content `buy blue pens`.
 
 === Listing entered commands : `history`
