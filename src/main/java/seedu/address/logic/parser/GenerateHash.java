@@ -2,8 +2,6 @@ package seedu.address.logic.parser;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.HashMap;
-import java.util.Map;
 
 import seedu.address.logic.commands.IncorrectCommand;
 
@@ -20,7 +18,7 @@ public class GenerateHash {
      * @param password
      * @return hashedPassword
      */
-    public static String signUp(String password){
+    public static String signUp(String password) {
         String saltedPassword = SALT + password;
         String hashedPassword = generateHash(saltedPassword);
         return hashedPassword;
@@ -37,7 +35,7 @@ public class GenerateHash {
         String saltedPassword = SALT + loginPassword;
         String hashedPassword = generateHash(saltedPassword);
 
-        if (hashedPassword.equals(storedPassword)){
+        if (hashedPassword.equals(storedPassword)) {
             isAuthenticated = true;
         } else {
             isAuthenticated = false;

@@ -25,7 +25,9 @@ public class JsonLoginStorage implements LoginStorage {
     public JsonLoginStorage(Path filePath) throws IOException {
         loginFilePath = "./" + filePath.toString();
 
-        if (Files.notExists(filePath)) { createLoginInfoFile(); }
+        if (Files.notExists(filePath)) {
+            createLoginInfoFile();
+        }
 
         setAccount();
     }

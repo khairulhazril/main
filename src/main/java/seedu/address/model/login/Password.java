@@ -3,8 +3,6 @@ package seedu.address.model.login;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-import seedu.address.logic.parser.GenerateHash;
-
 /**
  * Password in User Account
  */
@@ -32,8 +30,12 @@ public class Password {
      *
      * @return true if password is valid
      */
-    public static Boolean isValidPassword(String test) { return test.matches(PASSWORD_REGEX); }
+    public static Boolean isValidPassword(String test) {
+        return test.matches(PASSWORD_REGEX);
+    }
 
     @Override
-    public String toString() { return enteredPassword; }
+    public String toString() {
+        return enteredPassword;
+    }
 }
