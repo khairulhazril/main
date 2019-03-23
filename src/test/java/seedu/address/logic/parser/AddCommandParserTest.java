@@ -33,7 +33,7 @@ import org.junit.Test;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.task.Date;
+import seedu.address.model.task.Due;
 import seedu.address.model.task.Module;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.Priority;
@@ -120,7 +120,7 @@ public class AddCommandParserTest {
 
         // invalid email
         assertParseFailure(parser, NAME_DESC_TUTORIAL + MODULE_DESC_TUTORIAL + INVALID_DATE_DESC
-                + PRIORITY_DESC_TUTORIAL + TAG_DESC_UNGRADED + TAG_DESC_GRADED, Date.MESSAGE_CONSTRAINTS);
+                + PRIORITY_DESC_TUTORIAL + TAG_DESC_UNGRADED + TAG_DESC_GRADED, Due.MESSAGE_CONSTRAINTS);
 
         // invalid address
         assertParseFailure(parser, NAME_DESC_TUTORIAL + MODULE_DESC_TUTORIAL + DATE_DESC_TUTORIAL

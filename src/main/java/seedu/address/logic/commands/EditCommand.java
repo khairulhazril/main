@@ -21,11 +21,9 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.task.Date;
+import seedu.address.model.task.*;
+import seedu.address.model.task.Due;
 import seedu.address.model.task.Module;
-import seedu.address.model.task.Name;
-import seedu.address.model.task.Priority;
-import seedu.address.model.task.Task;
 
 /**
  * Edits the details of an existing task in the task manager.
@@ -75,11 +73,11 @@ public class EditCommand extends Command {
 
         Name updatedName = editTaskDescriptor.getName().orElse(taskToEdit.getName());
         Module updatedModule = editTaskDescriptor.getModule().orElse(taskToEdit.getModule());
-        Date updatedDate = editTaskDescriptor.getDate().orElse(taskToEdit.getDate());
+        Due updatedDue = editTaskDescriptor.getDue().orElse(taskToEdit.getDue());
         Priority updatedPriority = editTaskDescriptor.getPriority().orElse(taskToEdit.getPriority());
         Set<Tag> updatedTags = editTaskDescriptor.getTags().orElse(taskToEdit.getTags());
 
-        return new Task(updatedName, updatedModule, updatedDate, updatedPriority, updatedTags);
+        return new Task(updatedName, updatedModule, updatedDue, updatedPriority, updatedTags);
     }
 
     @Override
@@ -129,7 +127,7 @@ public class EditCommand extends Command {
     public static class EditTaskDescriptor {
         private Name name;
         private Module module;
-        private Date date;
+        private Due due;
         private Priority priority;
         private Set<Tag> tags;
 
@@ -143,7 +141,7 @@ public class EditCommand extends Command {
         public EditTaskDescriptor(EditTaskDescriptor toCopy) {
             setName(toCopy.name);
             setModule(toCopy.module);
-            setDate(toCopy.date);
+            setDue(toCopy.due);
             setPriority(toCopy.priority);
             setTags(toCopy.tags);
         }
@@ -152,7 +150,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, module, date, priority, tags);
+            return CollectionUtil.isAnyNonNull(name, module, due, priority, tags);
         }
 
         public Optional<Name> getName() {
@@ -171,12 +169,12 @@ public class EditCommand extends Command {
             this.module = module;
         }
 
-        public Optional<Date> getDate() {
-            return Optional.ofNullable(date);
+        public Optional<Due> getDue() {
+            return Optional.ofNullable(due);
         }
 
-        public void setDate(Date date) {
-            this.date = date;
+        public void setDue(Due due) {
+            this.due = due;
         }
 
         public Optional<Priority> getPriority() {
@@ -221,7 +219,7 @@ public class EditCommand extends Command {
 
             return getName().equals(e.getName())
                     && getModule().equals(e.getModule())
-                    && getDate().equals(e.getDate())
+                    && getDue().equals(e.getDue())
                     && getPriority().equals(e.getPriority())
                     && getTags().equals(e.getTags());
         }

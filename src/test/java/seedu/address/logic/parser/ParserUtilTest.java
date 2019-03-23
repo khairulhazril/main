@@ -16,7 +16,7 @@ import org.junit.rules.ExpectedException;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.task.Date;
+import seedu.address.model.task.Due;
 import seedu.address.model.task.Module;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.Priority;
@@ -144,15 +144,15 @@ public class ParserUtilTest {
 
     @Test
     public void parseDate_validValueWithoutWhitespace_returnsEmail() throws Exception {
-        Date expectedDate = new Date(VALID_DATE);
-        assertEquals(expectedDate, ParserUtil.parseDate(VALID_DATE));
+        Due expectedDue = new Due(VALID_DATE);
+        assertEquals(expectedDue, ParserUtil.parseDate(VALID_DATE));
     }
 
     @Test
     public void parseDate_validValueWithWhitespace_returnsTrimmedEmail() throws Exception {
         String emailWithWhitespace = WHITESPACE + VALID_DATE + WHITESPACE;
-        Date expectedDate = new Date(VALID_DATE);
-        assertEquals(expectedDate, ParserUtil.parseDate(emailWithWhitespace));
+        Due expectedDue = new Due(VALID_DATE);
+        assertEquals(expectedDue, ParserUtil.parseDate(emailWithWhitespace));
     }
 
     @Test

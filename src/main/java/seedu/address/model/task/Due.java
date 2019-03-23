@@ -3,18 +3,22 @@ package seedu.address.model.task;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Represents a Task's date in the task manager.
  * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
  */
-public class Date {
+public class Due {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Date must be valid and should only be of the format DD-MM, where D and M are numbers.\n"
+            "Due must be valid and should only be of the format DD-MM, where D and M are numbers.\n"
                     + "DD must range from 01 to 31 and MM must range from 01 to 12";
     public static final String VALIDATION_REGEX = "[\\d]{2}" + "-" + "[\\d]{2}";
+
 
     private static final int DAY_MIN = 1;
     private static final int DAY_MAX_FEB = 28;
@@ -27,11 +31,11 @@ public class Date {
     public final String value;
 
     /**
-     * Constructs an {@code Date}.
+     * Constructs an {@code Due}.
      *
      * @param date A valid date.
      */
-    public Date(String date) {
+    public Due(String date) {
         requireNonNull(date);
         checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS);
         value = date;
@@ -65,6 +69,17 @@ public class Date {
         return false;
     }
 
+    public Date getDate() {
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        String dateAsString = toString() + "-0000";
+        Date date = null;
+        try {
+            date = dateFormat.parse(dateAsString);
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
+        return date;
+    }
 
     @Override
     public String toString() {
@@ -74,8 +89,8 @@ public class Date {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Date // instanceof handles nulls
-                && value.equals(((Date) other).value)); // state check
+                || (other instanceof Due // instanceof handles nulls
+                && value.equals(((Due) other).value)); // state check
     }
 
     @Override

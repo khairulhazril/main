@@ -40,7 +40,7 @@
 //import seedu.address.logic.commands.UndoCommand;
 //import seedu.address.model.Model;
 //import seedu.address.model.task.Priority;
-//import seedu.address.model.task.Date;
+//import seedu.address.model.task.Due;
 //import seedu.address.model.task.Name;
 //import seedu.address.model.task.Task;
 //import seedu.address.model.task.Module;
@@ -177,7 +177,7 @@
 //
 //        /* Case: invalid email -> rejected */
 //        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_TASK.getOneBased()
-//        + INVALID_DATE_DESC, Date.MESSAGE_CONSTRAINTS);
+//        + INVALID_DATE_DESC, Due.MESSAGE_CONSTRAINTS);
 //
 //        /* Case: invalid address -> rejected */
 //        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_TASK.getOneBased()
