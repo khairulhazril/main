@@ -31,8 +31,6 @@ public class NotesCard extends UiPart<Region> {
     @FXML
     private Label content;
 
-    //private Label date;
-
 
     public NotesCard(Notes notes, int displayedIndex) {
         super(FXML);
@@ -40,7 +38,6 @@ public class NotesCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         heading.setText(notes.getHeading().realHeading);
         content.setText(notes.getContent().realContent);
-        //date.setText(task.getPriority().value);
     }
 
     @Override

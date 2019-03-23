@@ -272,6 +272,15 @@ Sorts the task list lexicographically by module code.
 * `sort priority` +
 Sorts the task list in ascending order by priority code.
 
+=== Adding miscellaneous notes : `note`
+
+Adds a note to the address book.
+Format: `note h/HEADING c/CONTENT`
+
+Example:
+*`note h/Popular c/buy blue pens` +
+Add a note with heading `Popular` and content `buy blue pens`.
+
 === Listing entered commands : `history`
 
 Lists all the commands that you have entered in reverse chronological order. +
