@@ -9,6 +9,8 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.login.Password;
+import seedu.address.model.login.Username;
 import seedu.address.model.notes.Content;
 import seedu.address.model.notes.Heading;
 import seedu.address.model.tag.Tag;
@@ -23,6 +25,38 @@ import seedu.address.model.task.Priority;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+
+    /**
+     * Makes sure username is valid and in the right form
+     * @param username
+     * @return trimmed username
+     * @throws ParseException if the username is invalid
+     */
+    public static Username parseUsername(String username) throws ParseException {
+        requireNonNull(username);
+        String trimUsername = username.trim();
+
+        if (!Username.isValidUsername(trimUsername)) {
+            throw new ParseException(Username.MESSAGE_USERNAME_CONSTRAINTS);
+        }
+        return new Username(trimUsername);
+    }
+
+    /**
+     * Makes sure password is valid and in the right form
+     * @param password
+     * @return trimmed password
+     * @throws ParseException
+     */
+    public static Password parsePassword(String password) throws ParseException {
+        requireNonNull(password);
+        String trimPassword = password.trim();
+
+        if (!Password.isValidPassword(trimPassword)) {
+            throw new ParseException(Password.MESSAGE_PASSWORD_CONSTRAINTS);
+        }
+        return new Password(trimPassword);
+    }
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be

@@ -25,14 +25,14 @@ public class JsonLoginStorage implements LoginStorage {
     public JsonLoginStorage(Path filePath) throws IOException {
         loginFilePath = "./" + filePath.toString();
 
-        if (Files.notExists(filePath)) {
-            createLoginInfoFile();
-        }
+        if (Files.notExists(filePath)) { createLoginInfoFile(); }
 
         setAccount();
     }
 
-    // Adds properties into JSON files
+    /**
+     *  Adds properties to the Json file
+     */
     @Override
     public void newUser(String username, String password) throws IOException {
         JsonObject jsonObject = getJsonObject();
@@ -42,18 +42,28 @@ public class JsonLoginStorage implements LoginStorage {
         setAccount();
     }
 
-    // Sets user accounts as maps
+    /**
+     * Gets the accounts as maps
+     * @return accounts
+     */
     @Override public Map<String, String> getAccounts() {
         return accounts;
     }
 
-    // Sets up user accounts
+    /**
+     * Sets up user account
+     * @throws IOException if account cannot be created
+     */
     private void setAccount() throws IOException {
         Type type = new TypeToken<Map<String, String>>(){}.getType();
         accounts = new Gson().fromJson(new FileReader(loginFilePath), type);
     }
 
-    // Returns user accounts as JSON objects
+    /**
+     * Convert user accounts as JSON objects
+     * @return JSON objects
+     * @throws IOException if obeject cannot be retrieved
+     */
     private JsonObject getJsonObject() throws IOException {
         JsonParser parser = new JsonParser();
         JsonElement jsonElement = parser.parse(new FileReader(loginFilePath));
@@ -61,7 +71,10 @@ public class JsonLoginStorage implements LoginStorage {
         return jsonElement.getAsJsonObject();
     }
 
-    //Creates user login account with JSON file
+    /**
+     * Creates user login account with JSON file
+     * @throws IOException if cannot be written to JSON file
+     */
     private void createLoginInfoFile() throws IOException {
         JsonObject jsonObject = new JsonObject();
         writeJson(new Gson(), jsonObject);
