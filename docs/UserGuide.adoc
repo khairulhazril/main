@@ -58,7 +58,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 Creates an account for the user +
 Format: `signup u/USERNAME p/PASSWORD` +
 
-Example: Create an account with username `nicholas` and password `lee`.
+Example:
 
 * `signup u/nicholas p/lee` +
 Signed up: nicholas
@@ -76,7 +76,7 @@ The username already exists, signup again with another username.
 Logs the user into their account +
 Format: `login u/USERNAME p/PASSWORD` +
 
-Example: Login to an existing account with username `nicholas` and password `lee`.
+Example:
 
 * `login u/nicholas p/lee` +
 Logged in as nicholas.
@@ -84,7 +84,7 @@ Logged in as nicholas.
 ====
 * `You are already logged in!` +
 You are already logged in and will need logout in order to login to another account. +
-* `Please Login again!` +
+* `Please Login again! Command Format: [login u/USERNAME p/PASSWORD]` +
 You have inserted an incorrect username or password. The login command has to be executed again
 ====
 
@@ -93,7 +93,7 @@ You have inserted an incorrect username or password. The login command has to be
 Logs user out of an account +
 Format: `logout`
 
-Example: You are logged into nicholas account and would want to logout.
+Example:
 
 * `logout` +
 Logged out of nicholas.
