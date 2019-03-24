@@ -1,6 +1,6 @@
-//package seedu.address.logic.commands;
+package seedu.address.logic.commands;
 
-/*import static java.util.Objects.requireNonNull;
+import static java.util.Objects.requireNonNull;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -23,14 +23,17 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyTaskManager;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.TaskManager;
+import seedu.address.model.login.User;
+import seedu.address.model.login.Username;
+import seedu.address.model.notes.Notes;
 import seedu.address.model.task.Task;
 import seedu.address.testutil.TaskBuilder;
-*/
 
 
-//public class AddCommandTest {
 
-    /*private static final CommandHistory EMPTY_COMMAND_HISTORY = new CommandHistory();
+public class AddCommandTest {
+
+    private static final CommandHistory EMPTY_COMMAND_HISTORY = new CommandHistory();
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -93,7 +96,7 @@ import seedu.address.testutil.TaskBuilder;
     /**
      * A default model stub that have all of the methods failing.
      */
-    /*private class ModelStub implements Model {
+    private class ModelStub implements Model {
         @Override
         public ReadOnlyUserPrefs getUserPrefs() {
             throw new AssertionError("This method should not be called.");
@@ -206,12 +209,82 @@ import seedu.address.testutil.TaskBuilder;
         public void setSelectedTask(Task task) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public boolean getLoginStatus() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Username getUsername() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void logout() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void loginUser(User loginInfo) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean userExists(User user) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void newUser(User user) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasNotes(Notes notes) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addNotes(Notes notes) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Notes> getFilteredNotesList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredNotesList(Predicate<Notes> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyProperty<Notes> selectedNotesProperty() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setSelectedNotes(Notes notes) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteNotes(Notes target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Notes getSelectedNotes() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
      * A Model stub that contains a single task.
      */
-    /*private class ModelStubWithTask extends ModelStub {
+    private class ModelStubWithTask extends ModelStub {
         private final Task task;
 
         ModelStubWithTask(Task task) {
@@ -229,7 +302,7 @@ import seedu.address.testutil.TaskBuilder;
     /**
      * A Model stub that always accept the task being added.
      */
-    /*private class ModelStubAcceptingTaskAdded extends ModelStub {
+    private class ModelStubAcceptingTaskAdded extends ModelStub {
         final ArrayList<Task> tasksAdded = new ArrayList<>();
 
         @Override
@@ -254,5 +327,5 @@ import seedu.address.testutil.TaskBuilder;
             return new TaskManager();
         }
     }
-*/
-//}
+
+}
