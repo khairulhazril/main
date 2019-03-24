@@ -71,7 +71,7 @@ public class Due {
 
     public Date getDate() {
         DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-        String dateAsString = toString() + "-0000";
+        String dateAsString = toString() + "-" + Calendar.getInstance().get(Calendar.YEAR);
         Date date = null;
         try {
             date = dateFormat.parse(dateAsString);
@@ -79,6 +79,41 @@ public class Due {
             System.out.println(ex);
         }
         return date;
+    }
+
+    /**
+     * Returns the current day
+     * @return
+     */
+    public Date getCurrentDate() {
+        return new Date();
+    }
+
+    /**
+     * Finds the number of days till the task is due
+     * @param currentDay
+     * @param taskDay
+     * @return
+     */
+    public int daysDifference(Date currentDay, Date taskDay) {
+        long duration = taskDay.getTime() - currentDay.getTime();
+        return (int) (duration / (24 * 60 * 60 * 1000));
+    }
+
+    /**
+     * Returns -1 if the task is overdue, 0 if the task is due within 7 days and 1 if the task is due after 7 days
+     * @return
+     */
+    public int daysRemaining() {
+        int duration = daysDifference(getCurrentDate(), getDate());
+
+        if (duration < 0) {
+            return -1;
+        } else if (duration > 7) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 
     @Override
