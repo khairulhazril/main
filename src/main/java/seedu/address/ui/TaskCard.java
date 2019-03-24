@@ -14,6 +14,8 @@ public class TaskCard extends UiPart<Region> {
 
     private static final String FXML = "TaskListCard.fxml";
 
+    private static final String[] PRIORITYNAMES = new String[] { "High", "Medium", "Low" };
+
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
      * As a consequence, UI elements' variable names cannot be set to such keywords
@@ -45,8 +47,8 @@ public class TaskCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(task.getName().fullName);
         module.setText(task.getModule().value);
-        date.setText(task.getPriority().value);
-        priority.setText(task.getDate().value);
+        date.setText(task.getDate().value);
+        priority.setText(PRIORITYNAMES[Integer.parseInt(task.getPriority().value) - 1]);
         task.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
