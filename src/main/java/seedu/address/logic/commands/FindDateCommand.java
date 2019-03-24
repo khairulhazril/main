@@ -6,7 +6,6 @@ import seedu.address.commons.core.Messages;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.task.DueContainsKeywordsPredicate;
-import seedu.address.model.task.ModuleContainsKeywordsPredicate;
 
 /**
  * Finds and lists all tasks in task manager which has due dates containing any of the argument keywords.

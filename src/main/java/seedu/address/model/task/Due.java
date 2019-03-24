@@ -5,7 +5,6 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -82,15 +81,29 @@ public class Due {
         return date;
     }
 
+    /**
+     * Returns the current day
+     * @return
+     */
     public Date getCurrentDate() {
         return new Date();
     }
 
+    /**
+     * Finds the number of days till the task is due
+     * @param currentDay
+     * @param taskDay
+     * @return
+     */
     public int daysDifference(Date currentDay, Date taskDay) {
         long duration = taskDay.getTime() - currentDay.getTime();
         return (int) (duration / (24 * 60 * 60 * 1000));
     }
 
+    /**
+     * Returns -1 if the task is overdue, 0 if the task is due within 7 days and 1 if the task is due after 7 days
+     * @return
+     */
     public int daysRemaining() {
         int duration = daysDifference(getCurrentDate(), getDate());
 
