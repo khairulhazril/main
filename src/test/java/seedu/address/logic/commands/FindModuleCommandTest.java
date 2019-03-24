@@ -63,15 +63,15 @@ public class FindModuleCommandTest {
         assertEquals(Collections.emptyList(), model.getFilteredTaskList());
     }
 
-//    @Test
-//    public void execute_multipleKeywords_multiplePersonsFound() {
-//    String expectedMessage = String.format(MESSAGE_TASKS_LISTED_OVERVIEW, 2);
-//    DueContainsKeywordsPredicate predicate = preparePredicate("Lab Tutorial");
-//    FindDateCommand command = new FindDateCommand(predicate);
-//    expectedModel.updateFilteredTaskList(predicate);
-//    assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
-//    assertEquals(Arrays.asList(05-03), model.getFilteredTaskList());
-//    }
+    //@Test
+    //public void execute_multipleKeywords_multiplePersonsFound() {
+    //String expectedMessage = String.format(MESSAGE_TASKS_LISTED_OVERVIEW, 2);
+    //DueContainsKeywordsPredicate predicate = preparePredicate("Lab Tutorial");
+    //FindDateCommand command = new FindDateCommand(predicate);
+    //expectedModel.updateFilteredTaskList(predicate);
+    //assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
+    //assertEquals(Arrays.asList(05-03), model.getFilteredTaskList());
+    //}
 
     /**
      * Parses {@code userInput} into a {@code ModuleContainsKeywordsPredicate}.

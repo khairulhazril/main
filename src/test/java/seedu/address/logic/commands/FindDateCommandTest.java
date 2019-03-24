@@ -13,7 +13,6 @@ import java.util.Collections;
 import org.junit.Test;
 
 import seedu.address.logic.CommandHistory;
-import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindDateCommand;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -65,15 +64,15 @@ public class FindDateCommandTest {
         assertEquals(Collections.emptyList(), model.getFilteredTaskList());
     }
 
-//    @Test
-//    public void execute_multipleKeywords_multiplePersonsFound() {
-//    String expectedMessage = String.format(MESSAGE_TASKS_LISTED_OVERVIEW, 2);
-//    DueContainsKeywordsPredicate predicate = preparePredicate("Lab Tutorial");
-//    FindDateCommand command = new FindDateCommand(predicate);
-//    expectedModel.updateFilteredTaskList(predicate);
-//    assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
-//    assertEquals(Arrays.asList(05-03), model.getFilteredTaskList());
-//    }
+    //@Test
+    //public void execute_multipleKeywords_multiplePersonsFound() {
+    //String expectedMessage = String.format(MESSAGE_TASKS_LISTED_OVERVIEW, 2);
+    //DueContainsKeywordsPredicate predicate = preparePredicate("Lab Tutorial");
+    //FindDateCommand command = new FindDateCommand(predicate);
+    //expectedModel.updateFilteredTaskList(predicate);
+    //assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
+    //assertEquals(Arrays.asList(05-03), model.getFilteredTaskList());
+    //}
 
     /**
      * Parses {@code userInput} into a {@code DueContainsKeywordsPredicate}.

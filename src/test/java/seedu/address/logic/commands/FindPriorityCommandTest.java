@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_TASKS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalTasks.getTypicalTaskManager;
@@ -61,15 +63,15 @@ public class FindPriorityCommandTest {
         assertEquals(Collections.emptyList(), model.getFilteredTaskList());
     }
 
-//    @Test
-//    public void execute_multipleKeywords_multiplePersonsFound() {
-//    String expectedMessage = String.format(MESSAGE_TASKS_LISTED_OVERVIEW, 2);
-//    DueContainsKeywordsPredicate predicate = preparePredicate("Lab Tutorial");
-//    FindDateCommand command = new FindDateCommand(predicate);
-//    expectedModel.updateFilteredTaskList(predicate);
-//    assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
-//    assertEquals(Arrays.asList(05-03), model.getFilteredTaskList());
-//    }
+    //@Test
+    //public void execute_multipleKeywords_multiplePersonsFound() {
+    //String expectedMessage = String.format(MESSAGE_TASKS_LISTED_OVERVIEW, 2);
+    //DueContainsKeywordsPredicate predicate = preparePredicate("Lab Tutorial");
+    //FindDateCommand command = new FindDateCommand(predicate);
+    //expectedModel.updateFilteredTaskList(predicate);
+    //assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
+    //assertEquals(Arrays.asList(05-03), model.getFilteredTaskList());
+    //}
 
     /**
      * Parses {@code userInput} into a {@code ModuleContainsKeywordsPredicate}.
