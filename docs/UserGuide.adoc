@@ -110,6 +110,7 @@ Format: `help`
 
 === Adding a task: `add`
 
+
 Adds a task to the Task Manager. +
 Format: `add n/NAME m/MODULE d/DATE p/PRIORITY [t/TAG]...`
 
