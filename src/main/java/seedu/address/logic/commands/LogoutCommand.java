@@ -14,17 +14,18 @@ public class LogoutCommand extends Command {
 
     public static final String COMMAND_WORD = "logout";
     public static final String MESSAGE_SUCCESS = "Logged out of %1$s";
-    public static final String MESSAGE_LOGIN = "Please Login!";
+    public static final String MESSAGE_LOGIN = "You have already logged out. Please Login!";
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-
+        // User is already logged out
         if (!model.getLoginStatus()) {
             throw new CommandException(MESSAGE_LOGIN);
         }
-
+        // Get username for printout statement
         Username loginUsername = model.getUsername();
+        // Clear user
         model.logout();
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, loginUsername.toString()));

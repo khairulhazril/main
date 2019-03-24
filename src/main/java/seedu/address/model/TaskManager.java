@@ -182,5 +182,26 @@ public class TaskManager implements ReadOnlyTaskManager {
         return unotes.asUnmodifiableObservableList();
     }
 
+    /**
+     * Replaces the given task {@code target} in the list with {@code editedTask}.
+     * {@code target} must exist in the task manager.
+     * The task identity of {@code editedTask} must not be the same as another existing task in the task manager.
+     */
+    public void setNotes(Notes target, Notes editedNotes) {
+        requireNonNull(editedNotes);
+
+        unotes.setNotes(target, editedNotes);
+        indicateModified();
+    }
+
+    /**
+     * Removes {@code key} from this {@code TaskManager}.
+     * {@code key} must exist in the task manager.
+     */
+    public void removeNotes(Notes key) {
+        unotes.remove(key);
+        indicateModified();
+    }
+
 
 }

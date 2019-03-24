@@ -3,18 +3,22 @@ package seedu.address.model.task;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Represents a Task's date in the task manager.
  * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
  */
-public class Date {
+public class Due {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Date must be valid and should only be of the format DD-MM, where D and M are numbers.\n"
+            "Due must be valid and should only be of the format DD-MM, where D and M are numbers.\n"
                     + "DD must range from 01 to 31 and MM must range from 01 to 12";
     public static final String VALIDATION_REGEX = "[\\d]{2}" + "-" + "[\\d]{2}";
+
 
     private static final int DAY_MIN = 1;
     private static final int DAY_MAX_FEB = 28;
@@ -27,11 +31,11 @@ public class Date {
     public final String value;
 
     /**
-     * Constructs an {@code Date}.
+     * Constructs an {@code Due}.
      *
      * @param date A valid date.
      */
-    public Date(String date) {
+    public Due(String date) {
         requireNonNull(date);
         checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS);
         value = date;
@@ -65,6 +69,52 @@ public class Date {
         return false;
     }
 
+    public Date getDate() {
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        String dateAsString = toString() + "-" + Calendar.getInstance().get(Calendar.YEAR);
+        Date date = null;
+        try {
+            date = dateFormat.parse(dateAsString);
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
+        return date;
+    }
+
+    /**
+     * Returns the current day
+     * @return
+     */
+    public Date getCurrentDate() {
+        return new Date();
+    }
+
+    /**
+     * Finds the number of days till the task is due
+     * @param currentDay
+     * @param taskDay
+     * @return
+     */
+    public int daysDifference(Date currentDay, Date taskDay) {
+        long duration = taskDay.getTime() - currentDay.getTime();
+        return (int) (duration / (24 * 60 * 60 * 1000));
+    }
+
+    /**
+     * Returns -1 if the task is overdue, 0 if the task is due within 7 days and 1 if the task is due after 7 days
+     * @return
+     */
+    public int daysRemaining() {
+        int duration = daysDifference(getCurrentDate(), getDate());
+
+        if (duration < 0) {
+            return -1;
+        } else if (duration > 7) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
 
     @Override
     public String toString() {
@@ -74,8 +124,8 @@ public class Date {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Date // instanceof handles nulls
-                && value.equals(((Date) other).value)); // state check
+                || (other instanceof Due // instanceof handles nulls
+                && value.equals(((Due) other).value)); // state check
     }
 
     @Override

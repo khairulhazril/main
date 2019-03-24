@@ -1,10 +1,17 @@
 package seedu.address.model;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.util.Map;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.parser.GenerateHash;
 import seedu.address.model.login.Password;
 import seedu.address.model.login.User;
 import seedu.address.model.login.Username;
@@ -18,10 +25,13 @@ public class LoginEvent {
     private JsonLoginStorage loginStorage;
     private User user;
     private boolean loginStatus;
+    private Logger logger = LogsCenter.getLogger(LoginEvent.class);
 
-    // Constructor to start user with temp username and password
+    /**
+     * Constructor to start user with stub username and password
+     */
+
     public LoginEvent() {
-
         final Path loginInfoPath = Paths.get("login.json");
         final Username username = new Username("test");
         final Password password = new Password("test");
@@ -38,16 +48,22 @@ public class LoginEvent {
     }
 
     /**
-     * Creates new user in JSON file
+     * Creates a new user in JSON file
      * @param user
      */
     public void newUser(User user) {
         String loginUsername = user.getUsername().toString();
         String loginPassword = user.getPassword().toString();
+
         try {
-            loginStorage.newUser(loginUsername, loginPassword);
+            String hashedPassword = GenerateHash.signUp(loginPassword);
+            loginStorage.newUser(loginUsername, hashedPassword);
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+            logger.warning("Password cannot be hashed");
+        } catch (FileNotFoundException e) {
+            logger.warning("login.json cannot be found in file path" + StringUtil.getDetails(e));
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.warning("User storage is unable to read or write to Json file" + StringUtil.getDetails(e));
         }
     }
 
@@ -57,13 +73,16 @@ public class LoginEvent {
      */
     public void loginUser(User user) {
         String loginUsername = user.getUsername().toString();
+        String loginPassword = user.getPassword().toString();
         Map<String, String> accounts = loginStorage.getAccounts();
 
         if (accounts.containsKey(loginUsername)) {
-            boolean passwordValid = false;
-            String password = accounts.get(loginUsername);
+            boolean passwordAuthenticate;
+            String storedPassword = accounts.get(loginUsername);
 
-            if (passwordValid) {
+            passwordAuthenticate = GenerateHash.login(loginPassword, storedPassword);
+
+            if (passwordAuthenticate) {
                 this.user = user;
                 loginStatus = true;
             }

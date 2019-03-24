@@ -18,20 +18,24 @@ By: `M11-02`      Since: `Feb 2019`      Licence: `MIT`
 
 == Introduction
 
-Task Manager is for those who *prefer to use a desktop app for managing tasks*. More importantly, Task Manager is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). Do you want to organise and prioritise your tasks and never miss a single deadline again? Then this app is perfect for you!
+Task Manager is for those who *prefer to use a desktop app for managing tasks*.
+More importantly, Task Manager is *optimized for those who prefer to work with a keyboard rather than a mouse*.
+Do you want to organise and prioritise your tasks and never miss a single deadline again? Then this app is perfect for you!
 
 == Quick Start
+Here are the steps to get you started with the Task Manager.
 
 .  Ensure you have Java version `9` or later installed in your Computer.
 .  Download the latest `TaskManager.jar` link:{repoURL}/releases[here].
 .  Copy the file to the folder you want to use as the home folder for your Task Manager.
 .  Double-click the file to start the app. The GUI should appear in a few seconds. It should look like this:
 +
-image::Ui.png[width="1000"]
+image::TaskManager.png[width="1000"]
 +
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Try the following example commands to get a feel for the app:
+
 
 * *`list`* : shows a list of all tasks in the Task Manager
 * *`add n/Assignment m/CG2027 d/12-02 p/1`* : adds a task named `Assignment` of module `CG2023`, with submission date `12-02` and priority level `1` to the Task Manager.
@@ -59,8 +63,15 @@ Format: `signup u/USERNAME p/PASSWORD` +
 
 Example:
 
-* `signup u/nicholas p/abcdefg` +
-Creates account with the username `nicholas` with password `abcdefg`.
+* `signup u/nicholas p/lee` +
+Signed up: nicholas
+
+====
+* `Logged in: nicholas` +
+You are already logged in and will need to logout in order to signup for a new account. +
+* `Please try another username` +
+The username already exists, signup again with another username.
+====
 
 
 === Logging into an account : `login`
@@ -70,8 +81,15 @@ Format: `login u/USERNAME p/PASSWORD` +
 
 Example:
 
-* `login u/nicholas p/abcdefg` +
-Logs in user nicholas.
+* `login u/nicholas p/lee` +
+Logged in as nicholas.
+
+====
+* `You are already logged in!` +
+You are already logged in and will need logout in order to login to another account. +
+* `Please Login again! Command Format: [login u/USERNAME p/PASSWORD]` +
+You have inserted an incorrect username or password. The login command has to be executed again
+====
 
 === Logging out of an account : `logout`
 
@@ -81,7 +99,12 @@ Format: `logout`
 Example:
 
 * `logout` +
-Logs out the current user.
+Logged out of nicholas.
+
+====
+* `Please Login!` +
+You did not login into any account.
+====
 
 === Viewing help : `help`
 
@@ -90,7 +113,8 @@ Format: `help`
 
 === Adding a task: `add`
 
-Adds a task to the task manager +
+
+Adds a task to the Task Manager. +
 Format: `add n/NAME m/MODULE d/DATE p/PRIORITY [t/TAG]...`
 
 [TIP]
@@ -167,7 +191,7 @@ Returns all tasks containing the module code `CS2113T`.
 * `find CS2113T CS2101` +
 Returns all tasks containing the module code `CS2113T` or `CS2101`.
 
-=== Locating tasks by date: `finddate` [Coming in v1.3]
+=== Locating tasks by date: `finddate`
 
 Finds tasks with dates containing any of the given keywords. +
 Format: `finddate KEYWORD [MORE_KEYWORDS]`
@@ -250,10 +274,21 @@ Format: `sort PARAMETER`
 ****
 
 Examples:
+
 * `sort module` +
 Sorts the task list lexicographically by module code.
 * `sort priority` +
 Sorts the task list in descending order by priority.
+
+=== Adding miscellaneous notes : `note`
+
+Adds a note to the address book.
+Format: `note h/HEADING c/CONTENT`
+
+Example:
+
+* `note h/Popular c/buy blue pens` +
+Add a note with heading `Popular` and content `buy blue pens`.
 
 === Listing entered commands : `history`
 
@@ -358,13 +393,13 @@ e.g. `add n/Tutorial 3 m/CG2023 d/21-02 p/3 t/urgent`
 e.g. `delete 3`
 * *Edit* : `edit INDEX [n/NAME] [m/MODULE] [d/DATE] [p/PRIORITY] [t/TAG]...` +
 e.g. `edit 2 n/CG2027 Hw d/23-04`
-* *Finddate* : `finddate KEYWORD [MORE_KEYWORDS]` +
+* *Find Date* : `finddate KEYWORD [MORE_KEYWORDS]` +
 e.g. `finddate 21-03`
-* *Findmodule* : `findmodule KEYWROD [MORE_KEYWORDS]` +
+* *Find Module* : `findmodule KEYWROD [MORE_KEYWORDS]` +
 e.g. `findmodule CS2113T`
-* *Findname* : `findname KEYWORD [MORE_KEYWORDS]` +
+* *Find Name* : `findname KEYWORD [MORE_KEYWORDS]` +
 e.g. `findname Project`
-* *Findpriority* : `findpriority KEYWORD [MORE_KEYWORDS]` +
+* *Find Priority* : `findpriority KEYWORD [MORE_KEYWORDS]` +
 e.g. `findpriority 1`
 * *Help* : `help`
 * *History* : `history`

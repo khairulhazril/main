@@ -18,7 +18,7 @@ public class Task {
     // Identity fields
     private final Name name;
     private final Module module;
-    private final Date date;
+    private final Due due;
 
     // Data fields
     private final Priority priority;
@@ -27,11 +27,11 @@ public class Task {
     /**
      * Every field must be present and not null.
      */
-    public Task(Name name, Module module, Date date, Priority priority, Set<Tag> tags) {
-        requireAllNonNull(name, module, date, priority, tags);
+    public Task(Name name, Module module, Due due, Priority priority, Set<Tag> tags) {
+        requireAllNonNull(name, module, due, priority, tags);
         this.name = name;
         this.module = module;
-        this.date = date;
+        this.due = due;
         this.priority = priority;
         this.tags.addAll(tags);
     }
@@ -44,8 +44,8 @@ public class Task {
         return module;
     }
 
-    public Date getDate() {
-        return date;
+    public Due getDue() {
+        return due;
     }
 
     public Priority getPriority() {
@@ -53,11 +53,15 @@ public class Task {
     }
 
     public String getMonth() {
-        return date.toString().substring(3, 5);
+        return due.toString().substring(3, 5);
     }
 
     public String getDay() {
-        return date.toString().substring(0, 2);
+        return due.toString().substring(0, 2);
+    }
+
+    public int getDaysRemaining() {
+        return due.daysRemaining();
     }
 
     /**
@@ -79,7 +83,7 @@ public class Task {
 
         return otherTask != null
                 && otherTask.getName().equals(getName())
-                && (otherTask.getModule().equals(getModule()) || otherTask.getDate().equals(getDate()));
+                && (otherTask.getModule().equals(getModule()) || otherTask.getDue().equals(getDue()));
     }
 
     /**
@@ -99,7 +103,7 @@ public class Task {
         Task otherTask = (Task) other;
         return otherTask.getName().equals(getName())
                 && otherTask.getModule().equals(getModule())
-                && otherTask.getDate().equals(getDate())
+                && otherTask.getDue().equals(getDue())
                 && otherTask.getPriority().equals(getPriority())
                 && otherTask.getTags().equals(getTags());
     }
@@ -107,7 +111,7 @@ public class Task {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, module, date, priority, tags);
+        return Objects.hash(name, module, due, priority, tags);
     }
 
     @Override
@@ -116,8 +120,8 @@ public class Task {
         builder.append(getName())
                 .append(" Module: ")
                 .append(getModule())
-                .append(" Date: ")
-                .append(getDate())
+                .append(" Due: ")
+                .append(getDue())
                 .append(" Priority: ")
                 .append(getPriority())
                 .append(" Tags: ");

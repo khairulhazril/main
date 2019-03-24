@@ -18,6 +18,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.login.User;
 import seedu.address.model.login.Username;
 import seedu.address.model.notes.Notes;
+import seedu.address.model.notes.exceptions.NotesNotFoundException;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.exceptions.TaskNotFoundException;
 
@@ -33,6 +34,7 @@ public class ModelManager implements Model {
     private final FilteredList<Notes> filteredNotes;
     private final SimpleObjectProperty<Task> selectedTask = new SimpleObjectProperty<>();
     private final LoginEvent loginEvent;
+    private final SimpleObjectProperty<Notes> selectedNotes = new SimpleObjectProperty<>();
 
     /**
      * Initializes a ModelManager with the given taskManager and userPrefs.
@@ -49,6 +51,7 @@ public class ModelManager implements Model {
         filteredTasks.addListener(this::ensureSelectedTaskIsValid);
         filteredNotes = new FilteredList<>(versionedTaskManager.getNotesList());
         loginEvent = new LoginEvent();
+        filteredNotes.addListener(this::ensureSelectedNotesIsValid);
     }
 
     public ModelManager() {
@@ -179,6 +182,12 @@ public class ModelManager implements Model {
     public void addNotes(Notes notes) {
         versionedTaskManager.addNotes(notes);
         updateFilteredNotesList(PREDICATE_SHOW_ALL_NOTES);
+
+    }
+
+    @Override
+    public void deleteNotes(Notes notes) {
+        versionedTaskManager.removeNotes(notes);
     }
 
     //=========== Filtered Task List Accessors =============================================================
@@ -311,5 +320,56 @@ public class ModelManager implements Model {
                 && filteredTasks.equals(other.filteredTasks)
                 && Objects.equals(selectedTask.get(), other.selectedTask.get());
     }
+
+    //============ Selected Notes=============================================
+
+    @Override
+    public ReadOnlyProperty<Notes> selectedNotesProperty() {
+        return selectedNotes;
+    }
+
+    @Override
+    public Notes getSelectedNotes() {
+        return selectedNotes.getValue();
+    }
+
+    @Override
+    public void setSelectedNotes(Notes notes) {
+        if (notes != null && !filteredNotes.contains(notes)) {
+            throw new NotesNotFoundException();
+        }
+        selectedNotes.setValue(notes);
+    }
+
+    /**
+     * Ensures {@code selectedTask} is a valid task in {@code filteredTasks}.
+     */
+    private void ensureSelectedNotesIsValid(ListChangeListener.Change<? extends Notes> change) {
+        while (change.next()) {
+            if (selectedNotes.getValue() == null) {
+                // null is always a valid selected task, so we do not need to check that it is valid anymore.
+                return;
+            }
+
+            boolean wasSelectedNotesReplaced = change.wasReplaced() && change.getAddedSize() == change.getRemovedSize()
+                    && change.getRemoved().contains(selectedNotes.getValue());
+            if (wasSelectedNotesReplaced) {
+                // Update selectedTask to its new value.
+                int index = change.getRemoved().indexOf(selectedNotes.getValue());
+                selectedNotes.setValue(change.getAddedSubList().get(index));
+                continue;
+            }
+
+            boolean wasSelectedNotesRemoved = change.getRemoved().stream()
+                    .anyMatch(removedNotes -> selectedNotes.getValue().isSameNotes(removedNotes));
+            if (wasSelectedNotesRemoved) {
+                // Select the task that came before it in the list,
+                // or clear the selection if there is no such task.
+                selectedNotes.setValue(change.getFrom() > 0 ? change.getList().get(change.getFrom() - 1) : null);
+            }
+        }
+    }
+
+
 
 }

@@ -113,4 +113,14 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Notes> getFilteredNotesList() {
         return model.getFilteredNotesList(); }
+
+    @Override
+    public void setSelectedNotes(Notes notes) {
+        model.setSelectedNotes(notes); }
+
+    @Override
+    public ReadOnlyProperty<Notes> selectedNotesProperty() {
+        return model.selectedNotesProperty(); }
+
 }
+

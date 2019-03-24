@@ -12,7 +12,7 @@ import guitests.guihandles.PersonListPanelHandle;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.task.Date;
+import seedu.address.model.task.Due;
 import seedu.address.model.task.Module;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.Priority;
@@ -77,9 +77,9 @@ public class TaskListPanelTest extends GuiUnitTest {
         for (int i = 0; i < personCount; i++) {
             Name name = new Name(i + "a");
             Module module = new Module("CS2113");
-            Date date = new Date("01-03");
+            Due due = new Due("01-03");
             Priority priority = new Priority("1");
-            Task task = new Task(name, module, date, priority, Collections.emptySet());
+            Task task = new Task(name, module, due, priority, Collections.emptySet());
             backingList.add(task);
         }
         return backingList;
