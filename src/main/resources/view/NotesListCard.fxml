@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
 <HBox xmlns:fx="http://javafx.com/fxml/1" id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8">
     <GridPane HBox.hgrow="ALWAYS">
         <columnConstraints>
@@ -19,12 +22,9 @@
                         <Region fx:constant="USE_PREF_SIZE"/>
                     </minWidth>
                 </Label>
-                <Label fx:id="name" text="\$first" styleClass="cell_big_label"/>
+                <Label fx:id="heading" text="\$first" styleClass="cell_big_label"/>
             </HBox>
-            <FlowPane fx:id="tags"/>
-            <Label fx:id="module" styleClass="cell_small_label" text="\$module"/>
-            <Label fx:id="priority" styleClass="cell_small_label" text="\$priority"/>
-            <Label fx:id="due" styleClass="cell_small_label" text="\$due"/>
+            <Label fx:id="content" styleClass="cell_small_label" text="\$content"/>
         </VBox>
     </GridPane>
 </HBox>

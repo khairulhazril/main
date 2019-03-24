@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.task.Date;
+import seedu.address.model.task.Due;
 import seedu.address.model.task.Module;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.Priority;
@@ -52,7 +52,7 @@ class JsonAdaptedTask {
     public JsonAdaptedTask(Task source) {
         name = source.getName().fullName;
         module = source.getModule().value;
-        date = source.getDate().value;
+        date = source.getDue().value;
         priority = source.getPriority().value;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
@@ -87,12 +87,12 @@ class JsonAdaptedTask {
         final Module modelModule = new Module(module);
 
         if (date == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Date.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Due.class.getSimpleName()));
         }
-        if (!Date.isValidDate(date)) {
-            throw new IllegalValueException(Date.MESSAGE_CONSTRAINTS);
+        if (!Due.isValidDate(date)) {
+            throw new IllegalValueException(Due.MESSAGE_CONSTRAINTS);
         }
-        final Date modelDate = new Date(date);
+        final Due modelDue = new Due(date);
 
         if (priority == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
@@ -104,7 +104,7 @@ class JsonAdaptedTask {
         final Priority modelPriority = new Priority(priority);
 
         final Set<Tag> modelTags = new HashSet<>(taskTags);
-        return new Task(modelName, modelModule, modelDate, modelPriority, modelTags);
+        return new Task(modelName, modelModule, modelDue, modelPriority, modelTags);
     }
 
 }
