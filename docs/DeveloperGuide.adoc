@@ -322,17 +322,18 @@ The login mechanism is facilitated by `TaskManager`, `SignupCommand`, `LoginComm
 
 Given below is an example usage scenario.
 
-Step 1. The user keys in username and password, the `LoginCommandParser` or `SignupCommandParser` will trim the command to get the string of username and password.
+Step 1. The user signs up and keys in username and password, using the command `signup u/USERNAME p/PASSWORD`. The `TaskManagerParser` recognises the command as a signup and calls `SignupCommand`.
 
-Step 2. If the attribute is valid, username and password is stored in a User class, it will then pass the attribute to `loginEvent`.
+Step 2. In SignupCommand, `newUser(user)` will be called in `ModelManager`. This method is also connected to `LoginEvent`.
 
-Step 3. `loginEvent` will then call `JsonLoginStorage` with attributes to read and write Json files or set Json properties.
+Step 2. `LoginEvent` will use the username to check if there is such account. If there is, `userExists(user)` will be triggered in `ModelManager`.
+If there is no such account, the username and hashed password will be stored in a User class, it will then pass the User object to `JsonLoginStorage`.
 
-Step 4. It will then return to `loginEvent` where it will return the user account details.
+Step 3. `JsonLoginStorage` retrieves the User object to read and write Json files with the correct Json properties.
 
-Step 5. Then we convert the relevant attributes of the user information to string to compare. This is used in login and signup. Here, `loginEvent` is able to check if the user exists, if user information matches or logs out of account.
+Step 4. It will then return to `loginEvent` then to `SignupCommand` and returns the user a successful signup output.
 
-Step 6. After returning the user information, the user is then logged into or logged out of Task Manager.
+image::SignUpSequenceDiagram.png[width="900"]
 
 ==== Design Considerations
 
