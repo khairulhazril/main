@@ -29,13 +29,13 @@ Here are the steps to get you started with the Task Manager.
 .  Download the latest `TaskManager.jar` link:{repoURL}/releases[here].
 .  Copy the file to the folder you want to use as the home folder for your Task Manager.
 .  Double-click the file to start the app. The GUI should appear in a few seconds. It should look like this:
-
 +
 image::TaskManager.png[width="1000"]
 +
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
-.  Try the following commands to get a feel of the app:
+.  Try the following example commands to get a feel for the app:
+
 
 * *`list`* : shows a list of all tasks in the Task Manager
 * *`add n/Assignment m/CG2027 d/12-02 p/1`* : adds a task named `Assignment` of module `CG2023`, with submission date `12-02` and priority level `1` to the Task Manager.
@@ -372,12 +372,6 @@ Format: `exit`
 
 Task Manager data is saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
-
-=== Monthly calendar view
-
-Tasks displayed in the task list are automatically displayed on a calendar display of the current month. If the task list is modified or filtered using `find`, the calendar will update accordingly.
-
-image::CalendarDemo.png[width="1000"]
 
 // tag::dataencryption[]
 === Encrypting data files `[coming in v2.0]`

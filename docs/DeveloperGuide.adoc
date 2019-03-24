@@ -13,9 +13,9 @@ ifdef::env-github[]
 :warning-caption: :warning:
 :experimental:
 endif::[]
-:repoURL: https://github.com/se-edu/addressbook-level4/tree/master
+:repoURL: https://github.com/CS2113-AY1819S2-M11-2/main/
 
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+By: `M11-02`      Since: `Feb 2019`      Licence: `MIT`
 
 == Setting up
 
@@ -450,9 +450,9 @@ image::CalendarBuildSequenceDiagram.png[width="698"]
 ** Pros: No need to navigate between different classes.
 ** Cons: The class will be very long and complex, possibly making the code difficult to read and understand for future maintainers. Violates the principles of Single Responsibility Principle and Separation of Concerns.
 
-===== Aspect: How to update the calendar in real time (Coming in v1.3)
+===== Aspect: How the calendar is updated in real time
 
-* **Alternative 1:** Replace the old calendar with a newly built calendar when task list changes.
+* **Alternative 1 (current choice):** Replace the old calendar with a newly built calendar when task list changes.
 ** Pros: Easy for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.
 ** Cons: Potential performance issues. If the list of tasks is very large, rebuilding the Calendar at every step may result in degraded performance manifested as a loss of responsiveness to user commands.
 * **Alternative 2:** Implement a separate class to handle the contents of each Calendar cell.
