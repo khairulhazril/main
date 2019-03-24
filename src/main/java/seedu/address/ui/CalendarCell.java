@@ -1,7 +1,6 @@
 package seedu.address.ui;
 
 import java.util.ArrayList;
-import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -20,7 +19,6 @@ import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
-import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.task.Task;
 
 /**
@@ -36,8 +34,6 @@ public class CalendarCell extends UiPart<Region> {
             CornerRadii.EMPTY, BorderStroke.THIN));
 
     private static final int CELL_WIDTH = 105;
-
-    private final Logger logger = LogsCenter.getLogger(CalendarCell.class);
 
     private String date;
     private String month;
@@ -125,12 +121,9 @@ public class CalendarCell extends UiPart<Region> {
      * Adds tasks to the calendar cell, tasks sorted by priority in descending order
      */
     private void addTasksToCell() {
-        cellTasks.sort((o1, o2) -> { //sort tasks by priority
-            return o1.compareTo(o2);
-        });
-        for (int i = 0; i < cellTasks.size(); i++) {
-            CalendarCellTask newTask = cellTasks.get(i);
-
+        //sort tasks by priority
+        cellTasks.sort(CalendarCellTask::compareTo);
+        for (CalendarCellTask newTask : cellTasks) {
             cellContent.getChildren().add(newTask);
 
             if (selectedTask != null && newTask.getText().equals(selectedTask.getName().toString())) {

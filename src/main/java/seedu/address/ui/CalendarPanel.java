@@ -3,7 +3,6 @@ package seedu.address.ui;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.util.Objects;
-import java.util.logging.Logger;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -29,7 +28,6 @@ import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
-import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.model.task.Task;
 
@@ -58,8 +56,6 @@ public class CalendarPanel extends UiPart<Region> {
     //get current year and month and date as set by system clock
     private static final YearMonth yearMonth = YearMonth.now();
     private static LocalDate calendarDate = LocalDate.of(yearMonth.getYear(), yearMonth.getMonthValue(), 1);
-
-    private final Logger logger = LogsCenter.getLogger(CalendarPanel.class);
 
     private Task selectedTask;
 
