@@ -14,8 +14,8 @@ endif::[]
 
 == Welcome to Task Manager.
 * A sophisticated event planner for the tech-savvy NUS student.
-* A Command Line Interface (CLI) for quick input, and a pretty GUI for easy-to-read output.
-* Inbuilt calendar and event viewer.
+* A Command Line Interface (CLI) for quick input, and a pretty Graphical User Interface (GUI) for easy-to-read output.
+* Inbuilt calendar, task list and note-taking.
 * Fast and responsive.
 
 == Site Map
