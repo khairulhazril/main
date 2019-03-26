@@ -92,6 +92,9 @@ public class TaskManagerParser {
         case FindPriorityCommand.COMMAND_WORD:
             return new FindPriorityCommandParser().parse(arguments);
 
+//        case FindUpcomingCommand.COMMAND_WORD:
+//            return new FindDateCommandParser().parse("01-01");
+
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
 

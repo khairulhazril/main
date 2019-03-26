@@ -37,8 +37,8 @@ public class TaskCard extends UiPart<Region> {
     private Label due;
     @FXML
     private Label priority;
-    //@FXML
-    //private Label daysLeft;
+    @FXML
+    private Label daysLeft;
     @FXML
     private FlowPane tags;
 
@@ -50,12 +50,12 @@ public class TaskCard extends UiPart<Region> {
         module.setText(task.getModule().value);
         due.setText(task.getDue().value);
         priority.setText(PRIORITYNAMES[Integer.parseInt(task.getPriority().value) - 1]);
-        //daysLeft.setText(Integer.toString(task.getDaysRemaining()));
+        //daysLeft.setText("Days Left: " + Integer.toString(task.getDaysRemaining()));
         task.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
 
         int daysRemaining = task.getDaysRemaining();
 
-        if (daysRemaining == -1) {
+        if (daysRemaining < 0) {
             id.setStyle("-fx-text-fill: red");
             name.setStyle("-fx-text-fill: red");
             module.setStyle("-fx-text-fill: red");
@@ -63,7 +63,7 @@ public class TaskCard extends UiPart<Region> {
             priority.setStyle("-fx-text-fill: red");
             //daysLeft.setStyle("-fx-text-fill: red");
 
-        } else if (daysRemaining == 0) {
+        } else if (daysRemaining <= 7) {
             id.setStyle("-fx-text-fill: lightgreen");
             name.setStyle("-fx-text-fill: lightgreen");
             module.setStyle("-fx-text-fill: lightgreen");
