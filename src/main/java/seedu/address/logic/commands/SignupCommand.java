@@ -22,7 +22,8 @@ public class SignupCommand extends Command {
 
     public static final String MESSAGE_LOGGED = "Logged in: %1$s!";
     public static final String MESSAGE_SUCCESS = "Signed up: %1$s";
-    public static final String MESSAGE_EXISTS = "Please try another username";
+    public static final String MESSAGE_USER_EXISTS = "Please try another username!";
+    public static final String MESSAGE_ACCOUNT_EXISTS = "Account has already been created!";
 
     private final User signingUp;
 
@@ -46,7 +47,11 @@ public class SignupCommand extends Command {
         }
         // The account is already exist
         if (model.userExists(signingUp)) {
-            throw new CommandException(MESSAGE_EXISTS);
+            throw new CommandException(MESSAGE_USER_EXISTS);
+        }
+
+        if (model.accountExists()) {
+            throw new CommandException(MESSAGE_ACCOUNT_EXISTS);
         }
         // Signs up the user with a new account
         model.newUser(signingUp);

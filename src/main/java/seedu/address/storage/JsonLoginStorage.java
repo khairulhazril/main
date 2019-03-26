@@ -1,5 +1,9 @@
 package seedu.address.storage;
 
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.exceptions.CommandException;
+
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -18,6 +22,9 @@ import com.google.gson.JsonParser;
  * To access the LoginEvent stored as a JSON file
  */
 public class JsonLoginStorage implements LoginStorage {
+
+    public static final String MESSAGE_DELETE_SUCCESS = "Account has been deleted!";
+    public static final String MESSAGE_DELETE_FAILURE = "There has been an error deleting account.";
 
     private String loginFilePath;
     private Map<String, String> accounts;
@@ -93,5 +100,19 @@ public class JsonLoginStorage implements LoginStorage {
         FileWriter file = new FileWriter(loginFilePath);
         file.write(json);
         file.flush();
+    }
+
+    /**
+     * Deletes the JSON file with accounts in it
+     * @throws IOException
+     */
+    public void deleteAccount() throws CommandException {
+        File file = new File(loginFilePath);
+
+        if (file.delete()) {
+            throw new CommandException(MESSAGE_DELETE_SUCCESS);
+        } else {
+            throw new CommandException(MESSAGE_DELETE_FAILURE);
+        }
     }
 }
