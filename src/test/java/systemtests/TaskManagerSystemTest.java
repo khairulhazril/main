@@ -25,7 +25,7 @@
 //import guitests.guihandles.CommandBoxHandle;
 //import guitests.guihandles.MainMenuHandle;
 //import guitests.guihandles.MainWindowHandle;
-//import guitests.guihandles.PersonListPanelHandle;
+//import guitests.guihandles.TaskListPanelHandle;
 //import guitests.guihandles.ResultDisplayHandle;
 //import guitests.guihandles.StatusBarFooterHandle;
 //import seedu.address.TestApp;
@@ -98,7 +98,7 @@
 //        return mainWindowHandle.getCommandBox();
 //    }
 //
-//    public PersonListPanelHandle getTaskListPanel() {
+//    public TaskListPanelHandle getTaskListPanel() {
 //        return mainWindowHandle.getTaskListPanel();
 //    }
 //
@@ -179,7 +179,7 @@
 //    }
 //
 //    /**
-//     * Calls {@code BrowserPanelHandle}, {@code PersonListPanelHandle} and {@code StatusBarFooterHandle} to remember
+//     * Calls {@code BrowserPanelHandle}, {@code TaskListPanelHandle} and {@code StatusBarFooterHandle} to remember
 //     * their current state.
 //     */
 //    private void rememberStates() {
@@ -204,7 +204,7 @@
 //     * Asserts that the browser's url is changed to display the details of the task in the task list panel at
 //     * {@code expectedSelectedCardIndex}, and only the card at {@code expectedSelectedCardIndex} is selected.
 //     * @see BrowserPanelHandle#isUrlChanged()
-//     * @see PersonListPanelHandle#isSelectedPersonCardChanged()
+//     * @see TaskListPanelHandle#isSelectedPersonCardChanged()
 //     */
 //    protected void assertSelectedCardChanged(Index expectedSelectedCardIndex) {
 //        getTaskListPanel().navigateToCard(getTaskListPanel().getSelectedCardIndex());
@@ -223,7 +223,7 @@
 //    /**
 //     * Asserts that the browser's url and the selected card in the task list panel remain unchanged.
 //     * @see BrowserPanelHandle#isUrlChanged()
-//     * @see PersonListPanelHandle#isSelectedPersonCardChanged()
+//     * @see TaskListPanelHandle#isSelectedPersonCardChanged()
 //     */
 //    protected void assertSelectedCardUnchanged() {
 //        assertFalse(getBrowserPanel().isUrlChanged());
