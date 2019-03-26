@@ -9,13 +9,13 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Map;
 
-import seedu.address.logic.commands.exceptions.CommandException;
-
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+
+import seedu.address.logic.commands.exceptions.CommandException;
 
 /**
  * To access the LoginEvent stored as a JSON file

@@ -66,7 +66,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean getAdminStatus() { return loginEvent.getAdminStatus(); }
+    public boolean getAdminStatus() {
+        return loginEvent.getAdminStatus();
+    }
 
     @Override
     public boolean userExists(User user) {
