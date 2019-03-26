@@ -25,6 +25,7 @@
             <Label fx:id="module" styleClass="cell_small_label" text="\$module"/>
             <Label fx:id="due" styleClass="cell_small_label" text="\$due"/>
             <Label fx:id="priority" styleClass="cell_small_label" text="\$priority"/>
+            <Label fx:id="daysLeft" styleClass="cell_small_label"/>
         </VBox>
     </GridPane>
 </HBox>

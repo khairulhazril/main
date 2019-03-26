@@ -8,7 +8,7 @@ import java.util.Collections;
 
 import org.junit.Test;
 
-import guitests.guihandles.PersonListPanelHandle;
+import guitests.guihandles.TaskListPanelHandle;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -25,7 +25,7 @@ public class TaskListPanelTest extends GuiUnitTest {
     private static final long CARD_CREATION_AND_DELETION_TIMEOUT = 2500;
 
     private final SimpleObjectProperty<Task> selectedTask = new SimpleObjectProperty<>();
-    private PersonListPanelHandle taskListPanelHandle;
+    private TaskListPanelHandle taskListPanelHandle;
 
     /*
     @Test
@@ -35,7 +35,7 @@ public class TaskListPanelTest extends GuiUnitTest {
     for (int i = 0; i < TYPICAL_TASKS.size(); i++) {
     personListPanelHandle.navigateToCard(TYPICAL_TASKS.get(i));
     Task expectedTask = TYPICAL_TASKS.get(i);
-    PersonCardHandle actualCard = personListPanelHandle.getPersonCardHandle(i);
+    TaskCardHandle actualCard = personListPanelHandle.getPersonCardHandle(i);
 
     assertCardDisplaysPerson(expectedTask, actualCard);
     assertEquals(Integer.toString(i + 1) + ". ", actualCard.getId());
@@ -48,8 +48,8 @@ public class TaskListPanelTest extends GuiUnitTest {
     guiRobot.interact(() -> selectedTask.set(secondTask));
     guiRobot.pauseForHuman();
 
-    PersonCardHandle expectedPerson = personListPanelHandle.getPersonCardHandle(INDEX_SECOND_TASK.getZeroBased());
-    PersonCardHandle selectedPerson = personListPanelHandle.getHandleToSelectedCard();
+    TaskCardHandle expectedPerson = personListPanelHandle.getPersonCardHandle(INDEX_SECOND_TASK.getZeroBased());
+    TaskCardHandle selectedPerson = personListPanelHandle.getHandleToSelectedCard();
     assertCardEquals(expectedPerson, selectedPerson);
     }
     */
@@ -94,7 +94,7 @@ public class TaskListPanelTest extends GuiUnitTest {
                 new TaskListPanel(backingList, selectedTask, selectedTask::set);
         uiPartRule.setUiPart(taskListPanel);
 
-        taskListPanelHandle = new PersonListPanelHandle(getChildNode(taskListPanel.getRoot(),
-                PersonListPanelHandle.PERSON_LIST_VIEW_ID));
+        taskListPanelHandle = new TaskListPanelHandle(getChildNode(taskListPanel.getRoot(),
+                TaskListPanelHandle.PERSON_LIST_VIEW_ID));
     }
 }
