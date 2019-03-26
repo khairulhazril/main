@@ -1,8 +1,5 @@
 package seedu.address.storage;
 
-import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.exceptions.CommandException;
-
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -11,6 +8,8 @@ import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Map;
+
+import seedu.address.logic.commands.exceptions.CommandException;
 
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;

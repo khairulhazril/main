@@ -63,8 +63,8 @@ public class TaskManagerParser {
         case LoginCommand.COMMAND_WORD:
             return new LoginCommandParser().parse(arguments);
 
-            case DeleteAccountCommand.COMMAND_WORD:
-                return new DeleteAccountCommand();
+        case DeleteAccountCommand.COMMAND_WORD:
+            return new DeleteAccountCommand();
 
         case LogoutCommand.COMMAND_WORD:
             return new LogoutCommand();
