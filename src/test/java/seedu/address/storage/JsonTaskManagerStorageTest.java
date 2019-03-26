@@ -74,7 +74,7 @@ public class JsonTaskManagerStorageTest {
 
     @Test
     public void readAndSaveAddressBook_allInOrder_success() throws Exception {
-        Path filePath = testFolder.getRoot().toPath().resolve("Temptaskmanager.json");
+        Path filePath = testFolder.getRoot().toPath().resolve("TempTaskManager.json");
         TaskManager original = getTypicalTaskManager();
         JsonTaskManagerStorage jsonAddressBookStorage = new JsonTaskManagerStorage(filePath);
 
