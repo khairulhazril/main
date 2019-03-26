@@ -60,11 +60,11 @@ public class TaskCard extends UiPart<Region> {
         int daysRemaining = task.getDaysRemaining();
 
         if (daysRemaining < 0) {
-            id.setStyle("-fx-text-fill: red");
-            name.setStyle("-fx-text-fill: red");
-            module.setStyle("-fx-text-fill: red");
-            due.setStyle("-fx-text-fill: red");
-            priority.setStyle("-fx-text-fill: red");
+            id.setStyle("-fx-text-fill: grey");
+            name.setStyle("-fx-text-fill: grey");
+            module.setStyle("-fx-text-fill: grey");
+            due.setStyle("-fx-text-fill: grey");
+            priority.setStyle("-fx-text-fill: grey");
             daysLeft.setStyle("-fx-text-fill: red");
 
         } else if (daysRemaining <= 7) {
