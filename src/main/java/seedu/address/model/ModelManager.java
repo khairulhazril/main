@@ -82,7 +82,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void deleteAccount() { loginEvent.deleteAccount(); }
+    public void deleteAccount() {
+        loginEvent.deleteAccount();
+    }
 
 
     @Override
