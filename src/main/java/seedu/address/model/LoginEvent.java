@@ -53,7 +53,7 @@ public class LoginEvent {
     /**
      * Reinitialize LoginEvent
      */
-    public void reinitialize(){
+    public void reinitialize() {
         final Path loginInfoPath = Paths.get("login.json");
         final Username username = new Username("admin");
         final Password password = new Password("admin");
