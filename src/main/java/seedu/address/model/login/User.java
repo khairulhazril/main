@@ -3,7 +3,7 @@ package seedu.address.model.login;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 /**
- * User
+ * User Account
  */
 public class User {
 

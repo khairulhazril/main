@@ -10,9 +10,11 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddNotesCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.DeleteAccountCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FindDateCommand;
 import seedu.address.logic.commands.FindModuleCommand;
 import seedu.address.logic.commands.FindNameCommand;
 import seedu.address.logic.commands.FindPriorityCommand;
@@ -61,6 +63,9 @@ public class TaskManagerParser {
         case LoginCommand.COMMAND_WORD:
             return new LoginCommandParser().parse(arguments);
 
+        case DeleteAccountCommand.COMMAND_WORD:
+            return new DeleteAccountCommand();
+
         case LogoutCommand.COMMAND_WORD:
             return new LogoutCommand();
 
@@ -78,6 +83,9 @@ public class TaskManagerParser {
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
+
+        case FindDateCommand.COMMAND_WORD:
+            return new FindDateCommandParser().parse(arguments);
 
         case FindNameCommand.COMMAND_WORD:
             return new FindNameCommandParser().parse(arguments);

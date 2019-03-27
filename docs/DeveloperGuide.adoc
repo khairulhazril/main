@@ -13,9 +13,9 @@ ifdef::env-github[]
 :warning-caption: :warning:
 :experimental:
 endif::[]
-:repoURL: https://github.com/se-edu/addressbook-level4/tree/master
+:repoURL: https://github.com/CS2113-AY1819S2-M11-2/main/
 
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+By: `M11-02`      Since: `Feb 2019`      Licence: `MIT`
 
 == Setting up
 
@@ -322,17 +322,18 @@ The login mechanism is facilitated by `TaskManager`, `SignupCommand`, `LoginComm
 
 Given below is an example usage scenario.
 
-Step 1. The user keys in username and password, the `LoginCommandParser` or `SignupCommandParser` will trim the command to get the string of username and password.
+Step 1. The user signs up and keys in username and password, using the command `signup u/USERNAME p/PASSWORD`. The `TaskManagerParser` recognises the command as a signup and calls `SignupCommand`.
 
-Step 2. If the attribute is valid, username and password is stored in a User class, it will then pass the attribute to `loginEvent`.
+Step 2. In SignupCommand, `newUser(user)` will be called in `ModelManager`. This method is also connected to `LoginEvent`.
 
-Step 3. `loginEvent` will then call `JsonLoginStorage` with attributes to read and write Json files or set Json properties.
+Step 2. `LoginEvent` will use the username to check if there is such account. If there is, `userExists(user)` will be triggered in `ModelManager`.
+If there is no such account, the username and hashed password will be stored in a User class, it will then pass the User object to `JsonLoginStorage`.
 
-Step 4. It will then return to `loginEvent` where it will return the user account details.
+Step 3. `JsonLoginStorage` retrieves the User object to read and write Json files with the correct Json properties.
 
-Step 5. Then we convert the relevant attributes of the user information to string to compare. This is used in login and signup. Here, `loginEvent` is able to check if the user exists, if user information matches or logs out of account.
+Step 4. It will then return to `loginEvent` then to `SignupCommand` and returns the user a successful signup output.
 
-Step 6. After returning the user information, the user is then logged into or logged out of Task Manager.
+image::SignUpSequenceDiagram.png[width="900"]
 
 ==== Design Considerations
 
@@ -450,9 +451,9 @@ image::CalendarBuildSequenceDiagram.png[width="698"]
 ** Pros: No need to navigate between different classes.
 ** Cons: The class will be very long and complex, possibly making the code difficult to read and understand for future maintainers. Violates the principles of Single Responsibility Principle and Separation of Concerns.
 
-===== Aspect: How to update the calendar in real time (Coming in v1.3)
+===== Aspect: How the calendar is updated in real time
 
-* **Alternative 1:** Replace the old calendar with a newly built calendar when task list changes.
+* **Alternative 1 (current choice):** Replace the old calendar with a newly built calendar when task list changes.
 ** Pros: Easy for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.
 ** Cons: Potential performance issues. If the list of tasks is very large, rebuilding the Calendar at every step may result in degraded performance manifested as a loss of responsiveness to user commands.
 * **Alternative 2:** Implement a separate class to handle the contents of each Calendar cell.
@@ -899,7 +900,7 @@ Now we have the `Remark` class, we need to actually use it inside link:{repoURL}
 
 . Add `getRemark()` in link:{repoURL}/src/main/java/seedu/address/model/person/Person.java[`Person`].
 . You may assume that the user will not be able to use the `add` and `edit` commands to modify the remarks field (i.e. the person will be created without a remark).
-. Modify link:{repoURL}/src/main/java/seedu/address/model/util/SampleDataUtil.java/[`SampleDataUtil`] to add remarks for the sample data (delete your `data/addressbook.json` so that the application will load the sample data when you launch it.)
+. Modify link:{repoURL}/src/main/java/seedu/address/model/util/SampleDataUtil.java/[`SampleDataUtil`] to add remarks for the sample data (delete your `data/taskmanager.json` so that the application will load the sample data when you launch it.)
 
 ===== [Step 6] Storage: Add `Remark` field to `JsonAdaptedPerson` class
 We now have `Remark` s for `Person` s, but they will be gone when we exit the application. Let's modify link:{repoURL}/src/main/java/seedu/address/storage/JsonAdaptedPerson.java[`JsonAdaptedPerson`] to include a `Remark` field so that it will be saved.
@@ -910,7 +911,7 @@ We now have `Remark` s for `Person` s, but they will be gone when we exit the ap
 
 **Tests:**
 
-. Fix `invalidAndValidPersonAddressBook.json`, `typicalPersonsAddressBook.json`, `validAddressBook.json` etc., such that the JSON tests will not fail due to a missing `remark` field.
+. Fix `invalidAndValidTaskManager.json`, `typicalTaskTaskManager.json`, `validTaskManager.json` etc., such that the JSON tests will not fail due to a missing `remark` field.
 
 ===== [Step 6b] Test: Add withRemark() for `PersonBuilder`
 Since `Person` can now have a `Remark`, we should add a helper method to link:{repoURL}/src/test/java/seedu/address/testutil/PersonBuilder.java[`PersonBuilder`], so that users are able to create remarks when building a link:{repoURL}/src/main/java/seedu/address/model/person/Person.java[`Person`].

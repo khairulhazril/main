@@ -65,10 +65,26 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean getAdminStatus() {
+        return loginEvent.getAdminStatus();
+    }
+
+    @Override
     public boolean userExists(User user) {
         requireNonNull(user);
         return loginEvent.userExists(user);
     }
+
+    @Override
+    public boolean accountExists() {
+        return loginEvent.accountExists();
+    }
+
+    @Override
+    public void deleteAccount() {
+        loginEvent.deleteAccount();
+    }
+
 
     @Override
     public void newUser(User user) {

@@ -1,5 +1,6 @@
 package seedu.address.storage;
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -14,10 +15,15 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import seedu.address.logic.commands.exceptions.CommandException;
+
 /**
  * To access the LoginEvent stored as a JSON file
  */
 public class JsonLoginStorage implements LoginStorage {
+
+    public static final String MESSAGE_DELETE_SUCCESS = "Account has been deleted!";
+    public static final String MESSAGE_DELETE_FAILURE = "There has been an error deleting account.";
 
     private String loginFilePath;
     private Map<String, String> accounts;
@@ -32,7 +38,9 @@ public class JsonLoginStorage implements LoginStorage {
         setAccount();
     }
 
-    // Adds properties into JSON files
+    /**
+     *  Adds properties to the Json file
+     */
     @Override
     public void newUser(String username, String password) throws IOException {
         JsonObject jsonObject = getJsonObject();
@@ -42,18 +50,28 @@ public class JsonLoginStorage implements LoginStorage {
         setAccount();
     }
 
-    // Sets user accounts as maps
+    /**
+     * Gets the accounts as maps
+     * @return accounts
+     */
     @Override public Map<String, String> getAccounts() {
         return accounts;
     }
 
-    // Sets up user accounts
+    /**
+     * Sets up user account
+     * @throws IOException if account cannot be created
+     */
     private void setAccount() throws IOException {
         Type type = new TypeToken<Map<String, String>>(){}.getType();
         accounts = new Gson().fromJson(new FileReader(loginFilePath), type);
     }
 
-    // Returns user accounts as JSON objects
+    /**
+     * Convert user accounts as JSON objects
+     * @return JSON objects
+     * @throws IOException if obeject cannot be retrieved
+     */
     private JsonObject getJsonObject() throws IOException {
         JsonParser parser = new JsonParser();
         JsonElement jsonElement = parser.parse(new FileReader(loginFilePath));
@@ -61,7 +79,10 @@ public class JsonLoginStorage implements LoginStorage {
         return jsonElement.getAsJsonObject();
     }
 
-    //Creates user login account with JSON file
+    /**
+     * Creates user login account with JSON file
+     * @throws IOException if cannot be written to JSON file
+     */
     private void createLoginInfoFile() throws IOException {
         JsonObject jsonObject = new JsonObject();
         writeJson(new Gson(), jsonObject);
@@ -78,5 +99,19 @@ public class JsonLoginStorage implements LoginStorage {
         FileWriter file = new FileWriter(loginFilePath);
         file.write(json);
         file.flush();
+    }
+
+    /**
+     * Deletes the JSON file with accounts in it
+     * @throws IOException
+     */
+    public void deleteAccount() throws CommandException {
+        File file = new File(loginFilePath);
+
+        if (file.delete()) {
+            throw new CommandException(MESSAGE_DELETE_SUCCESS);
+        } else {
+            throw new CommandException(MESSAGE_DELETE_FAILURE);
+        }
     }
 }

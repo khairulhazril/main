@@ -150,6 +150,12 @@ public interface Model {
     boolean getLoginStatus();
 
     /**
+     * Returns true if the admin is logged in.
+     */
+
+    boolean getAdminStatus();
+
+    /**
      * Return Username of logged in user.
      */
     Username getUsername();
@@ -165,14 +171,25 @@ public interface Model {
     void loginUser(User loginInfo);
 
     /**
-     *  Returns true if user exists
+     *  Returns true if user exists.
      */
     boolean userExists(User user);
 
     /**
-     * A new user is registered in Task Manager
+     * A new user is registered in Task Manager.
      */
     void newUser(User user);
+
+    /**
+     * There is already an account created.
+     */
+    boolean accountExists();
+
+    /**
+     * Deletes the account.
+     * Only admin can access this command.
+     */
+    void deleteAccount();
 
     //=====================Notes========================================================
 
