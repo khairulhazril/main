@@ -20,7 +20,10 @@ public class LoginCommand extends Command {
                                              + PREFIX_USERNAME + "PASSWORD: "
                                              + PREFIX_PASSWORD;
     public static final String MESSAGE_SUCCESS = "Logged in as %1$s";
-    public static final String MESSAGE_LOGGED = "You are already logged in!";
+    public static final String MESSAGE_LOGGED_USER = "You are already logged in! You need to logout"
+                                                   + " if you want to login into another account.";
+    public static final String MESSAGE_LOGGED_ADMIN = "You are logged in as admin.";
+
     public static final String MESSAGE_FAILURE = "Please Login again! "
                                                + "Command Format: [login u/USERNAME p/PASSWORD]";
 
@@ -40,6 +43,16 @@ public class LoginCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
+
+        // Checks if user is already logged in
+        if (model.getLoginStatus()) {
+            throw new CommandException(MESSAGE_LOGGED_USER);
+        }
+
+        // Checks if admin is logged in
+        if (model.getAdminStatus()) {
+            throw new CommandException(MESSAGE_LOGGED_ADMIN);
+        }
 
         // Checks if user exists and logs into account
         model.loginUser(loginInfo);

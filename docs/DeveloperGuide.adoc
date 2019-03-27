@@ -318,20 +318,29 @@ image::UndoRedoActivityDiagram.png[width="650"]
 
 ==== Current Implementation
 
-The login mechanism is facilitated by `TaskManager`, `SignupCommand`, `LoginCommand`, `LogoutCommand`, `loginEvent`, `JsonLoginStorage`, .
+The login mechanism is facilitated by `TaskManager`, `SignupCommand`, `LoginCommand`, `LogoutCommand`, `LoginEvent`, `JsonLoginStorage`.
 
-Given below is an example usage scenario.
+Given below is an example usage scenario of `signup`.
 
-Step 1. The user signs up and keys in username and password, using the command `signup u/USERNAME p/PASSWORD`. The `TaskManagerParser` recognises the command as a signup and calls `SignupCommand`.
+Step 1. The user signs up and keys in username and password using the command `signup u/USERNAME p/PASSWORD`.
 
-Step 2. In SignupCommand, `newUser(user)` will be called in `ModelManager`. This method is also connected to `LoginEvent`.
+Step 2. The `TaskManagerParser` recognises the command word as a signup from `SignupCommandParser` and calls `SignupCommand`.
 
-Step 2. `LoginEvent` will use the username to check if there is such account. If there is, `userExists(user)` will be triggered in `ModelManager`.
-If there is no such account, the username and hashed password will be stored in a User class, it will then pass the User object to `JsonLoginStorage`.
+Step 3. `SignupCommand` will call the following commands which are linked to `LoginEvent`.
 
-Step 3. `JsonLoginStorage` retrieves the User object to read and write Json files with the correct Json properties.
+`getLoginStatus` to check if the user is already logged in. +
+`userExists` to check if there is already an account with the same username. +
+`accountExists` to check if an account has already been created. +
 
-Step 4. It will then return to `loginEvent` then to `SignupCommand` and returns the user a successful signup output.
+If the arguments passes all the commands, `newUser(user)` will be called to store
+the username and hashed password in a User class.
+It will then pass the User object to `JsonLoginStorage`.
+
+Step 4. `JsonLoginStorage` retrieves the User object to read and write Json files with the correct Json properties.
+
+Step 5. It will then return to `loginEvent` then to `SignupCommand` and returns the user a successful signup output.
+
+The sequence diagram below shows the flow of `signup` from Step 1 to Step 5
 
 image::SignUpSequenceDiagram.png[width="900"]
 
