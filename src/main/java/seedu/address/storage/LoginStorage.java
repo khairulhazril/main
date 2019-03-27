@@ -1,10 +1,9 @@
 package seedu.address.storage;
 
-import seedu.address.logic.commands.exceptions.CommandException;
-
 import java.io.IOException;
 import java.util.Map;
 
+import seedu.address.logic.commands.exceptions.CommandException;
 /**
  * Login Storage
  */
