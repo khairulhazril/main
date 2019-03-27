@@ -59,7 +59,7 @@ public class LoginEvent {
         final Password password = new Password("admin");
         user = new User(username, password);
         loginStatus = false;
-        adminStatus = false;
+        adminStatus = true;
 
         try {
             loginStorage = new JsonLoginStorage(loginInfoPath);
