@@ -152,6 +152,7 @@ public class LoginEvent {
         } catch (CommandException e) {
             logger.warning("Unable to delete account");
         }
+        reinitialize();
     }
 
     /**

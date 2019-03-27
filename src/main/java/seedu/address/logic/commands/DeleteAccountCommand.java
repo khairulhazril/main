@@ -28,7 +28,6 @@ public class DeleteAccountCommand extends Command {
 
         // Delete JSON file
         model.deleteAccount();
-        model.reinitialize();
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, loginUsername.toString()));
     }
