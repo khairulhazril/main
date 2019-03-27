@@ -1,5 +1,7 @@
 package seedu.address.storage;
 
+import seedu.address.logic.commands.exceptions.CommandException;
+
 import java.io.IOException;
 import java.util.Map;
 
@@ -13,4 +15,7 @@ public interface LoginStorage {
 
     // Returns JSON Object with user account username and password
     Map<String, String> getAccounts() throws IOException;
+
+    // Deletes JSON file with accounts in it
+    void deleteAccount() throws CommandException;
 }
