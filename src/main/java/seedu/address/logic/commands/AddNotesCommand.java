@@ -42,6 +42,10 @@ public class AddNotesCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
+        if (!model.getLoginStatus()) {
+            throw new CommandException(MESSAGE_LOGIN_REQUIRED);
+        }
+
         if (model.hasNotes(wantAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_NOTE);
         }

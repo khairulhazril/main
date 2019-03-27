@@ -36,6 +36,10 @@ public class DeleteCommand extends Command {
         requireNonNull(model);
         List<Task> lastShownList = model.getFilteredTaskList();
 
+        if (!model.getLoginStatus()) {
+            throw new CommandException(MESSAGE_LOGIN_REQUIRED);
+        }
+
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }

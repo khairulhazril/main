@@ -20,6 +20,10 @@ public class UndoCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
+        if (!model.getLoginStatus()) {
+            throw new CommandException(MESSAGE_LOGIN_REQUIRED);
+        }
+
         if (!model.canUndoTaskManager()) {
             throw new CommandException(MESSAGE_FAILURE);
         }
