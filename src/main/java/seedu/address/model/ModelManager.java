@@ -86,6 +86,10 @@ public class ModelManager implements Model {
         loginEvent.deleteAccount();
     }
 
+    @Override
+    public void reinitialize() {
+        loginEvent.reinitialize();
+    }
 
     @Override
     public void newUser(User user) {

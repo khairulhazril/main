@@ -191,6 +191,11 @@ public interface Model {
      */
     void deleteAccount();
 
+    /**
+     * Reinitializes the entire JSON file with admin account.
+     */
+    void reinitialize();
+
     //=====================Notes========================================================
 
     /**

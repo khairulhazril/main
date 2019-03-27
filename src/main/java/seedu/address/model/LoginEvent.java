@@ -51,6 +51,26 @@ public class LoginEvent {
     }
 
     /**
+     * Reinitialize LoginEvent
+     */
+    public void reinitialize(){
+        final Path loginInfoPath = Paths.get("login.json");
+        final Username username = new Username("admin");
+        final Password password = new Password("admin");
+        user = new User(username, password);
+        loginStatus = false;
+        adminStatus = false;
+
+        try {
+            loginStorage = new JsonLoginStorage(loginInfoPath);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        newUser(user);
+    }
+
+    /**
      * Creates a new user in JSON file
      * @param user
      */

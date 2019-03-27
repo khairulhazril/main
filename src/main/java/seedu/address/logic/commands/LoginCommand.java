@@ -41,12 +41,9 @@ public class LoginCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        // User is already logged in
-        if (model.getLoginStatus()) {
-            throw new CommandException(String.format(MESSAGE_LOGGED, model.getUsername().toString()));
-        }
         // Checks if user exists and logs into account
         model.loginUser(loginInfo);
+
         // Incorrect password or username
         if (!model.getLoginStatus()) {
             throw new CommandException(MESSAGE_FAILURE);

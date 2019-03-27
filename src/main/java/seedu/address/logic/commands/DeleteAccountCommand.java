@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.LoginEvent;
 import seedu.address.model.Model;
 import seedu.address.model.login.Username;
 
@@ -28,6 +29,7 @@ public class DeleteAccountCommand extends Command {
 
         // Delete JSON file
         model.deleteAccount();
+        model.reinitialize();
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, loginUsername.toString()));
     }
