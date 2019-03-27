@@ -183,9 +183,9 @@ public class TaskManager implements ReadOnlyTaskManager {
     }
 
     /**
-     * Replaces the given task {@code target} in the list with {@code editedTask}.
+     * Replaces the given note {@code target} in the list with {@code editedNotes}.
      * {@code target} must exist in the task manager.
-     * The task identity of {@code editedTask} must not be the same as another existing task in the task manager.
+     * The task identity of {@code editedNotes} must not be the same as another existing note in the task manager.
      */
     public void setNotes(Notes target, Notes editedNotes) {
         requireNonNull(editedNotes);
@@ -194,14 +194,6 @@ public class TaskManager implements ReadOnlyTaskManager {
         indicateModified();
     }
 
-    /**
-     * Removes {@code key} from this {@code TaskManager}.
-     * {@code key} must exist in the task manager.
-     */
-    public void removeNotes(Notes key) {
-        unotes.remove(key);
-        indicateModified();
-    }
 
 
 }
