@@ -20,7 +20,7 @@ public class LogoutCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         // User is already logged out
-        if (!model.getLoginStatus()) {
+        if (!model.getLoginStatus() && !model.getAdminStatus()) {
             throw new CommandException(MESSAGE_LOGIN);
         }
         // Get username for printout statement

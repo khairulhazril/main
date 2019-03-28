@@ -105,6 +105,7 @@ public class JsonLoginStorage implements LoginStorage {
      * Deletes the JSON file with accounts in it
      * @throws IOException
      */
+    @Override
     public void deleteAccount() throws CommandException {
         File file = new File(loginFilePath);
 
