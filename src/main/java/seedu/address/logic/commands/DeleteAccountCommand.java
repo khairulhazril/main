@@ -18,7 +18,7 @@ public class DeleteAccountCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
 
-        // User is already logged out
+        // Not an admin loggin in
         if (!model.getAdminStatus()) {
             throw new CommandException(MESSAGE_ADMIN_LOGIN);
         }

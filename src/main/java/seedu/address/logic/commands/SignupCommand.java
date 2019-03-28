@@ -20,7 +20,7 @@ public class SignupCommand extends Command {
             + PREFIX_USERNAME + "USERNAME "
             + PREFIX_PASSWORD + "PASSWORD";
 
-    public static final String MESSAGE_LOGGED = "Logged in: %1$s!";
+    public static final String MESSAGE_LOGGED = "You are logged in as %1$s!";
     public static final String MESSAGE_SUCCESS = "Signed up: %1$s";
     public static final String MESSAGE_USER_EXISTS = "Please try another username!";
     public static final String MESSAGE_ACCOUNT_EXISTS = "Account has already been created!";
