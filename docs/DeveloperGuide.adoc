@@ -386,7 +386,11 @@ Step 7. Else, addNotes(notes) method is called and note is added.
 
 The class diagram below illustrates the `Notes` class.
 
+image:: NotesClassDiagram.png[width="500"]
 
+The sequence diagram below illustrates how the AddNotes mechanism function.
+
+image:: AddNotesSequenceDiagram.png[width="900"]
 
 ==== Design Considerations
 
