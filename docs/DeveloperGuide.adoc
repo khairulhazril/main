@@ -361,7 +361,7 @@ The Notes mechanism is facilitated by AddNotesCommand. A Notes object is instant
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user enters the in a note with its associated parameters. e.g note h/popular c/buy pilot G-2 blue pens.
+Step 1. The user enters the in a note with its associated parameters. e.g `note h/popular c/buy pilot G-2 blue pens`.
 
 Step 2. The LogicManager calls ParseCommand with that input.
 
@@ -371,9 +371,13 @@ Step 4. The LogicManager will call execute method on the AddNotesCommand object.
 
 Step 5. ModelManager is then called and will check if the note already exists.
 
-Step 6. If note already exists, DuplicateNotesException will be called.
+Step 6. If note already exists, `DuplicateNotesException` will be thrown. This will return a string message "This note already exists in the task manager".
 
-Step 7. Else, addNotes notes method is called and note is added.
+Step 7. Else, addNotes(notes) method is called and note is added.
+
+The class diagram below illustrates the `Notes` class.
+
+
 
 ==== Design Considerations
 
