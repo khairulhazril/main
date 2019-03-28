@@ -364,6 +364,10 @@ image::SignUpSequenceDiagram.png[width="900"]
 
 This feature allow users to add and view notes regarding miscellaneous matters.
 
+The class diagram below illustrates the `Notes` class.
+
+image::NotesClassDiagram.png[width="400"]
+
 ==== Current Implementation
 
 The Notes mechanism is facilitated by AddNotesCommand. A Notes object is instantiated which contains of Heading and Content.
@@ -384,10 +388,6 @@ Step 6. If note already exists, `DuplicateNotesException` will be thrown. This w
 
 Step 7. Else, addNotes(notes) method is called and note is added.
 
-The class diagram below illustrates the `Notes` class.
-
-image::NotesClassDiagram.png[width="500"]
-
 The sequence diagram below illustrates how the AddNotes mechanism function.
 
 image::AddNotesSequenceDiagram.png[width="900"]
@@ -396,12 +396,13 @@ image::AddNotesSequenceDiagram.png[width="900"]
 
 Aspect: Checking for duplicate notes
 
-* Alternative 1(current choice): IsSameNotes
-
+* **Alternative 1(current choice):** IsSameNotes
 
 ** Pros: Easy to implement
-
 ** Cons: May neglect duplicate notes that mean the same because IsSameNotes check for the exact same heading and content. E.g 1. h/popular c/buy ring file 2.h/popular c/buy ring files
+* **Alternative 2:** Implement a method to check for similarity of notes. If similarity is more than 95%, notes is classified as same notes and cannot be added.
+** Pros: Can reduce the amount of duplicate notes that are added.
+** Cons: Difficult to implement and cannot eliminate duplicate notes completely.
 // end::notes[]
 
 
