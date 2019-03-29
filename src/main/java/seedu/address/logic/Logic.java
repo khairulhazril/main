@@ -89,7 +89,7 @@ public interface Logic {
     ReadOnlyProperty<Notes> selectedNotesProperty();
 
     /**
-     * Sets the selected task in the filtered notes list.
+     * Sets the selected note in the filtered notes list.
      *
      * @see seedu.address.model.Model#setSelectedNotes(Notes)
      */

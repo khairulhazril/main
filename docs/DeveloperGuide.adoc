@@ -364,13 +364,17 @@ image::SignUpSequenceDiagram.png[width="900"]
 
 This feature allow users to add and view notes regarding miscellaneous matters.
 
+The class diagram below illustrates the `Notes` class.
+
+image::NotesClassDiagram.png[width="400"]
+
 ==== Current Implementation
 
 The Notes mechanism is facilitated by AddNotesCommand. A Notes object is instantiated which contains of Heading and Content.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user enters the in a note with its associated parameters. e.g note h/popular c/buy pilot G-2 blue pens.
+Step 1. The user enters the in a note with its associated parameters. e.g `note h/popular c/buy pilot G-2 blue pens`.
 
 Step 2. The LogicManager calls ParseCommand with that input.
 
@@ -380,20 +384,25 @@ Step 4. The LogicManager will call execute method on the AddNotesCommand object.
 
 Step 5. ModelManager is then called and will check if the note already exists.
 
-Step 6. If note already exists, DuplicateNotesException will be called.
+Step 6. If note already exists, `DuplicateNotesException` will be thrown. This will return a string message "This note already exists in the task manager".
 
-Step 7. Else, addNotes notes method is called and note is added.
+Step 7. Else, addNotes(notes) method is called and note is added.
+
+The sequence diagram below illustrates how the AddNotes mechanism function.
+
+image::AddNotesSequenceDiagram.png[width="900"]
 
 ==== Design Considerations
 
 Aspect: Checking for duplicate notes
 
-* Alternative 1(current choice): IsSameNotes
-
+* **Alternative 1(current choice):** IsSameNotes
 
 ** Pros: Easy to implement
-
 ** Cons: May neglect duplicate notes that mean the same because IsSameNotes check for the exact same heading and content. E.g 1. h/popular c/buy ring file 2.h/popular c/buy ring files
+* **Alternative 2:** Implement a method to check for similarity of notes. If similarity is more than 95%, notes is classified as same notes and cannot be added.
+** Pros: Can reduce the amount of duplicate notes that are added.
+** Cons: Difficult to implement and cannot eliminate duplicate notes completely.
 // end::notes[]
 
 
