@@ -316,11 +316,36 @@ image::UndoRedoActivityDiagram.png[width="650"]
 // tag::loginfunction[]
 === Login Feature
 
-==== Current Implementation
+*Current Implementation*
 
-The login mechanism is facilitated by `TaskManager`, `SignupCommand`, `LoginCommand`, `LogoutCommand`, `LoginEvent`, `JsonLoginStorage`.
+* The login mechanism is facilitated by `TaskManager`, `SignupCommand`, `LoginCommand`, `LogoutCommand`, `DeleteAccountCommand`, `LoginEvent`, `GenerateHash`, `JsonLoginStorage`.
+
+* The login feature is mainly supported by the `Command` class and `login` class. +
+There are two types of accounts in login feature which are implemented in the `login` class: +
+1. A normal user account +
+2. An admin account. +
+The username and hashed password are stored in a JSON file.
+
+* In `model` class, there are methods to check for +
+`loginStatus` (if the user is logged in), +
+`adminStatus` (if the admin is logged in), +
+`userExists` (if the username is already taken), +
+`accountExists` (if there is already an account created).
+
+* In this feature, there are 4 main commands.
+The flow, how the commands are executed and their respective sequence diagrams will be further elaborated below: +
+<<Signup Command>> +
+<<Login Command>> +
+<<Logout Command>> +
+<<DeleteAcc Command>>
+
+==== Signup Command
+
+* Signup Command creates an account for the user and stores their username and password in a JSON file.
 
 Given below is an example usage scenario of `signup`.
+
+|===
 
 Step 1. The user signs up and keys in username and password using the command `signup u/USERNAME p/PASSWORD`.
 
@@ -340,9 +365,23 @@ Step 4. `JsonLoginStorage` retrieves the User object to read and write Json file
 
 Step 5. It will then return to `loginEvent` then to `SignupCommand` and returns the user a successful signup output.
 
-The sequence diagram below shows the flow of `signup` from Step 1 to Step 5
+|===
+
+The sequence diagram below shows the flow of `signup` from Step 1 to Step 5 above.
 
 image::SignUpSequenceDiagram.png[width="900"]
+
+==== Login Command
+
+image::LoginSequenceDiagram.png[width="900"]
+
+==== Logout Command
+
+image::LogoutSequenceDiagram.png[width="900"]
+
+==== DeleteAcc Command
+
+image::DeleteAccountSequenceDiagram.png[width="900"]
 
 ==== Design Considerations
 
