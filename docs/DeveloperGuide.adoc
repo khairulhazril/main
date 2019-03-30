@@ -237,23 +237,23 @@ This section describes some noteworthy details on how certain features are imple
 === Undo/Redo feature
 ==== Current Implementation
 
-The undo/redo mechanism is facilitated by `VersionedAddressBook`.
-It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`.
+The undo/redo mechanism is facilitated by `VersionedTaskManager`.
+It extends `TaskManager` with an undo/redo history, stored internally as an `taskManagerStateList` and `currentStatePointer`.
 Additionally, it implements the following operations:
 
-* `VersionedAddressBook#commit()` -- Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` -- Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` -- Restores a previously undone address book state from its history.
+* `VersionedTaskManager#commit()` -- Saves the current task manager state in its history.
+* `VersionedTaskManager#undo()` -- Restores the previous task manager state from its history.
+* `VersionedTaskManager#redo()` -- Restores a previously undone task manager state from its history.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+These operations are exposed in the `Model` interface as `Model#commitTaskManager()`, `Model#undoTaskManager()` and `Model#redoTaskManager()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Step 1. The user launches the application for the first time. The `VersionedTaskManager` will be initialized with the initial task manager state, and the `currentStatePointer` pointing to that single task manager state.
 
 image::UndoRedoStartingStateListDiagram.png[width="800"]
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th task in the task manager. The `delete` command calls `Model#commitTaskManager()`, causing the modified state of the task manager after the `delete 5` command executes to be saved in the `taskManagerStateList`, and the `currentStatePointer` is shifted to the newly inserted task manager state.
 
 image::UndoRedoNewCommand1StateListDiagram.png[width="800"]
 
@@ -262,29 +262,29 @@ Step 3. The user executes `add n/David ...` to add a new person. The `add` comma
 image::UndoRedoNewCommand2StateListDiagram.png[width="800"]
 
 [NOTE]
-If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+If a command fails its execution, it will not call `Model#commitTaskManager()`, so the task manager state will not be saved into the `taskManagerStateList`.
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the task was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoTaskManager()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous task manager state, and restores the task manager to that state.
 
 image::UndoRedoExecuteUndoStateListDiagram.png[width="800"]
 
 [NOTE]
-If the `currentStatePointer` is at index 0, pointing to the initial address book state, then there are no previous address book states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
+If the `currentStatePointer` is at index 0, pointing to the initial task manager state, then there are no previous task manager states to restore. The `undo` command uses `Model#canUndoTaskManager()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
 
 The following sequence diagram shows how the undo operation works:
 
 image::UndoRedoSequenceDiagram.png[width="800"]
 
-The `redo` command does the opposite -- it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+The `redo` command does the opposite -- it calls `Model#redoTaskManager()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the task manager to that state.
 
 [NOTE]
-If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone address book states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+If the `currentStatePointer` is at index `taskManagerStateList.size() - 1`, pointing to the latest task manager state, then there are no undone task manager states to restore. The `redo` command uses `Model#canRedoTaskManager()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the task manager, such as `list`, will usually not call `Model#commitTaskManager()`, `Model#undoTaskManager()` or `Model#redoTaskManager()`. Thus, the `taskManagerStateList` remains unchanged.
 
 image::UndoRedoNewCommand3StateListDiagram.png[width="800"]
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. We designed it this way because it no longer makes sense to redo the `add n/David ...` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitTaskManager()`. Since the `currentStatePointer` is not pointing at the end of the `taskManagerStateList`, all task manager states after the `currentStatePointer` will be purged. We designed it this way because it no longer makes sense to redo the `add n/David ...` command. This is the behavior that most modern desktop applications follow.
 
 image::UndoRedoNewCommand4StateListDiagram.png[width="800"]
 
@@ -296,18 +296,18 @@ image::UndoRedoActivityDiagram.png[width="650"]
 
 ===== Aspect: How undo & redo executes
 
-* **Alternative 1 (current choice):** Saves the entire address book.
+* **Alternative 1 (current choice):** Saves the entire task manager.
 ** Pros: Easy to implement.
 ** Cons: May have performance issues in terms of memory usage.
 * **Alternative 2:** Individual command knows how to undo/redo by itself.
-** Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+** Pros: Will use less memory (e.g. for `delete`, just save the task being deleted).
 ** Cons: We must ensure that the implementation of each individual command are correct.
 
 ===== Aspect: Data structure to support the undo/redo commands
 
-* **Alternative 1 (current choice):** Use a list to store the history of address book states.
+* **Alternative 1 (current choice):** Use a list to store the history of task manager states.
 ** Pros: Easy for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.
-** Cons: Logic is duplicated twice. For example, when a new command is executed, we must remember to update both `HistoryManager` and `VersionedAddressBook`.
+** Cons: Logic is duplicated twice. For example, when a new command is executed, we must remember to update both `HistoryManager` and `VersionedTaskManager`.
 * **Alternative 2:** Use `HistoryManager` for undo/redo
 ** Pros: We do not need to maintain a separate list, and just reuse what is already in the codebase.
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
@@ -316,17 +316,47 @@ image::UndoRedoActivityDiagram.png[width="650"]
 // tag::loginfunction[]
 === Login Feature
 
-==== Current Implementation
+*Current Implementation*
 
-The login mechanism is facilitated by `TaskManager`, `SignupCommand`, `LoginCommand`, `LogoutCommand`, `LoginEvent`, `JsonLoginStorage`.
+* The login mechanism is facilitated by `TaskManager`, `SignupCommand`, `LoginCommand`, `LogoutCommand`, `DeleteAccountCommand`, `LoginEvent`, `GenerateHash`, `JsonLoginStorage`.
+
+* The login feature is mainly supported by the `Command` class and `account` class. +
+There are two types of accounts in login feature which are implemented in the `account` class: +
+1. A normal user account +
+2. An admin account. +
+The username and hashed password are stored in a JSON file.
+
+The class diagram below illustrates the `account` class.
+
+image::AccountClassDiagram.png[width="900"]
+
+* In `model` class, there are methods to check for +
+`loginStatus` (if the user is logged in), +
+`adminStatus` (if the admin is logged in), +
+`userExists` (if the username is already taken), +
+`accountExists` (if there is already an account created).
+
+* In this feature, there are 4 main commands.
+The flow on how the commands are executed and their respective sequence diagrams will be further elaborated below: +
+1. Section 3.2.1, Signup Command +
+2. <<Login Command>> +
+3. <<Logout Command>> +
+4. <<DeleteAcc Command>>
+
+==== Signup Command
+
+* Signup Command creates an account for the user and stores their username and password in a JSON file.
 
 Given below is an example usage scenario of `signup`.
 
+|===
+
 Step 1. The user signs up and keys in username and password using the command `signup u/USERNAME p/PASSWORD`.
 
-Step 2. The `TaskManagerParser` recognises the command word as a signup from `SignupCommandParser` and calls `SignupCommand`.
+Step 2. The `TaskManagerParser` recognises the command word as a signup from `SignupCommand` and calls `SignupCommand`.
 
-Step 3. `SignupCommand` will call the following commands which are linked to `LoginEvent`.
+Step 3. `SignupCommandParser` will parse the arguments to `SignupCommand`.
+ `SignupCommand` will call the following commands which are linked to `LoginEvent`.
 
 `getLoginStatus` to check if the user is already logged in. +
 `userExists` to check if there is already an account with the same username. +
@@ -340,22 +370,121 @@ Step 4. `JsonLoginStorage` retrieves the User object to read and write Json file
 
 Step 5. It will then return to `loginEvent` then to `SignupCommand` and returns the user a successful signup output.
 
-The sequence diagram below shows the flow of `signup` from Step 1 to Step 5
+|===
+
+The sequence diagram below shows the flow of `signup` from Step 1 to Step 5 above.
 
 image::SignUpSequenceDiagram.png[width="900"]
 
+==== Login Command
+
+* Login Command logs in the account for the user by checking the username and password stored in the JSON file.
+
+Given below is an example usage scenario of `login`.
+
+|===
+
+Step 1. The user logs in by keying in username and password using the command `login u/USERNAME p/PASSWORD`.
+
+Step 2. The `TaskManagerParser` recognises the command word as a login from `LoginCommand` and calls `LoginCommand`.
+
+Step 3. `LoginCommandParser` will parse the arguments to `LoginCommand`
+ `LoginCommand` will call the following command which is linked to `LoginEvent`.
+
+`getLoginStatus` to check if the user is already logged in. +
+
+If the arguments passes `getLoginStatus`, `logUser(user)` will be called in `LoginEvent` to
+check for username and password match.
+
+Step 4. In`LoginEvent`, `JsonLoginStorage` retrieves the username and hashed password from the Json file.
+
+Step 5. `loginEvent` will then check if the user inputs matches the username and password stored and
+will then return to `LoginCommand` and returns the user a successful login output.
+
+|===
+
+The sequence diagram below shows the flow of `login` from Step to Step above.
+
+image::LoginSequenceDiagram.png[width="900"]
+
+==== Logout Command
+
+* Logout Command logs the user out of their account.
+
+Given below is an example usage scenario of `logout`.
+
+|===
+
+Step 1. The user logs out by keying in the command `logout`.
+
+Step 2. The `TaskManagerParser` recognises the command word as a logout from `LogoutCommand` and calls `LogoutCommand`.
+
+Step 3. `LogoutCommand` will call the following command which is linked to `LoginEvent`.
+
+`getLoginStatus` to check if the user is already logged out. +
+`getAdminStatus` to check if the admin is already logged out. +
+
+If the arguments passes `getLoginStatus` and `getAdminStatus`, `logout` will be called in `LoginEvent`.
+
+Step 4. In`LoginEvent`, `getLoginStatus` and `getAdminStatus` will be set to false and will then
+return to `LoginCommand` to return the user a successful logout output.
+
+|===
+
+The sequence diagram below shows the flow of `logout` from Step to Step above.
+
+image::LogoutSequenceDiagram.png[width="900"]
+
+==== DeleteAcc Command
+
+* DeleteAcc Command is only accessible to admins. DeleteAcc deletes the entire account.
+
+Given below is an example usage scenario of `DeleteAcc`.
+
+|===
+
+Step 1. The admin logs in by keying in username and password using the command `login u/USERNAME p/PASSWORD`.
+
+Step 2. The admin keys in `DeleteAcc` to delete the account.
+
+Step 3. The `TaskManagerParser` recognises the command word as delete account
+from `DeleteAccountCommand` and calls `DeleteAccountCommand`.
+
+Step 4. `DeleteAccountCommand` will call the following command which is linked to `LoginEvent`.
+
+`getAdminStatus` to check if an admin is logged in. +
+
+If the arguments passes `getAdminStatus`, `deleteAccount()` will be called in `LoginEvent`.
+
+Step 5. In`LoginEvent`, JsonLoginStorage's `deleteAccount()` will be called to delete the JSON file.
+
+Step 6. `LoginEvent` will then call `reinitialise()` to create the Json file
+without any username and password stored in it. `reinitialise()` is assisted by `JsonLoginStorage` and `writeJson()`.
+
+Step 7. `LoginEvent` will return to `DeleteAccountCommand` and returns the user a successful login output.
+
+|===
+
+The sequence diagram below shows the flow of `deleteacc` from Step to Step above.
+
+image::DeleteAccountSequenceDiagram.png[width="900"]
+
 ==== Design Considerations
 
-===== Aspect: How loginEvent executes
+* Combine the classes for `LoginEvent` and `JsonLoginStorage`
+** Pros: Easy to read and debug, all codes are in one file and thus easier for other coders to modify.
+** Cons: Does not follow OOP coding. The codes in the file will look messy.
 
-* Write a class separately for handling the Json file reading of user information.
-** Pros: Easy to read and debug, Follows OOP coding and thus easier for other coders to modify.
-** Cons: Difficult to implement.
+* To use encryption library instead of creating my own hashing function.
+** Pros: Do not need to code much. Most of the function are one lines. Easy to implement.
+** Cons: Encryption is a two-way function. Encrypted strings can be decrypted with a proper key.
+Hashing was chosen because it is a one way function. With a proper hashing design, there is no way to reverse
+the hasing process to reveal the original password.
 
-* Write a class separately for passing Json file attributes and follow OOP coding in loginEvent.
-** Pros: Able to debug easily if any error occurs. Most of the login function happens within this 2 files.
-** Cons: Difficult to implement. Does not follow OOP coding.
-
+* To have the `LoginEvent` being a component of its own without having to implement into logic.
+** Pros: It would be easier to visualise and could still run the entire Taskmanager.
+** Cons: There would be a lot of repeated and redundant codes. Most of the functions in the `logic` componenet
+will be repeated. This will violate Single Responsibility Principle and Separation of Concerns.
 
 // end::loginfunction[]
 
@@ -679,7 +808,7 @@ When a pull request has changes to asciidoc files, you can use https://www.netli
 
 Here are the steps to create a new release.
 
-.  Update the version number in link:{repoURL}/src/main/java/seedu/address/MainApp.java[`MainApp.java`].
+.  Update the version number in link:{repoURL}blob/master/src/main/java/seedu/address/MainApp.java[`MainApp.java`].
 .  Generate a JAR file <<UsingGradle#creating-the-jar-file, using Gradle>>.
 .  Tag the repo with the version number. e.g. `v0.1`
 .  https://help.github.com/articles/creating-releases/[Create a new release using GitHub] and upload the JAR file you created.
@@ -839,7 +968,6 @@ Do take a look at <<Design-Storage>> before attempting to modify the `Storage` c
 * Hint
 ** Add the API method in link:{repoURL}blob/master/src/main/java/seedu/address/storage/TaskManagerStorage.java[`TaskManagerStorage`] interface.
 ** Implement the logic in link:{repoURL}blob/master/src/main/java/seedu/address/storage/StorageManager.java[`StorageManager`] and link:{repoURL}blob/master/src/main/java/seedu/address/storage/JsonTaskManagerStorage.java[`JsonTaskManagerStorage`] class.
-* Solution
 ** See this https://github.com/se-edu/addressbook-level4/pull/594[PR] for the full solution.
 ****
 
@@ -868,13 +996,13 @@ Let's start by teaching the application how to parse a `remark` command. We will
 
 **Main:**
 
-. Add a `RemarkCommand` that extends link:{repoURL}/src/main/java/seedu/address/logic/commands/Command.java[`Command`]. Upon execution, it should just throw an `Exception`.
-. Modify link:{repoURL}/src/main/java/seedu/address/logic/parser/AddressBookParser.java[`AddressBookParser`] to accept a `RemarkCommand`.
+. Add a `RemarkCommand` that extends link:{repoURL}blob/master/src/main/java/seedu/address/logic/commands/Command.java[`Command`]. Upon execution, it should just throw an `Exception`.
+. Modify link:{repoURL}blob/master/src/main/java/seedu/address/logic/parser/AddressBookParser.java[`AddressBookParser`] to accept a `RemarkCommand`.
 
 **Tests:**
 
 . Add `RemarkCommandTest` that tests that `execute()` throws an Exception.
-. Add new test method to link:{repoURL}/src/test/java/seedu/address/logic/parser/AddressBookParserTest.java[`AddressBookParserTest`], which tests that typing "remark" returns an instance of `RemarkCommand`.
+. Add new test method to link:{repoURL}blob/master/src/test/java/seedu/address/logic/parser/AddressBookParserTest.java[`AddressBookParserTest`], which tests that typing "remark" returns an instance of `RemarkCommand`.
 
 ===== [Step 2] Logic: Teach the app to accept 'remark' arguments
 Let's teach the application to parse arguments that our `remark` command will accept. E.g. `1 r/Likes to drink coffee.`
@@ -883,33 +1011,33 @@ Let's teach the application to parse arguments that our `remark` command will ac
 
 . Modify `RemarkCommand` to take in an `Index` and `String` and print those two parameters as the error message.
 . Add `RemarkCommandParser` that knows how to parse two arguments, one index and one with prefix 'r/'.
-. Modify link:{repoURL}/src/main/java/seedu/address/logic/parser/AddressBookParser.java[`AddressBookParser`] to use the newly implemented `RemarkCommandParser`.
+. Modify link:{repoURL}blob/master/src/main/java/seedu/address/logic/parser/AddressBookParser.java[`AddressBookParser`] to use the newly implemented `RemarkCommandParser`.
 
 **Tests:**
 
 . Modify `RemarkCommandTest` to test the `RemarkCommand#equals()` method.
 . Add `RemarkCommandParserTest` that tests different boundary values
 for `RemarkCommandParser`.
-. Modify link:{repoURL}/src/test/java/seedu/address/logic/parser/AddressBookParserTest.java[`AddressBookParserTest`] to test that the correct command is generated according to the user input.
+. Modify link:{repoURL}blob/master/src/test/java/seedu/address/logic/parser/AddressBookParserTest.java[`AddressBookParserTest`] to test that the correct command is generated according to the user input.
 
 ===== [Step 3] Ui: Add a placeholder for remark in `PersonCard`
-Let's add a placeholder on all our link:{repoURL}/src/main/java/seedu/address/ui/PersonCard.java[`PersonCard`] s to display a remark for each person later.
+Let's add a placeholder on all our link:{repoURL}blob/master/src/main/java/seedu/address/ui/PersonCard.java[`PersonCard`] s to display a remark for each person later.
 
 **Main:**
 
-. Add a `Label` with any random text inside link:{repoURL}/src/main/resources/view/PersonListCard.fxml[`PersonListCard.fxml`].
-. Add FXML annotation in link:{repoURL}/src/main/java/seedu/address/ui/PersonCard.java[`PersonCard`] to tie the variable to the actual label.
+. Add a `Label` with any random text inside link:{repoURL}blob/master/src/main/resources/view/PersonListCard.fxml[`PersonListCard.fxml`].
+. Add FXML annotation in link:{repoURL}blob/master/src/main/java/seedu/address/ui/PersonCard.java[`PersonCard`] to tie the variable to the actual label.
 
 **Tests:**
 
-. Modify link:{repoURL}/src/test/java/guitests/guihandles/PersonCardHandle.java[`PersonCardHandle`] so that future tests can read the contents of the remark label.
+. Modify link:{repoURL}blob/master/src/test/java/guitests/guihandles/PersonCardHandle.java[`PersonCardHandle`] so that future tests can read the contents of the remark label.
 
 ===== [Step 4] Model: Add `Remark` class
-We have to properly encapsulate the remark in our link:{repoURL}/src/main/java/seedu/address/model/person/Person.java[`Person`] class. Instead of just using a `String`, let's follow the conventional class structure that the codebase already uses by adding a `Remark` class.
+We have to properly encapsulate the remark in our link:{repoURL}blob/master/src/main/java/seedu/address/model/person/Person.java[`Person`] class. Instead of just using a `String`, let's follow the conventional class structure that the codebase already uses by adding a `Remark` class.
 
 **Main:**
 
-. Add `Remark` to model component (you can copy from link:{repoURL}/src/main/java/seedu/address/model/person/Address.java[`Address`], remove the regex and change the names accordingly).
+. Add `Remark` to model component (you can copy from link:{repoURL}blob/master/src/main/java/seedu/address/model/person/Address.java[`Address`], remove the regex and change the names accordingly).
 . Modify `RemarkCommand` to now take in a `Remark` instead of a `String`.
 
 **Tests:**
@@ -917,16 +1045,16 @@ We have to properly encapsulate the remark in our link:{repoURL}/src/main/java/s
 . Add test for `Remark`, to test the `Remark#equals()` method.
 
 ===== [Step 5] Model: Modify `Person` to support a `Remark` field
-Now we have the `Remark` class, we need to actually use it inside link:{repoURL}/src/main/java/seedu/address/model/person/Person.java[`Person`].
+Now we have the `Remark` class, we need to actually use it inside link:{repoURL}blob/master/src/main/java/seedu/address/model/person/Person.java[`Person`].
 
 **Main:**
 
-. Add `getRemark()` in link:{repoURL}/src/main/java/seedu/address/model/person/Person.java[`Person`].
+. Add `getRemark()` in link:{repoURL}blob/master/src/main/java/seedu/address/model/person/Person.java[`Person`].
 . You may assume that the user will not be able to use the `add` and `edit` commands to modify the remarks field (i.e. the person will be created without a remark).
-. Modify link:{repoURL}/src/main/java/seedu/address/model/util/SampleDataUtil.java/[`SampleDataUtil`] to add remarks for the sample data (delete your `data/taskmanager.json` so that the application will load the sample data when you launch it.)
+. Modify link:{repoURL}blob/master/src/main/java/seedu/address/model/util/SampleDataUtil.java/[`SampleDataUtil`] to add remarks for the sample data (delete your `data/taskmanager.json` so that the application will load the sample data when you launch it.)
 
 ===== [Step 6] Storage: Add `Remark` field to `JsonAdaptedPerson` class
-We now have `Remark` s for `Person` s, but they will be gone when we exit the application. Let's modify link:{repoURL}/src/main/java/seedu/address/storage/JsonAdaptedPerson.java[`JsonAdaptedPerson`] to include a `Remark` field so that it will be saved.
+We now have `Remark` s for `Person` s, but they will be gone when we exit the application. Let's modify link:{repoURL}blob/master/src/main/java/seedu/address/storage/JsonAdaptedPerson.java[`JsonAdaptedPerson`] to include a `Remark` field so that it will be saved.
 
 **Main:**
 
@@ -937,23 +1065,23 @@ We now have `Remark` s for `Person` s, but they will be gone when we exit the ap
 . Fix `invalidAndValidTaskManager.json`, `typicalTaskTaskManager.json`, `validTaskManager.json` etc., such that the JSON tests will not fail due to a missing `remark` field.
 
 ===== [Step 6b] Test: Add withRemark() for `PersonBuilder`
-Since `Person` can now have a `Remark`, we should add a helper method to link:{repoURL}/src/test/java/seedu/address/testutil/PersonBuilder.java[`PersonBuilder`], so that users are able to create remarks when building a link:{repoURL}/src/main/java/seedu/address/model/person/Person.java[`Person`].
+Since `Person` can now have a `Remark`, we should add a helper method to link:{repoURL}blob/master/src/test/java/seedu/address/testutil/PersonBuilder.java[`PersonBuilder`], so that users are able to create remarks when building a link:{repoURL}/src/main/java/seedu/address/model/person/Person.java[`Person`].
 
 **Tests:**
 
-. Add a new method `withRemark()` for link:{repoURL}/src/test/java/seedu/address/testutil/PersonBuilder.java[`PersonBuilder`]. This method will create a new `Remark` for the person that it is currently building.
-. Try and use the method on any sample `Person` in link:{repoURL}/src/test/java/seedu/address/testutil/TypicalPersons.java[`TypicalPersons`].
+. Add a new method `withRemark()` for link:{repoURL}blob/master/src/test/java/seedu/address/testutil/PersonBuilder.java[`PersonBuilder`]. This method will create a new `Remark` for the person that it is currently building.
+. Try and use the method on any sample `Person` in link:{repoURL}blob/master/src/test/java/seedu/address/testutil/TypicalPersons.java[`TypicalPersons`].
 
 ===== [Step 7] Ui: Connect `Remark` field to `PersonCard`
-Our remark label in link:{repoURL}/src/main/java/seedu/address/ui/PersonCard.java[`PersonCard`] is still a placeholder. Let's bring it to life by binding it with the actual `remark` field.
+Our remark label in link:{repoURL}blob/master/src/main/java/seedu/address/ui/PersonCard.java[`PersonCard`] is still a placeholder. Let's bring it to life by binding it with the actual `remark` field.
 
 **Main:**
 
-. Modify link:{repoURL}/src/main/java/seedu/address/ui/PersonCard.java[`PersonCard`]'s constructor to bind the `Remark` field to the `Person` 's remark.
+. Modify link:{repoURL}blob/master/src/main/java/seedu/address/ui/PersonCard.java[`PersonCard`]'s constructor to bind the `Remark` field to the `Person` 's remark.
 
 **Tests:**
 
-. Modify link:{repoURL}/src/test/java/seedu/address/ui/testutil/GuiTestAssert.java[`GuiTestAssert#assertCardDisplaysPerson(...)`] so that it will compare the now-functioning remark label.
+. Modify link:{repoURL}blob/master/src/test/java/seedu/address/ui/testutil/GuiTestAssert.java[`GuiTestAssert#assertCardDisplaysPerson(...)`] so that it will compare the now-functioning remark label.
 
 ===== [Step 8] Logic: Implement `RemarkCommand#execute()` logic
 We now have everything set up... but we still can't modify the remarks. Let's finish it up by adding in actual logic for our `remark` command.
@@ -1011,7 +1139,17 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* *` |user |change the colours and sizes of the text |make things easier to read
 
-|`* *` |user |secure my task manager via a username and password to hide contacts by default |keep my events and due dates private and secure to minimize the chances of someone seeing them by accident
+|`* *` |user |secure my task manager via a username and password to keep my events safe |keep my events and due dates private and secure to minimize the chances of someone deleting them
+
+|`* *` |user | have my password hashed | keep my password safe without anyone easily retrieving them through my computer
+
+|`* *` |user | have admins to be able to access over my account | allow them to add or edit any tasks
+
+|`* *` |user | have just one task manager account | make things simple and minimal
+
+|`* *` |administrator | be able to delete an account  | assist the user by resetting their account if they forget their password
+
+|`* *` |administrator | be able to use commands like the user | assign task and dealines to the user
 
 |`*` |user |change the theme of the GUI |
 
