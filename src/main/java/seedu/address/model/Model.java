@@ -231,12 +231,6 @@ public interface Model {
     void setSelectedNotes(Notes notes);
 
     /**
-     * Deletes the given task.
-     * The task must exist in the task manager.
-     */
-    void deleteNotes(Notes target);
-
-    /**
      * Returns the selected task in the filtered task list.
      * null if no task is selected.
      */
