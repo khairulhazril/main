@@ -1127,13 +1127,13 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |Priority |As a ... |I want to ... |So that I can...
 |`* * *` |new user |see usage instructions |remember how to accomplish tasks in the program
 
-|`* * *` |user |add a new task |
+|`* * *` |user |add a new task |keep track of tasks and deadlines
 
-|`* * *` |user |delete a task |remove entries that I no longer need
+|`* * *` |user |delete a task |remove tasks that I no longer need
 
-|`* * *` |user |edit an task |keep entries up to date
+|`* * *` |user |edit an task |keep tasks up to date
 
-|`* * *` |user |find a task by name |locate details of event without having to go through the entire list
+|`* * *` |user |find a task by name |locate details of a task without having to go through the entire list
 
 |`* * *` |user |have an intuitive and easy-to-read calender |view upcoming tasks quickly and easily
 
@@ -1167,9 +1167,9 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* *` |user |store miscellaneous notes |keep track of important events other than tasks
 
-|`* *` |user | have just one task manager account | make things simple and minimal
+|`* *` |user |have just one task manager account |make things simple and minimal
 
-|`* *` |administrator | be able to use commands like the user | assign task and deadlines to the user
+|`* *` |administrator |be able to use commands like the user |assign task and deadlines to the user
 
 |`*` |user |change the theme of the GUI |allow me to customise the app's appearance to my liking
 
@@ -1178,8 +1178,6 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |`*` |user |change the colours and sizes of the text |make things easier to read
 
 |=======================================================================
-
-_{More to be added}_
 
 [appendix]
 == Use Cases
