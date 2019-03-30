@@ -8,7 +8,7 @@ import javafx.scene.text.Text;
  */
 public class CalendarCellTask extends Text {
     //Colours for priority, in order for highest to lowest. In order, red, orange, blue.
-    private static final String[] PRIORITYCOLOURS = new String[] { "#FF2D00", "#FFA000", "#0000FF" };
+    private static final String[] PRIORITY_COLOURS = new String[] { "#FF2D00", "#FFA000", "#0000FF" };
 
     private int priority;
 
@@ -47,7 +47,7 @@ public class CalendarCellTask extends Text {
      * Sets the colour of the text based on the priority of the task.
      */
     private void setTextColour() {
-        setFill(Paint.valueOf(PRIORITYCOLOURS[priority - 1]));
+        setFill(Paint.valueOf(PRIORITY_COLOURS[priority - 1]));
     }
 
     /**
