@@ -13,9 +13,9 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.GenerateHash;
-import seedu.address.model.login.Password;
-import seedu.address.model.login.User;
-import seedu.address.model.login.Username;
+import seedu.address.model.account.Password;
+import seedu.address.model.account.User;
+import seedu.address.model.account.Username;
 import seedu.address.storage.JsonLoginStorage;
 
 /**
@@ -34,7 +34,7 @@ public class LoginEvent {
      */
 
     public LoginEvent() {
-        final Path loginInfoPath = Paths.get("login.json");
+        final Path loginInfoPath = Paths.get("account.json");
         final Username username = new Username("admin");
         final Password password = new Password("admin");
         user = new User(username, password);
@@ -54,7 +54,7 @@ public class LoginEvent {
      * Reinitialize LoginEvent
      */
     public void reinitialize() {
-        final Path loginInfoPath = Paths.get("login.json");
+        final Path loginInfoPath = Paths.get("account.json");
         final Username username = new Username("admin");
         final Password password = new Password("admin");
         user = new User(username, password);
@@ -84,7 +84,7 @@ public class LoginEvent {
         } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
             logger.warning("Password cannot be hashed");
         } catch (FileNotFoundException e) {
-            logger.warning("login.json cannot be found in file path" + StringUtil.getDetails(e));
+            logger.warning("account.json cannot be found in file path" + StringUtil.getDetails(e));
         } catch (IOException e) {
             logger.warning("User storage is unable to read or write to Json file" + StringUtil.getDetails(e));
         }
@@ -143,7 +143,7 @@ public class LoginEvent {
     }
 
     /**
-     * Deletes login.Json file with accounts
+     * Deletes account.Json file with accounts
      * @return
      */
     public void deleteAccount() {
@@ -172,7 +172,7 @@ public class LoginEvent {
     }
 
     /**
-     * Retrieves the login status of the user
+     * Retrieves the account status of the user
      * @return true if user is logged in
      */
     public boolean getLoginStatus() {
@@ -180,7 +180,7 @@ public class LoginEvent {
     }
 
     /**
-     * Retrieves the login status of the admin
+     * Retrieves the account status of the admin
      * @return true if the admin is logged in
      */
     public boolean getAdminStatus() {

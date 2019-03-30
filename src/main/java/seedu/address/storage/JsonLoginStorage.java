@@ -80,7 +80,7 @@ public class JsonLoginStorage implements LoginStorage {
     }
 
     /**
-     * Creates user login account with JSON file
+     * Creates user account account with JSON file
      * @throws IOException if cannot be written to JSON file
      */
     private void createLoginInfoFile() throws IOException {
