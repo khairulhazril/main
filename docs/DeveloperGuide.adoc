@@ -1124,27 +1124,25 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |Priority |As a ... |I want to ... |So that I can...
 |`* * *` |new user |see usage instructions |remember how to accomplish tasks in the program
 
-|`* * *` |user |add a new task |
+|`* * *` |user |add a new task |add new tasks to the task manager
 
-|`* * *` |user |delete a task |remove entries that I no longer need
+|`* * *` |user |delete a task |remove tasks that I no longer need
 
-|`* * *` |user |edit an task |keep entries up to date
+|`* * *` |user |edit an task |keep tasks up to date
 
-|`* * *` |user |find a task by name |locate details of event without having to go through the entire list
+|`* * *` |user |find a task by name |locate details of a task without having to go through the entire list
 
 |`* * *` |user |have an intuitive and easy-to-read calender |view upcoming tasks quickly and easily
 
 |`* * *` |user |have the calender update in real time as tasks are added or removed |instantly view changes made to the list of tasks
 
-|`* * *` |user |have an intuitive and easy-to-read calender |view upcoming tasks quickly and easily
-
 |`* * *` |user |secure my task manager via a username and password to keep my events safe |keep my events and due dates private and secure to minimize the chances of someone deleting them
 
-|`* * *` |user | have my password hashed | keep my password safe without anyone easily retrieving them through my computer
+|`* * *` |user |have my password hashed |keep my password safe without anyone easily retrieving them through my computer
 
-|`* * *` |user | have admins to be able to access over my account | allow them to add or edit any tasks
+|`* * *` |user |have admins to be able to access over my account |allow them to add or edit any tasks
 
-|`* * *` |administrator | be able to delete an account  | assist the user by resetting their account if they forget their password
+|`* * *` |administrator |be able to delete an account |assist the user by resetting their account if they forget their password
 
 |`* *` |user |have an tasks on the calendar sorted in order of priority |easily see which tasks are the most urgent
 
@@ -1162,17 +1160,15 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* *` |user |store miscellaneous notes |keep track of important events other than tasks
 
-|`* *` |user | have just one task manager account | make things simple and minimal
+|`* *` |user |have just one task manager account |make things simple and minimal
 
-|`* *` |administrator | be able to use commands like the user | assign task and dealines to the user
+|`* *` |administrator |be able to use commands like the user |assign task and dealines to the user
 
 |`*` |user |change the theme of the GUI |allow me to customise the app's appearance to my liking
 
 |`*` |user |have the program automatically complete my inputs |save time by not having to write out the entire command or search query
 
 |=======================================================================
-
-_{More to be added}_
 
 [appendix]
 == Use Cases
