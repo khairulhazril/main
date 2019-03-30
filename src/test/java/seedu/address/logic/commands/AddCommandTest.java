@@ -216,6 +216,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean getAdminStatus() {
+            return false;
+        }
+
+        @Override
         public Username getUsername() {
             throw new AssertionError("This method should not be called.");
         }
@@ -238,6 +243,16 @@ public class AddCommandTest {
         @Override
         public void newUser(User user) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean accountExists() {
+            return false;
+        }
+
+        @Override
+        public void deleteAccount() {
+
         }
 
         @Override
@@ -267,11 +282,6 @@ public class AddCommandTest {
 
         @Override
         public void setSelectedNotes(Notes notes) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void deleteNotes(Notes target) {
             throw new AssertionError("This method should not be called.");
         }
 
