@@ -1124,7 +1124,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |Priority |As a ... |I want to ... |So that I can...
 |`* * *` |new user |see usage instructions |remember how to accomplish tasks in the program
 
-|`* * *` |user |add a new task |add new tasks to the task manager
+|`* * *` |user |add a new task |keep track of tasks and deadlines
 
 |`* * *` |user |delete a task |remove tasks that I no longer need
 
