@@ -328,7 +328,7 @@ The username and hashed password are stored in a JSON file.
 
 The class diagram below illustrates the `account` class.
 
-image::AccountClassDiagram.png[width="400"]
+image::AccountClassDiagram.png[width="450"]
 
 * In `model` class, there are methods to check for +
 `loginStatus` (if the user is logged in), +
