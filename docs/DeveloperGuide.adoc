@@ -495,7 +495,7 @@ This feature allow users to add and view notes regarding miscellaneous matters.
 
 The class diagram below illustrates the `Notes` class.
 
-image::NotesClassDiagram.png[width="400"]
+image::NotesClassDiagram.png[width="450"]
 
 ==== Current Implementation
 
