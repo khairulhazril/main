@@ -6,8 +6,8 @@ import java.util.function.Predicate;
 import javafx.beans.property.ReadOnlyProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.login.User;
-import seedu.address.model.login.Username;
+import seedu.address.model.account.User;
+import seedu.address.model.account.Username;
 import seedu.address.model.notes.Notes;
 import seedu.address.model.task.Task;
 
@@ -166,7 +166,7 @@ public interface Model {
     void logout();
 
     /**
-     * User login to Task Manager.
+     * User account to Task Manager.
      */
     void loginUser(User loginInfo);
 
