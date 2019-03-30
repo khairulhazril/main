@@ -390,7 +390,7 @@ Step 7. Else, addNotes(notes) method is called and note is added.
 
 The sequence diagram below illustrates how the AddNotes mechanism function.
 
-image::AddNotesSequenceDiagram.png[width="900"]
+image::AddNotesSequenceDiagram.png[width="800"]
 
 ==== Design Considerations
 
