@@ -443,6 +443,10 @@ The Calendar extends the `TaskManager` GUI with an easy to read interface for tr
 `CalendarCell` represents each individual cell of the grid in the `CalendarPanel`.
 `CalendarCellTask` represents each individual task inside each `CalendarCell`.
 
+The following class diagram illustrates the relationships between `CalendarPanel`, `CalendarCell` and `CalendarCellTask`:
+
+image::CalendarClassDiagram.png[width="1000"]
+
 The following sequence diagram shows how the Calendar is built on startup:
 
 image::CalendarBuildSequenceDiagram.png[width="1000"]
