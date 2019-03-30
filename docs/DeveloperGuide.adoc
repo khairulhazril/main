@@ -988,27 +988,27 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |Priority |As a ... |I want to ... |So that I can...
 |`* * *` |new user |see usage instructions |remember how to accomplish tasks in the program
 
-|`* * *` |user |add a new event |
+|`* * *` |user |add a new task |
 
-|`* * *` |user |delete a event |remove entries that I no longer need
+|`* * *` |user |delete a task |remove tasks that I no longer need
 
-|`* * *` |user |edit an event |keep entries up to date
+|`* * *` |user |edit an task |keep tasks up to date
 
-|`* * *` |user |find a event by name |locate details of event without having to go through the entire list
-
-|`* *` |user |have multiple events with different tags for a single entry |combine duplicate events and prevent cofusion for multiple same events
+|`* * *` |user |find a task by name |locate details of task without having to go through the entire list
 
 |`* *` |user |find tasks by due date, tags, etc. |still find an important task if I forget their name
 
 |`* *` |user |find a task even if I mistype (e.g. incorrect capitalisation) |save time by not having to rewrite the query
 
-|`* *` |user |change the colours and sizes of the text |make things easier to read
+|`* *` |user |sort my tasks by the attributes |can view my tasks by urgency etc.
 
 |`* *` |user |secure my task manager via a username and password to hide contacts by default |keep my events and due dates private and secure to minimize the chances of someone seeing them by accident
 
-|`* *` |user |change the theme of the GUI |
+|`*` |user |change the theme of the GUI |
 
 |`*` |user |have the program autocomplete my inputs |save time by not having to write out the entire command or search query
+
+|`*` |user |change the colours and sizes of the text |make things easier to read
 
 |=======================================================================
 
@@ -1121,11 +1121,11 @@ Use case resumes at step 2.
 
 
 [discrete]
-=== Use case: Find task
+=== Use case: Find task by name
 
 *MSS*
 
-1. User requests to find a task
+1. User requests to find a task by name
 2. Task Manager shows the tasks according to user's input
 +
 Use case ends.
@@ -1144,6 +1144,97 @@ Use case ends.
 ** 2bi. Task manager shows an error
 +
 Use case resumes at step 2.
+
+=== Use case: Find task by module
+
+*MSS*
+
+1. User requests to find a task by module
+2. Task Manager shows the tasks according to user's input
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The list is empty
++
+Use case ends.
+
+[none]
+* 2b. The given index is invalid
++
+[none]
+** 2bi. Task manager shows an error
++
+Use case resumes at step 2.
+
+=== Use case: Find task by date
+
+*MSS*
+
+1. User requests to find a task by date
+2. Task Manager shows the tasks according to user's input
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The list is empty
++
+Use case ends.
+
+[none]
+* 2b. The given index is invalid
++
+[none]
+** 2bi. Task manager shows an error
++
+Use case resumes at step 2.
+
+=== Use case: Find task by priority
+
+*MSS*
+
+1. User requests to find a task by priority
+2. Task Manager shows the tasks according to user's input
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The list is empty
++
+Use case ends.
+
+[none]
+* 2b. The given index is invalid
++
+[none]
+** 2bi. Task manager shows an error
++
+Use case resumes at step 2.
+
+=== Use case: Sort tasks
+
+*MSS*
+
+1. User requests to sort tasks by an attribute
+2. Task Manager sorts the tasks according to user's input
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1b. The given index is invalid
++
+[none]
+** 1ai. Task manager shows an error
++
+Use case resumes at step 1.
 
 _{More to be added}_
 
