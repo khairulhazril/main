@@ -427,6 +427,8 @@ Then we convert the relevant attributes of the tasks in the Task List to string 
 Step 5. This will sort `ObservableList<Task> sortedList`.
 After returning the sorted Task List, the Task Manager is then committed.
 
+image::SortSequenceDiagram.png[width="900"]
+
 ==== Design Considerations
 
 ===== Aspect: How sort executes
