@@ -15,8 +15,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.login.User;
-import seedu.address.model.login.Username;
+import seedu.address.model.account.User;
+import seedu.address.model.account.Username;
 import seedu.address.model.notes.Notes;
 import seedu.address.model.notes.exceptions.NotesNotFoundException;
 import seedu.address.model.task.Task;
@@ -51,7 +51,6 @@ public class ModelManager implements Model {
         filteredTasks.addListener(this::ensureSelectedTaskIsValid);
         filteredNotes = new FilteredList<>(versionedTaskManager.getNotesList());
         loginEvent = new LoginEvent();
-        filteredNotes.addListener(this::ensureSelectedNotesIsValid);
     }
 
     public ModelManager() {
@@ -66,10 +65,26 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean getAdminStatus() {
+        return loginEvent.getAdminStatus();
+    }
+
+    @Override
     public boolean userExists(User user) {
         requireNonNull(user);
         return loginEvent.userExists(user);
     }
+
+    @Override
+    public boolean accountExists() {
+        return loginEvent.accountExists();
+    }
+
+    @Override
+    public void deleteAccount() {
+        loginEvent.deleteAccount();
+    }
+
 
     @Override
     public void newUser(User user) {
@@ -185,10 +200,6 @@ public class ModelManager implements Model {
 
     }
 
-    @Override
-    public void deleteNotes(Notes notes) {
-        versionedTaskManager.removeNotes(notes);
-    }
 
     //=========== Filtered Task List Accessors =============================================================
 
@@ -340,36 +351,5 @@ public class ModelManager implements Model {
         }
         selectedNotes.setValue(notes);
     }
-
-    /**
-     * Ensures {@code selectedTask} is a valid task in {@code filteredTasks}.
-     */
-    private void ensureSelectedNotesIsValid(ListChangeListener.Change<? extends Notes> change) {
-        while (change.next()) {
-            if (selectedNotes.getValue() == null) {
-                // null is always a valid selected task, so we do not need to check that it is valid anymore.
-                return;
-            }
-
-            boolean wasSelectedNotesReplaced = change.wasReplaced() && change.getAddedSize() == change.getRemovedSize()
-                    && change.getRemoved().contains(selectedNotes.getValue());
-            if (wasSelectedNotesReplaced) {
-                // Update selectedTask to its new value.
-                int index = change.getRemoved().indexOf(selectedNotes.getValue());
-                selectedNotes.setValue(change.getAddedSubList().get(index));
-                continue;
-            }
-
-            boolean wasSelectedNotesRemoved = change.getRemoved().stream()
-                    .anyMatch(removedNotes -> selectedNotes.getValue().isSameNotes(removedNotes));
-            if (wasSelectedNotesRemoved) {
-                // Select the task that came before it in the list,
-                // or clear the selection if there is no such task.
-                selectedNotes.setValue(change.getFrom() > 0 ? change.getList().get(change.getFrom() - 1) : null);
-            }
-        }
-    }
-
-
 
 }

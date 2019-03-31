@@ -7,7 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.login.User;
+import seedu.address.model.account.User;
 
 /**
  * SignUp Command
@@ -20,9 +20,12 @@ public class SignupCommand extends Command {
             + PREFIX_USERNAME + "USERNAME "
             + PREFIX_PASSWORD + "PASSWORD";
 
-    public static final String MESSAGE_LOGGED = "Logged in: %1$s!";
+    public static final String MESSAGE_LOGGED = "You are logged in as %1$s!";
     public static final String MESSAGE_SUCCESS = "Signed up: %1$s";
-    public static final String MESSAGE_EXISTS = "Please try another username";
+    public static final String MESSAGE_USER_EXISTS = "Please try another username!";
+    public static final String MESSAGE_ACCOUNT_EXISTS = "Account has already been created!";
+    public static final String MESSAGE_INVALID_FORMAT = "Invalid format! "
+                                                      + "Command Format: [signup u/USERNAME p/PASSWORD]";
 
     private final User signingUp;
 
@@ -46,7 +49,11 @@ public class SignupCommand extends Command {
         }
         // The account is already exist
         if (model.userExists(signingUp)) {
-            throw new CommandException(MESSAGE_EXISTS);
+            throw new CommandException(MESSAGE_USER_EXISTS);
+        }
+
+        if (model.accountExists()) {
+            throw new CommandException(MESSAGE_ACCOUNT_EXISTS);
         }
         // Signs up the user with a new account
         model.newUser(signingUp);

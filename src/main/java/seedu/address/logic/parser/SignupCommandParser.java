@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.commands.SignupCommand.MESSAGE_INVALID_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
 import static seedu.address.logic.parser.ParserUtil.parsePassword;
@@ -9,16 +10,14 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.SignupCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.login.Password;
-import seedu.address.model.login.User;
-import seedu.address.model.login.Username;
+import seedu.address.model.account.Password;
+import seedu.address.model.account.User;
+import seedu.address.model.account.Username;
 
 /**
  * SignupCommand Parser
  */
 public class SignupCommandParser implements Parser<SignupCommand> {
-
-    public static final String MESSAGE_INVALID_FORMAT = "Invalid format!";
 
     /**
      * Creates a SignupCommand parser to create a user

@@ -101,19 +101,12 @@ public class Due {
     }
 
     /**
-     * Returns -1 if the task is overdue, 0 if the task is due within 7 days and 1 if the task is due after 7 days
-     * @return
+     * @return number of days till task is due
      */
     public int daysRemaining() {
         int duration = daysDifference(getCurrentDate(), getDate());
 
-        if (duration < 0) {
-            return -1;
-        } else if (duration > 7) {
-            return 1;
-        } else {
-            return 0;
-        }
+        return duration;
     }
 
     @Override

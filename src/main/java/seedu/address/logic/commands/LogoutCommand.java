@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.login.Username;
+import seedu.address.model.account.Username;
 
 /**
  * Logout Command
@@ -20,7 +20,7 @@ public class LogoutCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         // User is already logged out
-        if (!model.getLoginStatus()) {
+        if (!model.getLoginStatus() && !model.getAdminStatus()) {
             throw new CommandException(MESSAGE_LOGIN);
         }
         // Get username for printout statement

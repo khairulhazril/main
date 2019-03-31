@@ -6,8 +6,8 @@ import java.util.function.Predicate;
 import javafx.beans.property.ReadOnlyProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.login.User;
-import seedu.address.model.login.Username;
+import seedu.address.model.account.User;
+import seedu.address.model.account.Username;
 import seedu.address.model.notes.Notes;
 import seedu.address.model.task.Task;
 
@@ -150,6 +150,12 @@ public interface Model {
     boolean getLoginStatus();
 
     /**
+     * Returns true if the admin is logged in.
+     */
+
+    boolean getAdminStatus();
+
+    /**
      * Return Username of logged in user.
      */
     Username getUsername();
@@ -160,19 +166,30 @@ public interface Model {
     void logout();
 
     /**
-     * User login to Task Manager.
+     * User account to Task Manager.
      */
     void loginUser(User loginInfo);
 
     /**
-     *  Returns true if user exists
+     *  Returns true if user exists.
      */
     boolean userExists(User user);
 
     /**
-     * A new user is registered in Task Manager
+     * A new user is registered in Task Manager.
      */
     void newUser(User user);
+
+    /**
+     * There is already an account created.
+     */
+    boolean accountExists();
+
+    /**
+     * Deletes the account.
+     * Only admin can access this command.
+     */
+    void deleteAccount();
 
     //=====================Notes========================================================
 
@@ -212,12 +229,6 @@ public interface Model {
      * Sets the selected task in the filtered task list.
      */
     void setSelectedNotes(Notes notes);
-
-    /**
-     * Deletes the given task.
-     * The task must exist in the task manager.
-     */
-    void deleteNotes(Notes target);
 
     /**
      * Returns the selected task in the filtered task list.
