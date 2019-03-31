@@ -13,15 +13,13 @@ AddressBook - Level 4 is a desktop address book application used for teaching So
 
 == Summary of contributions
 
-* *Major enhancement 1*: *Sort* - Sorts the tasks in the task manager by name, module, date or priority.
-** What it does:
-*** allows the user to view the tasks in a more systematic order
-*** a
-** Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-** Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-** Credits: _{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}_
+* *Major enhancement 1*: *Sort* - Sorts the tasks in the task manager.
+** What it does: It allows the user to view the tasks in a more systematic order by name, module, date or priority.
+** Justification: This feature improves the product significantly because it provides the user with the ability to organise the task list based on the attribute they choose. This allows the user to plan their schedule based on the due date, priority or module.
 
-* *Minor enhancement*: added a history command that allows the user to navigate to previous commands using up/down keys.
+* *Major enhancement 2*:
+
+* *Minor enhancement*:
 
 * *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
 
