@@ -14,23 +14,23 @@ import seedu.address.model.account.User;
  */
 
 public class LoginCommand extends Command {
-    public static final String COMMAND_WORD = "account";
+    public static final String COMMAND_WORD = "login";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "USERNAME: "
                                              + PREFIX_USERNAME + "PASSWORD: "
                                              + PREFIX_PASSWORD;
     public static final String MESSAGE_SUCCESS = "Logged in as %1$s";
     public static final String MESSAGE_LOGGED_USER = "You are already logged in! You need to logout"
-                                                   + " if you want to account into another account.";
+                                                   + " if you want to login into another account.";
     public static final String MESSAGE_LOGGED_ADMIN = "You are logged in as admin.";
 
     public static final String MESSAGE_FAILURE = "Please Login again! "
-                                               + "Command Format: [account u/USERNAME p/PASSWORD]";
+                                               + "Command Format: [login u/USERNAME p/PASSWORD]";
 
     private final User loginInfo;
 
     /**
-     * Creates a LoginCommand to account user
+     * Creates a LoginCommand to login user
      *
      * @param user
      */
