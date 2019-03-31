@@ -24,6 +24,8 @@ public class SignupCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Signed up: %1$s";
     public static final String MESSAGE_USER_EXISTS = "Please try another username!";
     public static final String MESSAGE_ACCOUNT_EXISTS = "Account has already been created!";
+    public static final String MESSAGE_INVALID_FORMAT = "Invalid format! "
+                                                      + "Command Format: [signup u/USERNAME p/PASSWORD]";
 
     private final User signingUp;
 
