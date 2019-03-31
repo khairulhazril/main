@@ -207,4 +207,8 @@ public class CalendarPanel extends UiPart<Region> {
         calendarDate = LocalDate.of(yearMonth.getYear(), yearMonth.getMonthValue(), 1);
     }
 
+    public GridPane getTaskGridPane() {
+        return taskGridPane;
+    }
+
 }
