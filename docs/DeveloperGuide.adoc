@@ -349,8 +349,6 @@ The flow on how the commands are executed and their respective sequence diagrams
 
 Given below is an example usage scenario of `signup`.
 
-|===
-
 Step 1. The user signs up and keys in username and password using the command `signup u/USERNAME p/PASSWORD`.
 
 Step 2. The `TaskManagerParser` recognises the command word as a signup from `SignupCommand` and calls `SignupCommand`.
@@ -370,8 +368,6 @@ Step 4. `JsonLoginStorage` retrieves the User object to read and write Json file
 
 Step 5. It will then return to `loginEvent` then to `SignupCommand` and returns the user a successful signup output.
 
-|===
-
 The sequence diagram below shows the flow of `signup` from Step 1 to Step 5 above.
 
 image::SignUpSequenceDiagram.png[width="900"]
@@ -381,8 +377,6 @@ image::SignUpSequenceDiagram.png[width="900"]
 * Login Command logs in the account for the user by checking the username and password stored in the JSON file.
 
 Given below is an example usage scenario of `login`.
-
-|===
 
 Step 1. The user logs in by keying in username and password using the command `login u/USERNAME p/PASSWORD`.
 
@@ -401,8 +395,6 @@ Step 4. In`LoginEvent`, `JsonLoginStorage` retrieves the username and hashed pas
 Step 5. `loginEvent` will then check if the user inputs matches the username and password stored and
 will then return to `LoginCommand` and returns the user a successful login output.
 
-|===
-
 The sequence diagram below shows the flow of `login` from Step to Step above.
 
 image::LoginSequenceDiagram.png[width="900"]
@@ -412,8 +404,6 @@ image::LoginSequenceDiagram.png[width="900"]
 * Logout Command logs the user out of their account.
 
 Given below is an example usage scenario of `logout`.
-
-|===
 
 Step 1. The user logs out by keying in the command `logout`.
 
@@ -429,8 +419,6 @@ If the arguments passes `getLoginStatus` and `getAdminStatus`, `logout` will be 
 Step 4. In`LoginEvent`, `getLoginStatus` and `getAdminStatus` will be set to false and will then
 return to `LoginCommand` to return the user a successful logout output.
 
-|===
-
 The sequence diagram below shows the flow of `logout` from Step to Step above.
 
 image::LogoutSequenceDiagram.png[width="900"]
@@ -440,8 +428,6 @@ image::LogoutSequenceDiagram.png[width="900"]
 * DeleteAcc Command is only accessible to admins. DeleteAcc deletes the entire account.
 
 Given below is an example usage scenario of `DeleteAcc`.
-
-|===
 
 Step 1. The admin logs in by keying in username and password using the command `login u/USERNAME p/PASSWORD`.
 
@@ -462,8 +448,6 @@ Step 6. `LoginEvent` will then call `reinitialise()` to create the Json file
 without any username and password stored in it. `reinitialise()` is assisted by `JsonLoginStorage` and `writeJson()`.
 
 Step 7. `LoginEvent` will return to `DeleteAccountCommand` and returns the user a successful login output.
-
-|===
 
 The sequence diagram below shows the flow of `deleteacc` from Step to Step above.
 
