@@ -5,14 +5,10 @@ import static seedu.address.testutil.TypicalTasks.getTypicalTasks;
 import java.time.LocalDate;
 import java.time.YearMonth;
 
-import javafx.beans.value.ObservableBooleanValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.GridPane;
 import seedu.address.model.task.Task;
-import seedu.address.ui.CalendarCell;
 import seedu.address.ui.CalendarPanel;
 
 /**
@@ -20,10 +16,10 @@ import seedu.address.ui.CalendarPanel;
  * {@code CalendarContentCell}.
  */
 public class CalendarPanelHandle {
+    public static final String CALENDAR_PANEL_ID = "#calendarView";
+
     private static final ObservableList<Task> TYPICAL_TASKS =
             FXCollections.observableList(getTypicalTasks());
-
-    public static final String CALENDAR_PANEL_ID = "#calendarView";
 
     private static final int COLS = 7; // 7 Days in a week
     private static final int ROWS = 8; // 6 Rows + Day Header + Month Header

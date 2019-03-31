@@ -1,9 +1,7 @@
 package seedu.address.ui;
 
-import static java.time.Duration.ofMillis;
-import static org.junit.jupiter.api.Assertions.assertTimeout;
-import static org.junit.jupiter.api.Assertions.assertTimeoutPreemptively;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import static seedu.address.testutil.TypicalTasks.getTypicalTasks;
 
 import java.util.Collections;
