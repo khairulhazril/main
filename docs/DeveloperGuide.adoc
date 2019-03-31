@@ -227,7 +227,7 @@ The `Storage` component,
 [[Design-Commons]]
 === Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.address.commons` package.
 
 == Implementation
 
@@ -257,7 +257,7 @@ Step 2. The user executes `delete 5` command to delete the 5th task in the task 
 
 image::UndoRedoNewCommand1StateListDiagram.png[width="800"]
 
-Step 3. The user executes `add n/David ...` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/Project ...` to add a new task. The `add` command also calls `Model#commitTaskManager()`, causing another modified task manager state to be saved into the `taskManagerStateList`.
 
 image::UndoRedoNewCommand2StateListDiagram.png[width="800"]
 
@@ -284,7 +284,7 @@ Step 5. The user then decides to execute the command `list`. Commands that do no
 
 image::UndoRedoNewCommand3StateListDiagram.png[width="800"]
 
-Step 6. The user executes `clear`, which calls `Model#commitTaskManager()`. Since the `currentStatePointer` is not pointing at the end of the `taskManagerStateList`, all task manager states after the `currentStatePointer` will be purged. We designed it this way because it no longer makes sense to redo the `add n/David ...` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitTaskManager()`. Since the `currentStatePointer` is not pointing at the end of the `taskManagerStateList`, all task manager states after the `currentStatePointer` will be purged. We designed it this way because it no longer makes sense to redo the `add n/Project ...` command. This is the behavior that most modern desktop applications follow.
 
 image::UndoRedoNewCommand4StateListDiagram.png[width="800"]
 
@@ -328,7 +328,7 @@ The username and hashed password are stored in a JSON file.
 
 The class diagram below illustrates the `account` class.
 
-image::AccountClassDiagram.png[width="900"]
+image::AccountClassDiagram.png[width="450"]
 
 * In `model` class, there are methods to check for +
 `loginStatus` (if the user is logged in), +
@@ -495,7 +495,7 @@ This feature allow users to add and view notes regarding miscellaneous matters.
 
 The class diagram below illustrates the `Notes` class.
 
-image::NotesClassDiagram.png[width="400"]
+image::NotesClassDiagram.png[width="450"]
 
 ==== Current Implementation
 
@@ -547,15 +547,19 @@ Given below is an example usage scenario.
 
 Step 1. The user keys in `sort ATTRIBUTE`, the `SortCommandParser` will trim the command to get the attribute.
 
-Step 2. If the attribute is valid, it will then pass the attribute to `SortCommand`.
+Step 2. If the attribute is valid, it will then create a new `SortCommand` and execute with the given attribute.
 
-Step 3. `SortCommand` will then call `ModelManager#sortTask(attribute)`.
+Step 3. `SortCommand` will then call `ModelManager#sortTask(toSortBy)`.
 
 Step 4. It will then call `TaskManager#sortTask(attribute)`.
 Then we convert the relevant attributes of the tasks in the Task List to string to compare using `string#compareTo()`.
 
-Step 5. This will sort `ObservableList<Task> sortedList`.
+Step 5. Then, we use `setTasks()` in `UniqueTaskList`to update the Task List.
 After returning the sorted Task List, the Task Manager is then committed.
+
+The Sequence Diagram below illustrates how the sort mechanism functions. More specifically, sorting by module code.
+
+image::SortSequenceDiagram.png[width="900"]
 
 ==== Design Considerations
 
@@ -818,7 +822,7 @@ Here are the steps to create a new release.
 
 === Managing Dependencies
 
-A project often depends on third-party libraries. For example, Address Book depends on the https://github.com/FasterXML/jackson[Jackson library] for JSON parsing. Managing these _dependencies_ can be automated using Gradle. For example, Gradle can download the dependencies automatically, which is better than these alternatives:
+A project often depends on third-party libraries. For example, Task Manager depends on the https://github.com/FasterXML/jackson[Jackson library] for JSON parsing. Managing these _dependencies_ can be automated using Gradle. For example, Gradle can download the dependencies automatically, which is better than these alternatives:
 
 [loweralpha]
 . Include those libraries in the repo (this bloats the repo size)
@@ -847,14 +851,14 @@ Each individual exercise in this section is component-based (i.e. you would not 
 [TIP]
 Do take a look at <<Design-Logic>> before attempting to modify the `Logic` component.
 
-. Add a shorthand equivalent alias for each of the individual commands. For example, besides typing `clear`, the user can also type `c` to remove all persons in the list.
+. Add a shorthand equivalent alias for each of the individual commands. For example, besides typing `clear`, the user can also type `c` to remove all tasks in the list.
 +
 ****
 * Hints
-** Just like we store each individual command word constant `COMMAND_WORD` inside `*Command.java` (e.g.  link:{repoURL}blob/master/src/main/java/seedu/address/logic/commands/FindCommand.java[`FindCommand#COMMAND_WORD`], link:{repoURL}blob/master/src/main/java/seedu/address/logic/commands/DeleteCommand.java[`DeleteCommand#COMMAND_WORD`]), you need a new constant for aliases as well (e.g. `FindCommand#COMMAND_ALIAS`).
-** link:{repoURL}blob/master/src/main/java/seedu/address/logic/parser/AddressBookParser.java[`AddressBookParser`] is responsible for analyzing command words.
+** Just like we store each individual command word constant `COMMAND_WORD` inside `*Command.java` (e.g.  link:{repoURL}blob/master/src/main/java/seedu/address/logic/commands/FindNameCommand.java[`FindNameCommand#COMMAND_WORD`], link:{repoURL}blob/master/src/main/java/seedu/address/logic/commands/DeleteCommand.java[`DeleteCommand#COMMAND_WORD`]), you need a new constant for aliases as well (e.g. `FindCommand#COMMAND_ALIAS`).
+** link:{repoURL}blob/master/src/main/java/seedu/address/logic/parser/TaskManagerParser.java[`TaskManagerParser`] is responsible for analyzing command words.
 * Solution
-** Modify the switch statement in link:{repoURL}blob/master/src/main/java/seedu/address/logic/parser/AddressBookParser.java[`AddressBookParser#parseCommand(String)`] such that both the proper command word and alias can be used to execute the same intended command.
+** Modify the switch statement in link:{repoURL}blob/master/src/main/java/seedu/address/logic/parser/TaskManagerParser.java[`TaskManagerParser#parseCommand(String)`] such that both the proper command word and alias can be used to execute the same intended command.
 ** Add new tests for each of the aliases that you have added.
 ** Update the user guide to document the new aliases.
 ** See this https://github.com/se-edu/addressbook-level4/pull/785[PR] for the full solution.
@@ -863,21 +867,21 @@ Do take a look at <<Design-Logic>> before attempting to modify the `Logic` compo
 [discrete]
 ==== `Model` component
 
-*Scenario:* You are in charge of `model`. One day, the `logic`-in-charge approaches you for help. He wants to implement a command such that the user is able to remove a particular tag from everyone in the address book, but the model API does not support such a functionality at the moment. Your job is to implement an API method, so that your teammate can use your API to implement his command.
+*Scenario:* You are in charge of `model`. One day, the `logic`-in-charge approaches you for help. He wants to implement a command such that the user is able to remove a particular tag from every task in the task manager, but the model API does not support such a functionality at the moment. Your job is to implement an API method, so that your teammate can use your API to implement his command.
 
 [TIP]
 Do take a look at <<Design-Model>> before attempting to modify the `Model` component.
 
-. Add a `removeTag(Tag)` method. The specified tag will be removed from everyone in the address book.
+. Add a `removeTag(Tag)` method. The specified tag will be removed from every task in the task manager.
 +
 ****
 * Hints
-** The link:{repoURL}blob/master/src/main/java/seedu/address/model/Model.java[`Model`] and the link:{repoURL}blob/master/src/main/java/seedu/address/model/AddressBook.java[`AddressBook`] API need to be updated.
+** The link:{repoURL}blob/master/src/main/java/seedu/address/model/Model.java[`Model`] and the link:{repoURL}blob/master/src/main/java/seedu/address/model/TaskManager.java[`TaskManager`] API need to be updated.
 ** Think about how you can use SLAP to design the method. Where should we place the main logic of deleting tags?
-**  Find out which of the existing API methods in  link:{repoURL}blob/master/src/main/java/seedu/address/model/AddressBook.java[`AddressBook`] and link:{repoURL}blob/master/src/main/java/seedu/address/model/person/Person.java[`Person`] classes can be used to implement the tag removal logic. link:{repoURL}blob/master/src/main/java/seedu/address/model/AddressBook.java[`AddressBook`] allows you to update a person, and link:{repoURL}blob/master/src/main/java/seedu/address/model/person/Person.java[`Person`] allows you to update the tags.
+**  Find out which of the existing API methods in  link:{repoURL}blob/master/src/main/java/seedu/address/model/TaskManager.java[`TaskManager`] and link:{repoURL}blob/master/src/main/java/seedu/address/model/task/Task.java[`Task`] classes can be used to implement the tag removal logic. link:{repoURL}blob/master/src/main/java/seedu/address/model/TaskManager.java[`TaskManager`] allows you to update a task, and link:{repoURL}blob/master/src/main/java/seedu/address/model/task/Task.java[`Task`] allows you to update the tags.
 * Solution
-** Implement a `removeTag(Tag)` method in link:{repoURL}blob/master/src/main/java/seedu/address/model/AddressBook.java[`AddressBook`]. Loop through each person, and remove the `tag` from each person.
-** Add a new API method `deleteTag(Tag)` in link:{repoURL}blob/master/src/main/java/seedu/address/model/ModelManager.java[`ModelManager`]. Your link:{repoURL}blob/master/src/main/java/seedu/address/model/ModelManager.java[`ModelManager`] should call `AddressBook#removeTag(Tag)`.
+** Implement a `removeTag(Tag)` method in link:{repoURL}blob/master/src/main/java/seedu/address/model/TaskManager.java[`TaskManager`]. Loop through each task, and remove the `tag` from each task.
+** Add a new API method `deleteTag(Tag)` in link:{repoURL}blob/master/src/main/java/seedu/address/model/ModelManager.java[`ModelManager`]. Your link:{repoURL}blob/master/src/main/java/seedu/address/model/ModelManager.java[`ModelManager`] should call `TaskManager#removeTag(Tag)`.
 ** Add new tests for each of the new public methods that you have added.
 ** See this https://github.com/se-edu/addressbook-level4/pull/790[PR] for the full solution.
 ****
@@ -885,12 +889,12 @@ Do take a look at <<Design-Model>> before attempting to modify the `Model` compo
 [discrete]
 ==== `Ui` component
 
-*Scenario:* You are in charge of `ui`. During a beta testing session, your team is observing how the users use your address book application. You realize that one of the users occasionally tries to delete non-existent tags from a contact, because the tags all look the same visually, and the user got confused. Another user made a typing mistake in his command, but did not realize he had done so because the error message wasn't prominent enough. A third user keeps scrolling down the list, because he keeps forgetting the index of the last person in the list. Your job is to implement improvements to the UI to solve all these problems.
+*Scenario:* You are in charge of `ui`. During a beta testing session, your team is observing how the users use your task manager application. You realize that one of the users occasionally tries to delete non-existent tags from a contact, because the tags all look the same visually, and the user got confused. Another user made a typing mistake in his command, but did not realize he had done so because the error message wasn't prominent enough. A third user keeps scrolling down the list, because he keeps forgetting the index of the last task in the list. Your job is to implement improvements to the UI to solve all these problems.
 
 [TIP]
 Do take a look at <<Design-Ui>> before attempting to modify the `UI` component.
 
-. Use different colors for different tags inside person cards. For example, `friends` tags can be all in brown, and `colleagues` tags can be all in yellow.
+. Use different colors for different tags inside task cards. For example, `ungraded` tags can be all in brown, and `graded` tags can be all in yellow.
 +
 **Before**
 +
@@ -902,11 +906,11 @@ image::getting-started-ui-tag-after.png[width="300"]
 +
 ****
 * Hints
-** The tag labels are created inside link:{repoURL}blob/master/src/main/java/seedu/address/ui/PersonCard.java[the `PersonCard` constructor] (`new Label(tag.tagName)`). https://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/Label.html[JavaFX's `Label` class] allows you to modify the style of each Label, such as changing its color.
+** The tag labels are created inside link:{repoURL}blob/master/src/main/java/seedu/address/ui/TaskCard.java[the `TaskCard` constructor] (`new Label(tag.tagName)`). https://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/Label.html[JavaFX's `Label` class] allows you to modify the style of each Label, such as changing its color.
 ** Use the .css attribute `-fx-background-color` to add a color.
 ** You may wish to modify link:{repoURL}blob/master/src/main/resources/view/DarkTheme.css[`DarkTheme.css`] to include some pre-defined colors using css, especially if you have experience with web-based css.
 * Solution
-** You can modify the existing test methods for `PersonCard` 's to include testing the tag's color as well.
+** You can modify the existing test methods for `TaskCard` 's to include testing the tag's color as well.
 ** See this https://github.com/se-edu/addressbook-level4/pull/798[PR] for the full solution.
 *** The PR uses the hash code of the tag names to generate a color. This is deliberately designed to ensure consistent colors each time the application runs. You may wish to expand on this design to include additional features, such as allowing users to set their own tag colors, and directly saving the colors to storage, so that tags retain their colors even if the hash code algorithm changes.
 ****
@@ -923,19 +927,19 @@ image::getting-started-ui-result-after.png[width="200"]
 +
 ****
 * Hints
-** link:{repoURL}blob/master/src/main/java/seedu/address/commons/events/ui/NewResultAvailableEvent.java[`NewResultAvailableEvent`] is raised by link:{repoURL}/src/main/java/seedu/address/ui/CommandBox.java[`CommandBox`] which also knows whether the result is a success or failure, and is caught by link:{repoURL}/src/main/java/seedu/address/ui/ResultDisplay.java[`ResultDisplay`] which is where we want to change the style to.
+** link:{repoURL}blob/master/src/main/java/seedu/address/commons/events/ui/NewResultAvailableEvent.java[`NewResultAvailableEvent`] is raised by link:{repoURL}blob/master/src/main/java/seedu/address/ui/CommandBox.java[`CommandBox`] which also knows whether the result is a success or failure, and is caught by link:{repoURL}blob/master/src/main/java/seedu/address/ui/ResultDisplay.java[`ResultDisplay`] which is where we want to change the style to.
 ** Refer to link:{repoURL}blob/master/src/main/java/seedu/address/ui/CommandBox.java[`CommandBox`] for an example on how to display an error.
 * Solution
 ** Modify link:{repoURL}blob/master/src/main/java/seedu/address/commons/events/ui/NewResultAvailableEvent.java[`NewResultAvailableEvent`] 's constructor so that users of the event can indicate whether an error has occurred.
 ** Modify link:{repoURL}blob/master/src/main/java/seedu/address/ui/ResultDisplay.java[`ResultDisplay#handleNewResultAvailableEvent(NewResultAvailableEvent)`] to react to this event appropriately.
 ** You can write two different kinds of tests to ensure that the functionality works:
 *** The unit tests for `ResultDisplay` can be modified to include verification of the color.
-*** The system tests link:{repoURL}blob/master/src/test/java/systemtests/AddressBookSystemTest.java[`AddressBookSystemTest#assertCommandBoxShowsDefaultStyle() and AddressBookSystemTest#assertCommandBoxShowsErrorStyle()`] to include verification for `ResultDisplay` as well.
+*** The system tests link:{repoURL}blob/master/src/test/java/systemtests/TaskManagerSystemTest.java[`TaskManagerSystemTest#assertCommandBoxShowsDefaultStyle() and TaskManagerSystemTest#assertCommandBoxShowsErrorStyle()`] to include verification for `ResultDisplay` as well.
 ** See this https://github.com/se-edu/addressbook-level4/pull/799[PR] for the full solution.
 *** Do read the commits one at a time if you feel overwhelmed.
 ****
 
-. Modify the link:{repoURL}blob/master/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter`] to show the total number of people in the address book.
+. Modify the link:{repoURL}blob/master/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter`] to show the total number of tasks in the task manager.
 +
 **Before**
 +
@@ -948,30 +952,29 @@ image::getting-started-ui-status-after.png[width="500"]
 ****
 * Hints
 ** link:{repoURL}blob/master/src/main/resources/view/StatusBarFooter.fxml[`StatusBarFooter.fxml`] will need a new `StatusBar`. Be sure to set the `GridPane.columnIndex` properly for each `StatusBar` to avoid misalignment!
-** link:{repoURL}blob/master/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter`] needs to initialize the status bar on application start, and to update it accordingly whenever the address book is updated.
+** link:{repoURL}blob/master/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter`] needs to initialize the status bar on application start, and to update it accordingly whenever the task manager is updated.
 * Solution
-** Modify the constructor of link:{repoURL}blob/master/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter`] to take in the number of persons when the application just started.
-** Use link:{repoURL}blob/master/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter#handleAddressBookChangedEvent(AddressBookChangedEvent)`] to update the number of persons whenever there are new changes to the addressbook.
+** Modify the constructor of link:{repoURL}blob/master/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter`] to take in the number of tasks when the application just started.
+** Use link:{repoURL}blob/master/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter#handleAddressBookChangedEvent(AddressBookChangedEvent)`] to update the number of tasks whenever there are new changes to the task manager.
 ** For tests, modify link:{repoURL}blob/master/src/test/java/guitests/guihandles/StatusBarFooterHandle.java[`StatusBarFooterHandle`] by adding a state-saving functionality for the total number of people status, just like what we did for save location and sync status.
-** For system tests, modify link:{repoURL}blob/master/src/test/java/systemtests/AddressBookSystemTest.java[`AddressBookSystemTest`] to also verify the new total number of persons status bar.
+** For system tests, modify link:{repoURL}blob/master/src/test/java/systemtests/TaskManagerSystemTest.java[`TaskManagerSystemTest`] to also verify the new total number of tasks status bar.
 ** See this https://github.com/se-edu/addressbook-level4/pull/803[PR] for the full solution.
 ****
 
 [discrete]
 ==== `Storage` component
 
-*Scenario:* You are in charge of `storage`. For your next project milestone, your team plans to implement a new feature of saving the address book to the cloud. However, the current implementation of the application constantly saves the address book after the execution of each command, which is not ideal if the user is working on limited internet connection. Your team decided that the application should instead save the changes to a temporary local backup file first, and only upload to the cloud after the user closes the application. Your job is to implement a backup API for the address book storage.
+*Scenario:* You are in charge of `storage`. For your next project milestone, your team plans to implement a new feature of saving the task manager to the cloud. However, the current implementation of the application constantly saves the task manager after the execution of each command, which is not ideal if the user is working on limited internet connection. Your team decided that the application should instead save the changes to a temporary local backup file first, and only upload to the cloud after the user closes the application. Your job is to implement a backup API for the task manager storage.
 
 [TIP]
 Do take a look at <<Design-Storage>> before attempting to modify the `Storage` component.
 
-. Add a new method `backupAddressBook(ReadOnlyAddressBook)`, so that the address book can be saved in a fixed temporary location.
+. Add a new method `backupTaskManger(ReadOnlyTaskManager)`, so that the task manager can be saved in a fixed temporary location.
 +
 ****
 * Hint
-** Add the API method in link:{repoURL}blob/master/src/main/java/seedu/address/storage/AddressBookStorage.java[`AddressBookStorage`] interface.
-** Implement the logic in link:{repoURL}blob/master/src/main/java/seedu/address/storage/StorageManager.java[`StorageManager`] and link:{repoURL}blob/master/src/main/java/seedu/address/storage/JsonAddressBookStorage.java[`JsonAddressBookStorage`] class.
-* Solution
+** Add the API method in link:{repoURL}blob/master/src/main/java/seedu/address/storage/TaskManagerStorage.java[`TaskManagerStorage`] interface.
+** Implement the logic in link:{repoURL}blob/master/src/main/java/seedu/address/storage/StorageManager.java[`StorageManager`] and link:{repoURL}blob/master/src/main/java/seedu/address/storage/JsonTaskManagerStorage.java[`JsonTaskManagerStorage`] class.
 ** See this https://github.com/se-edu/addressbook-level4/pull/594[PR] for the full solution.
 ****
 
@@ -1047,7 +1050,7 @@ Practice proper encapsulation when adding the remark in the link:{repoURL}blob/m
 
 . Add a test for `Remark`, to test the `Remark#equals()` method.
 
-===== [Step 5] Model: Modify `Person` to support a `Remark` field
+===== [Step 5] Model: Modify `Task` to support a `Remark` field
 Implement `Remark` in link:{repoURL}blob/master/src/main/java/seedu/address/model/task/Task.java[`Task`].
 
 **Main:**
@@ -1056,7 +1059,7 @@ Implement `Remark` in link:{repoURL}blob/master/src/main/java/seedu/address/mode
 . Assume that the user will not be able to use the `add` and `edit` commands to modify the remarks field (i.e. the task will be created without a remark).
 . Modify link:{repoURL}blob/master/src/main/java/seedu/address/model/util/SampleDataUtil.java/[`SampleDataUtil`] to add remarks for the sample data (delete `data/taskmanager.json` so that the application will load the sample data when launched).
 
-===== [Step 6] Storage: Add `Remark` field to the `JsonAdaptedPerson` class
+===== [Step 6] Storage: Add `Remark` field to the `JsonAdaptedTask` class
 Modify link:{repoURL}blob/master/src/main/java/seedu/address/storage/JsonAdaptedTask.java[`JsonAdaptedTask`] to include a `Remark` field so that it will be saved when the application is exited.
 
 **Main:**
@@ -1091,7 +1094,7 @@ Add in actual logic for the `remark` command.
 
 **Main:**
 
-. Replace the logic in `RemarkCommand#execute()` (that currently just throws an `Exception`), with the actual logic to modify the remarks of a person.
+. Replace the logic in `RemarkCommand#execute()` (that currently just throws an `Exception`), with the actual logic to modify the remarks of a task.
 
 **Tests:**
 
@@ -1136,13 +1139,17 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |user |have the calender update in real time as tasks are added or removed |instantly view changes made to the list of tasks
 
-|`* * *` |user |secure my task manager via a username and password to keep my events safe |keep my events and due dates private and secure to minimize the chances of someone deleting them
+|`* *` |user |sort my tasks by the attributes |can view my tasks by urgency etc.
 
-|`* * *` |user |have my password hashed |keep my password safe without anyone easily retrieving them through my computer
+|`* *` |user |secure my task manager via a username and password to keep my events safe |keep my events and due dates private and secure to minimize the chances of someone deleting them
 
-|`* * *` |user |have admins to be able to access over my account |allow them to add or edit any tasks
+|`* *` |user | have my password hashed | keep my password safe without anyone easily retrieving them through my computer
 
-|`* * *` |administrator |be able to delete an account |assist the user by resetting their account if they forget their password
+|`* *` |user | have admins to be able to access over my account | allow them to add or edit any tasks
+
+|`* *` |user | have just one task manager account | make things simple and minimal
+
+|`* *` |administrator | be able to delete an account  | assist the user by resetting their account if they forget their password
 
 |`* *` |user |have an tasks on the calendar sorted in order of priority |easily see which tasks are the most urgent
 
@@ -1162,11 +1169,13 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* *` |user |have just one task manager account |make things simple and minimal
 
-|`* *` |administrator |be able to use commands like the user |assign task and dealines to the user
+|`* *` |administrator |be able to use commands like the user |assign task and deadlines to the user
 
 |`*` |user |change the theme of the GUI |allow me to customise the app's appearance to my liking
 
 |`*` |user |have the program automatically complete my inputs |save time by not having to write out the entire command or search query
+
+|`*` |user |change the colours and sizes of the text |make things easier to read
 
 |=======================================================================
 
@@ -1221,7 +1230,7 @@ Use case resumes at step 1.
 1.  User requests to list tasks
 2.  Task Manager shows a list of tasks
 3.  User requests to delete a specific task in the list
-4.  Task Manager deletes the person
+4.  Task Manager deletes the task
 +
 Use case ends.
 
@@ -1277,11 +1286,11 @@ Use case resumes at step 2.
 
 
 [discrete]
-=== Use case: Find task
+=== Use case: Find task by name
 
 *MSS*
 
-1. User requests to find a task
+1. User requests to find a task by name
 2. Task Manager shows the tasks according to user's input
 +
 Use case ends.
@@ -1301,13 +1310,104 @@ Use case ends.
 +
 Use case resumes at step 2.
 
+=== Use case: Find task by module
+
+*MSS*
+
+1. User requests to find a task by module
+2. Task Manager shows the tasks according to user's input
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The list is empty
++
+Use case ends.
+
+[none]
+* 2b. The given index is invalid
++
+[none]
+** 2bi. Task manager shows an error
++
+Use case resumes at step 2.
+
+=== Use case: Find task by date
+
+*MSS*
+
+1. User requests to find a task by date
+2. Task Manager shows the tasks according to user's input
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The list is empty
++
+Use case ends.
+
+[none]
+* 2b. The given index is invalid
++
+[none]
+** 2bi. Task manager shows an error
++
+Use case resumes at step 2.
+
+=== Use case: Find task by priority
+
+*MSS*
+
+1. User requests to find a task by priority
+2. Task Manager shows the tasks according to user's input
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The list is empty
++
+Use case ends.
+
+[none]
+* 2b. The given index is invalid
++
+[none]
+** 2bi. Task manager shows an error
++
+Use case resumes at step 2.
+
+=== Use case: Sort tasks
+
+*MSS*
+
+1. User requests to sort tasks by an attribute
+2. Task Manager sorts the tasks according to user's input
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1b. The given index is invalid
++
+[none]
+** 1ai. Task manager shows an error
++
+Use case resumes at step 1.
+
 _{More to be added}_
 
 [appendix]
 == Non Functional Requirements
 
 .  Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `9` or higher installed.
-.  Should be able to hold up to 250 persons without a noticeable sluggishness in performance for typical usage.
+.  Should be able to hold up to 1000 tasks without a noticeable sluggishness in performance for typical usage.
 .  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
 _{More to be added}_

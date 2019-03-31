@@ -50,20 +50,24 @@ public class TaskCard extends UiPart<Region> {
         module.setText(task.getModule().value);
         due.setText(task.getDue().value);
         priority.setText(PRIORITYNAMES[Integer.parseInt(task.getPriority().value) - 1]);
-        daysLeft.setText(Integer.toString(task.getDaysRemaining()));
+        if (task.getDaysRemaining() < 0) {
+            daysLeft.setText("Task is overdue!!!");
+        } else {
+            daysLeft.setText("Days Left: " + Integer.toString(task.getDaysRemaining()));
+        }
         task.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
 
         int daysRemaining = task.getDaysRemaining();
 
-        if (daysRemaining == -1) {
-            id.setStyle("-fx-text-fill: red");
-            name.setStyle("-fx-text-fill: red");
-            module.setStyle("-fx-text-fill: red");
-            due.setStyle("-fx-text-fill: red");
-            priority.setStyle("-fx-text-fill: red");
+        if (daysRemaining < 0) {
+            id.setStyle("-fx-text-fill: grey");
+            name.setStyle("-fx-text-fill: grey");
+            module.setStyle("-fx-text-fill: grey");
+            due.setStyle("-fx-text-fill: grey");
+            priority.setStyle("-fx-text-fill: grey");
             daysLeft.setStyle("-fx-text-fill: red");
 
-        } else if (daysRemaining == 0) {
+        } else if (daysRemaining <= 7) {
             id.setStyle("-fx-text-fill: lightgreen");
             name.setStyle("-fx-text-fill: lightgreen");
             module.setStyle("-fx-text-fill: lightgreen");

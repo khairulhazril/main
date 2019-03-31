@@ -9,13 +9,13 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.task.DueContainsKeywordsPredicate;
 
 /**
- * Parses input arguments and creates a new FindModuleCommand object
+ * Parses input arguments and creates a new FindDateCommand object
  */
 public class FindDateCommandParser implements Parser<FindDateCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the FindModuleCommand
-     * and returns an FindModuleCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the FindDateCommand
+     * and returns an FindDateCommand object for execution.
      *
      * @throws ParseException if the user input does not conform the expected format
      */
