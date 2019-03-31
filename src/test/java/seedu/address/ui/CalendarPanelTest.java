@@ -46,7 +46,7 @@ public class CalendarPanelTest extends GuiUnitTest {
 
     @Test(timeout = 1000)
     public void timingTest() {
-        initUi(createBackingList(1000));
+        initUi(createBackingList(500));
     }
 
     /**
