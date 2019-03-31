@@ -205,6 +205,10 @@ public interface Model {
      */
     void addNotes(Notes notes);
 
+    /**
+     * Add Notes into Json file
+     */
+    void addJsonNotes(Notes notes);
 
     /**
      * Returns an unmodifiable view of the filtered notes list

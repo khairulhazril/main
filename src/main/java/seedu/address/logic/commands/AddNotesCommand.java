@@ -52,6 +52,7 @@ public class AddNotesCommand extends Command {
 
         model.addNotes(wantAdd);
         model.commitTaskManager();
+        model.addJsonNotes(wantAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, wantAdd));
     }
 

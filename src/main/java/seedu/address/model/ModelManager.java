@@ -34,6 +34,7 @@ public class ModelManager implements Model {
     private final FilteredList<Notes> filteredNotes;
     private final SimpleObjectProperty<Task> selectedTask = new SimpleObjectProperty<>();
     private final LoginEvent loginEvent;
+    private final NotesEvent notesEvent;
     private final SimpleObjectProperty<Notes> selectedNotes = new SimpleObjectProperty<>();
 
     /**
@@ -51,6 +52,7 @@ public class ModelManager implements Model {
         filteredTasks.addListener(this::ensureSelectedTaskIsValid);
         filteredNotes = new FilteredList<>(versionedTaskManager.getNotesList());
         loginEvent = new LoginEvent();
+        notesEvent = new NotesEvent();
     }
 
     public ModelManager() {
@@ -198,6 +200,12 @@ public class ModelManager implements Model {
         versionedTaskManager.addNotes(notes);
         updateFilteredNotesList(PREDICATE_SHOW_ALL_NOTES);
 
+    }
+
+    @Override
+    public void addJsonNotes(Notes notes) {
+        requireNonNull(notes);
+        notesEvent.newNotes(notes);
     }
 
 
