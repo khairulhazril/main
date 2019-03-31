@@ -12,14 +12,14 @@ import seedu.address.model.task.Task;
  * Provides a handle for {@code TaskListPanel} containing the list of {@code TaskCard}.
  */
 public class TaskListPanelHandle extends NodeHandle<ListView<Task>> {
-    public static final String PERSON_LIST_VIEW_ID = "#personListView";
+    public static final String TASK_LIST_VIEW_ID = "#personListView";
 
     private static final String CARD_PANE_ID = "#cardPane";
 
     private Optional<Task> lastRememberedSelectedPersonCard;
 
-    public TaskListPanelHandle(ListView<Task> personListPanelNode) {
-        super(personListPanelNode);
+    public TaskListPanelHandle(ListView<Task> taskListPanelNode) {
+        super(taskListPanelNode);
     }
 
     /**
