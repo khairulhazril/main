@@ -97,7 +97,11 @@ public class Due {
      */
     public int daysDifference(Date currentDay, Date taskDay) {
         long duration = taskDay.getTime() - currentDay.getTime();
-        return (int) (duration / (24 * 60 * 60 * 1000));
+        if (duration < 0) {
+            return -1;
+        } else {
+            return (int) ((duration / (24 * 60 * 60 * 1000)) + 1);
+        }
     }
 
     /**
