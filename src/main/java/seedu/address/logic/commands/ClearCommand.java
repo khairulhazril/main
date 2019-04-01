@@ -13,6 +13,8 @@ import seedu.address.model.TaskManager;
 public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "clear";
+    public static final String COMMAND_ALIAS = "c";
+
     public static final String MESSAGE_SUCCESS = "Task Manager has been cleared!";
 
 

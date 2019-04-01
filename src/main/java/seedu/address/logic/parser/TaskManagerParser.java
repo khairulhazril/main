@@ -71,36 +71,46 @@ public class TaskManagerParser {
             return new LogoutCommand();
 
         case AddCommand.COMMAND_WORD:
+        case AddCommand.COMMAND_ALIAS:
             return new AddCommandParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
+        case EditCommand.COMMAND_ALIAS:
             return new EditCommandParser().parse(arguments);
 
         case SelectCommand.COMMAND_WORD:
             return new SelectCommandParser().parse(arguments);
 
         case DeleteCommand.COMMAND_WORD:
+        case DeleteCommand.COMMAND_ALIAS:
+
             return new DeleteCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
+        case ClearCommand.COMMAND_ALIAS:
             return new ClearCommand();
 
         case FindDateCommand.COMMAND_WORD:
+        case FindDateCommand.COMMAND_ALIAS:
             return new FindDateCommandParser().parse(arguments);
 
         case FindNameCommand.COMMAND_WORD:
+        case FindNameCommand.COMMAND_ALIAS:
             return new FindNameCommandParser().parse(arguments);
 
         case FindModuleCommand.COMMAND_WORD:
+        case FindModuleCommand.COMMAND_ALIAS:
             return new FindModuleCommandParser().parse(arguments);
 
         case FindPriorityCommand.COMMAND_WORD:
+        case FindPriorityCommand.COMMAND_ALIAS:
             return new FindPriorityCommandParser().parse(arguments);
 
         case FindUpcomingCommand.COMMAND_WORD:
             return new FindDateCommandParser().parse("01-01");
 
         case ListCommand.COMMAND_WORD:
+        case ListCommand.COMMAND_ALIAS:
             return new ListCommand();
 
         case HistoryCommand.COMMAND_WORD:
@@ -110,15 +120,19 @@ public class TaskManagerParser {
             return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:
+        case HelpCommand.COMMAND_ALIAS:
             return new HelpCommand();
 
         case UndoCommand.COMMAND_WORD:
+        case UndoCommand.COMMAND_ALIAS:
             return new UndoCommand();
 
         case SortCommand.COMMAND_WORD:
+        case SortCommand.COMMAND_ALIAS:
             return new SortCommandParser().parse(arguments);
 
         case RedoCommand.COMMAND_WORD:
+        case RedoCommand.COMMAND_ALIAS:
             return new RedoCommand();
 
         case AddNotesCommand.COMMAND_WORD:
