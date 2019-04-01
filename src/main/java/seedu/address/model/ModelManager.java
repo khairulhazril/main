@@ -208,6 +208,11 @@ public class ModelManager implements Model {
         notesEvent.newNotes(notes);
     }
 
+    @Override
+    public void deleteNotes(Notes target) {
+        versionedTaskManager.removeNotes(target);
+    }
+
 
     //=========== Filtered Task List Accessors =============================================================
 

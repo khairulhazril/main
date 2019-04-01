@@ -239,4 +239,11 @@ public interface Model {
      * null if no task is selected.
      */
     Notes getSelectedNotes();
+
+    /**
+     * Deletes the given task.
+     * The task must exist in the task manager.
+     */
+    void deleteNotes(Notes target);
+
 }
