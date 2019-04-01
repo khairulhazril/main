@@ -63,7 +63,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 [[Features]]
 <span class="s0">== Features</span>
 
-<span class="s1">==== 
+<span class="s1">====
 </span><span class="s2">*Command Format*</span>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/CS2113`.
@@ -71,7 +71,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/urgent`, `t/urgent t/math` etc.
 * Parameters can be in any order e.g. if the command specifies `n/NAME d/DATE`, `d/DATE n/NAME` is also acceptable.
 * Dates are in the format DD-MM.
-<span class="s1">==== 
+<span class="s1">====
 </span>
 <span class="s0">=== Signing up for an account : `signup`</span>
 
@@ -83,12 +83,12 @@ Example:
 * `signup u/nicholas p/lee` +
 Signed up: nicholas
 
-==== 
+====
 <span class="s2">* `Logged in: nicholas` +</span>
 You are already logged in and will need to logout in order to signup for a new account. +
 * `Please try another username` +
 The username already exists, signup again with another username.
-<span class="s1">==== 
+<span class="s1">====
 </span>
 
 <span class="s0">=== Logging into an account : `login`</span>
@@ -101,12 +101,12 @@ Example:
 * `login u/nicholas p/lee` +
 Logged in as nicholas.
 
-==== 
+====
 <span class="s2">* `You are already logged in!` +</span>
 You are already logged in and will need logout in order to login to another account. +
 * `Please Login again! Command Format: [login u/USERNAME p/PASSWORD]` +
 You have inserted an incorrect username or password. The login command has to be executed again
-<span class="s1">==== 
+<span class="s1">====
 </span>
 <span class="s0">=== Logging out of an account : `logout`</span>
 
@@ -118,10 +118,10 @@ Example:
 * `logout` +
 Logged out of nicholas.
 
-==== 
+====
 <span class="s2">* `Please Login!` +</span>
 You did not login into any account.
-<span class="s1">==== 
+<span class="s1">====
 </span>
 <span class="s0">=== Viewing help : `help`</span>
 
@@ -154,13 +154,13 @@ Format: `list`
 <span class="s1">Edits an existing task in the Task Manager. +</span>
 Format: `edit INDEX [n/NAME] [m/MODULE] [d/DATE] [p/PRIORITY] [t/TAG]...`
 
-**** 
+****
 <span class="s2">* Edits the task at the specified `INDEX`. The index refers to the index number shown in the displayed task list. The index *must be a positive integer* 1, 2, 3, ...</span>
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the task will be removed i.e adding of tags is not cumulative.
 * You can remove all the person's tags by typing `t/` without specifying any tags after it.
-<span class="s1">**** 
+<span class="s1">****
 </span>
 Examples:
 
@@ -174,13 +174,13 @@ Edits the name of the 2nd person to be `Project` and clears all existing tags.
 <span class="s1">Finds tasks with names containing any of the given keywords. +</span>
 Format: `findname KEYWORD [MORE_KEYWORDS]`
 
-**** 
+****
 <span class="s2">* The search is case insensitive. e.g `HOMEWORK` will match `homework`</span>
 * The order of the keywords does not matter. e.g. `CS2113 Tutorial` will match `Tutorial CS2113`
 * Only the name is searched.
 * Only full words will be matched e.g. `Assignments` will not match `Assignment`
 * Tasks matching at least one keyword will be returned (i.e. `OR` search). e.g. `CS2113 Assignment` will return `CS2113 Homework`, `Assignment 2`
-<span class="s1">**** 
+<span class="s1">****
 </span>
 Examples:
 
@@ -194,12 +194,12 @@ Returns all task having names `CS2113`, `Hw`, or `Tutorial`
 <span class="s1">Finds tasks with module codes containing any of the given keywords. +</span>
 Format: `findmodule KEYWORD [MORE_KEYWORDS]`
 
-**** 
+****
 <span class="s2">* The search is case insensitive. e.g `CS2113T` will match `cs2113t`</span>
 * The order of the keywords does not matter. e.g. `CS2113T CS2101` will match `CS2101 CS2113`
 * Only the module code is searched.
 * Only full words will be matched e.g. `CS2113T` will not match `CS2113`
-<span class="s1">**** 
+<span class="s1">****
 </span>
 Examples:
 
@@ -213,9 +213,9 @@ Returns all tasks containing the module code `CS2113T` or `CS2101`.
 <span class="s1">Finds tasks with dates containing any of the given keywords. +</span>
 Format: `finddate KEYWORD [MORE_KEYWORDS]`
 
-**** 
+****
 <span class="s2">* The order of the keywords does not matter. e.g. `03-03 21-03` will match `21-03 03-03`</span>
-<span class="s1">**** 
+<span class="s1">****
 </span>
 Examples:
 
@@ -229,9 +229,9 @@ Returns all task with date 20-03 or 30-03.
 <span class="s1">Finds tasks with priority code containing any of the given keywords. +</span>
 Format: `findpriority KEYWORD [MORE_KEYWORDS]`
 
-**** 
+****
 <span class="s2">* The order of the keywords does not matter. e.g. `1 2` will match `2 1`</span>
-<span class="s1">**** 
+<span class="s1">****
 </span>
 Examples:
 
@@ -249,7 +249,7 @@ Format: `delete INDEX`
 <span class="s2">* Deletes the task at the specified `INDEX`.</span>
 * The index refers to the index number shown in the displayed task list.
 * The index *must be a positive integer* 1, 2, 3, ...
-<span class="s1">**** 
+<span class="s1">****
 </span>
 Examples:
 
@@ -265,11 +265,11 @@ Deletes the 1st task in the results of the `find` command.
 <span class="s1">Selects the task identified by the index number used in the displayed task list. +</span>
 Format: `select INDEX`
 
-**** 
+****
 <span class="s2">* Selects the task and displays the task on the calendar.</span>
 * The index refers to the index number shown in the displayed task list.
 * The index *must be a positive integer* `1, 2, 3, ...`
-<span class="s1">**** 
+<span class="s1">****
 </span>
 Examples:
 
@@ -285,7 +285,7 @@ Selects the 1st task in the results of the `find` command.
 <span class="s1">Sorts the task list in the Task Manager according to an input parameter.</span>
 Format: `sort PARAMETER`
 
-**** 
+****
 <span class="s2">* Sorts the task list according to the `PARAMETER`.</span>
 * The parameter *must be one of the following* `name, module, date, priority`.
 <span class="s1">**** 
@@ -313,9 +313,9 @@ Add a note with heading `Popular` and content `buy blue pens`.
 Format: `history`
 
 [NOTE]
-==== 
+====
 <span class="s2">Pressing the kbd:[&amp;uarr;] and kbd:[&amp;darr;] arrows will display the previous and next input respectively in the command box.</span>
-<span class="s1">==== 
+<span class="s1">====
 </span>
 <span class="s3">// tag::undoredo[]</span>
 <span class="s0">=== Undoing previous command : `undo`</span>
@@ -324,9 +324,9 @@ Format: `history`
 Format: `undo`
 
 [NOTE]
-==== 
+====
 <span class="s2">Undoable commands: those commands that modify the Task Manager's content (`add`, `delete`, `edit` and `clear`).</span>
-<span class="s1">==== 
+<span class="s1">====
 </span>
 Examples:
 
@@ -434,4 +434,5 @@ e.g `sort module`
 * *Undo* : `undo`
 </pre>
 </body>
+
 </html>
