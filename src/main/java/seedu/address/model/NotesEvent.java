@@ -1,23 +1,13 @@
 package seedu.address.model;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
-import java.util.Map;
 import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.StringUtil;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.GenerateHash;
-import seedu.address.model.login.Password;
-import seedu.address.model.login.User;
-import seedu.address.model.login.Username;
 import seedu.address.model.notes.Notes;
-import seedu.address.storage.JsonLoginStorage;
 import seedu.address.storage.JsonNotesStorage;
 
 public class NotesEvent {
