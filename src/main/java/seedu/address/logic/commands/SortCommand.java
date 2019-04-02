@@ -12,6 +12,8 @@ import seedu.address.model.Model;
 public class SortCommand extends Command {
 
     public static final String COMMAND_WORD = "sort";
+    public static final String COMMAND_ALIAS = "s";
+
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Sorts the task list in the task manager.\n"

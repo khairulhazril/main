@@ -237,90 +237,10 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-// tag::undoredo[]
-=== Undo/Redo feature
-==== Current Implementation
-
-The undo/redo mechanism is facilitated by `VersionedTaskManager`.
-It extends `TaskManager` with an undo/redo history, stored internally as an `taskManagerStateList` and `currentStatePointer`.
-Additionally, it implements the following operations:
-
-* `VersionedTaskManager#commit()` -- Saves the current task manager state in its history.
-* `VersionedTaskManager#undo()` -- Restores the previous task manager state from its history.
-* `VersionedTaskManager#redo()` -- Restores a previously undone task manager state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitTaskManager()`, `Model#undoTaskManager()` and `Model#redoTaskManager()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedTaskManager` will be initialized with the initial task manager state, and the `currentStatePointer` pointing to that single task manager state.
-
-image::UndoRedoStartingStateListDiagram.png[width="800"]
-
-Step 2. The user executes `delete 5` command to delete the 5th task in the task manager. The `delete` command calls `Model#commitTaskManager()`, causing the modified state of the task manager after the `delete 5` command executes to be saved in the `taskManagerStateList`, and the `currentStatePointer` is shifted to the newly inserted task manager state.
-
-image::UndoRedoNewCommand1StateListDiagram.png[width="800"]
-
-Step 3. The user executes `add n/Project ...` to add a new task. The `add` command also calls `Model#commitTaskManager()`, causing another modified task manager state to be saved into the `taskManagerStateList`.
-
-image::UndoRedoNewCommand2StateListDiagram.png[width="800"]
-
-[NOTE]
-If a command fails its execution, it will not call `Model#commitTaskManager()`, so the task manager state will not be saved into the `taskManagerStateList`.
-
-Step 4. The user now decides that adding the task was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoTaskManager()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous task manager state, and restores the task manager to that state.
-
-image::UndoRedoExecuteUndoStateListDiagram.png[width="800"]
-
-[NOTE]
-If the `currentStatePointer` is at index 0, pointing to the initial task manager state, then there are no previous task manager states to restore. The `undo` command uses `Model#canUndoTaskManager()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
-
-The following sequence diagram shows how the undo operation works:
-
-image::UndoRedoSequenceDiagram.png[width="800"]
-
-The `redo` command does the opposite -- it calls `Model#redoTaskManager()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the task manager to that state.
-
-[NOTE]
-If the `currentStatePointer` is at index `taskManagerStateList.size() - 1`, pointing to the latest task manager state, then there are no undone task manager states to restore. The `redo` command uses `Model#canRedoTaskManager()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the task manager, such as `list`, will usually not call `Model#commitTaskManager()`, `Model#undoTaskManager()` or `Model#redoTaskManager()`. Thus, the `taskManagerStateList` remains unchanged.
-
-image::UndoRedoNewCommand3StateListDiagram.png[width="800"]
-
-Step 6. The user executes `clear`, which calls `Model#commitTaskManager()`. Since the `currentStatePointer` is not pointing at the end of the `taskManagerStateList`, all task manager states after the `currentStatePointer` will be purged. We designed it this way because it no longer makes sense to redo the `add n/Project ...` command. This is the behavior that most modern desktop applications follow.
-
-image::UndoRedoNewCommand4StateListDiagram.png[width="800"]
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-image::UndoRedoActivityDiagram.png[width="650"]
-
-==== Design Considerations
-
-===== Aspect: How undo & redo executes
-
-* **Alternative 1 (current choice):** Saves the entire task manager.
-** Pros: Easy to implement.
-** Cons: May have performance issues in terms of memory usage.
-* **Alternative 2:** Individual command knows how to undo/redo by itself.
-** Pros: Will use less memory (e.g. for `delete`, just save the task being deleted).
-** Cons: We must ensure that the implementation of each individual command are correct.
-
-===== Aspect: Data structure to support the undo/redo commands
-
-* **Alternative 1 (current choice):** Use a list to store the history of task manager states.
-** Pros: Easy for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.
-** Cons: Logic is duplicated twice. For example, when a new command is executed, we must remember to update both `HistoryManager` and `VersionedTaskManager`.
-* **Alternative 2:** Use `HistoryManager` for undo/redo
-** Pros: We do not need to maintain a separate list, and just reuse what is already in the codebase.
-** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
-// end::undoredo[]
-
 // tag::loginfunction[]
 === Login Feature
 
-*Current Implementation*
+==== Current Implementation
 
 * The login mechanism is facilitated by `TaskManager`, `SignupCommand`, `LoginCommand`, `LogoutCommand`, `DeleteAccountCommand`, `LoginEvent`, `GenerateHash`, `JsonLoginStorage`.
 
@@ -342,7 +262,7 @@ image::AccountClassDiagram.png[width="450"]
 
 * In this feature, there are 4 main commands.
 The flow on how the commands are executed and their respective sequence diagrams will be further elaborated below: +
-1. Section 3.2.1, Signup Command +
+1. Section 3.2.2, Signup Command +
 2. <<Login Command>> +
 3. <<Logout Command>> +
 4. <<DeleteAcc Command>>
@@ -475,27 +395,55 @@ image::DeleteAccountSequenceDiagram.png[width="900"]
 
 ==== Design Considerations
 
-* Combine the classes for `LoginEvent` and `JsonLoginStorage`
+===== Aspect: How `LoginEvent` and `JsonLoginStorage` works together
+
+* ** Alternative 1 (current choice): ** `LoginEvent` and `JsonLoginStorage` are in separate classes.
+
+** Pros: Follows OOP coding. The codes will look more organised and clean.
+** Cons: Coders will have to look at both files to code or debug as both calls each other frequently.
+
+* ** Alternative 2: ** `LoginEvent` and `JsonLoginStorage` are in the same class.
+
 ** Pros: Easy to read and debug, all codes are in one file and thus easier for other coders to modify.
 ** Cons: Does not follow OOP coding. The codes in the file will look messy.
 
-* To use encryption library instead of creating my own hashing function.
-** Pros: Do not need to code much. Most of the function are one lines. Easy to implement.
-** Cons: Encryption is a two-way function. Encrypted strings can be decrypted with a proper key.
-Hashing was chosen because it is a one way function. With a proper hashing design, there is no way to reverse
-the hasing process to reveal the original password.
+==== Aspect: How `LoginEvent` fits into the code
 
-* To have the `LoginEvent` being a component of its own without having to implement into logic.
-** Pros: It would be easier to visualise and could still run the entire Taskmanager.
-** Cons: There would be a lot of repeated and redundant codes. Most of the functions in the `logic` componenet
-will be repeated. This will violate Single Responsibility Principle and Separation of Concerns.
+* ** Alternative 1 (current choice): ** `LoginEvent` is implemented into the logic.
+
+** Pros: The code will be efficient and effective. It will be neat and the flow will be well structured.
+Single Responsibility Principle and Separation of Concerns is maintained in the code.
+** Cons: Might be confusing as `LoginEvent` is used frequently.
+Coders might need to fully understand how other classes work before looking at `LoginEvent`.
+
+* ** Alternative 2: ** `LoginEvent` is implemented on its own.
+
+** Pros: It would be easier for coders to visualise and debug. `LoginEvent` can still run the entire Taskmanager.
+** Cons: There would be a lot of repeated and redundant codes.
+Most of the functions in the `logic` component will be repeated.
+This will violate Single Responsibility Principle and Separation of Concerns.
+
+==== Aspect: How the securing of password is implemented
+
+* ** Alternative 1 (current choice): ** Create my own hashing fuction to secure password
+
+** Pros: Hashing is a one way function. With a proper hashing design, there is no way to reverse
+the hashing process to reveal the original password.
+** Cons: Need to code out my own hashing function. More logic and function have to be written.
+The code will be mroe complex.
+
+* ** Alternative 2: ** Use encryption library to secure password
+
+** Pros: Do not need to code much. Most of the function are one line. Easy to implement.
+** Cons: Encryption is a two-way function. Encrypted strings can be decrypted with a proper key.
+The password will not be secure.
 
 // end::loginfunction[]
 
 // tag::notes[]
-=== Notes Feature
+=== Add Notes Feature
 
-This feature allow users to add and view notes regarding miscellaneous matters.
+This feature allow users to add notes regarding miscellaneous matters.
 
 The class diagram below illustrates the `Notes` class.
 
@@ -503,11 +451,11 @@ image::NotesClassDiagram.png[width="450"]
 
 ==== Current Implementation
 
-The Notes mechanism is facilitated by AddNotesCommand. A Notes object is instantiated which contains of Heading and Content.
+The add notes mechanism is facilitated by AddNotesCommand. A Notes object is instantiated which contains of Heading, Content and Priority.
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+Given below is an example usage scenario and how the add notes mechanism behaves at each step.
 
-Step 1. The user enters the in a note with its associated parameters. e.g `note h/popular c/buy pilot G-2 blue pens`.
+Step 1. The user enters the in a note with its associated parameters. e.g `note h/popular c/buy pilot G-2 blue pens p/2`.
 
 Step 2. The LogicManager calls ParseCommand with that input.
 
@@ -523,20 +471,60 @@ Step 7. Else, addNotes(notes) method is called and note is added.
 
 The sequence diagram below illustrates how the AddNotes mechanism function.
 
-
 image::AddNotesSequenceDiagram.png[width="800"]
 
 ==== Design Considerations
 
 Aspect: Checking for duplicate notes
 
-* **Alternative 1(current choice):** IsSameNotes
-
+* **Alternative 1(current choice):** Implement a method to check new notes entered. If a new note added is exactly the same as exisitng notes in the Student Buddy, it will be classified as duplicate note and cannot be added.
 ** Pros: Easy to implement
-** Cons: May neglect duplicate notes that mean the same because IsSameNotes check for the exact same heading and content. E.g 1. h/popular c/buy ring file 2.h/popular c/buy ring files
-* **Alternative 2:** Implement a method to check for similarity of notes. If similarity is more than 95%, notes is classified as same notes and cannot be added.
+** Cons: May neglect duplicate notes that mean the same because the check is for the exact same heading and content, co. E.g 1. h/popular c/buy ring file 2.h/popular c/buy ring files
+* **Alternative 2:** Implement a method to check for similarity of notes. If similarity is more than 90%, note is classified as same note and cannot be added.
 ** Pros: Can reduce the amount of duplicate notes that are added.
 ** Cons: Difficult to implement and cannot eliminate duplicate notes completely.
+
+Final decision: Alternative 1 was chosen due to the significantly easier implementation.
+
+=== Delete Notes Feature
+
+This feature allow users to delete notes that are no longer wanted.
+
+==== Current Implementation
+
+The Notes mechanism is facilitated by DeleteNotesCommand from the logic component. Upon executing the DeleteNotesCommand, the unwanted note will be removed from the memory of the Student Buddy.
+
+Given below is an example usage scenario and how the delete notes mechanism behaves at each step.
+
+Step 1. The user calls the `DeleteNotesCommand` with the note’s displayed index. e.g `deletenote 1`.
+
+Step 2. The `LogicManager` calls `parseCommand` with the user input.
+
+Step 3. The `TaskManagerParser` is called and it returns a `DeleteNotesCommand` object to the `LogicManager`.
+
+Step 4. The `LogicManager` will call execute() on the `DeleteNotesCommand` object. If no note of the corresponding index is found, it would return a string of message MESSAGE_INVALID_NOTES_DISPLAYED_INDEX.
+
+Step 5. The `Logic` component then interacts with the Model component which then calls TaskManager component within it to execute deleteNotes(target) to remove the note.
+
+Step 6. The command result would then return the message `MESSAGE_DELETE_NOTE_SUCCESS` in a string.
+
+The following diagram illustrates how the `DeleteNotes` operation works:
+
+image::DeleteNotesSequenceDiagram.png[width="800"]
+
+==== Design Considerations
+
+Aspect: Weighing user experience to convenience of users
+
+* **Alternative 1:** Implement a method to strike off notes that are completed so that users can keep track of what notes they have added in and finished.
+** Pros: Better user experience
+** Cons: May cause incovenience as users have to delete away completed notes every few days so as to allow easier viewing of latest notes.
+* **Alternative 2(current choice):** Just deleting completed notes away.
+** Pros: Easy to implement
+** Pros: Easy for users to manage completed notes.
+** Cons: No sense of achievement as users are unable to view the amount of work completed.
+
+Final decision: Alternative 2 was chosen due to it being more practical and convenient to users so that users will continue to use it.
 // end::notes[]
 
 
