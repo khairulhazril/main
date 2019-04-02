@@ -11,6 +11,7 @@ lib/*
 config.json
 login.json
 account.json
+notes.json
 src/test/data/sandbox/
 preferences.json
 .DS_Store

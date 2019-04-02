@@ -1,4 +1,4 @@
-= Task Manager - Developer Guide
+= Student Buddy - Developer Guide
 :site-section: DeveloperGuide
 :toc:
 :toc-title:
@@ -16,6 +16,10 @@ endif::[]
 :repoURL: https://github.com/CS2113-AY1819S2-M11-2/main/
 
 By: `M11-02`      Since: `Feb 2019`      Licence: `MIT`
+
+== Introduction
+
+Student Buddy is a desktop application tailored for users who are comfortable with using a Command Line Interface (CLI), while retaining a Graphical User Interface (GUI) for ease of use. The use of a CLI for user input allows users to manage their tasks more efficiently than when using a conventional user interface.
 
 == Setting up
 
@@ -202,7 +206,7 @@ image::ModelClassDiagram.png[width="800"]
 The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
-* stores the Task Manager data.
+* stores the user's data.
 * exposes an unmodifiable `ObservableList<Task>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
@@ -232,86 +236,6 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 == Implementation
 
 This section describes some noteworthy details on how certain features are implemented.
-
-// tag::undoredo[]
-=== Undo/Redo feature
-==== Current Implementation
-
-The undo/redo mechanism is facilitated by `VersionedTaskManager`.
-It extends `TaskManager` with an undo/redo history, stored internally as an `taskManagerStateList` and `currentStatePointer`.
-Additionally, it implements the following operations:
-
-* `VersionedTaskManager#commit()` -- Saves the current task manager state in its history.
-* `VersionedTaskManager#undo()` -- Restores the previous task manager state from its history.
-* `VersionedTaskManager#redo()` -- Restores a previously undone task manager state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitTaskManager()`, `Model#undoTaskManager()` and `Model#redoTaskManager()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedTaskManager` will be initialized with the initial task manager state, and the `currentStatePointer` pointing to that single task manager state.
-
-image::UndoRedoStartingStateListDiagram.png[width="800"]
-
-Step 2. The user executes `delete 5` command to delete the 5th task in the task manager. The `delete` command calls `Model#commitTaskManager()`, causing the modified state of the task manager after the `delete 5` command executes to be saved in the `taskManagerStateList`, and the `currentStatePointer` is shifted to the newly inserted task manager state.
-
-image::UndoRedoNewCommand1StateListDiagram.png[width="800"]
-
-Step 3. The user executes `add n/Project ...` to add a new task. The `add` command also calls `Model#commitTaskManager()`, causing another modified task manager state to be saved into the `taskManagerStateList`.
-
-image::UndoRedoNewCommand2StateListDiagram.png[width="800"]
-
-[NOTE]
-If a command fails its execution, it will not call `Model#commitTaskManager()`, so the task manager state will not be saved into the `taskManagerStateList`.
-
-Step 4. The user now decides that adding the task was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoTaskManager()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous task manager state, and restores the task manager to that state.
-
-image::UndoRedoExecuteUndoStateListDiagram.png[width="800"]
-
-[NOTE]
-If the `currentStatePointer` is at index 0, pointing to the initial task manager state, then there are no previous task manager states to restore. The `undo` command uses `Model#canUndoTaskManager()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
-
-The following sequence diagram shows how the undo operation works:
-
-image::UndoRedoSequenceDiagram.png[width="800"]
-
-The `redo` command does the opposite -- it calls `Model#redoTaskManager()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the task manager to that state.
-
-[NOTE]
-If the `currentStatePointer` is at index `taskManagerStateList.size() - 1`, pointing to the latest task manager state, then there are no undone task manager states to restore. The `redo` command uses `Model#canRedoTaskManager()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the task manager, such as `list`, will usually not call `Model#commitTaskManager()`, `Model#undoTaskManager()` or `Model#redoTaskManager()`. Thus, the `taskManagerStateList` remains unchanged.
-
-image::UndoRedoNewCommand3StateListDiagram.png[width="800"]
-
-Step 6. The user executes `clear`, which calls `Model#commitTaskManager()`. Since the `currentStatePointer` is not pointing at the end of the `taskManagerStateList`, all task manager states after the `currentStatePointer` will be purged. We designed it this way because it no longer makes sense to redo the `add n/Project ...` command. This is the behavior that most modern desktop applications follow.
-
-image::UndoRedoNewCommand4StateListDiagram.png[width="800"]
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-image::UndoRedoActivityDiagram.png[width="650"]
-
-==== Design Considerations
-
-===== Aspect: How undo & redo executes
-
-* **Alternative 1 (current choice):** Saves the entire task manager.
-** Pros: Easy to implement.
-** Cons: May have performance issues in terms of memory usage.
-* **Alternative 2:** Individual command knows how to undo/redo by itself.
-** Pros: Will use less memory (e.g. for `delete`, just save the task being deleted).
-** Cons: We must ensure that the implementation of each individual command are correct.
-
-===== Aspect: Data structure to support the undo/redo commands
-
-* **Alternative 1 (current choice):** Use a list to store the history of task manager states.
-** Pros: Easy for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.
-** Cons: Logic is duplicated twice. For example, when a new command is executed, we must remember to update both `HistoryManager` and `VersionedTaskManager`.
-* **Alternative 2:** Use `HistoryManager` for undo/redo
-** Pros: We do not need to maintain a separate list, and just reuse what is already in the codebase.
-** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
-// end::undoredo[]
 
 // tag::loginfunction[]
 === Login Feature
@@ -396,7 +320,7 @@ Step 3. `LoginCommandParser` will parse the arguments to `LoginCommand`
 If the arguments passes `getLoginStatus`, `logUser(user)` will be called in `LoginEvent` to
 check for username and password match.
 
-Step 4. In`LoginEvent`, `JsonLoginStorage` retrieves the username and hashed password from the Json file.
+Step 4. In `LoginEvent`, `JsonLoginStorage` retrieves the username and hashed password from the Json file.
 
 Step 5. `loginEvent` will then check if the user inputs matches the username and password stored and
 will then return to `LoginCommand` and returns the user a successful login output.
@@ -426,7 +350,7 @@ Step 3. `LogoutCommand` will call the following command which is linked to `Logi
 
 If the arguments passes `getLoginStatus` and `getAdminStatus`, `logout` will be called in `LoginEvent`.
 
-Step 4. In`LoginEvent`, `getLoginStatus` and `getAdminStatus` will be set to false and will then
+Step 4. In `LoginEvent`, `getLoginStatus` and `getAdminStatus` will be set to false and will then
 return to `LoginCommand` to return the user a successful logout output.
 
 |===
@@ -456,7 +380,7 @@ Step 4. `DeleteAccountCommand` will call the following command which is linked t
 
 If the arguments passes `getAdminStatus`, `deleteAccount()` will be called in `LoginEvent`.
 
-Step 5. In`LoginEvent`, JsonLoginStorage's `deleteAccount()` will be called to delete the JSON file.
+Step 5. In `LoginEvent`, JsonLoginStorage's `deleteAccount()` will be called to delete the JSON file.
 
 Step 6. `LoginEvent` will then call `reinitialise()` to create the Json file
 without any username and password stored in it. `reinitialise()` is assisted by `JsonLoginStorage` and `writeJson()`.
@@ -594,7 +518,7 @@ Step 3. `SortCommand` will then call `ModelManager#sortTask(toSortBy)`.
 Step 4. It will then call `TaskManager#sortTask(attribute)`.
 Then we convert the relevant attributes of the tasks in the Task List to string to compare using `string#compareTo()`.
 
-Step 5. Then, we use `setTasks()` in `UniqueTaskList`to update the Task List.
+Step 5. Then, we use `setTasks()` in `UniqueTaskList` to update the Task List.
 After returning the sorted Task List, the Task Manager is then committed.
 
 The Sequence Diagram below illustrates how the sort mechanism functions. More specifically, sorting by module code.
@@ -620,17 +544,38 @@ image::SortSequenceDiagram.png[width="900"]
 === Calendar feature
 ==== Current Implementation
 
-The Calendar extends the `TaskManager` GUI with an easy to read interface for tracking task deadlines. It is composed of three classes, `CalendarPanel`, `CalendarCell` and `CalendarCellTask`.
+The Calendar extends the `Student Buddy` GUI with an easy to read interface for tracking task deadlines. It is composed of three classes, `CalendarPanel`, `CalendarCell` and `CalendarCellTask`. Furthermore, it uses the JavaFX files `CalendarPanel.fxml` and `CalendarCell.fxml` to format and structure the display.
 
-`CalendarPanel` is the pane on which the headers and grid of the Calendar are drawn.
-`CalendarCell` represents each individual cell of the grid in the `CalendarPanel`.
-`CalendarCellTask` represents each individual task inside each `CalendarCell`.
+`CalendarPanel` is the base class, which builds and fills the calendar grid.
+
+`CalendarCell` represents an individual cell of the grid in `CalendarPanel`.
+
+`CalendarCellTask` represents an individual task inside each `CalendarCell`.
+
+`CalendarPanel.fxml` is a `ScrollPane` containing a `GridPane`. The `GridPane` acts as the calendar grid.
+
+`CalendarCell.fxml` is a `VBox` containing a `Text`, and a `ScrollPane` containing another `VBox`. The `Text` is the date of a calendar cell, and the second `VBox` contains the list of tasks in a cell.
 
 The following class diagram illustrates the relationships between `CalendarPanel`, `CalendarCell` and `CalendarCellTask`:
 
 image::CalendarClassDiagram.png[width="1000"]
 
-The following sequence diagram shows how the Calendar is built on startup:
+The following steps show how the Calendar is built on startup:
+
+* Step 1: The constructor of `CalendarPanel` is called, thereby creating a new instance of `CalendarPanel`.
+* Step 2: buildCalendarPane(taskList) is called, which contains function calls to buildGrid(), createHeaderCells(), writeMonthHeader(), writeDayHeaders(), and createCalendarCells(taskList).
+* Step 3: buildGrid() populates the calendar grid with the correct number of rows and columns.
+* Step 4: createHeaderCells() fills the first two rows of the calendar with the month header cell and day header cells.
+* Step 5: writeMonthHeader() writes the current month of the user's system clock to the month header cell.
+* Step 6: writeDayHeaders() writes the days of the week to the day header cells, using the enumeration HEADERS.
+* Step 7: createCalendarCells(taskList) fills in the remaining calendar cells with `CalendarCell` instances.
+** Step 7.1: `CalendarCell` calls setDate(date) and setMonth(month) to set the date and month of the cell.
+** Step 7.2: getTasks(taskList) is called, which uses the task list stored in the app to create a list of `CalendarCellTask` s applicable for the cell according to the date and month.
+** Step 7.3: addTasksToCell() sorts the list of `CalendarCellTask` s according to their priority, then adds them to the cell.
+** Step 7.4: setAppearance() sets the background and border of the cell.
+* Step 8: Done.
+
+The following sequence diagram illustrates the process outlined above:
 
 image::CalendarBuildSequenceDiagram.png[width="1000"]
 
@@ -650,14 +595,20 @@ Whenever the task list is updated, or the selected task is changed, the function
 ** Pros: No need to navigate between different classes.
 ** Cons: The class will be very long and complex, making the code difficult for future maintainers to read, understand and change. Violates the principles of Single Responsibility Principle and Separation of Concerns.
 
+* **Rationale for choice:**
+** It is the middle ground between alternatives 2 and 3, and thus strikes a balance between readability, maintainability and following Object-Oriented Programming principles. While it does not strictly follow the principles of OOP, it is easy to read the code and understand the processes involved, and is maintainable. This is important, as it is likely that future maintainters will be new Computer Science student undergraduates.
+
 ===== Aspect: How the calendar is updated in real time
 
 * **Alternative 1 (current choice):** Replace the previous `CalendarCell` and `CalendarCellTask` instances with with new instances when the task list changes.
-** Pros: Easy for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.
+** Pros: Easy to read and to understand, simpler and easier to implement.
 ** Cons: Potential performance issues. If the list of tasks is very large, rebuilding the Calendar at every step may result in degraded performance manifested as a loss of responsiveness to user commands.
-* **Alternative 2:** Have `CalendarCellTask` instances automatically update as the task list changes.
-** Pros: No need to rebuild the entire calendar when the task list changes, instead only updating the cell that is affected.
+* **Alternative 2:** Have `CalendarCell` and `CalendarCellTask` instances automatically update as the task list changes.
+** Pros: No need to rebuild the entire calendar when the task list changes, instead only updating the cells and tasks that are affected.
 ** Cons: Adds another layer of abstraction, which can cause difficulty in understanding how the Calendar works.
+
+* **Rationale for choice:**
+** The choice of alternative 1 was made due to time constraints and lack of proper understanding of how to implement alternative 2. Ideally, alternative 2 will be implemented by future maintainers.
 // end::calendar[]
 
 === Logging
@@ -862,7 +813,7 @@ Here are the steps to create a new release.
 
 === Managing Dependencies
 
-A project often depends on third-party libraries. For example, Task Manager depends on the https://github.com/FasterXML/jackson[Jackson library] for JSON parsing. Managing these _dependencies_ can be automated using Gradle. For example, Gradle can download the dependencies automatically, which is better than these alternatives:
+A project often depends on third-party libraries. For example, Student Buddy depends on the https://github.com/FasterXML/jackson[Jackson library] for JSON parsing. Managing these _dependencies_ can be automated using Gradle. For example, Gradle can download the dependencies automatically, which is better than these alternatives:
 
 [loweralpha]
 . Include those libraries in the repo (this bloats the repo size)
@@ -1123,7 +1074,7 @@ Bind the remark label in link:{repoURL}blob/master/src/main/java/seedu/address/u
 
 **Main:**
 
-. Modify link:{repoURL}blob/master/src/main/java/seedu/address/ui/TaskCard.java[`TaskCard`]'s constructor to bind the `Remark` field to the `Task`'s remark.
+. Modify link:{repoURL}blob/master/src/main/java/seedu/address/ui/TaskCard.java[`TaskCard`]'s constructor to bind the `Remark` field to the `Task` 's remark.
 
 **Tests:**
 
@@ -1230,7 +1181,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 *MSS*
 
 1. User requests for help
-2. Task Manger shows all the commands with the purpose of the command
+2. Student Buddy shows all the commands with the purpose of the command
 +
 Use case ends.
 
@@ -1240,7 +1191,7 @@ Use case ends.
 *MSS*
 
 1. User requests to add a new event with given fields
-2. Task Manager adds the event
+2. Student Buddy adds the event
 +
 Use case ends.
 
@@ -1250,7 +1201,7 @@ Use case ends.
 * 1a. The given fields are invalid
 +
 [none]
-** 1ai. Task Manager shows an error message
+** 1ai. Student Buddy shows an error message
 +
 Use case resumes at step 1.
 
@@ -1258,7 +1209,7 @@ Use case resumes at step 1.
 * 1b. The given fields are invalid
 +
 [none]
-** 1bi. Task Manager shows an error message
+** 1bi. Student Buddy shows an error message
 +
 Use case resumes at step 1.
 
@@ -1268,9 +1219,9 @@ Use case resumes at step 1.
 *MSS*
 
 1.  User requests to list tasks
-2.  Task Manager shows a list of tasks
+2.  Student Buddy shows a list of tasks
 3.  User requests to delete a specific task in the list
-4.  Task Manager deletes the task
+4.  Student Buddy deletes the task
 +
 Use case ends.
 
@@ -1285,7 +1236,7 @@ Use case ends.
 * 3a. The given index is invalid.
 +
 [none]
-** 3ai. Task Manager shows an error message.
+** 3ai. Student Buddy shows an error message.
 +
 Use case resumes at step 2.
 
@@ -1295,9 +1246,9 @@ Use case resumes at step 2.
 *MSS*
 
 1. User requests to list tasks
-2. Task Manager shows a list of tasks
+2. Student Buddy shows a list of tasks
 3. User requests to edit a specific task in the list with the given fields
-4. Task Manager edits the task
+4. Student Buddy edits the task
 +
 Use case ends.
 
@@ -1331,7 +1282,7 @@ Use case resumes at step 2.
 *MSS*
 
 1. User requests to find a task by name
-2. Task Manager shows the tasks according to user's input
+2. Student Buddy shows the tasks according to user's input
 +
 Use case ends.
 
@@ -1355,7 +1306,7 @@ Use case resumes at step 2.
 *MSS*
 
 1. User requests to find a task by module
-2. Task Manager shows the tasks according to user's input
+2. Student Buddy shows the tasks according to user's input
 +
 Use case ends.
 
@@ -1379,7 +1330,7 @@ Use case resumes at step 2.
 *MSS*
 
 1. User requests to find a task by date
-2. Task Manager shows the tasks according to user's input
+2. Student Buddy shows the tasks according to user's input
 +
 Use case ends.
 
@@ -1403,7 +1354,7 @@ Use case resumes at step 2.
 *MSS*
 
 1. User requests to find a task by priority
-2. Task Manager shows the tasks according to user's input
+2. Student Buddy shows the tasks according to user's input
 +
 Use case ends.
 
@@ -1427,7 +1378,7 @@ Use case resumes at step 2.
 *MSS*
 
 1. User requests to sort tasks by an attribute
-2. Task Manager sorts the tasks according to user's input
+2. Student Buddy sorts the tasks according to user's input
 +
 Use case ends.
 
@@ -1447,7 +1398,7 @@ _{More to be added}_
 == Non Functional Requirements
 
 .  Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `9` or higher installed.
-.  Should be able to hold up to 1000 tasks without a noticeable sluggishness in performance for typical usage.
+.  Should be able to hold up to 250 tasks without a noticeable sluggishness in performance for typical usage.
 .  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
 _{More to be added}_
