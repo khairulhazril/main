@@ -194,6 +194,15 @@ public class TaskManager implements ReadOnlyTaskManager {
         indicateModified();
     }
 
+    /**
+     * Removes {@code key} from this {@code TaskManager}.
+     * {@code key} must exist in the task manager.
+     */
+    public void removeNotes(Notes key) {
+        unotes.remove(key);
+        indicateModified();
+    }
+
 
 
 }

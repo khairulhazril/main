@@ -205,6 +205,10 @@ public interface Model {
      */
     void addNotes(Notes notes);
 
+    /**
+     * Add Notes into Json file
+     */
+    void addJsonNotes(Notes notes);
 
     /**
      * Returns an unmodifiable view of the filtered notes list
@@ -235,4 +239,11 @@ public interface Model {
      * null if no task is selected.
      */
     Notes getSelectedNotes();
+
+    /**
+     * Deletes the given task.
+     * The task must exist in the task manager.
+     */
+    void deleteNotes(Notes target);
+
 }
