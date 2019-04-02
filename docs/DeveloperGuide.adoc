@@ -396,7 +396,7 @@ Step 3. `LoginCommandParser` will parse the arguments to `LoginCommand`
 If the arguments passes `getLoginStatus`, `logUser(user)` will be called in `LoginEvent` to
 check for username and password match.
 
-Step 4. In`LoginEvent`, `JsonLoginStorage` retrieves the username and hashed password from the Json file.
+Step 4. In `LoginEvent`, `JsonLoginStorage` retrieves the username and hashed password from the Json file.
 
 Step 5. `loginEvent` will then check if the user inputs matches the username and password stored and
 will then return to `LoginCommand` and returns the user a successful login output.
@@ -426,7 +426,7 @@ Step 3. `LogoutCommand` will call the following command which is linked to `Logi
 
 If the arguments passes `getLoginStatus` and `getAdminStatus`, `logout` will be called in `LoginEvent`.
 
-Step 4. In`LoginEvent`, `getLoginStatus` and `getAdminStatus` will be set to false and will then
+Step 4. In `LoginEvent`, `getLoginStatus` and `getAdminStatus` will be set to false and will then
 return to `LoginCommand` to return the user a successful logout output.
 
 |===
@@ -456,7 +456,7 @@ Step 4. `DeleteAccountCommand` will call the following command which is linked t
 
 If the arguments passes `getAdminStatus`, `deleteAccount()` will be called in `LoginEvent`.
 
-Step 5. In`LoginEvent`, JsonLoginStorage's `deleteAccount()` will be called to delete the JSON file.
+Step 5. In `LoginEvent`, JsonLoginStorage's `deleteAccount()` will be called to delete the JSON file.
 
 Step 6. `LoginEvent` will then call `reinitialise()` to create the Json file
 without any username and password stored in it. `reinitialise()` is assisted by `JsonLoginStorage` and `writeJson()`.
@@ -554,7 +554,7 @@ Step 3. `SortCommand` will then call `ModelManager#sortTask(toSortBy)`.
 Step 4. It will then call `TaskManager#sortTask(attribute)`.
 Then we convert the relevant attributes of the tasks in the Task List to string to compare using `string#compareTo()`.
 
-Step 5. Then, we use `setTasks()` in `UniqueTaskList`to update the Task List.
+Step 5. Then, we use `setTasks()` in `UniqueTaskList` to update the Task List.
 After returning the sorted Task List, the Task Manager is then committed.
 
 The Sequence Diagram below illustrates how the sort mechanism functions. More specifically, sorting by module code.
@@ -580,21 +580,44 @@ image::SortSequenceDiagram.png[width="900"]
 === Calendar feature
 ==== Current Implementation
 
-The Calendar extends the `TaskManager` GUI with an easy to read interface for tracking task deadlines. It is composed of three classes, `CalendarPanel`, `CalendarCell` and `CalendarCellTask`.
+The Calendar extends the `TaskManager` GUI with an easy to read interface for tracking task deadlines. It is composed of three classes, `CalendarPanel`, `CalendarCell` and `CalendarCellTask`. Furthermore, it uses the JavaFX files `CalendarPanel.fxml` and `CalendarCell.fxml` to format and structure the display.
 
-`CalendarPanel` is the pane on which the headers and grid of the Calendar are drawn.
-`CalendarCell` represents each individual cell of the grid in the `CalendarPanel`.
-`CalendarCellTask` represents each individual task inside each `CalendarCell`.
+`CalendarPanel` is the base class, which builds and fills the calendar grid.
+
+`CalendarCell` represents an individual cell of the grid in `CalendarPanel`.
+
+`CalendarCellTask` represents an individual task inside each `CalendarCell`.
+
+`CalendarPanel.fxml` is a `ScrollPane` containing a `GridPane`. The `GridPane` acts as the calendar grid.
+
+`CalendarCell.fxml` is a `VBox` containing a `Text`, and a `ScrollPane` containing another `VBox`. The `Text` is the date of a calendar cell, and the second `VBox` contains the list of tasks in a cell.
 
 The following class diagram illustrates the relationships between `CalendarPanel`, `CalendarCell` and `CalendarCellTask`:
 
 image::CalendarClassDiagram.png[width="1000"]
 
-The following sequence diagram shows how the Calendar is built on startup:
+The following steps show how the Calendar is built on startup:
+
+* Step 1: The constructor of `CalendarPanel` is called, thereby creating a new instance of `CalendarPanel`.
+* Step 2: buildCalendarPane(taskList) is called, which contains fuction calls to buildGrid(), createHeaderCells(), writeMonthHeader(), writeDayHeaders(), and createCalendarCells(taskList).
+* Step 3: buildGrid() populates the calendar grid with the correct number of rows and columns.
+* Step 4: createHeaderCells() fills the first two rows of the calendar with the month header cell and day header cells.
+* Step 5: writeMonthHeader() writes the current month of the user's system clock to the month header cell.
+* Step 6: writeDayHeaders() writes the days of the week to the day header cells, using the enumeration HEADERS.
+* Step 7: createCalendarCells(taskList) fills in the remaining calendar cells with `CalendarCell` instances.
+** Step 7.1: `CalendarCell` calls setDate(date) and setMonth(month) to set the date and month of the cell.
+** Step 7.2: getTasks(taskList) is called, which uses the task list stored in the app to create a list of `CalendarCellTask` s applicable for the cell according to the date and month.
+** Step 7.3: addTasksToCell() sorts the list of `CalendarCellTask` s according to their priority, then adds them to the cell.
+** Step 7.4: setAppearance() sets the background and border of the cell.
+* Step 8: Done.
+
+The following sequence diagram illustrates the process outlined above:
 
 image::CalendarBuildSequenceDiagram.png[width="1000"]
 
 Whenever the task list is updated, or the selected task is changed, the function `createCalendarCells(taskList)` is called, which replaces the `CalendarCell` and `CalendarCellTask` instances in the `CalendarPanel`.
+{empty} +
+{empty} +
 
 ==== Design Considerations
 
@@ -610,14 +633,22 @@ Whenever the task list is updated, or the selected task is changed, the function
 ** Pros: No need to navigate between different classes.
 ** Cons: The class will be very long and complex, making the code difficult for future maintainers to read, understand and change. Violates the principles of Single Responsibility Principle and Separation of Concerns.
 
+* **Rationale for choice:**
+** It is the middle ground between alternatives 2 and 3, and thus strikes a balance between readability, maintainability and following Object-Oriented Programming principles. While it does not strictly follow the principles of OOP, it is easy to read the code and understand the processes involved, and is maintainable. This is important, as it is likely that future maintainters will be new Computer Science student undergraduates.
+{empty} +
+{empty} +
+
 ===== Aspect: How the calendar is updated in real time
 
 * **Alternative 1 (current choice):** Replace the previous `CalendarCell` and `CalendarCellTask` instances with with new instances when the task list changes.
-** Pros: Easy for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.
+** Pros: Easy to read and to understand, simpler and easier to implement.
 ** Cons: Potential performance issues. If the list of tasks is very large, rebuilding the Calendar at every step may result in degraded performance manifested as a loss of responsiveness to user commands.
-* **Alternative 2:** Have `CalendarCellTask` instances automatically update as the task list changes.
-** Pros: No need to rebuild the entire calendar when the task list changes, instead only updating the cell that is affected.
+* **Alternative 2:** Have `CalendarCell` and `CalendarCellTask` instances automatically update as the task list changes.
+** Pros: No need to rebuild the entire calendar when the task list changes, instead only updating the cells and tasks that are affected.
 ** Cons: Adds another layer of abstraction, which can cause difficulty in understanding how the Calendar works.
+
+* **Rationale for choice:**
+** The choice of alternative 1 was made due to time constraints and lack of proper understanding of how to implement alternative 2. Ideally, alternative 2 will be implemented by future maintainers.
 // end::calendar[]
 
 === Logging
@@ -1083,7 +1114,7 @@ Bind the remark label in link:{repoURL}blob/master/src/main/java/seedu/address/u
 
 **Main:**
 
-. Modify link:{repoURL}blob/master/src/main/java/seedu/address/ui/TaskCard.java[`TaskCard`]'s constructor to bind the `Remark` field to the `Task`'s remark.
+. Modify link:{repoURL}blob/master/src/main/java/seedu/address/ui/TaskCard.java[`TaskCard`]'s constructor to bind the `Remark` field to the `Task` 's remark.
 
 **Tests:**
 
