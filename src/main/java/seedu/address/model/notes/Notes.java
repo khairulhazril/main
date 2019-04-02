@@ -32,7 +32,8 @@ public class Notes {
         return content;
     }
 
-    public Priority getPriority() { return priority; }
+    public Priority getPriority() {
+        return priority; }
 
     /**
      * Returns true if both notes of the same name have at least one other identity field that is the same.

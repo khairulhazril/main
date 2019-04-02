@@ -1,8 +1,5 @@
 package seedu.address.storage;
 
-import static java.util.Objects.requireNonNull;
-
-import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -10,7 +7,6 @@ import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Map;
-import java.util.Optional;
 
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
@@ -18,12 +14,9 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.commons.util.JsonUtil;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.ReadOnlyTaskManager;
-
+/**
+ * Access JSON event
+ */
 public class JsonNotesStorage implements NotesStorage {
 
     private String notesFilePath;

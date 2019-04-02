@@ -3,8 +3,9 @@ package seedu.address.storage;
 import java.io.IOException;
 import java.util.Map;
 
-import seedu.address.model.task.Priority;
-
+/**
+ * Notes storage
+ */
 public interface NotesStorage {
 
     void newNotes(String heading, String content) throws IOException;

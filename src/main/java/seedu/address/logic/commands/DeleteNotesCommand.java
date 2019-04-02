@@ -10,8 +10,10 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.notes.Notes;
-import seedu.address.model.task.Task;
 
+/**
+ * Deletes a note identified using it's displayed index from the task manger.
+ */
 public class DeleteNotesCommand extends Command {
 
     public static final String COMMAND_WORD = "deletenote";

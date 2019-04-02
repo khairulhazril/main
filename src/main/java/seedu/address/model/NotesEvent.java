@@ -10,6 +10,9 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.model.notes.Notes;
 import seedu.address.storage.JsonNotesStorage;
 
+/**
+ * A notes event
+ */
 public class NotesEvent {
 
     private JsonNotesStorage notesStorage;
