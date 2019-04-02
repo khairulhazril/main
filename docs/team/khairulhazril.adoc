@@ -9,15 +9,12 @@
 
 == Overview
 
-AddressBook - Level 4 is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+Student Buddy is a task manager desktop application. It is a GUI app but most of its user interactions happen in the Command Line Interface (CLI). It is targeted to students who have difficulty keeping track of their tasks and additional notes.
 
 == Summary of contributions
 This section shows a summary of my coding, documentation, and other helpful contributions to the team project.
 
-* *Major enhancement 1*:
-
-
-* *Major enhancement 2*: added *the ability to `sort` tasks*
+* *Major enhancement*: added *the ability to `sort` tasks*
 ** What it does: It allows the user to sort the tasks in the task list based on name, module code, date due or priority level.
 ** Justification: This feature improves significantly because it allows the user to organise the task list in a manner of their choosing.
 ** Highlights: It required an in-depth analysis and understanding on how the different components of the task manager is involved with each other.
@@ -25,8 +22,6 @@ This section shows a summary of my coding, documentation, and other helpful cont
 * *Minor enhancement*: created a `daysLeft` function to find number of days remaining till the task is due and gave colour codes depending on how much days are left.
 
 * *Minor enhancement*: created `findname`, `findmodule`, `finddate` and `findpriority` commands to be able to search not only by task name but by other variables.
-
-* *Minor enhancement*:
 
 * *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
 
