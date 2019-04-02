@@ -616,8 +616,6 @@ The following sequence diagram illustrates the process outlined above:
 image::CalendarBuildSequenceDiagram.png[width="1000"]
 
 Whenever the task list is updated, or the selected task is changed, the function `createCalendarCells(taskList)` is called, which replaces the `CalendarCell` and `CalendarCellTask` instances in the `CalendarPanel`.
-{empty} +
-{empty} +
 
 ==== Design Considerations
 
@@ -635,8 +633,6 @@ Whenever the task list is updated, or the selected task is changed, the function
 
 * **Rationale for choice:**
 ** It is the middle ground between alternatives 2 and 3, and thus strikes a balance between readability, maintainability and following Object-Oriented Programming principles. While it does not strictly follow the principles of OOP, it is easy to read the code and understand the processes involved, and is maintainable. This is important, as it is likely that future maintainters will be new Computer Science student undergraduates.
-{empty} +
-{empty} +
 
 ===== Aspect: How the calendar is updated in real time
 
