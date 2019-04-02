@@ -40,6 +40,21 @@ public class NotesCard extends UiPart<Region> {
         content.setText(notes.getContent().realContent);
         heading.setWrapText(true);
         content.setWrapText(true);
+
+        String priorities = notes.getPriority().toString();
+        int importance = Integer.valueOf(priorities);
+
+        if (importance == 1) {
+            id.setStyle("-fx-text-fill: linear-gradient(red,yellow)");
+            heading.setStyle("-fx-text-fill: linear-gradient(red,yellow)");
+            content.setStyle("-fx-text-fill: linear-gradient(red,yellow)");
+        }
+
+        if (importance == 2) {
+            id.setStyle("-fx-text-fill: linear-gradient(yellow,white)");
+            heading.setStyle("-fx-text-fill: linear-gradient(yellow,white)");
+            content.setStyle("-fx-text-fill: linear-gradient(yellow,white)");
+        }
     }
 
     @Override

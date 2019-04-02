@@ -4,6 +4,8 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
+import seedu.address.model.task.Priority;
+
 /**
  * Represents a Note in the task manager.
  * Guarantees: details are present and not null, field values are validated, immutable.
@@ -12,11 +14,13 @@ public class Notes {
 
     private final Heading heading;
     private final Content content;
+    private final Priority priority;
 
-    public Notes(Heading heading, Content content) {
-        requireAllNonNull(heading, content);
+    public Notes(Heading heading, Content content, Priority priority) {
+        requireAllNonNull(heading, content, priority);
         this.heading = heading;
         this.content = content;
+        this.priority = priority;
 
     }
 
@@ -27,6 +31,9 @@ public class Notes {
     public Content getContent() {
         return content;
     }
+
+    public Priority getPriority() {
+        return priority; }
 
     /**
      * Returns true if both notes of the same name have at least one other identity field that is the same.
@@ -64,7 +71,7 @@ public class Notes {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(heading, content);
+        return Objects.hash(heading, content, priority);
     }
 
     @Override
@@ -73,7 +80,9 @@ public class Notes {
         builder.append(" Heading: ")
                 .append(getHeading())
                 .append(" Content: ")
-                .append(getContent());
+                .append(getContent())
+                .append(" Priority: ")
+                .append(getPriority());
         return builder.toString();
     }
 

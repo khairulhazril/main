@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HEADING;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -20,10 +21,12 @@ public class AddNotesCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a note to the address book. "
         + "Parameters: "
         + PREFIX_HEADING + "HEADING "
-        + PREFIX_CONTENT + "CONTENT \n"
+        + PREFIX_CONTENT + "CONTENT "
+        + PREFIX_PRIORITY + "PRIORITY\n"
         + "Example: " + COMMAND_WORD + " "
         + PREFIX_HEADING + "STATIONARY "
-        + PREFIX_CONTENT + "REMEMBER TO BUY BLUE PEN";
+        + PREFIX_CONTENT + "REMEMBER TO BUY BLUE PEN "
+        + PREFIX_PRIORITY + "3 ";
 
     public static final String MESSAGE_SUCCESS = "New note added: %1$s";
     public static final String MESSAGE_DUPLICATE_NOTE = "This note already exists in the task manager";
@@ -52,6 +55,7 @@ public class AddNotesCommand extends Command {
 
         model.addNotes(wantAdd);
         model.commitTaskManager();
+        model.addJsonNotes(wantAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, wantAdd));
     }
 
