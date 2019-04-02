@@ -1,4 +1,4 @@
-= Task Manager - User Guide
+= Student Buddy - User Guide
 :site-section: UserGuide
 :toc:
 :toc-title:
