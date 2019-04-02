@@ -1,4 +1,4 @@
-= Task Manager - Developer Guide
+= Student Buddy - Developer Guide
 :site-section: DeveloperGuide
 :toc:
 :toc-title:
@@ -16,6 +16,10 @@ endif::[]
 :repoURL: https://github.com/CS2113-AY1819S2-M11-2/main/
 
 By: `M11-02`      Since: `Feb 2019`      Licence: `MIT`
+
+== Introduction
+
+Student Buddy is a desktop application tailored for users who are comfortable with using a Command Line Interface (CLI), while retaining a Graphical User Interface (GUI) for ease of use. The use of a CLI for user input allows users to manage their tasks more efficiently than when using a conventional user interface.
 
 == Setting up
 
@@ -202,7 +206,7 @@ image::ModelClassDiagram.png[width="800"]
 The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
-* stores the Task Manager data.
+* stores the user's data.
 * exposes an unmodifiable `ObservableList<Task>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
@@ -580,7 +584,7 @@ image::SortSequenceDiagram.png[width="900"]
 === Calendar feature
 ==== Current Implementation
 
-The Calendar extends the `TaskManager` GUI with an easy to read interface for tracking task deadlines. It is composed of three classes, `CalendarPanel`, `CalendarCell` and `CalendarCellTask`. Furthermore, it uses the JavaFX files `CalendarPanel.fxml` and `CalendarCell.fxml` to format and structure the display.
+The Calendar extends the `Student Buddy` GUI with an easy to read interface for tracking task deadlines. It is composed of three classes, `CalendarPanel`, `CalendarCell` and `CalendarCellTask`. Furthermore, it uses the JavaFX files `CalendarPanel.fxml` and `CalendarCell.fxml` to format and structure the display.
 
 `CalendarPanel` is the base class, which builds and fills the calendar grid.
 
@@ -599,7 +603,7 @@ image::CalendarClassDiagram.png[width="1000"]
 The following steps show how the Calendar is built on startup:
 
 * Step 1: The constructor of `CalendarPanel` is called, thereby creating a new instance of `CalendarPanel`.
-* Step 2: buildCalendarPane(taskList) is called, which contains fuction calls to buildGrid(), createHeaderCells(), writeMonthHeader(), writeDayHeaders(), and createCalendarCells(taskList).
+* Step 2: buildCalendarPane(taskList) is called, which contains function calls to buildGrid(), createHeaderCells(), writeMonthHeader(), writeDayHeaders(), and createCalendarCells(taskList).
 * Step 3: buildGrid() populates the calendar grid with the correct number of rows and columns.
 * Step 4: createHeaderCells() fills the first two rows of the calendar with the month header cell and day header cells.
 * Step 5: writeMonthHeader() writes the current month of the user's system clock to the month header cell.
@@ -849,7 +853,7 @@ Here are the steps to create a new release.
 
 === Managing Dependencies
 
-A project often depends on third-party libraries. For example, Task Manager depends on the https://github.com/FasterXML/jackson[Jackson library] for JSON parsing. Managing these _dependencies_ can be automated using Gradle. For example, Gradle can download the dependencies automatically, which is better than these alternatives:
+A project often depends on third-party libraries. For example, Student Buddy depends on the https://github.com/FasterXML/jackson[Jackson library] for JSON parsing. Managing these _dependencies_ can be automated using Gradle. For example, Gradle can download the dependencies automatically, which is better than these alternatives:
 
 [loweralpha]
 . Include those libraries in the repo (this bloats the repo size)
@@ -1217,7 +1221,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 *MSS*
 
 1. User requests for help
-2. Task Manger shows all the commands with the purpose of the command
+2. Student Buddy shows all the commands with the purpose of the command
 +
 Use case ends.
 
@@ -1227,7 +1231,7 @@ Use case ends.
 *MSS*
 
 1. User requests to add a new event with given fields
-2. Task Manager adds the event
+2. Student Buddy adds the event
 +
 Use case ends.
 
@@ -1237,7 +1241,7 @@ Use case ends.
 * 1a. The given fields are invalid
 +
 [none]
-** 1ai. Task Manager shows an error message
+** 1ai. Student Buddy shows an error message
 +
 Use case resumes at step 1.
 
@@ -1245,7 +1249,7 @@ Use case resumes at step 1.
 * 1b. The given fields are invalid
 +
 [none]
-** 1bi. Task Manager shows an error message
+** 1bi. Student Buddy shows an error message
 +
 Use case resumes at step 1.
 
@@ -1255,9 +1259,9 @@ Use case resumes at step 1.
 *MSS*
 
 1.  User requests to list tasks
-2.  Task Manager shows a list of tasks
+2.  Student Buddy shows a list of tasks
 3.  User requests to delete a specific task in the list
-4.  Task Manager deletes the task
+4.  Student Buddy deletes the task
 +
 Use case ends.
 
@@ -1272,7 +1276,7 @@ Use case ends.
 * 3a. The given index is invalid.
 +
 [none]
-** 3ai. Task Manager shows an error message.
+** 3ai. Student Buddy shows an error message.
 +
 Use case resumes at step 2.
 
@@ -1282,9 +1286,9 @@ Use case resumes at step 2.
 *MSS*
 
 1. User requests to list tasks
-2. Task Manager shows a list of tasks
+2. Student Buddy shows a list of tasks
 3. User requests to edit a specific task in the list with the given fields
-4. Task Manager edits the task
+4. Student Buddy edits the task
 +
 Use case ends.
 
@@ -1318,7 +1322,7 @@ Use case resumes at step 2.
 *MSS*
 
 1. User requests to find a task by name
-2. Task Manager shows the tasks according to user's input
+2. Student Buddy shows the tasks according to user's input
 +
 Use case ends.
 
@@ -1342,7 +1346,7 @@ Use case resumes at step 2.
 *MSS*
 
 1. User requests to find a task by module
-2. Task Manager shows the tasks according to user's input
+2. Student Buddy shows the tasks according to user's input
 +
 Use case ends.
 
@@ -1366,7 +1370,7 @@ Use case resumes at step 2.
 *MSS*
 
 1. User requests to find a task by date
-2. Task Manager shows the tasks according to user's input
+2. Student Buddy shows the tasks according to user's input
 +
 Use case ends.
 
@@ -1390,7 +1394,7 @@ Use case resumes at step 2.
 *MSS*
 
 1. User requests to find a task by priority
-2. Task Manager shows the tasks according to user's input
+2. Student Buddy shows the tasks according to user's input
 +
 Use case ends.
 
@@ -1414,7 +1418,7 @@ Use case resumes at step 2.
 *MSS*
 
 1. User requests to sort tasks by an attribute
-2. Task Manager sorts the tasks according to user's input
+2. Student Buddy sorts the tasks according to user's input
 +
 Use case ends.
 
