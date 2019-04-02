@@ -62,7 +62,7 @@
                         </padding>
                     </GridPane>
 
-                    <VBox fx:id="notesList" minWidth="300" prefWidth="300" SplitPane.resizableWithParent="false">
+                    <VBox fx:id="notesList" minWidth="200" prefWidth="200" SplitPane.resizableWithParent="false">
                         <padding>
                             <Insets top="10" right="10" bottom="10" left="10"/>
                         </padding>
