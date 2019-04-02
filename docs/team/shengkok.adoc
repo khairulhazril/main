@@ -3,30 +3,31 @@
 :imagesDir: ../images
 :stylesDir: ../stylesheets
 
-== PROJECT: AddressBook - Level 4
+== PROJECT: Task Manager
 
 ---
 
 == Overview
 
-AddressBook - Level 4 is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+This software engineering project requires my team and I to morph a basic command line interface addressbook. After some discussion, we decided to morph it into Task Manager. This enhanced application allows users to manage their tasks and miscellaneous notes; view tasks added easily via a calendar panel display; as well as incorporate a signup and login feature to strengthen the security of this application.
+
+My role was to design and implement the `notes` feature which allows user to `add` and `delete` miscellaneous notes as well as display them in a clear and concise manner. The following sections will highlight my enhancements in more detail, as well as illustrating the relevant sections that I have contributed to the user and developer guide.
 
 == Summary of contributions
+This section showcases the different aspects in which I have contributed to the project. These aspects include coding and the updating of user and developer guide.
 
-* *Major enhancement*: added *the ability to undo/redo previous commands*
-** What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-** Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-** Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-** Credits: _{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}_
+* *Major enhancement*: added *the ability to `add notes` and `delete notes`*
+** What it does: allows the user to add in new notes to help keep track and manage notes. Unwanted notes or notes that are already completed can be removed by deleting the note.
+** Justification: This feature improves the product significantly because a user can now manage their miscellaneous activities other than school-related tasks which greatly enhances the useablility of Task Manager.
+** Highlights: This enhancement required an in-depth analysis and understanding of the design of Task Manager to know what are its restrictions and how it can be improved.
+** Credits: All the team members.
 
-* *Minor enhancement*: added a history command that allows the user to navigate to previous commands using up/down keys.
+* *Minor enhancement*: added colour codes to depict the importance of a note according to `priority` level.
 
 * *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
 
 * *Other contributions*:
 
-** Project management:
-*** Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
 ** Enhancements to existing features:
 *** Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
 *** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
@@ -37,11 +38,6 @@ AddressBook - Level 4 is a desktop address book application used for teaching So
 *** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
 *** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
 *** Some parts of the history feature I added was adopted by several other class mates (https://github.com[1], https://github.com[2])
-** Tools:
-*** Integrated a third party library (Natty) to the project (https://github.com[#42])
-*** Integrated a new Github plugin (CircleCI) to the team repo
-
-_{you can add/remove categories in the list above}_
 
 == Contributions to the User Guide
 
@@ -62,11 +58,4 @@ include::../UserGuide.adoc[tag=dataencryption]
 
 include::../DeveloperGuide.adoc[tag=undoredo]
 
-include::../DeveloperGuide.adoc[tag=dataencryption]
-
-
-== PROJECT: PowerPointLabs
-
----
-
-_{Optionally, you may include other projects in your portfolio.}_
+include::../DeveloperGuide.adoc
