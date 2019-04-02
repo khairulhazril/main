@@ -283,13 +283,29 @@ Sorts the task list in descending order by priority.
 
 === Adding miscellaneous notes : `note`
 
-Adds a note to the address book.
-Format: `note h/HEADING c/CONTENT`
+Adds a note to Student Buddy.
+Format: `note h/HEADING c/CONTENT p/PRIORITY`
 
 Example:
 
-* `note h/Popular c/buy blue pens` +
-Add a note with heading `Popular` and content `buy blue pens`.
+* `note h/Popular c/buy blue pens p/2` +
+Add a note with heading `Popular`, content `buy blue pens` and priority `2`.
+
+=== Deleting miscellaneous notes : `deletenote`
+
+Deletes the specified note from Student Buddy. +
+Format: `delete INDEX`
+
+****
+* Deletes the note at the specified `INDEX`.
+* The index refers to the index number shown in the displayed notes list.
+* The index *must be a positive integer* 1, 2, 3, ...
+****
+
+Examples:
+
+* `delete 2` +
+Deletes the 2nd note from the displayed notes list in Student Buddy.
 
 === Listing entered commands : `history`
 
