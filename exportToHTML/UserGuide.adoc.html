@@ -1,5 +1,22 @@
-= Student Buddy - User Guide
-:site-section: UserGuide
+<html>
+<head>
+<title>UserGuide.adoc</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #f92772;}
+.s1 { color: #f6f6f6;}
+.s2 { color: #f92772;}
+.s3 { color: #808080;}
+</style>
+</head>
+<body bgcolor="#1c1c1c">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+UserGuide.adoc</font>
+</center></td></tr></table>
+<pre><span class="s0">= Task Manager - User Guide</span>
+<span class="s1">:site-section: UserGuide</span>
 :toc:
 :toc-title:
 :toc-placement: preamble
@@ -10,56 +27,55 @@
 :experimental:
 ifdef::env-github[]
 :tip-caption: :bulb:
-= :note-caption: :information_source:
-endif::[]
+<span class="s0">= :note-caption: :information_source:</span>
+<span class="s1">endif::[]</span>
 :repoURL: https://github.com/CS2113-AY1819S2-M11-2/main/
 
 By: `M11-02`      Since: `Feb 2019`      Licence: `MIT`
 
-== Introduction
+<span class="s0">== Introduction</span>
 
-Student Buddy is for tech-savvy students who *prefer to use a desktop app for managing tasks*.
-More importantly, Student Buddy is *optimized for those who prefer to work with a keyboard rather than a mouse*, but still has a *graphical display* for easy viewing.
-Do you want to organise, prioritise and never miss a deadline again? Then this app is perfect for you!
+<span class="s1">Task Manager is for those who *prefer to use a desktop app for managing tasks*.</span>
+More importantly, Task Manager is *optimized for those who prefer to work with a keyboard rather than a mouse*.
+Do you want to organise and prioritise your tasks and never miss a single deadline again? Then this app is perfect for you!
 
-== Quick Start
-Here are the steps to get you started with the Student Buddy.
+<span class="s0">== Quick Start</span>
+<span class="s1">Here are the steps to get you started with the Task Manager.</span>
 
 .  Ensure you have Java version `9` or later installed in your Computer.
 .  Download the latest `TaskManager.jar` link:{repoURL}/releases[here].
-.  Copy the file to the folder you want to use as the home folder for Student Buddy.
+.  Copy the file to the folder you want to use as the home folder for your Task Manager.
 .  Double-click the file to start the app. The GUI should appear in a few seconds. It should look like this:
 +
-image::TaskManager.png[width="1000"]
+image::TaskManager.png[width=&quot;1000&quot;]
 +
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Try the following example commands to get a feel for the app:
 
 
-* *`list`* : shows a list of all tasks in the app
-* *`add n/Assignment m/CG2027 d/12-02 p/1`* : adds a task named `Assignment` of module `CG2023`, with submission date `12-02` and priority level `1` to Student Buddy.
+* *`list`* : shows a list of all tasks in the Task Manager
+* *`add n/Assignment m/CG2027 d/12-02 p/1`* : adds a task named `Assignment` of module `CG2023`, with submission date `12-02` and priority level `1` to the Task Manager.
 * *`delete`*`1` : deletes the 1st task shown in the current list
 * *`help`* : displays this guide inside the app
 * *`exit`* : exits the app
 
 [[Features]]
-== Features
+<span class="s0">== Features</span>
 
-====
-*Command Format*
+<span class="s1">====
+</span><span class="s2">*Command Format*</span>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/CS2113`.
 * Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/CS2113 t/urgent` or as `n/CS2113`.
 * Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/urgent`, `t/urgent t/math` etc.
 * Parameters can be in any order e.g. if the command specifies `n/NAME d/DATE`, `d/DATE n/NAME` is also acceptable.
 * Dates are in the format DD-MM.
-====
+<span class="s1">====
+</span>
+<span class="s0">=== Signing up for an account : `signup`</span>
 
-// tag::loginfunction[]
-=== Signing up for an account : `signup`
-
-Creates an account for the user +
+<span class="s1">Creates an account for the user +</span>
 Format: `signup u/USERNAME p/PASSWORD` +
 
 Example:
@@ -68,15 +84,16 @@ Example:
 Signed up: nicholas
 
 ====
-* `Logged in: nicholas` +
+<span class="s2">* `Logged in: nicholas` +</span>
 You are already logged in and will need to logout in order to signup for a new account. +
 * `Please try another username` +
 The username already exists, signup again with another username.
-====
+<span class="s1">====
+</span>
 
-=== Logging into an account : `login`
+<span class="s0">=== Logging into an account : `login`</span>
 
-Logs the user into their account +
+<span class="s1">Logs the user into their account +</span>
 Format: `login u/USERNAME p/PASSWORD` +
 
 Example:
@@ -85,15 +102,15 @@ Example:
 Logged in as nicholas.
 
 ====
-* `You are already logged in!` +
+<span class="s2">* `You are already logged in!` +</span>
 You are already logged in and will need logout in order to login to another account. +
 * `Please Login again! Command Format: [login u/USERNAME p/PASSWORD]` +
 You have inserted an incorrect username or password. The login command has to be executed again
-====
+<span class="s1">====
+</span>
+<span class="s0">=== Logging out of an account : `logout`</span>
 
-=== Logging out of an account : `logout`
-
-Logs user out of an account +
+<span class="s1">Logs user out of an account +</span>
 Format: `logout`
 
 Example:
@@ -102,20 +119,19 @@ Example:
 Logged out of nicholas.
 
 ====
-* `Please Login!` +
+<span class="s2">* `Please Login!` +</span>
 You did not login into any account.
-====
-// end::loginfunction[]
+<span class="s1">====
+</span>
+<span class="s0">=== Viewing help : `help`</span>
 
-=== Viewing help : `help`
-
-Displays a list of commands +
+<span class="s1">Displays a list of commands +</span>
 Format: `help`
 
-=== Adding a task: `add`
+<span class="s0">=== Adding a task: `add`</span>
 
 
-Adds a task to Student Buddy. +
+<span class="s1">Adds a task to the Task Manager. +</span>
 Format: `add n/NAME m/MODULE d/DATE p/PRIORITY [t/TAG]...`
 
 [TIP]
@@ -128,24 +144,24 @@ Adds a task with the name `Tutorial 3`, module code `CG1112`, date `21-03`, with
 * `add n/Project Version 1 m/CS2113T d/11-03` +
 Adds a task with the name `Project Version 1`, module code `CS2113T` and date `11-03`.
 
-=== Listing all tasks : `list`
+<span class="s0">=== Listing all tasks : `list`</span>
 
-Shows a list of all tasks in Student Buddy. +
+<span class="s1">Shows a list of all tasks in the Task Manager. +</span>
 Format: `list`
 
-=== Editing a task : `edit`
+<span class="s0">=== Editing a task : `edit`</span>
 
-Edits an existing task in Student Buddy. +
+<span class="s1">Edits an existing task in the Task Manager. +</span>
 Format: `edit INDEX [n/NAME] [m/MODULE] [d/DATE] [p/PRIORITY] [t/TAG]...`
 
 ****
-* Edits the task at the specified `INDEX`. The index refers to the index number shown in the displayed task list. The index *must be a positive integer* 1, 2, 3, ...
+<span class="s2">* Edits the task at the specified `INDEX`. The index refers to the index number shown in the displayed task list. The index *must be a positive integer* 1, 2, 3, ...</span>
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the task will be removed i.e adding of tags is not cumulative.
 * You can remove all the person's tags by typing `t/` without specifying any tags after it.
-****
-
+<span class="s1">****
+</span>
 Examples:
 
 * `edit 1 n/Tutorial 4 d/21-03 t/urgent` +
@@ -153,19 +169,19 @@ Edits the name and date of the 1st task to be `Tutorial 4` and `21-03` with the 
 * `edit 2 n/Project t/` +
 Edits the name of the 2nd person to be `Project` and clears all existing tags.
 
-=== Locating tasks by name: `findname`
+<span class="s0">=== Locating tasks by name: `findname`</span>
 
-Finds tasks with names containing any of the given keywords. +
+<span class="s1">Finds tasks with names containing any of the given keywords. +</span>
 Format: `findname KEYWORD [MORE_KEYWORDS]`
 
 ****
-* The search is case insensitive. e.g `HOMEWORK` will match `homework`
+<span class="s2">* The search is case insensitive. e.g `HOMEWORK` will match `homework`</span>
 * The order of the keywords does not matter. e.g. `CS2113 Tutorial` will match `Tutorial CS2113`
 * Only the name is searched.
 * Only full words will be matched e.g. `Assignments` will not match `Assignment`
 * Tasks matching at least one keyword will be returned (i.e. `OR` search). e.g. `CS2113 Assignment` will return `CS2113 Homework`, `Assignment 2`
-****
-
+<span class="s1">****
+</span>
 Examples:
 
 * `find CS2113 task` +
@@ -173,18 +189,18 @@ Returns all task with names containing `CS2113` or `task`.
 * `find CS2113 Hw Tutorial` +
 Returns all task having names `CS2113`, `Hw`, or `Tutorial`
 
-=== Locating tasks by module code: `findmodule`
+<span class="s0">=== Locating tasks by module code: `findmodule`</span>
 
-Finds tasks with module codes containing any of the given keywords. +
+<span class="s1">Finds tasks with module codes containing any of the given keywords. +</span>
 Format: `findmodule KEYWORD [MORE_KEYWORDS]`
 
 ****
-* The search is case insensitive. e.g `CS2113T` will match `cs2113t`
+<span class="s2">* The search is case insensitive. e.g `CS2113T` will match `cs2113t`</span>
 * The order of the keywords does not matter. e.g. `CS2113T CS2101` will match `CS2101 CS2113`
 * Only the module code is searched.
 * Only full words will be matched e.g. `CS2113T` will not match `CS2113`
-****
-
+<span class="s1">****
+</span>
 Examples:
 
 * `find CS2113T` +
@@ -192,15 +208,15 @@ Returns all tasks containing the module code `CS2113T`.
 * `find CS2113T CS2101` +
 Returns all tasks containing the module code `CS2113T` or `CS2101`.
 
-=== Locating tasks by date: `finddate`
+<span class="s0">=== Locating tasks by date: `finddate`</span>
 
-Finds tasks with dates containing any of the given keywords. +
+<span class="s1">Finds tasks with dates containing any of the given keywords. +</span>
 Format: `finddate KEYWORD [MORE_KEYWORDS]`
 
 ****
-* The order of the keywords does not matter. e.g. `03-03 21-03` will match `21-03 03-03`
-****
-
+<span class="s2">* The order of the keywords does not matter. e.g. `03-03 21-03` will match `21-03 03-03`</span>
+<span class="s1">****
+</span>
 Examples:
 
 * `finddate 20-03` +
@@ -208,15 +224,15 @@ Returns all task with date 20-03.
 * `finddate 20-03 30-03` +
 Returns all task with date 20-03 or 30-03.
 
-=== Locating tasks by priority code: `findpriority`
+<span class="s0">=== Locating tasks by priority code: `findpriority`</span>
 
-Finds tasks with priority code containing any of the given keywords. +
+<span class="s1">Finds tasks with priority code containing any of the given keywords. +</span>
 Format: `findpriority KEYWORD [MORE_KEYWORDS]`
 
 ****
-* The order of the keywords does not matter. e.g. `1 2` will match `2 1`
-****
-
+<span class="s2">* The order of the keywords does not matter. e.g. `1 2` will match `2 1`</span>
+<span class="s1">****
+</span>
 Examples:
 
 * `findpriority 1` +
@@ -224,56 +240,56 @@ Returns all task with priority code 1.
 * `findpriority 1 3` +
 Returns all task with priority code 1 or 3.
 
-=== Deleting a task : `delete`
+<span class="s0">=== Deleting a task : `delete`</span>
 
-Deletes the specified task from Student Buddy. +
+<span class="s1">Deletes the specified task from the Task Manager. +</span>
 Format: `delete INDEX`
 
 ****
-* Deletes the task at the specified `INDEX`.
+<span class="s2">* Deletes the task at the specified `INDEX`.</span>
 * The index refers to the index number shown in the displayed task list.
 * The index *must be a positive integer* 1, 2, 3, ...
-****
-
+<span class="s1">****
+</span>
 Examples:
 
 * `list` +
 `delete 2` +
-Deletes the 2nd task in Student Buddy.
+Deletes the 2nd task in the Task Manager.
 * `findname Project` +
 `delete 1` +
 Deletes the 1st task in the results of the `find` command.
 
-=== Selecting a task : `select`
+<span class="s0">=== Selecting a task : `select`</span>
 
-Selects the task identified by the index number used in the displayed task list. +
+<span class="s1">Selects the task identified by the index number used in the displayed task list. +</span>
 Format: `select INDEX`
 
 ****
-* Selects the task and displays the task on the calendar.
+<span class="s2">* Selects the task and displays the task on the calendar.</span>
 * The index refers to the index number shown in the displayed task list.
 * The index *must be a positive integer* `1, 2, 3, ...`
-****
-
+<span class="s1">****
+</span>
 Examples:
 
 * `list` +
 `select 2` +
-Selects the 2nd task in Student Buddy.
+Selects the 2nd task in the Task Manager.
 * `findmodule CS2113` +
 `select 1` +
 Selects the 1st task in the results of the `find` command.
 
-=== Sorting the task list : `sort`
+<span class="s0">=== Sorting the task list : `sort`</span>
 
-Sorts the task list in Student Buddy according to an input parameter.
+<span class="s1">Sorts the task list in the Task Manager according to an input parameter.</span>
 Format: `sort PARAMETER`
 
 ****
-* Sorts the task list according to the `PARAMETER`.
+<span class="s2">* Sorts the task list according to the `PARAMETER`.</span>
 * The parameter *must be one of the following* `name, module, date, priority`.
-****
-
+<span class="s1">****
+</span>
 Examples:
 
 * `sort module` +
@@ -281,9 +297,9 @@ Sorts the task list lexicographically by module code.
 * `sort priority` +
 Sorts the task list in descending order by priority.
 
-=== Adding miscellaneous notes : `note`
+<span class="s0">=== Adding miscellaneous notes : `note`</span>
 
-Adds a note to the address book.
+<span class="s1">Adds a note to the address book.</span>
 Format: `note h/HEADING c/CONTENT`
 
 Example:
@@ -291,27 +307,27 @@ Example:
 * `note h/Popular c/buy blue pens` +
 Add a note with heading `Popular` and content `buy blue pens`.
 
-=== Listing entered commands : `history`
+<span class="s0">=== Listing entered commands : `history`</span>
 
-Lists all the commands that you have entered in reverse chronological order. +
+<span class="s1">Lists all the commands that you have entered in reverse chronological order. +</span>
 Format: `history`
 
 [NOTE]
 ====
-Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and next input respectively in the command box.
-====
+<span class="s2">Pressing the kbd:[&amp;uarr;] and kbd:[&amp;darr;] arrows will display the previous and next input respectively in the command box.</span>
+<span class="s1">====
+</span>
+<span class="s3">// tag::undoredo[]</span>
+<span class="s0">=== Undoing previous command : `undo`</span>
 
-// tag::undoredo[]
-=== Undoing previous command : `undo`
-
-Restores Student Buddy to the state before the previous _undoable_ command was executed. +
+<span class="s1">Restores the Task Manager to the state before the previous _undoable_ command was executed. +</span>
 Format: `undo`
 
 [NOTE]
 ====
-Undoable commands: those commands that modify Student Buddy's content (`add`, `delete`, `edit` and `clear`).
-====
-
+<span class="s2">Undoable commands: those commands that modify the Task Manager's content (`add`, `delete`, `edit` and `clear`).</span>
+<span class="s1">====
+</span>
 Examples:
 
 * `delete 1` +
@@ -330,9 +346,9 @@ The `undo` command fails as there are no undoable commands executed previously.
 `undo` (reverses the `delete 1` command) +
 This reverses the `clear` command and the `delete 1` command.
 
-=== Redoing the previously undone command : `redo`
+<span class="s0">=== Redoing the previously undone command : `redo`</span>
 
-Reverses the most recent `undo` command. +
+<span class="s1">Reverses the most recent `undo` command. +</span>
 Format: `redo`
 
 Examples:
@@ -351,54 +367,43 @@ The `redo` command fails as there are no `undo` commands executed previously.
 `undo` (reverses the `delete 1` command) +
 `redo` (reapplies the `delete 1` command) +
 `redo` (reapplies the `clear` command) +
-// end::undoredo[]
+<span class="s3">// end::undoredo[]</span>
 
-=== Clearing all entries : `clear`
+<span class="s0">=== Clearing all entries : `clear`</span>
 
-Clears all entries from Student Buddy. +
+<span class="s1">Clears all entries from the Task Manager. +</span>
 Format: `clear`
 
-// tag::calendar[]
-=== Viewing tasks on a calendar
+<span class="s0">=== Viewing tasks on a calendar</span>
 
-Tasks displayed in the task list are automatically displayed on a calendar of the current month.
+<span class="s1">Tasks displayed in the task list are automatically displayed on a calendar of the current month. If the task list is modified or filtered using `find`, the calendar will update accordingly. An example is displayed below:</span>
 
-In addition, the calendar comes with the following features:
+image::CalendarDemo.png[width=&quot;1000&quot;]
 
-* Tasks are automatically colour-coded, with high, medium and low priority tasks appearing red, orange and blue, respectively.
-* Tasks are automatically listed in order of priority, from high to low.
-* If the task list is modified with `add`, `delete` or `edit`, or it is filtered using `find`, the calendar will update accordingly.
-* Selecting a task will highlight it on the calendar for easy viewing.
+<span class="s0">=== Exiting the program : `exit`</span>
 
-A showcase of the calendar's features is displayed below:
-
-image::CalendarDemo.png[width="1000"]
-// end::calendar[]
-
-=== Exiting the program : `exit`
-
-Exits the program. +
+<span class="s1">Exits the program. +</span>
 Format: `exit`
 
-=== Saving the data
+<span class="s0">=== Saving the data</span>
 
-Student Buddy's data is saved in the hard disk automatically after any command that changes the data. +
+<span class="s1">Task Manager data is saved in the hard disk automatically after any command that changes the data. +</span>
 There is no need to save manually.
 
-// tag::dataencryption[]
-=== Encrypting data files `[coming in v2.0]`
+<span class="s3">// tag::dataencryption[]</span>
+<span class="s0">=== Encrypting data files `[coming in v2.0]`</span>
 
-_{explain how the user can enable/disable data encryption}_
-// end::dataencryption[]
+<span class="s1">_{explain how the user can enable/disable data encryption}_</span>
+<span class="s3">// end::dataencryption[]</span>
 
-== FAQ
+<span class="s0">== FAQ</span>
 
-*Q*: How do I transfer my data to another Computer? +
-*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Student Buddy folder.
+<span class="s1">*Q*: How do I transfer my data to another Computer? +</span>
+*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Task Manager folder.
 
-== Command Summary
+<span class="s0">== Command Summary</span>
 
-* *Add* `add n/NAME m/MODULE d/DATE p/PRIORITY [t/TAG]...` +
+<span class="s1">* *Add* `add n/NAME m/MODULE d/DATE p/PRIORITY [t/TAG]...` +</span>
 e.g. `add n/Tutorial 3 m/CG2023 d/21-02 p/3 t/urgent`
 * *Clear* : `clear`
 * *Delete* : `delete INDEX` +
@@ -427,3 +432,7 @@ e.g. `signup u/nicholas p/abcdefg`
 * *Sort* : `sort KEYWORD` +
 e.g `sort module`
 * *Undo* : `undo`
+</pre>
+</body>
+
+</html>

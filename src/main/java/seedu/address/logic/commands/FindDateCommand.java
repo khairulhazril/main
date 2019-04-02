@@ -14,6 +14,8 @@ import seedu.address.model.task.DueContainsKeywordsPredicate;
 public class FindDateCommand extends Command {
 
     public static final String COMMAND_WORD = "finddate";
+    public static final String COMMAND_ALIAS = "fd";
+
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all tasks whose due dates contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"

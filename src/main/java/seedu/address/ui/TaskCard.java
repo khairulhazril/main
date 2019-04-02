@@ -50,6 +50,7 @@ public class TaskCard extends UiPart<Region> {
         module.setText(task.getModule().value);
         due.setText(task.getDue().value);
         priority.setText(PRIORITYNAMES[Integer.parseInt(task.getPriority().value) - 1]);
+        name.setWrapText(true);
         if (task.getDaysRemaining() < 0) {
             daysLeft.setText("Task is overdue!!!");
         } else {
