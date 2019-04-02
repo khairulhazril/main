@@ -38,6 +38,8 @@ public class NotesCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         heading.setText(notes.getHeading().realHeading);
         content.setText(notes.getContent().realContent);
+        heading.setWrapText(true);
+        content.setWrapText(true);
     }
 
     @Override
