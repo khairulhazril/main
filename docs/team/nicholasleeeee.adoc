@@ -119,10 +119,16 @@ include::../UserGuide.adoc[tag=loginfunction]
 include::../DeveloperGuide.adoc[tag=loginfunction]
 
 
-== PROJECT: PowerPointLabs
+== PROJECTS:
 
 ---
+=== Vincent
 
-Insert Vincent? +
-Insert EE2026? +
-Insert CG2028?
+https://github.com/nicholasleeeee/01-04-02[CG1112]
+
+=== FPGA
+
+https://github.com/Nicholas-Kayden/EE2026[EE2026] +
+
+
+
