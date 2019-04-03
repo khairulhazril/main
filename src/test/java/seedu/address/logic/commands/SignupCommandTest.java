@@ -10,8 +10,10 @@ import java.util.function.Predicate;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+
 import javafx.beans.property.ReadOnlyProperty;
 import javafx.collections.ObservableList;
+
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -23,10 +25,6 @@ import seedu.address.model.account.Username;
 import seedu.address.model.notes.Notes;
 import seedu.address.model.task.Task;
 import seedu.address.testutil.AccountBuilder;
-
-
-
-
 
 public class SignupCommandTest {
 
@@ -50,10 +48,10 @@ public class SignupCommandTest {
         ModelStubTestUser modelStubTestUser = new ModelStubTestUser(currentUser);
         CommandResult commandResult = new SignupCommand(user).execute(modelStubTestUser, commandHistory);
 
-        assertEquals(String.format(SignupCommand.MESSAGE_SUCCESS,user.getUsername().toString()),
+        assertEquals(String.format(SignupCommand.MESSAGE_SUCCESS, user.getUsername().toString()),
                 commandResult.getFeedbackToUser());
 
-        assertEquals(emptyCommandHistory,commandHistory);
+        assertEquals(emptyCommandHistory, commandHistory);
     }
 
     @Test
