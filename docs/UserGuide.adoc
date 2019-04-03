@@ -297,6 +297,14 @@ Example:
 * `note h/Popular c/buy blue pens p/2` +
 Add a note with heading `Popular`, content `buy blue pens` and priority `2`.
 
+The following are 2 diagrams that demostrate the example shown above. One of the diagram shows the state before the command is executed and the other shows the state after it is executed.
+
+*Before:*
+image::AddNotesBefore.png[width="800"]
+
+*After:*
+image::AddNotesAfter.png[width="800"]
+
 === Deleting miscellaneous notes : `deletenote`
 
 Deletes the specified note from Student Buddy. +
@@ -312,6 +320,16 @@ Examples:
 
 * `delete 2` +
 Deletes the 2nd note from the displayed notes list in Student Buddy.
+
+The following are 2 diagrams that demostrate the example shown above. One of the diagram shows the state before the command is executed and the other shows the state after it is executed.
+
+*Before:*
+
+image::DeleteNoteBefore.png[width="800"]
+
+*After:*
+
+image::DeleteNoteAfter.png[width="800"]
 // end::notes[]
 
 === Listing entered commands : `history`
