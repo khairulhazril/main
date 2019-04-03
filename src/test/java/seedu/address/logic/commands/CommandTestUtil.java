@@ -5,8 +5,10 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -40,6 +42,8 @@ public class CommandTestUtil {
     public static final String VALID_TAG_GRADED = "graded";
     public static final String VALID_TAG_UNGRADED = "ungraded";
 
+    public static final String USERNAME_DESC = " " + PREFIX_USERNAME + VALID_USERNAME;
+    public static final String PASSWORD_DESC = " " + PREFIX_PASSWORD + VALID_PASSWORD;
     public static final String NAME_DESC_PROJECT = " " + PREFIX_NAME + VALID_NAME_PROJECT;
     public static final String NAME_DESC_TUTORIAL = " " + PREFIX_NAME + VALID_NAME_TUTORIAL;
     public static final String MODULE_DESC_PROJECT = " " + PREFIX_MODULE + VALID_MODULE_PROJECT;
@@ -51,6 +55,8 @@ public class CommandTestUtil {
     public static final String TAG_DESC_GRADED = " " + PREFIX_TAG + VALID_TAG_UNGRADED;
     public static final String TAG_DESC_UNGRADED = " " + PREFIX_TAG + VALID_TAG_GRADED;
 
+    public static final String INVALID_USERNAME_DESC = " " + PREFIX_USERNAME + "N!";
+    public static final String INVALID_PASSWORD_DESC = " " + PREFIX_PASSWORD + "no space";
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; //'&' not allowed in names
     public static final String INVALID_MODULE_DESC = " " + PREFIX_MODULE + "CS21a3"; //Module must be in the form AAXXXX
     public static final String INVALID_DATE_DESC = " " + PREFIX_DATE + "01-20"; //Month must between 1 to 12

@@ -40,8 +40,8 @@ public class Username {
 
     @Override
     public boolean equals(Object other) {
-        return other == this || (other instanceof Username &&
-                enteredUsername.equals(((Username) other).enteredUsername));
+        return other == this || (other instanceof Username
+                && enteredUsername.equals(((Username) other).enteredUsername));
     }
 
     @Override

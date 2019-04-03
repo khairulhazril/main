@@ -42,8 +42,8 @@ public class Password {
 
     @Override
     public boolean equals(Object other) {
-        return other == this || (other instanceof Password &&
-                enteredPassword.equals(((Password) other).enteredPassword));
+        return other == this || (other instanceof Password
+                && enteredPassword.equals(((Password) other).enteredPassword));
     }
 
     @Override
