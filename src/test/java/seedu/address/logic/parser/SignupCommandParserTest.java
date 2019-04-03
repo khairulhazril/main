@@ -1,13 +1,5 @@
 package seedu.address.logic.parser;
 
-import seedu.address.logic.commands.SignupCommand;
-import seedu.address.model.account.Password;
-import seedu.address.model.account.User;
-import seedu.address.model.account.Username;
-
-
-import org.junit.Test;
-
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PASSWORD_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_USERNAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.PASSWORD_DESC;
@@ -19,6 +11,13 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_USERNAME;
 import static seedu.address.logic.commands.SignupCommand.MESSAGE_INVALID_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+
+import seedu.address.logic.commands.SignupCommand;
+import seedu.address.model.account.Password;
+import seedu.address.model.account.User;
+import seedu.address.model.account.Username;
+
+import org.junit.Test;
 
 public class SignupCommandParserTest {
 

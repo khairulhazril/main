@@ -1,9 +1,9 @@
 package seedu.address.testutil;
 
-import seedu.address.model.account.User;
-
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PASSWORD;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_USERNAME;
+
+import seedu.address.model.account.User;
 
 /**
  * Test utility containing accounts to be used in tests

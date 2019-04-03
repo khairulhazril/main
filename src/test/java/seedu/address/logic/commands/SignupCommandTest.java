@@ -1,5 +1,15 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.testutil.TypicalAccounts.NICHOLAS;
+
+import java.nio.file.Path;
+import java.util.function.Predicate;
+
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import javafx.beans.property.ReadOnlyProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
@@ -14,16 +24,9 @@ import seedu.address.model.notes.Notes;
 import seedu.address.model.task.Task;
 import seedu.address.testutil.AccountBuilder;
 
-import java.nio.file.Path;
-import java.util.function.Predicate;
 
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
-import static java.util.Objects.requireNonNull;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.testutil.TypicalAccounts.NICHOLAS;
+
 
 public class SignupCommandTest {
 
