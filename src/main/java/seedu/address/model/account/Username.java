@@ -8,8 +8,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Username {
 
-    public static final String MESSAGE_USERNAME_CONSTRAINTS
-            = "Username should be alphanumeric and it should not be blank!";
+    public static final String MESSAGE_USERNAME_CONSTRAINTS =
+            "Username should be alphanumeric and it should not be blank!";
     public static final String USERNAME_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
     public final String enteredUsername;
 

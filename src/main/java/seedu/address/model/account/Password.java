@@ -8,8 +8,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Password {
 
-    public static final String MESSAGE_PASSWORD_CONSTRAINTS
-            = "Password should be alphanumeric and it should not be blank!";
+    public static final String MESSAGE_PASSWORD_CONSTRAINTS =
+            "Password should be alphanumeric and it should not be blank!";
     private static final String SPECIAL_CHARACTERS = "!#$%&'*+/=?`{|}~^.@-";
     private static final String PASSWORD_REGEX = "^[\\w" + SPECIAL_CHARACTERS + "]+";
     public final String enteredPassword;
