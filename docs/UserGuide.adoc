@@ -300,9 +300,11 @@ Add a note with heading `Popular`, content `buy blue pens` and priority `2`.
 The following are 2 diagrams that demostrate the example shown above. One of the diagram shows the state before the command is executed and the other shows the state after it is executed.
 
 *Before:*
+
 image::AddNotesBefore.png[width="800"]
 
 *After:*
+
 image::AddNotesAfter.png[width="800"]
 
 === Deleting miscellaneous notes : `deletenote`
