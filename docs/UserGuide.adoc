@@ -289,7 +289,8 @@ Format: `note h/HEADING c/CONTENT p/PRIORITY`
 
 ****
 * Adds the note with the given parameters. +
-* Priority can *only take numbers from 1 to 3* with 1 being the most urgent.
+* `Priority` can *only take numbers from 1 to 3* with 1 being the most urgent.
+* `Priority` `1` will be in *red* colour followed by `2` in *yellow* and `3` in *white*. 
 ****
 
 Example:
