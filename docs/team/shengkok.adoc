@@ -22,15 +22,14 @@ This section showcases the different aspects in which I have contributed to the 
 ** Highlights: This enhancement required an in-depth analysis and understanding of the design of Task Manager to know what are its restrictions and how it can be improved.
 ** Credits: All the team members.
 
-* *Minor enhancement*: added colour codes to depict the importance of a note according to `priority` level.
+* *Minor enhancement*: Added colour codes to depict the importance of a note according to `priority` levels 1 to 3. The highest priority 1 being red-orange followed by yellow for 2 and white for 3.
 
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+* *Sample code contributed*: [https://github.com/Shengkok/main/blob/master/src/main/java/seedu/address/logic/commands/AddNotesCommand.java[Functional code]] [https://github.com[Test code]] 
 
 * *Other contributions*:
 
 ** Enhancements to existing features:
-*** Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
-*** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
+*** Updated the GUI of the application by adding a panel to display notes: https://github.com/CS2113-AY1819S2-M11-2/main/pull/56[#56]
 ** Documentation:
 *** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
 ** Community:
@@ -40,7 +39,6 @@ This section showcases the different aspects in which I have contributed to the 
 *** Some parts of the history feature I added was adopted by several other class mates (https://github.com[1], https://github.com[2])
 
 == Contributions to the User Guide
-
 
 |===
 |_Given below are sections I contributed to the User Guide. They showcase my *ability to write documentation* targeting end-users._
