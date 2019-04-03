@@ -26,6 +26,9 @@ import seedu.address.testutil.EditTaskDescriptorBuilder;
  */
 public class CommandTestUtil {
 
+    public static final String VALID_USERNAME = "Wonder Woman";
+    public static final String VALID_PASSWORD = "Why-1s-Zeu5-my-f4ther";
+
     public static final String VALID_NAME_PROJECT = "Project";
     public static final String VALID_NAME_TUTORIAL = "Tutorial";
     public static final String VALID_MODULE_PROJECT = "CS2113";
