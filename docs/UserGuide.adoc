@@ -281,10 +281,16 @@ Sorts the task list lexicographically by module code.
 * `sort priority` +
 Sorts the task list in descending order by priority.
 
+// tag::notes[]
 === Adding miscellaneous notes : `note`
 
 Adds a note to Student Buddy.
 Format: `note h/HEADING c/CONTENT p/PRIORITY`
+
+****
+* Adds the note with the given parameters. +
+* Priority can *only take numbers from 1 to 3* with 1 being the most urgent.
+****
 
 Example:
 
@@ -294,7 +300,7 @@ Add a note with heading `Popular`, content `buy blue pens` and priority `2`.
 === Deleting miscellaneous notes : `deletenote`
 
 Deletes the specified note from Student Buddy. +
-Format: `delete INDEX`
+Format: `deletenote INDEX`
 
 ****
 * Deletes the note at the specified `INDEX`.
@@ -306,6 +312,7 @@ Examples:
 
 * `delete 2` +
 Deletes the 2nd note from the displayed notes list in Student Buddy.
+// end::notes[]
 
 === Listing entered commands : `history`
 
