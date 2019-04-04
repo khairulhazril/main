@@ -83,7 +83,9 @@ public class Task {
 
         return otherTask != null
                 && otherTask.getName().equals(getName())
-                && (otherTask.getModule().equals(getModule()) || otherTask.getDue().equals(getDue()));
+                && otherTask.getModule().equals(getModule())
+                && otherTask.getDue().equals(getDue())
+                && otherTask.getPriority().equals((getPriority()));
     }
 
     /**
