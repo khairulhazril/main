@@ -1,15 +1,16 @@
-= Kayden - Project Portfolio
+= PROJECT: Student Buddy
 :site-section: AboutUs
 :imagesDir: ../images
 :stylesDir: ../stylesheets
 
-== PROJECT: Student Buddy
+== Kayden - Project Portfolio
+This portfolio serves to document my contributions in a team-based software enginnering project CS2113T. My team comprises of 4 memebers and we were tasked to morph a basic command line interface addressbook within 8 weeks. After some discussion, we decided that we will work towards a Task Manager, Student Buddy.
 
 ---
 
 == Overview
 
-This software engineering project requires my team and I to morph a basic command line interface addressbook. After some discussion, we decided to morph it into Task Manager. This enhanced application allows users to manage their tasks and miscellaneous notes; view tasks added easily via a calendar panel display; as well as incorporate a signup and login feature to strengthen the security of this application.
+Our project's ultimate aim is to help students organise their tasks and notes more efficiently and effectively. This is done through the following features. Student Buddy allows users to add and delete their tasks and miscellaneous notes; view tasks added easily via a calendar panel display; as well as incorporate a signup and login feature to strengthen the security of this application.
 
 My role was to design and implement the `notes` feature which allows user to `add` and `delete` miscellaneous notes as well as display them in a clear and concise manner. The following sections will highlight my enhancements in more detail, as well as illustrating the relevant sections that I have contributed to the user and developer guide.
 
@@ -31,7 +32,8 @@ This section showcases the different aspects in which I have contributed to the 
 ** Enhancements to existing features:
 *** Updated the GUI of the application by adding a panel to display notes: https://github.com/CS2113-AY1819S2-M11-2/main/pull/56[#56]
 ** Documentation:
-*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
+*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com/CS2113-AY1819S2-M11-2/main/pull/31[#31]
+*** Added notes section for user guide which comprise of add notes and delete notes feature. 
 ** Community:
 *** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
 *** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
@@ -44,7 +46,11 @@ This section showcases the different aspects in which I have contributed to the 
 |_Given below are sections I contributed to the User Guide. They showcase my *ability to write documentation* targeting end-users._
 |===
 
+{Start of extract}
+
 include::../UserGuide.adoc[tag=notes]
+
+{End of extract}
 
 == Contributions to the Developer Guide
 
@@ -52,4 +58,8 @@ include::../UserGuide.adoc[tag=notes]
 |_Given below are sections I contributed to the Developer Guide. They showcase my *ability to write technical documentation* and the technical depth of my contributions to the project._
 |===
 
+{Start of extract}
+
 include::../DeveloperGuide.adoc[tag=notes]
+
+{End of extract}
