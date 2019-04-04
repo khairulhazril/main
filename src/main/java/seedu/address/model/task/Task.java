@@ -73,8 +73,7 @@ public class Task {
     }
 
     /**
-     * Returns true if both persons of the same name have at least one other identity field that is the same.
-     * This defines a weaker notion of equality between two persons.
+     * Returns true if tasks are identical in all parameters
      */
     public boolean isSameTask(Task otherTask) {
         if (otherTask == this) {
@@ -83,7 +82,8 @@ public class Task {
 
         return otherTask != null
                 && otherTask.getName().equals(getName())
-                && (otherTask.getModule().equals(getModule()) || otherTask.getDue().equals(getDue()));
+                && otherTask.getModule().equals(getModule())
+                && otherTask.getDue().equals(getDue());
     }
 
     /**
