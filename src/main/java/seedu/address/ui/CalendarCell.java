@@ -97,7 +97,7 @@ public class CalendarCell extends UiPart<Region> {
                 boolean selected = task.isSameTask(selectedTask);
 
                 CalendarCellTask newTask = new CalendarCellTask(task, selected);
-                newTask.setWrappingWidth(CELL_WIDTH - 5); //add a bit of padding for better text wrapping
+                newTask.setWrappingWidth(CELL_WIDTH - 20); //add a bit of padding for better text wrapping
 
                 cellTasks.add(newTask);
             }
@@ -113,7 +113,7 @@ public class CalendarCell extends UiPart<Region> {
         getRoot().setBackground(background);
         getRoot().setBorder(border);
         cellTasksPane.setHbarPolicy(ScrollBarPolicy.NEVER);
-        cellTasksPane.setVbarPolicy(ScrollBarPolicy.NEVER);
+        cellTasksPane.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
     }
 
     /**
