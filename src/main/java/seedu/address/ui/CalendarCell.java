@@ -16,8 +16,6 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import seedu.address.model.task.Task;
 
@@ -96,8 +94,9 @@ public class CalendarCell extends UiPart<Region> {
             int currMonth = Integer.parseInt(currMonthString);
 
             if (currDate == Integer.parseInt(date) && currMonth == Integer.parseInt(month)) {
-                int taskPriority = Integer.parseInt(task.getPriority().value);
-                CalendarCellTask newTask = new CalendarCellTask(task.getName().toString(), taskPriority);
+                boolean selected = task.isSameTask(selectedTask);
+
+                CalendarCellTask newTask = new CalendarCellTask(task, selected);
                 newTask.setWrappingWidth(CELL_WIDTH - 5); //add a bit of padding for better text wrapping
 
                 cellTasks.add(newTask);
@@ -125,11 +124,6 @@ public class CalendarCell extends UiPart<Region> {
         cellTasks.sort(CalendarCellTask::compareTo);
         for (CalendarCellTask newTask : cellTasks) {
             cellContent.getChildren().add(newTask);
-
-            if (selectedTask != null && newTask.getText().equals(selectedTask.getName().toString())) {
-                newTask.setUnderline(true);
-                newTask.setFont(Font.font(Font.getDefault().getName(), FontWeight.BOLD, Font.getDefault().getSize()));
-            }
         }
     }
 
