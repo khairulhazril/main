@@ -443,78 +443,80 @@ The password will not be secure.
 // tag::notes[]
 === Add Notes Feature
 
-This feature allow users to `add` notes regarding miscellaneous matters.
+This feature allow users to add notes regarding miscellaneous matters.
 
-The class diagram below illustrates the `Notes` class.
+The class diagram below illustrates the *Notes* class.
 
 image::NotesClassDiagram.png[width="450"]
 
 ==== Current Implementation
 
-The add notes mechanism is facilitated by `AddNotesCommand`. A `Notes` object is instantiated which contains of `Heading`, `Content` and `Priority`.
+The add notes mechanism is facilitated by _AddNotesCommand_. A _Notes_ object is instantiated which contains of _Heading_, _Content_ and _Priority_.
 
 Given below is an example usage scenario and how the add notes mechanism behaves at each step.
 
 Step 1. The user enters in a note with its *associated parameters*. e.g `note h/popular c/buy pilot G-2 blue pens p/2`.
 
-Step 2. The `LogicManager` calls `ParseCommand` with that input.
+Step 2. The _LogicManager_ calls _ParseCommand_ with that input.
 
-Step 3. The `TaskManagerParser` is called and returns a `AddNotesCommand` object to `Logic Manager`.
+Step 3. The _TaskManagerParser_ is called and returns a _AddNotesCommand_ object to _Logic Manager_.
 
-Step 4. The `LogicManage`r will call `execute` method on the `AddNotesCommand` object.
+Step 4. The _LogicManager_ will call _execute_ method on the _AddNotesCommand_ object.
 
-Step 5. `ModelManager` is then called and will check if the note already exists.
+Step 5. _ModelManager_ is then called and will check if the note already exists.
 
-Step 6. If note already exists, `DuplicateNotesException` will be thrown. This will return a string message "This note already exists in the task manager".
+Step 6. If note already exists, _DuplicateNotesException_ will be thrown. This will return a string message "This note already exists in the task manager".
 
-Step 7. Else, `addNotes(notes)` method is called and note is added.
+Step 7. Else, _addNotes(notes)_ method is called and note is added.
 
-The sequence diagram below illustrates how the `AddNotes` mechanism function.
+The sequence diagram below illustrates how the mechanism for adding notes function.
 
 image::AddNotesSequenceDiagram.png[width="800"]
 
 ==== Design Considerations
 
-Aspect: Checking for duplicate notes
+Aspect: Checking for *duplicate notes*
 
 * **Alternative 1(current choice):** Implement a method to check new notes entered. If a new note added is exactly the same as exisitng notes in the Student Buddy, it will be classified as duplicate note and cannot be added.
 ** Pros: Easy to implement
-** Cons: May neglect duplicate notes that mean the same because the check is for the exact same heading and content, co. E.g 1. h/popular c/buy ring file 2.h/popular c/buy ring files
+** Cons: May neglect duplicate notes that mean the same because the check is for the *exact same heading and content*. The following 2 examples shown below will be identified as different notes due to an additional *s* in example 2 +
+1. `h/popular c/buy ring file` +
+2. `h/popular c/buy ring files`
 * **Alternative 2:** Implement a method to check for similarity of notes. If similarity is *more than 90%*, note is classified as same note and cannot be added.
 ** Pros: Can reduce the amount of duplicate notes that are added.
-** Cons: Difficult to implement and cannot eliminate duplicate notes completely.
+** Cons: Difficult to implement and *cannot eliminate duplicate notes completely*.
 
 Final decision: Alternative 1 was chosen due to the *significantly easier* implementation.
 
 === Delete Notes Feature
 
-This feature allow users to `delete` notes that are no longer wanted.
+This feature allow users to delete notes that are no longer wanted.
 
 ==== Current Implementation
 
-The Notes mechanism is facilitated by `DeleteNotesCommand` from the `logic` component. Upon executing the `DeleteNotesCommand`, the unwanted note will be removed from the memory of the Student Buddy.
+The Notes mechanism is facilitated by _DeleteNotesCommand_ from the _Logic_ component. Upon executing the _DeleteNotesCommand_, the unwanted note will be removed from the memory of the Student Buddy.
 
-Given below is an example usage scenario and how the `delete notes` mechanism behaves at each step.
+Given below is an example usage scenario and how the `deletenote` mechanism behaves at each step.
 
-Step 1. The user calls the `DeleteNotesCommand` with the note’s displayed index. e.g `deletenote 1`.
+Step 1. The user calls the _DeleteNotesCommand_ with the note’s displayed index. e.g `deletenote 1`.
 
-Step 2. The `LogicManager` calls `parseCommand` with the user input.
+Step 2. The _LogicManager_ calls _parseCommand_ with the user input.
 
-Step 3. The `TaskManagerParser` is called and it returns a `DeleteNotesCommand` object to the `LogicManager`.
+Step 3. The _TaskManagerParser_ is called and it returns a _DeleteNotesCommand_ object to the _LogicManager_.
 
-Step 4. The `LogicManager` will call execute() on the `DeleteNotesCommand` object. If no note of the corresponding `index` is found, it would return a string of message MESSAGE_INVALID_NOTES_DISPLAYED_INDEX.
+Step 4. The _LogicManager_ will call _execute()_ on the _DeleteNotesCommand_ object. If no note of the corresponding index is found, it would return a string of message `MESSAGE_INVALID_NOTES_DISPLAYED_INDEX`.
 
-Step 5. The `Logic` component then interacts with the `Model` component which then calls `TaskManager` component within it to execute `deleteNotes(target)` to remove the note.
+Step 5. The _Logic_ component then interacts with the `Model` component which then calls `TaskManager` component within it to execute `deleteNotes(target)` to remove the note.
 
 Step 6. The command result would then return the message `MESSAGE_DELETE_NOTE_SUCCESS` in a string.
 
-The following diagram illustrates how the `DeleteNotes` operation works:
+The following diagram illustrates how the `deletenote` operation works:
 
 image::DeleteNotesSequenceDiagram.png[width="800"]
 
 ==== Design Considerations
 
-Aspect: Weighing user experience to convenience of users
+Aspect: Weighing *user experience* to *convenience* of users
 
 * **Alternative 1:** Implement a method to *strike off* notes that are completed so that users can keep track of what notes they have added in as well as the ones they finished.
 ** Pros: Better user experience
