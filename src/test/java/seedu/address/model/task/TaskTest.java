@@ -44,15 +44,15 @@ public class TaskTest {
         editedAlice = new TaskBuilder(SLIDES).withName(VALID_NAME_TUTORIAL).build();
         assertFalse(SLIDES.isSameTask(editedAlice));
 
-        // same name, same phone, different attributes -> returns true
+        // same name, same phone, different attributes -> returns false
         editedAlice = new TaskBuilder(SLIDES).withDate(VALID_DATE_TUTORIAL).withPriority(VALID_PRIORITY_TUTORIAL)
                 .withTags(VALID_TAG_GRADED).build();
-        assertTrue(SLIDES.isSameTask(editedAlice));
+        assertFalse(SLIDES.isSameTask(editedAlice));
 
-        // same name, same email, different attributes -> returns true
+        // same name, same email, different attributes -> returns false
         editedAlice = new TaskBuilder(SLIDES).withModule(VALID_MODULE_TUTORIAL).withPriority(VALID_PRIORITY_TUTORIAL)
                 .withTags(VALID_TAG_GRADED).build();
-        assertTrue(SLIDES.isSameTask(editedAlice));
+        assertFalse(SLIDES.isSameTask(editedAlice));
 
         // same name, same phone, same email, different attributes -> returns true
         editedAlice = new TaskBuilder(SLIDES).withPriority(VALID_PRIORITY_TUTORIAL).withTags(VALID_TAG_GRADED).build();
