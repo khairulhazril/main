@@ -25,7 +25,7 @@ This section showcases the different aspects in which I have contributed to the 
 
 * *Minor enhancement*: Added colour codes to depict the importance of a note according to `priority` levels 1 to 3. The highest priority 1 being red-orange followed by yellow for 2 and white for 3.
 
-* *Sample code contributed*: [https://github.com/Shengkok/main/blob/master/src/main/java/seedu/address/logic/commands/AddNotesCommand.java[Functional code]] [https://github.com[Test code]] 
+* *Sample code contributed*: [https://github.com/Shengkok/main/blob/master/src/main/java/seedu/address/logic/commands/AddNotesCommand.java[Functional code]] [https://github.com[Test code]]
 
 * *Other contributions*:
 
@@ -33,7 +33,7 @@ This section showcases the different aspects in which I have contributed to the 
 *** Updated the GUI of the application by adding a panel to display notes: https://github.com/CS2113-AY1819S2-M11-2/main/pull/56[#56]
 ** Documentation:
 *** Did cosmetic tweaks to existing contents of the User Guide: https://github.com/CS2113-AY1819S2-M11-2/main/pull/31[#31]
-*** Added notes section for user guide which comprise of add notes and delete notes feature. 
+*** Added notes section for user guide which comprise of add notes and delete notes feature.
 ** Community:
 *** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
 *** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
