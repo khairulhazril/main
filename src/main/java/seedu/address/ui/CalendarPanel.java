@@ -180,6 +180,8 @@ public class CalendarPanel extends UiPart<Region> {
                     box.getChildren().add(header);
                     box.setBackground(background);
                     box.setBorder(border);
+                } else if (GridPane.getRowIndex(node) > 1) {
+                    break;
                 }
             }
         }

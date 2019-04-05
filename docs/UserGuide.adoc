@@ -18,16 +18,16 @@ By: `M11-02`      Since: `Feb 2019`      Licence: `MIT`
 
 == Introduction
 
-Task Manager is for those who *prefer to use a desktop app for managing tasks*.
-More importantly, Task Manager is *optimized for those who prefer to work with a keyboard rather than a mouse*.
-Do you want to organise and prioritise your tasks and never miss a single deadline again? Then this app is perfect for you!
+Student Buddy is for tech-savvy students who *prefer to use a desktop app for managing tasks*.
+More importantly, Student Buddy is *optimized for those who prefer to work with a keyboard rather than a mouse*, but still has a *graphical display* for easy viewing.
+Do you want to organise, prioritise and never miss a deadline again? Then this app is perfect for you!
 
 == Quick Start
-Here are the steps to get you started with the Task Manager.
+Here are the steps to get you started with the Student Buddy.
 
 .  Ensure you have Java version `9` or later installed in your Computer.
 .  Download the latest `TaskManager.jar` link:{repoURL}/releases[here].
-.  Copy the file to the folder you want to use as the home folder for your Task Manager.
+.  Copy the file to the folder you want to use as the home folder for Student Buddy.
 .  Double-click the file to start the app. The GUI should appear in a few seconds. It should look like this:
 +
 image::TaskManager.png[width="1000"]
@@ -37,8 +37,8 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Try the following example commands to get a feel for the app:
 
 
-* *`list`* : shows a list of all tasks in the Task Manager
-* *`add n/Assignment m/CG2027 d/12-02 p/1`* : adds a task named `Assignment` of module `CG2023`, with submission date `12-02` and priority level `1` to the Task Manager.
+* *`list`* : shows a list of all tasks in the app
+* *`add n/Assignment m/CG2027 d/12-02 p/1`* : adds a task named `Assignment` of module `CG2023`, with submission date `12-02` and priority level `1` to Student Buddy.
 * *`delete`*`1` : deletes the 1st task shown in the current list
 * *`help`* : displays this guide inside the app
 * *`exit`* : exits the app
@@ -56,6 +56,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * Dates are in the format DD-MM.
 ====
 
+// tag::loginfunction[]
 === Signing up for an account : `signup`
 
 Creates an account for the user +
@@ -72,7 +73,6 @@ You are already logged in and will need to logout in order to signup for a new a
 * `Please try another username` +
 The username already exists, signup again with another username.
 ====
-
 
 === Logging into an account : `login`
 
@@ -105,6 +105,7 @@ Logged out of nicholas.
 * `Please Login!` +
 You did not login into any account.
 ====
+// end::loginfunction[]
 
 === Viewing help : `help`
 
@@ -114,7 +115,7 @@ Format: `help`
 === Adding a task: `add`
 
 
-Adds a task to the Task Manager. +
+Adds a task to Student Buddy. +
 Format: `add n/NAME m/MODULE d/DATE p/PRIORITY [t/TAG]...`
 
 [TIP]
@@ -129,12 +130,12 @@ Adds a task with the name `Project Version 1`, module code `CS2113T` and date `1
 
 === Listing all tasks : `list`
 
-Shows a list of all tasks in the Task Manager. +
+Shows a list of all tasks in Student Buddy. +
 Format: `list`
 
 === Editing a task : `edit`
 
-Edits an existing task in the Task Manager. +
+Edits an existing task in Student Buddy. +
 Format: `edit INDEX [n/NAME] [m/MODULE] [d/DATE] [p/PRIORITY] [t/TAG]...`
 
 ****
@@ -225,7 +226,7 @@ Returns all task with priority code 1 or 3.
 
 === Deleting a task : `delete`
 
-Deletes the specified task from the Task Manager. +
+Deletes the specified task from Student Buddy. +
 Format: `delete INDEX`
 
 ****
@@ -238,7 +239,7 @@ Examples:
 
 * `list` +
 `delete 2` +
-Deletes the 2nd task in the Task Manager.
+Deletes the 2nd task in Student Buddy.
 * `findname Project` +
 `delete 1` +
 Deletes the 1st task in the results of the `find` command.
@@ -258,14 +259,14 @@ Examples:
 
 * `list` +
 `select 2` +
-Selects the 2nd task in the Task Manager.
+Selects the 2nd task in Student Buddy.
 * `findmodule CS2113` +
 `select 1` +
 Selects the 1st task in the results of the `find` command.
 
 === Sorting the task list : `sort`
 
-Sorts the task list in the Task Manager according to an input parameter.
+Sorts the task list in Student Buddy according to an input parameter.
 Format: `sort PARAMETER`
 
 ****
@@ -280,15 +281,59 @@ Sorts the task list lexicographically by module code.
 * `sort priority` +
 Sorts the task list in descending order by priority.
 
+// tag::notes[]
 === Adding miscellaneous notes : `note`
 
-Adds a note to the address book.
-Format: `note h/HEADING c/CONTENT`
+Adds a note to Student Buddy.
+Format: `note h/HEADING c/CONTENT p/PRIORITY`
+
+****
+* Adds the note with the given parameters. +
+* `Priority` can *only take numbers from 1 to 3* with 1 being the most urgent.
+* `Priority` `1` will be in *red* colour followed by `2` in *yellow* and `3` in *white*.
+****
 
 Example:
 
-* `note h/Popular c/buy blue pens` +
-Add a note with heading `Popular` and content `buy blue pens`.
+* `note h/Popular c/buy blue pens p/2` +
+Add a note with heading `Popular`, content `buy blue pens` and priority `2`.
+
+The following are 2 diagrams that demostrate the example shown above. One of the diagram shows the state before the command is executed and the other shows the state after it is executed.
+
+*Before:*
+
+image::AddNotesBefore.png[width="800"]
+
+*After:*
+
+image::AddNotesAfter.png[width="800"]
+
+=== Deleting miscellaneous notes : `deletenote`
+
+Deletes the specified note from Student Buddy. +
+Format: `deletenote INDEX`
+
+****
+* Deletes the note at the specified `INDEX`.
+* The index refers to the index number shown in the displayed notes list.
+* The index *must be a positive integer* 1, 2, 3, ...
+****
+
+Examples:
+
+* `delete 2` +
+Deletes the 2nd note from the displayed notes list in Student Buddy.
+
+The following are 2 diagrams that demostrate the example shown above. One of the diagram shows the state before the command is executed and the other shows the state after it is executed.
+
+*Before:*
+
+image::DeleteNoteBefore.png[width="800"]
+
+*After:*
+
+image::DeleteNoteAfter.png[width="800"]
+// end::notes[]
 
 === Listing entered commands : `history`
 
@@ -303,12 +348,12 @@ Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and 
 // tag::undoredo[]
 === Undoing previous command : `undo`
 
-Restores the Task Manager to the state before the previous _undoable_ command was executed. +
+Restores Student Buddy to the state before the previous _undoable_ command was executed. +
 Format: `undo`
 
 [NOTE]
 ====
-Undoable commands: those commands that modify the Task Manager's content (`add`, `delete`, `edit` and `clear`).
+Undoable commands: those commands that modify Student Buddy's content (`add`, `delete`, `edit` and `clear`).
 ====
 
 Examples:
@@ -354,14 +399,25 @@ The `redo` command fails as there are no `undo` commands executed previously.
 
 === Clearing all entries : `clear`
 
-Clears all entries from the Task Manager. +
+Clears all entries from Student Buddy. +
 Format: `clear`
 
+// tag::calendar[]
 === Viewing tasks on a calendar
 
-Tasks displayed in the task list are automatically displayed on a calendar of the current month. If the task list is modified or filtered using `find`, the calendar will update accordingly. An example is displayed below:
+Tasks displayed in the task list are automatically displayed on a calendar of the current month.
+
+In addition, the calendar comes with the following features:
+
+* Tasks are automatically colour-coded, with high, medium and low priority tasks appearing red, orange and blue, respectively.
+* Tasks are automatically listed in order of priority, from high to low.
+* If the task list is modified with `add`, `delete` or `edit`, or it is filtered using `find`, the calendar will update accordingly.
+* Selecting a task will highlight it on the calendar for easy viewing.
+
+A showcase of the calendar's features is displayed below:
 
 image::CalendarDemo.png[width="1000"]
+// end::calendar[]
 
 === Exiting the program : `exit`
 
@@ -370,7 +426,7 @@ Format: `exit`
 
 === Saving the data
 
-Task Manager data is saved in the hard disk automatically after any command that changes the data. +
+Student Buddy's data is saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
 // tag::dataencryption[]
@@ -382,7 +438,7 @@ _{explain how the user can enable/disable data encryption}_
 == FAQ
 
 *Q*: How do I transfer my data to another Computer? +
-*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Task Manager folder.
+*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Student Buddy folder.
 
 == Command Summary
 

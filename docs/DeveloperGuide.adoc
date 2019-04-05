@@ -17,6 +17,10 @@ endif::[]
 
 By: `M11-02`      Since: `Feb 2019`      Licence: `MIT`
 
+== Introduction
+
+Student Buddy is a desktop application tailored for users who are comfortable with using a Command Line Interface (CLI), while retaining a Graphical User Interface (GUI) for ease of use. The use of a CLI for user input allows users to manage their tasks more efficiently than when using a conventional user interface.
+
 == Setting up
 
 === Prerequisites
@@ -202,7 +206,7 @@ image::ModelClassDiagram.png[width="800"]
 The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
-* stores the Task Manager data.
+* stores the user's data.
 * exposes an unmodifiable `ObservableList<Task>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
@@ -236,7 +240,7 @@ This section describes some noteworthy details on how certain features are imple
 // tag::loginfunction[]
 === Login Feature
 
-*Current Implementation*
+==== Current Implementation
 
 * The login mechanism is facilitated by `TaskManager`, `SignupCommand`, `LoginCommand`, `LogoutCommand`, `DeleteAccountCommand`, `LoginEvent`, `GenerateHash`, `JsonLoginStorage`.
 
@@ -258,7 +262,7 @@ image::AccountClassDiagram.png[width="450"]
 
 * In this feature, there are 4 main commands.
 The flow on how the commands are executed and their respective sequence diagrams will be further elaborated below: +
-1. Section 3.2.1, Signup Command +
+1. Section 3.2.2, Signup Command +
 2. <<Login Command>> +
 3. <<Logout Command>> +
 4. <<DeleteAcc Command>>
@@ -316,7 +320,7 @@ Step 3. `LoginCommandParser` will parse the arguments to `LoginCommand`
 If the arguments passes `getLoginStatus`, `logUser(user)` will be called in `LoginEvent` to
 check for username and password match.
 
-Step 4. In`LoginEvent`, `JsonLoginStorage` retrieves the username and hashed password from the Json file.
+Step 4. In `LoginEvent`, `JsonLoginStorage` retrieves the username and hashed password from the Json file.
 
 Step 5. `loginEvent` will then check if the user inputs matches the username and password stored and
 will then return to `LoginCommand` and returns the user a successful login output.
@@ -346,7 +350,7 @@ Step 3. `LogoutCommand` will call the following command which is linked to `Logi
 
 If the arguments passes `getLoginStatus` and `getAdminStatus`, `logout` will be called in `LoginEvent`.
 
-Step 4. In`LoginEvent`, `getLoginStatus` and `getAdminStatus` will be set to false and will then
+Step 4. In `LoginEvent`, `getLoginStatus` and `getAdminStatus` will be set to false and will then
 return to `LoginCommand` to return the user a successful logout output.
 
 |===
@@ -376,7 +380,7 @@ Step 4. `DeleteAccountCommand` will call the following command which is linked t
 
 If the arguments passes `getAdminStatus`, `deleteAccount()` will be called in `LoginEvent`.
 
-Step 5. In`LoginEvent`, JsonLoginStorage's `deleteAccount()` will be called to delete the JSON file.
+Step 5. In `LoginEvent`, JsonLoginStorage's `deleteAccount()` will be called to delete the JSON file.
 
 Step 6. `LoginEvent` will then call `reinitialise()` to create the Json file
 without any username and password stored in it. `reinitialise()` is assisted by `JsonLoginStorage` and `writeJson()`.
@@ -391,27 +395,55 @@ image::DeleteAccountSequenceDiagram.png[width="900"]
 
 ==== Design Considerations
 
-* Combine the classes for `LoginEvent` and `JsonLoginStorage`
+===== Aspect: How `LoginEvent` and `JsonLoginStorage` works together
+
+* ** Alternative 1 (current choice): ** `LoginEvent` and `JsonLoginStorage` are in separate classes.
+
+** Pros: Follows OOP coding. The codes will look more organised and clean.
+** Cons: Coders will have to look at both files to code or debug as both calls each other frequently.
+
+* ** Alternative 2: ** `LoginEvent` and `JsonLoginStorage` are in the same class.
+
 ** Pros: Easy to read and debug, all codes are in one file and thus easier for other coders to modify.
 ** Cons: Does not follow OOP coding. The codes in the file will look messy.
 
-* To use encryption library instead of creating my own hashing function.
-** Pros: Do not need to code much. Most of the function are one lines. Easy to implement.
-** Cons: Encryption is a two-way function. Encrypted strings can be decrypted with a proper key.
-Hashing was chosen because it is a one way function. With a proper hashing design, there is no way to reverse
-the hasing process to reveal the original password.
+==== Aspect: How `LoginEvent` fits into the code
 
-* To have the `LoginEvent` being a component of its own without having to implement into logic.
-** Pros: It would be easier to visualise and could still run the entire Taskmanager.
-** Cons: There would be a lot of repeated and redundant codes. Most of the functions in the `logic` componenet
-will be repeated. This will violate Single Responsibility Principle and Separation of Concerns.
+* ** Alternative 1 (current choice): ** `LoginEvent` is implemented into the logic.
+
+** Pros: The code will be efficient and effective. It will be neat and the flow will be well structured.
+Single Responsibility Principle and Separation of Concerns is maintained in the code.
+** Cons: Might be confusing as `LoginEvent` is used frequently.
+Coders might need to fully understand how other classes work before looking at `LoginEvent`.
+
+* ** Alternative 2: ** `LoginEvent` is implemented on its own.
+
+** Pros: It would be easier for coders to visualise and debug. `LoginEvent` can still run the entire Taskmanager.
+** Cons: There would be a lot of repeated and redundant codes.
+Most of the functions in the `logic` component will be repeated.
+This will violate Single Responsibility Principle and Separation of Concerns.
+
+==== Aspect: How the securing of password is implemented
+
+* ** Alternative 1 (current choice): ** Create my own hashing fuction to secure password
+
+** Pros: Hashing is a one way function. With a proper hashing design, there is no way to reverse
+the hashing process to reveal the original password.
+** Cons: Need to code out my own hashing function. More logic and function have to be written.
+The code will be mroe complex.
+
+* ** Alternative 2: ** Use encryption library to secure password
+
+** Pros: Do not need to code much. Most of the function are one line. Easy to implement.
+** Cons: Encryption is a two-way function. Encrypted strings can be decrypted with a proper key.
+The password will not be secure.
 
 // end::loginfunction[]
 
 // tag::notes[]
-=== Notes Feature
+=== Add Notes Feature
 
-This feature allow users to add and view notes regarding miscellaneous matters.
+This feature allow users to `add` notes regarding miscellaneous matters.
 
 The class diagram below illustrates the `Notes` class.
 
@@ -419,26 +451,25 @@ image::NotesClassDiagram.png[width="450"]
 
 ==== Current Implementation
 
-The Notes mechanism is facilitated by AddNotesCommand. A Notes object is instantiated which contains of Heading and Content.
+The add notes mechanism is facilitated by `AddNotesCommand`. A `Notes` object is instantiated which contains of `Heading`, `Content` and `Priority`.
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+Given below is an example usage scenario and how the add notes mechanism behaves at each step.
 
-Step 1. The user enters the in a note with its associated parameters. e.g `note h/popular c/buy pilot G-2 blue pens`.
+Step 1. The user enters in a note with its *associated parameters*. e.g `note h/popular c/buy pilot G-2 blue pens p/2`.
 
-Step 2. The LogicManager calls ParseCommand with that input.
+Step 2. The `LogicManager` calls `ParseCommand` with that input.
 
-Step 3. The TaskManagerParser is called and returns a AddNotesCommand object to Logic Manager.
+Step 3. The `TaskManagerParser` is called and returns a `AddNotesCommand` object to `Logic Manager`.
 
-Step 4. The LogicManager will call execute method on the AddNotesCommand object.
+Step 4. The `LogicManage`r will call `execute` method on the `AddNotesCommand` object.
 
-Step 5. ModelManager is then called and will check if the note already exists.
+Step 5. `ModelManager` is then called and will check if the note already exists.
 
 Step 6. If note already exists, `DuplicateNotesException` will be thrown. This will return a string message "This note already exists in the task manager".
 
-Step 7. Else, addNotes(notes) method is called and note is added.
+Step 7. Else, `addNotes(notes)` method is called and note is added.
 
-The sequence diagram below illustrates how the AddNotes mechanism function.
-
+The sequence diagram below illustrates how the `AddNotes` mechanism function.
 
 image::AddNotesSequenceDiagram.png[width="800"]
 
@@ -446,13 +477,54 @@ image::AddNotesSequenceDiagram.png[width="800"]
 
 Aspect: Checking for duplicate notes
 
-* **Alternative 1(current choice):** IsSameNotes
-
+* **Alternative 1(current choice):** Implement a method to check new notes entered. If a new note added is exactly the same as exisitng notes in the Student Buddy, it will be classified as duplicate note and cannot be added.
 ** Pros: Easy to implement
-** Cons: May neglect duplicate notes that mean the same because IsSameNotes check for the exact same heading and content. E.g 1. h/popular c/buy ring file 2.h/popular c/buy ring files
-* **Alternative 2:** Implement a method to check for similarity of notes. If similarity is more than 95%, notes is classified as same notes and cannot be added.
+** Cons: May neglect duplicate notes that mean the same because the check is for the exact same heading and content, co. E.g 1. h/popular c/buy ring file 2.h/popular c/buy ring files
+* **Alternative 2:** Implement a method to check for similarity of notes. If similarity is *more than 90%*, note is classified as same note and cannot be added.
 ** Pros: Can reduce the amount of duplicate notes that are added.
 ** Cons: Difficult to implement and cannot eliminate duplicate notes completely.
+
+Final decision: Alternative 1 was chosen due to the *significantly easier* implementation.
+
+=== Delete Notes Feature
+
+This feature allow users to `delete` notes that are no longer wanted.
+
+==== Current Implementation
+
+The Notes mechanism is facilitated by `DeleteNotesCommand` from the `logic` component. Upon executing the `DeleteNotesCommand`, the unwanted note will be removed from the memory of the Student Buddy.
+
+Given below is an example usage scenario and how the `delete notes` mechanism behaves at each step.
+
+Step 1. The user calls the `DeleteNotesCommand` with the note’s displayed index. e.g `deletenote 1`.
+
+Step 2. The `LogicManager` calls `parseCommand` with the user input.
+
+Step 3. The `TaskManagerParser` is called and it returns a `DeleteNotesCommand` object to the `LogicManager`.
+
+Step 4. The `LogicManager` will call execute() on the `DeleteNotesCommand` object. If no note of the corresponding `index` is found, it would return a string of message MESSAGE_INVALID_NOTES_DISPLAYED_INDEX.
+
+Step 5. The `Logic` component then interacts with the `Model` component which then calls `TaskManager` component within it to execute `deleteNotes(target)` to remove the note.
+
+Step 6. The command result would then return the message `MESSAGE_DELETE_NOTE_SUCCESS` in a string.
+
+The following diagram illustrates how the `DeleteNotes` operation works:
+
+image::DeleteNotesSequenceDiagram.png[width="800"]
+
+==== Design Considerations
+
+Aspect: Weighing user experience to convenience of users
+
+* **Alternative 1:** Implement a method to *strike off* notes that are completed so that users can keep track of what notes they have added in as well as the ones they finished.
+** Pros: Better user experience
+** Cons: May cause incovenience as users have to delete away completed notes every few days so as to allow easier viewing of latest notes.
+* **Alternative 2(current choice):** *Deleting* completed notes away.
+** Pros: Easy to implement
+** Pros: Easy for users to manage completed notes.
+** Cons: No sense of achievement as users are unable to view the amount of work completed.
+
+Final decision: Alternative 2 was chosen due to it being *more practical and convenient* to users so that users will continue to use it in the future.
 // end::notes[]
 
 
@@ -474,7 +546,7 @@ Step 3. `SortCommand` will then call `ModelManager#sortTask(toSortBy)`.
 Step 4. It will then call `TaskManager#sortTask(attribute)`.
 Then we convert the relevant attributes of the tasks in the Task List to string to compare using `string#compareTo()`.
 
-Step 5. Then, we use `setTasks()` in `UniqueTaskList`to update the Task List.
+Step 5. Then, we use `setTasks()` in `UniqueTaskList` to update the Task List.
 After returning the sorted Task List, the Task Manager is then committed.
 
 The Sequence Diagram below illustrates how the sort mechanism functions. More specifically, sorting by module code.
@@ -500,17 +572,38 @@ image::SortSequenceDiagram.png[width="900"]
 === Calendar feature
 ==== Current Implementation
 
-The Calendar extends the `TaskManager` GUI with an easy to read interface for tracking task deadlines. It is composed of three classes, `CalendarPanel`, `CalendarCell` and `CalendarCellTask`.
+The Calendar extends the `Student Buddy` GUI with an easy to read interface for tracking task deadlines. It is composed of three classes, `CalendarPanel`, `CalendarCell` and `CalendarCellTask`. Furthermore, it uses the JavaFX files `CalendarPanel.fxml` and `CalendarCell.fxml` to format and structure the display.
 
-`CalendarPanel` is the pane on which the headers and grid of the Calendar are drawn.
-`CalendarCell` represents each individual cell of the grid in the `CalendarPanel`.
-`CalendarCellTask` represents each individual task inside each `CalendarCell`.
+`CalendarPanel` is the base class, which builds and fills the calendar grid.
+
+`CalendarCell` represents an individual cell of the grid in `CalendarPanel`.
+
+`CalendarCellTask` represents an individual task inside each `CalendarCell`.
+
+`CalendarPanel.fxml` is a `ScrollPane` containing a `GridPane`. The `GridPane` acts as the calendar grid.
+
+`CalendarCell.fxml` is a `VBox` containing a `Text`, and a `ScrollPane` containing another `VBox`. The `Text` is the date of a calendar cell, and the second `VBox` contains the list of tasks in a cell.
 
 The following class diagram illustrates the relationships between `CalendarPanel`, `CalendarCell` and `CalendarCellTask`:
 
 image::CalendarClassDiagram.png[width="1000"]
 
-The following sequence diagram shows how the Calendar is built on startup:
+The following steps show how the Calendar is built on startup:
+
+* Step 1: The constructor of `CalendarPanel` is called, thereby creating a new instance of `CalendarPanel`.
+* Step 2: buildCalendarPane(taskList) is called, which contains function calls to buildGrid(), createHeaderCells(), writeMonthHeader(), writeDayHeaders(), and createCalendarCells(taskList).
+* Step 3: buildGrid() populates the calendar grid with the correct number of rows and columns.
+* Step 4: createHeaderCells() fills the first two rows of the calendar with the month header cell and day header cells.
+* Step 5: writeMonthHeader() writes the current month of the user's system clock to the month header cell.
+* Step 6: writeDayHeaders() writes the days of the week to the day header cells, using the enumeration HEADERS.
+* Step 7: createCalendarCells(taskList) fills in the remaining calendar cells with `CalendarCell` instances.
+** Step 7.1: `CalendarCell` calls setDate(date) and setMonth(month) to set the date and month of the cell.
+** Step 7.2: getTasks(taskList) is called, which uses the task list stored in the app to create a list of `CalendarCellTask` s applicable for the cell according to the date and month.
+** Step 7.3: addTasksToCell() sorts the list of `CalendarCellTask` s according to their priority, then adds them to the cell.
+** Step 7.4: setAppearance() sets the background and border of the cell.
+* Step 8: Done.
+
+The following sequence diagram illustrates the process outlined above:
 
 image::CalendarBuildSequenceDiagram.png[width="1000"]
 
@@ -530,14 +623,20 @@ Whenever the task list is updated, or the selected task is changed, the function
 ** Pros: No need to navigate between different classes.
 ** Cons: The class will be very long and complex, making the code difficult for future maintainers to read, understand and change. Violates the principles of Single Responsibility Principle and Separation of Concerns.
 
+* **Rationale for choice:**
+** It is the middle ground between alternatives 2 and 3, and thus strikes a balance between readability, maintainability and following Object-Oriented Programming principles. While it does not strictly follow the principles of OOP, it is easy to read the code and understand the processes involved, and is maintainable. This is important, as it is likely that future maintainters will be new Computer Science student undergraduates.
+
 ===== Aspect: How the calendar is updated in real time
 
 * **Alternative 1 (current choice):** Replace the previous `CalendarCell` and `CalendarCellTask` instances with with new instances when the task list changes.
-** Pros: Easy for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.
+** Pros: Easy to read and to understand, simpler and easier to implement.
 ** Cons: Potential performance issues. If the list of tasks is very large, rebuilding the Calendar at every step may result in degraded performance manifested as a loss of responsiveness to user commands.
-* **Alternative 2:** Have `CalendarCellTask` instances automatically update as the task list changes.
-** Pros: No need to rebuild the entire calendar when the task list changes, instead only updating the cell that is affected.
+* **Alternative 2:** Have `CalendarCell` and `CalendarCellTask` instances automatically update as the task list changes.
+** Pros: No need to rebuild the entire calendar when the task list changes, instead only updating the cells and tasks that are affected.
 ** Cons: Adds another layer of abstraction, which can cause difficulty in understanding how the Calendar works.
+
+* **Rationale for choice:**
+** The choice of alternative 1 was made due to time constraints and lack of proper understanding of how to implement alternative 2. Ideally, alternative 2 will be implemented by future maintainers.
 // end::calendar[]
 
 === Logging
@@ -742,7 +841,7 @@ Here are the steps to create a new release.
 
 === Managing Dependencies
 
-A project often depends on third-party libraries. For example, Task Manager depends on the https://github.com/FasterXML/jackson[Jackson library] for JSON parsing. Managing these _dependencies_ can be automated using Gradle. For example, Gradle can download the dependencies automatically, which is better than these alternatives:
+A project often depends on third-party libraries. For example, Student Buddy depends on the https://github.com/FasterXML/jackson[Jackson library] for JSON parsing. Managing these _dependencies_ can be automated using Gradle. For example, Gradle can download the dependencies automatically, which is better than these alternatives:
 
 [loweralpha]
 . Include those libraries in the repo (this bloats the repo size)
@@ -1003,7 +1102,7 @@ Bind the remark label in link:{repoURL}blob/master/src/main/java/seedu/address/u
 
 **Main:**
 
-. Modify link:{repoURL}blob/master/src/main/java/seedu/address/ui/TaskCard.java[`TaskCard`]'s constructor to bind the `Remark` field to the `Task`'s remark.
+. Modify link:{repoURL}blob/master/src/main/java/seedu/address/ui/TaskCard.java[`TaskCard`]'s constructor to bind the `Remark` field to the `Task` 's remark.
 
 **Tests:**
 
@@ -1110,7 +1209,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 *MSS*
 
 1. User requests for help
-2. Task Manger shows all the commands with the purpose of the command
+2. Student Buddy shows all the commands with the purpose of the command
 +
 Use case ends.
 
@@ -1120,7 +1219,7 @@ Use case ends.
 *MSS*
 
 1. User requests to add a new event with given fields
-2. Task Manager adds the event
+2. Student Buddy adds the event
 +
 Use case ends.
 
@@ -1130,7 +1229,7 @@ Use case ends.
 * 1a. The given fields are invalid
 +
 [none]
-** 1ai. Task Manager shows an error message
+** 1ai. Student Buddy shows an error message
 +
 Use case resumes at step 1.
 
@@ -1138,7 +1237,7 @@ Use case resumes at step 1.
 * 1b. The given fields are invalid
 +
 [none]
-** 1bi. Task Manager shows an error message
+** 1bi. Student Buddy shows an error message
 +
 Use case resumes at step 1.
 
@@ -1148,9 +1247,9 @@ Use case resumes at step 1.
 *MSS*
 
 1.  User requests to list tasks
-2.  Task Manager shows a list of tasks
+2.  Student Buddy shows a list of tasks
 3.  User requests to delete a specific task in the list
-4.  Task Manager deletes the task
+4.  Student Buddy deletes the task
 +
 Use case ends.
 
@@ -1165,7 +1264,7 @@ Use case ends.
 * 3a. The given index is invalid.
 +
 [none]
-** 3ai. Task Manager shows an error message.
+** 3ai. Student Buddy shows an error message.
 +
 Use case resumes at step 2.
 
@@ -1175,9 +1274,9 @@ Use case resumes at step 2.
 *MSS*
 
 1. User requests to list tasks
-2. Task Manager shows a list of tasks
+2. Student Buddy shows a list of tasks
 3. User requests to edit a specific task in the list with the given fields
-4. Task Manager edits the task
+4. Student Buddy edits the task
 +
 Use case ends.
 
@@ -1211,7 +1310,7 @@ Use case resumes at step 2.
 *MSS*
 
 1. User requests to find a task by name
-2. Task Manager shows the tasks according to user's input
+2. Student Buddy shows the tasks according to user's input
 +
 Use case ends.
 
@@ -1235,7 +1334,7 @@ Use case resumes at step 2.
 *MSS*
 
 1. User requests to find a task by module
-2. Task Manager shows the tasks according to user's input
+2. Student Buddy shows the tasks according to user's input
 +
 Use case ends.
 
@@ -1259,7 +1358,7 @@ Use case resumes at step 2.
 *MSS*
 
 1. User requests to find a task by date
-2. Task Manager shows the tasks according to user's input
+2. Student Buddy shows the tasks according to user's input
 +
 Use case ends.
 
@@ -1283,7 +1382,7 @@ Use case resumes at step 2.
 *MSS*
 
 1. User requests to find a task by priority
-2. Task Manager shows the tasks according to user's input
+2. Student Buddy shows the tasks according to user's input
 +
 Use case ends.
 
@@ -1307,7 +1406,7 @@ Use case resumes at step 2.
 *MSS*
 
 1. User requests to sort tasks by an attribute
-2. Task Manager sorts the tasks according to user's input
+2. Student Buddy sorts the tasks according to user's input
 +
 Use case ends.
 
