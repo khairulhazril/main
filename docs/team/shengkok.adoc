@@ -70,3 +70,11 @@ include::../UserGuide.adoc[tag=notes]
 include::../DeveloperGuide.adoc[tag=notes]
 
 {End of extract}
+
+== Other Projects
+
+=== EE2026 FPGA Design Project
+
+A project done by my partner Nicholas Lee and I on the Basys 3 FPGA board. It revolves around sound waves and how they can be displayed on various platforms such as on the monitor screen. Check out the link below to find out more.
+
+https://github.com/Nicholas-Kayden/EE2026[EE2026 FPGA Project]
