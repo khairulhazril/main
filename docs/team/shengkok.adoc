@@ -12,7 +12,7 @@ Note the following symbols and formatting used in the project portfolio:
 
 * *important*: Bold mark-ups emphasize that this is a important word or phrase.
 
-*_method_: Italics mark-ups signify that this is a class or method name and one should take extra note as it will be useful in understanding the concepts or diagrams discussed. 
+* __method__: Italics mark-ups signify that this is a class or method name and one should take extra note as it will be useful in understanding the concepts or diagrams discussed. 
 
 == Overview
 
