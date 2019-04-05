@@ -12,7 +12,7 @@ Note the following symbols and formatting used in the project portfolio:
 
 * *important*: Bold mark-ups emphasize that this is a important word or phrase.
 
-* __method__: Italics mark-ups signify that this is a class or method name and one should take extra note as it will be useful in understanding the concepts or diagrams discussed. 
+* __method__: Italics mark-ups signify that this is a class or method name and one should take extra note as it will be useful in understanding the concepts or diagrams discussed.
 
 == Overview
 
@@ -43,7 +43,7 @@ This section showcases the different aspects in which I have contributed to the 
 ** Community:
 *** PRs reviewed: https://github.com/CS2113-AY1819S2-M11-2/main/pull/36[#36], https://github.com/CS2113-AY1819S2-M11-2/main/pull/39[#39], https://github.com/CS2113-AY1819S2-M11-2/main/pull/122[#122]
 *** Reported bugs and suggestions for other teams in the class (examples:  https://github.com/CS2113-AY1819S2-T09-1/main/issues/189[1], https://github.com/CS2113-AY1819S2-T09-1/main/issues/182[2], https://github.com/CS2113-AY1819S2-T09-1/main/issues/176[3])
-** Project Management 
+** Project Management
 *** Created new branch v1.4
 *** Spearheaded the discussion of user stories under projects tab in Github: https://github.com/CS2113-AY1819S2-M11-2/main/projects/1[User_Stories]
 
