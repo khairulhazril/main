@@ -8,8 +8,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Username {
 
-    public static final String MESSAGE_USERNAME_CONSTRAINTS = "It should not be blank!";
-    public static final String USERNAME_REGEX = "[\\p{Alnum}][\\p{Alnum}]*";
+    public static final String MESSAGE_USERNAME_CONSTRAINTS =
+            "Username should be alphanumeric and it should not be blank!";
+    public static final String USERNAME_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
     public final String enteredUsername;
 
     /**
@@ -36,5 +37,16 @@ public class Username {
     @Override
     public String toString() {
         return enteredUsername;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this || (other instanceof Username
+                && enteredUsername.equals(((Username) other).enteredUsername));
+    }
+
+    @Override
+    public int hashCode() {
+        return enteredUsername.hashCode();
     }
 }

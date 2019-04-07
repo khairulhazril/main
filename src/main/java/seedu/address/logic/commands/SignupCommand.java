@@ -43,11 +43,10 @@ public class SignupCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        // User is already logged in
         if (model.getLoginStatus()) {
             throw new CommandException(String.format(MESSAGE_LOGGED, model.getUsername().toString()));
         }
-        // The account is already exist
+
         if (model.userExists(signingUp)) {
             throw new CommandException(MESSAGE_USER_EXISTS);
         }
@@ -55,8 +54,9 @@ public class SignupCommand extends Command {
         if (model.accountExists()) {
             throw new CommandException(MESSAGE_ACCOUNT_EXISTS);
         }
-        // Signs up the user with a new account
+
         model.newUser(signingUp);
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, signingUp.getUsername().toString()));
 
     }
