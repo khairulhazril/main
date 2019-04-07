@@ -9,37 +9,44 @@
 
 == Overview
 
-Student Buddy is a desktop application tailored for users who are comfortable with using a Command Line Interface (CLI), while retaining a Graphical User Interface (GUI) for ease of use. The use of a CLI for user input allows users to manage their tasks more efficiently than when using a conventional user interface.
+This portfolio serves to document my contributions in a team-based software engineering project for the module CS2113/T, Software Engineering and Object-oriented Programming. My team comprised 4 members, including myself, and we were tasked with morphing or enhancing the https://github.com/se-edu/addressbook-level4[Addressbook Level 4 project] (AB4) by https://github.com/se-edu[SE-EDU] within *8 weeks*. We decided to morph AB4 into a task management app named *Student Buddy*.
+
+*Student Buddy* is a desktop application tailored towards our fellow university students. Specifically, it is meant for students who are comfortable with using a Command Line Interface (CLI), while retaining a Graphical User Interface (GUI) for ease of use. The use of a CLI for user input allows users to manage their tasks more efficiently than when using a conventional user interface.
+
+The project is written in Java, with JavaFX used to create the GUI.
 
 == Summary of contributions
 
-The following list is a summary of my contributions to the project Student Buddy.
+The following list is a summary of my contributions to the project *Student Buddy*:
 
 * *Major enhancement*: added a *calendar panel* to the GUI for *easy viewing of tasks and their deadlines*.
-** What it does: allows the user to view their tasks in a format that is familiar and easy to read. In addition, tasks are ordered and colour-coded by priority (high to low).
+** What it does: allows the user to view their tasks in a format that is *familiar* and *easy to read*. In addition, tasks are ordered and colour-coded by priority (high to low), allowing users to easily see which tasks are more urgent.
 ** Justification: This feature improves the product significantly because a user is able to quickly and easily see what tasks are due and when, facilitating better time management.
 ** Highlights: This enhancement piggybacks off of existing infrastructure, so future changes to underlying systems may cause the enhancement to break. It required an in-depth study of new concepts, as GUI modification was completely new to me before this project. I also wrote tests to ensure that the enhancement was working correctly.
 
-* *Minor enhancement*: adjusted the GUI as features were added and modified.
+* *Minor enhancement*: adjusted the GUI as features were added and modified, whether by myself or teammates.
 
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]]
+* *Code contributed*: https://github.com/CS2113-AY1819S2-M11-2/main/commits?author=Justin-Ong[List of commits]
 
 * *Other contributions*:
 
 ** Project management:
-*** Deployed release v1.3.1.
+*** Set up milestones in the team repo for tracking our progress on the project
+*** Deployed release v1.3.1
 ** Enhancements to other features:
 *** Assisted in adding a due date display to the task card list in the GUI (Pull request https://github.com/CS2113-AY1819S2-M11-2/main/pull/94[#94])
 *** Assisted in formatting and presentation of notes function in the GUI (https://github.com/CS2113-AY1819S2-M11-2/main/pull/119[#119])
 ** Documentation:
-*** Updated contents of the User and Developer Guides: (https://github.com/CS2113-AY1819S2-M11-2/main/pull/36[#36], https://github.com/CS2113-AY1819S2-M11-2/main/pull/84[#84], https://github.com/CS2113-AY1819S2-M11-2/main/pull/90[#90], https://github.com/CS2113-AY1819S2-M11-2/main/pull/1089[#108], https://github.com/CS2113-AY1819S2-M11-2/main/pull/109[#109], https://github.com/CS2113-AY1819S2-M11-2/main/pull/119[#119])
+*** Updated contents of the User and Developer Guides with my contributions, as well as cleaning up tone, grammar, etc: (https://github.com/CS2113-AY1819S2-M11-2/main/pull/36[#36], https://github.com/CS2113-AY1819S2-M11-2/main/pull/84[#84], https://github.com/CS2113-AY1819S2-M11-2/main/pull/90[#90], https://github.com/CS2113-AY1819S2-M11-2/main/pull/1089[#108], https://github.com/CS2113-AY1819S2-M11-2/main/pull/109[#109], https://github.com/CS2113-AY1819S2-M11-2/main/pull/119[#119])
+** Community:
+*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com/cs2113-ay1819s2-t08-1/main/issues/89[1], https://github.com/cs2113-ay1819s2-t08-1/main/issues/99[2], https://github.com/cs2113-ay1819s2-t08-1/main/issues/95[3], https://github.com/cs2113-ay1819s2-t08-1/main/issues/91[4])
 ** Tools:
 *** Integrated Coveralls to the team repo
 
 == Contributions to the User Guide
 
 |===
-|_Given below are my contributions to the User Guide. They showcase my ability to write documentation targeting end-users._
+|_While the AB4 project came with a User Guide, we had to modify it extensively to match our product. For my part, I wrote about the features of my calendar panel, and how users could use it. Below is a sample of my work._
 |===
 
 include::../UserGuide.adoc[tag=calendar]
@@ -47,7 +54,7 @@ include::../UserGuide.adoc[tag=calendar]
 == Contributions to the Developer Guide
 
 |===
-|_Given below are my contributions to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|_The AB4 project also came with a Developer Guide, which we also modified to match our project. For my part, I wrote about the implementation of my calendar panel, and also contributed towards cleaning up some grammar mistakes in the guide, as well as adjusting the tone to be more consistent. Below is a sample of my contributions._
 |===
 
 include::../DeveloperGuide.adoc[tag=calendar]
