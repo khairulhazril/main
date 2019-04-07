@@ -26,7 +26,7 @@ The following list is a summary of my contributions to the project *Student Budd
 
 * *Minor enhancement*: adjusted the GUI as features were added and modified, whether by myself or teammates.
 
-* *Code contributed*: https://github.com/CS2113-AY1819S2-M11-2/main/commits?author=Justin-Ong[List of commits]
+* *Code contributed*: https://nuscs2113-ay1819s2.github.io/dashboard-beta/#search=Justin-Ong[LINK]
 
 * *Other contributions*:
 
