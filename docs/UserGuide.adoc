@@ -302,16 +302,16 @@ Format: `note h/HEADING c/CONTENT p/PRIORITY`
 
 ****
 * Adds the note with the given parameters. +
-* `Priority` can *only take numbers from 1 to 3* with 1 being the most urgent.
-* `Priority` `1` will be in *red* colour followed by `2` in *yellow* and `3` in *white*.
+* _Priority_ can *only take numbers from 1 to 3* with 1 being the most urgent.
+* Notes with _Priority_ 1 will be displayed in *red* colour followed by 2 in *yellow* and 3 in *white*.
 ****
 
 Example:
 
 * `note h/Popular c/buy blue pens p/2` +
-Add a note with heading `Popular`, content `buy blue pens` and priority `2`.
+Add a note with _heading_ Popular, _content_ buy blue pens and _priority_ 2.
 
-The following are 2 diagrams that demostrate the example shown above. One of the diagram shows the state before the command is executed and the other shows the state after it is executed.
+The following are 2 diagrams that demostrate the example shown above. One of the diagram shows the state before the command is executed and the other shows the state after command is executed.
 
 *Before:*
 
@@ -327,17 +327,17 @@ Deletes the specified note from Student Buddy. +
 Format: `deletenote INDEX`
 
 ****
-* Deletes the note at the specified `INDEX`.
-* The index refers to the index number shown in the displayed notes list.
+* Deletes the note at the specified _INDEX_.
+* The index refers to the _index_ number shown in the displayed notes list.
 * The index *must be a positive integer* 1, 2, 3, ...
 ****
 
 Examples:
 
-* `delete 2` +
+* `deletenote 2` +
 Deletes the 2nd note from the displayed notes list in Student Buddy.
 
-The following are 2 diagrams that demostrate the example shown above. One of the diagram shows the state before the command is executed and the other shows the state after it is executed.
+The following are 2 diagrams that demostrate the example shown above. One of the diagram shows the state before the command is executed and the other shows the state after command is executed.
 
 *Before:*
 
