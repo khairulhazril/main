@@ -4,14 +4,20 @@
 :stylesDir: ../stylesheets
 
 == PROJECT: Student Buddy
-
 ---
 
 == Overview
 
-Student Buddy is an application that is used for university students to view, sort and manage their tasks effectively.
-Students interact with it via the CLI or GUI that is created with JavaFX. It is written in Java, and has about 10kLoC.
+|===
+This portfolio serves to document my contributions in a Software Engineering project for 2113T.
+The team consist of 4 members and we were tasked to develop a working applicaiton within 12 weeks.
+Throughout the project, we were challenged to incoporate a Software Engineering project into a product of our own.
 
+Our team have decided to come up with Student Buddy. Student Buddy is an application that is used for university students to view, sort and manage their tasks effectively.
+
+In Student Buddy, students interact via the CLI or GUI that is created with JavaFX.
+It is written in Java, and has about 10kLoC.
+|===
 
 == Summary of contributions
 
@@ -123,13 +129,16 @@ include::../DeveloperGuide.adoc[tag=loginfunction]
 == PROJECTS:
 
 ---
-=== Vincent
 
-https://github.com/nicholasleeeee/01-04-02[CG1112]
+|===
+https://github.com/nicholasleeeee/01-04-02[CG1112] +
+In CG1112, we came up with Vincent. Vincent is a search and rescue robot designed to locate survivors. It will be tele-operated by the operator remotely though a secure connection from a remote desktop. The operator on the remote site will be presented with an environment map of Vincent, which can be used to navigate the simulated environment. The operator will use a Master Control Program (MCP) to command Vincent to move forward/backwards, turn left/right, mark the current location and start autonomous backtracking.
+|===
 
-=== FPGA
-
+|===
 https://github.com/Nicholas-Kayden/EE2026[EE2026] +
 
+In EE2026 FPGA Design Project, we created a real time voice scope (audio visualizer)! We were provided with a MEMs microphone to capture human voice and display our voice signal on a VGA monitor.
+|===
 
 

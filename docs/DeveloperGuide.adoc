@@ -252,7 +252,7 @@ The username and hashed password are stored in a JSON file.
 
 The class diagram below illustrates the `account` class.
 
-image::AccountClassDiagram.png[width="450"]
+image::AccountClassDiagram.png[width="200"]
 
 * In `model` class, there are methods to check for +
 `loginStatus` (if the user is logged in), +
@@ -262,7 +262,7 @@ image::AccountClassDiagram.png[width="450"]
 
 * In this feature, there are 4 main commands.
 The flow on how the commands are executed and their respective sequence diagrams will be further elaborated below: +
-1. Section 3.2.2, Signup Command +
+1. Section 4.1.2, Signup Command +
 2. <<Login Command>> +
 3. <<Logout Command>> +
 4. <<DeleteAcc Command>>
@@ -298,7 +298,7 @@ Step 5. It will then return to `loginEvent` then to `SignupCommand` and returns 
 
 The sequence diagram below shows the flow of `signup` from Step 1 to Step 5 above.
 
-image::SignUpSequenceDiagram.png[width="900"]
+image::SignUpSequenceDiagram.png[width="500"]
 
 ==== Login Command
 
@@ -329,7 +329,7 @@ will then return to `LoginCommand` and returns the user a successful login outpu
 
 The sequence diagram below shows the flow of `login` from Step to Step above.
 
-image::LoginSequenceDiagram.png[width="900"]
+image::LoginSequenceDiagram.png[width="500"]
 
 ==== Logout Command
 
@@ -357,7 +357,7 @@ return to `LoginCommand` to return the user a successful logout output.
 
 The sequence diagram below shows the flow of `logout` from Step to Step above.
 
-image::LogoutSequenceDiagram.png[width="900"]
+image::LogoutSequenceDiagram.png[width="500"]
 
 ==== DeleteAcc Command
 
@@ -391,7 +391,7 @@ Step 7. `LoginEvent` will return to `DeleteAccountCommand` and returns the user 
 
 The sequence diagram below shows the flow of `deleteacc` from Step to Step above.
 
-image::DeleteAccountSequenceDiagram.png[width="900"]
+image::DeleteAccountSequenceDiagram.png[width="500"]
 
 ==== Design Considerations
 

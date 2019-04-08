@@ -9,7 +9,6 @@ lib/*
 *.log.*
 *.csv
 config.json
-login.json
 account.json
 notes.json
 src/test/data/sandbox/
