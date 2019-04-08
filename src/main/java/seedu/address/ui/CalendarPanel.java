@@ -84,6 +84,7 @@ public class CalendarPanel extends UiPart<Region> {
             if (newValue == null) {
                 return;
             } else {
+                taskGridPane.getChildren().clear();
                 this.selectedTask = newValue;
                 createCalendarCells(taskList);
             }
