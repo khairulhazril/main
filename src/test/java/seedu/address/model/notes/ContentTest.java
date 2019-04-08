@@ -37,7 +37,7 @@ public class ContentTest {
         assertTrue(Content.isValidContent("BUY SOME EGGS")); // Capital letters only
         assertTrue(Content.isValidContent("45634")); // numbers only
         assertTrue(Content.isValidContent("Meet friends for dinner at Bedok 85")); // Alphanumeric
-        assertTrue(Content.isValidContent("Buy eggs chicken beef pork papaya milk pokka green tea ribena " +
-                "and all the infinity stones")); //long content
+        assertTrue(Content.isValidContent("Buy eggs chicken beef pork papaya milk pokka green tea ribena "
+                + "and all the infinity stones")); //long content
     }
 }
