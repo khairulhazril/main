@@ -12,6 +12,7 @@ import seedu.address.model.ReadOnlyTaskManager;
 
 import seedu.address.model.notes.Notes;
 import seedu.address.model.task.Task;
+import seedu.address.model.util.Month;
 
 /**
  * API of the Logic component
@@ -74,6 +75,14 @@ public interface Logic {
     ReadOnlyProperty<Task> selectedTaskProperty();
 
     /**
+     * Current month of the calendar.
+     * Current month according to system clock if not defined.
+     *
+     * @see seedu.address.model.Model#currentMonthProperty()
+     */
+    ReadOnlyProperty<Month> currentMonthProperty();
+
+    /**
      * Sets the selected task in the filtered task list.
      *
      * @see seedu.address.model.Model#setSelectedTask(Task)
@@ -94,4 +103,9 @@ public interface Logic {
      * @see seedu.address.model.Model#setSelectedNotes(Notes)
      */
     void setSelectedNotes(Notes notes);
+
+    /**
+     * Returns the current month of the model.
+     */
+    Month getCurrentMonth();
 }

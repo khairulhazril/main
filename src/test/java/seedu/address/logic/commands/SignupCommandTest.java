@@ -24,6 +24,7 @@ import seedu.address.model.account.User;
 import seedu.address.model.account.Username;
 import seedu.address.model.notes.Notes;
 import seedu.address.model.task.Task;
+import seedu.address.model.util.Month;
 import seedu.address.testutil.AccountBuilder;
 
 public class SignupCommandTest {
@@ -283,6 +284,17 @@ public class SignupCommandTest {
         public void setSelectedTask(Task task) {
             throw new AssertionError("This method should not be called");
         }
+
+        @Override
+        public ReadOnlyProperty<Month> currentMonthProperty() {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public void setMonth(Month month) { throw new AssertionError("This method should not be called"); }
+
+        @Override
+        public Month getMonth() { throw new AssertionError("This method should not be called"); }
     }
 
     /**
