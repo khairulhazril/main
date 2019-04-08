@@ -426,11 +426,30 @@ In addition, the calendar comes with the following features:
 * Tasks are automatically listed in order of priority, from high to low.
 * If the task list is modified with `add`, `delete` or `edit`, or it is filtered using `find`, the calendar will update accordingly.
 * Selecting a task will highlight it on the calendar for easy viewing.
+* Calendar cells are scrollable.
 
 A showcase of the calendar's features is displayed below:
 
 image::CalendarDemo.png[width="1000"]
 // end::calendar[]
+
+=== Changing the calendar month : `month`, `m`
+
+Changes the month to be displayed by the calendar. +
+Format: `month MONTH` or `m MONTH`
+
+****
+* Changes the displayed month to the specified `MONTH`.
+* MONTH must be an integer between 1 and 12 inclusive.
+* MONTH must not be the month already being displayed.
+****
+
+Examples:
+
+* `month 2` +
+Changes the month displayed to February.
+* `m 11` +
+Changes the month displayed to November.
 
 === Exiting the program : `exit`
 
@@ -476,6 +495,8 @@ e.g. `findpriority 1`
 * *Login* : `login u/USERNAME p/PASSWORD` +
 e.g. `login u/nicholas p/abcdefg`
 * *Logout* : `logout`
+* *Month Change* : `month MONTH` +
+e.g. `month 11`
 * *Redo* : `redo`
 * *Select* : `select INDEX` +
 e.g.`select 2`

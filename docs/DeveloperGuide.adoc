@@ -569,7 +569,6 @@ image::SortSequenceDiagram.png[width="900"]
 
 // end::sorttask[]
 
-
 // tag::calendar[]
 === Calendar feature
 ==== Current Implementation
@@ -609,7 +608,7 @@ The following sequence diagram illustrates the process outlined above:
 
 image::CalendarBuildSequenceDiagram.png[width="1000"]
 
-Whenever the task list is updated, or the selected task is changed, the function `createCalendarCells(taskList)` is called, which replaces the `CalendarCell` and `CalendarCellTask` instances in the `CalendarPanel`.
+Whenever the task list is updated, the selected task is changed, or the month to be displayed changes (see <<Month view change feature,month command>>), the function `createCalendarCells(taskList)` is called, which replaces the `CalendarCell` and `CalendarCellTask` instances in the `CalendarPanel`.
 
 ==== Design Considerations
 
@@ -640,6 +639,41 @@ Whenever the task list is updated, or the selected task is changed, the function
 * **Rationale for choice:**
 ** The choice of alternative 1 was made due to time constraints and lack of proper understanding of how to implement alternative 2. Ideally, alternative 2 will be implemented by future maintainers.
 // end::calendar[]
+
+// tag::monthChange[]
+=== Month view change feature
+==== Current Implementation
+
+The `month` command allows a user to change what month they are currently viewing on the calendar. This is facilitated using the `currMonth` parameter in `Model`.
+
+Given below is an example usage scenario of `month`.
+
+|===
+
+Step 1. The user signs in to their account. CommandException(MESSAGE_LOGIN_REQUIRED) will be returned if the user has not signed in before using the command.
+
+Step 2. The user types in `month` with its associated parameter, an integer between 1 and 12 inclusive.
+
+Step 2. The `TaskManagerParser` recognises the command word and calls `MonthCommandParser`.
+
+Step 3. `MonthCommandParser` will parse the arguments and call `MonthCommand`.
+
+Step 4. `MonthCommand` will then return one the following results:
+
+ CommandException(MESSAGE_DUPLICATE_MONTH) if the requested month and the current month are the same.
+ CommandException(MESSAGE_INVALID_MONTH) if the requested month is invalid, for example "aaa" or "0".
+
+If the arguments passes all the checks, the `currMonth` parameter in `Model` will be changed, which will then cause the calendar to be updated.
+
+Step 5. `MonthCommand` will then return a success message to the user.
+
+|===
+
+The following diagram illustrates the operation of the `month` command.
+
+image::MonthCommandSequenceDiagram.png[width="1000"]
+
+// end::monthChange[]
 
 === Logging
 
@@ -1078,7 +1112,7 @@ Implement `Remark` in link:{repoURL}blob/master/src/main/java/seedu/address/mode
 
 . Add `getRemark()` in link:{repoURL}blob/master/src/main/java/seedu/address/model/task/Task.java[`Task`].
 . Assume that the user will not be able to use the `add` and `edit` commands to modify the remarks field (i.e. the task will be created without a remark).
-. Modify link:{repoURL}blob/master/src/main/java/seedu/address/model/util/SampleDataUtil.java/[`SampleDataUtil`] to add remarks for the sample data (delete `data/taskmanager.json` so that the application will load the sample data when launched).
+. Modify link:{repoURL}blob/master/src/main/java/seedu/address/model/util/SampleDataUtil.java/[`SampleDataUtil`] to add remarks for the sample data (delete `data/StudentBuddy.json` so that the application will load the sample data when launched).
 
 ===== [Step 6] Storage: Add `Remark` field to the `JsonAdaptedTask` class
 Modify link:{repoURL}blob/master/src/main/java/seedu/address/storage/JsonAdaptedTask.java[`JsonAdaptedTask`] to include a `Remark` field so that it will be saved when the application is exited.

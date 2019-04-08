@@ -24,7 +24,9 @@ The following list is a summary of my contributions to the project *Student Budd
 ** Justification: This feature improves the product significantly because a user is able to quickly and easily see what tasks are due and when, facilitating better time management.
 ** Highlights: This enhancement piggybacks off of existing infrastructure, so future changes to underlying systems may cause the enhancement to break. It required an in-depth study of new concepts, as GUI modification was completely new to me before this project. I also wrote tests to ensure that the enhancement was working correctly.
 
-* *Minor enhancement*: adjusted the GUI as features were added and modified, whether by myself or teammates.
+* *Minor enhancements*:
+** added a `month` command to change the month displayed on the calendar
+** adjusted the GUI as features were added and modified, whether by myself or teammates
 
 * *Code contributed*: https://nuscs2113-ay1819s2.github.io/dashboard-beta/#search=Justin-Ong[LINK]
 
