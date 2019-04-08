@@ -43,17 +43,21 @@ public class NotesTest {
         assertFalse(ERRAND.equals(null));
 
         // different type
-        assertFalse(LEISURE.equals(5));
+        assertFalse(LEISURE.equals(99));
 
         // different objects
         assertFalse(BUSINESS.equals(MEETUP));
 
         // different heading
-        Notes othernotes = new NotesBuilder().withHeading("visiting").withContent("meet friends for dinner").withPriority("3").build();
+        Notes othernotes = new NotesBuilder().withHeading("visiting").withContent("meet friends for dinner")
+                .withPriority("3").build();
+
         assertFalse(MEETUP.equals(othernotes));
 
         // different content
-        othernotes = new NotesBuilder().withHeading("leisure").withContent("Watch Power Rangers").withPriority("1").build();
+        othernotes = new NotesBuilder().withHeading("leisure").withContent("Watch Power Rangers")
+                .withPriority("1").build();
+
         assertFalse(LEISURE.equals(othernotes));
 
         //different priority

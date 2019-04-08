@@ -5,6 +5,9 @@ import seedu.address.model.notes.Heading;
 import seedu.address.model.notes.Notes;
 import seedu.address.model.task.Priority;
 
+/**
+ * A utility class to help with building Notes objects.
+ */
 public class NotesBuilder {
 
     public static final String DEFAULT_CONTENT = "Buy eggs for dinner just like always";
@@ -46,6 +49,9 @@ public class NotesBuilder {
         return this;
     }
 
+    /**
+     * Sets the Priority of the code we are building
+     */
     public NotesBuilder withPriority(String priority) {
         this.priority = new Priority(priority);
         return this;

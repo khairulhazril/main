@@ -7,6 +7,9 @@ import java.util.List;
 import seedu.address.model.TaskManager;
 import seedu.address.model.notes.Notes;
 
+/**
+ * A utility class containing a list of notes used in tests.
+ */
 public class TypicalNotes {
 
     public static final Notes MEETUP = new NotesBuilder().withHeading("Meetup")
