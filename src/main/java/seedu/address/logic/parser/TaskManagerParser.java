@@ -25,6 +25,7 @@ import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.LoginCommand;
 import seedu.address.logic.commands.LogoutCommand;
+import seedu.address.logic.commands.MonthCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.SignupCommand;
@@ -84,7 +85,6 @@ public class TaskManagerParser {
 
         case DeleteCommand.COMMAND_WORD:
         case DeleteCommand.COMMAND_ALIAS:
-
             return new DeleteCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
@@ -141,6 +141,10 @@ public class TaskManagerParser {
 
         case DeleteNotesCommand.COMMAND_WORD:
             return new DeleteNotesCommandParser().parse(arguments);
+
+        case MonthCommand.COMMAND_WORD:
+        case MonthCommand.COMMAND_ALIAS:
+            return new MonthCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

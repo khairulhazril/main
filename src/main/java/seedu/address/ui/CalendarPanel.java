@@ -30,6 +30,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import seedu.address.logic.Logic;
 import seedu.address.model.task.Task;
+import seedu.address.model.util.Month;
 
 /**
  * Panel that displays a calendar in grid format.
@@ -44,8 +45,10 @@ public class CalendarPanel extends UiPart<Region> {
     private static final int ROW_HEIGHT = 80;
     private static final int COL_WIDTH = 105;
     private static final int HEADER_HEIGHT = 20;
-    private static final String[] HEADERS = new String[] { "SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY",
+    private static final String[] DAYS = new String[] { "SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY",
         "FRIDAY", "SATURDAY" };
+    private static final String[] MONTHS = new String[] { "JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE",
+            "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER" };
 
     private static final BackgroundFill backgroundFill = new BackgroundFill(Paint.valueOf("#FFFFFF"),
             CornerRadii.EMPTY, Insets.EMPTY);
@@ -55,7 +58,8 @@ public class CalendarPanel extends UiPart<Region> {
 
     //get current year and month and date as set by system clock
     private static final YearMonth yearMonth = YearMonth.now();
-    private static LocalDate calendarDate = LocalDate.of(yearMonth.getYear(), yearMonth.getMonthValue(), 1);
+    private static Month currMonth = new Month(Integer.toString(yearMonth.getMonthValue()));
+    private static LocalDate calendarDate = LocalDate.of(yearMonth.getYear(), currMonth.toInt(), 1);
 
     private Task selectedTask;
 
@@ -64,7 +68,8 @@ public class CalendarPanel extends UiPart<Region> {
     @FXML
     private GridPane taskGridPane;
 
-    public CalendarPanel(ObservableList<Task> taskList, ObservableValue<Task> selectedTask, Logic logic) {
+    public CalendarPanel(ObservableList<Task> taskList, ObservableValue<Task> selectedTask,
+                         ObservableValue<Month> currMonth, Logic logic) {
         super(FXML);
         this.logic = logic;
         buildCalendarPane(taskList);
@@ -72,6 +77,23 @@ public class CalendarPanel extends UiPart<Region> {
         taskList.addListener((ListChangeListener<? super Task>) (observable) -> {
             ObservableList<Task> newTaskList = logic.getFilteredTaskList();
             createCalendarCells(newTaskList);
+        });
+
+        currMonth.addListener((ChangeListener<? super Month>) (observable, oldValue, newValue) -> {
+            if (Objects.equals(oldValue, newValue)) {
+                return;
+            }
+
+            if (newValue == null) {
+                return;
+            } else {
+                this.currMonth = newValue;
+                this.calendarDate = LocalDate.of(yearMonth.getYear(), this.currMonth.toInt(), 1);
+                taskGridPane.getChildren().clear(); //completely reset the calendar for rebuild
+                taskGridPane.getRowConstraints().clear();
+                taskGridPane.getColumnConstraints().clear();
+                buildCalendarPane(taskList);
+            }
         });
 
         selectedTask.addListener((ChangeListener<? super Task>) (observable, oldValue, newValue) -> {
@@ -84,7 +106,6 @@ public class CalendarPanel extends UiPart<Region> {
             if (newValue == null) {
                 return;
             } else {
-                taskGridPane.getChildren().clear();
                 this.selectedTask = newValue;
                 createCalendarCells(taskList);
             }
@@ -147,7 +168,7 @@ public class CalendarPanel extends UiPart<Region> {
      * Writes month to top row of grid.
      */
     private void writeMonthHeader() {
-        String month = String.valueOf(calendarDate.getMonth());
+        String month = MONTHS[Integer.parseInt(currMonth.toString()) - 1];
         String year = String.valueOf(calendarDate.getYear());
 
         for (Node node : taskGridPane.getChildren()) {
@@ -175,7 +196,7 @@ public class CalendarPanel extends UiPart<Region> {
             for (Node node : taskGridPane.getChildren()) {
                 if (GridPane.getRowIndex(node) == 1 && GridPane.getColumnIndex(node) == i) {
                     VBox box = (VBox) node;
-                    Text header = new Text(HEADERS[i]);
+                    Text header = new Text(DAYS[i]);
 
                     box.setAlignment(Pos.CENTER);
                     box.getChildren().add(header);
