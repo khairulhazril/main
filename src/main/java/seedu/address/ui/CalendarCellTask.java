@@ -23,7 +23,7 @@ public class CalendarCellTask extends Text {
     public CalendarCellTask(Task task, boolean selected) {
         super();
         setPriority(task.getPriority().toInt());
-        setText(task.getName().toString());
+        setText(task.getModule().toString() + ": " + task.getName().toString());
         setTextProperties(selected);
     }
 
