@@ -650,9 +650,7 @@ Given below is an example usage scenario of `month`.
 
 |===
 
-Step 1. The user signs in to their account. CommandException(MESSAGE_LOGIN_REQUIRED) will be returned if the user has not signed in before using the command.
-
-Step 2. The user types in `month` with its associated parameter, an integer between 1 and 12 inclusive.
+Step 1. The user types in `month` with its associated parameter, an integer between 1 and 12 inclusive.
 
 Step 2. The `TaskManagerParser` recognises the command word and calls `MonthCommandParser`.
 
