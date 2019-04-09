@@ -566,18 +566,21 @@ image::CalendarClassDiagram.png[width="1000"]
 
 The following steps show how the Calendar is built on startup:
 
-* Step 1: The constructor of `CalendarPanel` is called, thereby creating a new instance of `CalendarPanel`.
-* Step 2: buildCalendarPane(taskList) is called, which contains function calls to buildGrid(), createHeaderCells(), writeMonthHeader(), writeDayHeaders(), and createCalendarCells(taskList).
-* Step 3: buildGrid() populates the calendar grid with the correct number of rows and columns.
-* Step 4: createHeaderCells() fills the first two rows of the calendar with the month header cell and day header cells.
-* Step 5: writeMonthHeader() writes the current month of the user's system clock to the month header cell.
-* Step 6: writeDayHeaders() writes the days of the week to the day header cells, using the enumeration HEADERS.
-* Step 7: createCalendarCells(taskList) fills in the remaining calendar cells with `CalendarCell` instances.
-** Step 7.1: `CalendarCell` calls setDate(date) and setMonth(month) to set the date and month of the cell.
-** Step 7.2: getTasks(taskList) is called, which uses the task list stored in the app to create a list of `CalendarCellTask` s applicable for the cell according to the date and month.
-** Step 7.3: addTasksToCell() sorts the list of `CalendarCellTask` s according to their priority, then adds them to the cell.
-** Step 7.4: setAppearance() sets the background and border of the cell.
-* Step 8: Done.
+|===
+|Step 1: The constructor of `CalendarPanel` is called, thereby creating a new instance of `CalendarPanel`.
+|Step 2: `buildCalendarPane(taskList)` is called, which contains function calls to `buildGrid()`, `createHeaderCells()`, `writeMonthHeader()`, `writeDayHeaders()`, and `createCalendarCells(taskList)`.
+|Step 3: `buildGrid()` populates the calendar grid with the correct number of rows and columns.
+|Step 4: `createHeaderCells()` fills the first two rows of the calendar with the month header cell and day header cells.
+|Step 5: `writeMonthHeader()` writes the current month of the user's system clock to the month header cell.
+|Step 6: `writeDayHeaders()` writes the days of the week to the day header cells, using the enumeration HEADERS.
+a|Step 7: `createCalendarCells(taskList)` fills in the remaining calendar cells with `CalendarCell` instances.
+
+* Step 7.1: `CalendarCell` calls `setDate(date)` and `setMonth(month)` to set the date and month of the cell.
+* Step 7.2: `getTasks(taskList)` is called, which uses the task list stored in the app to create a list of `CalendarCellTask` s applicable for the cell according to the date and month.
+* Step 7.3: `addTasksToCell()` sorts the list of `CalendarCellTask` s according to their priority, then adds them to the cell.
+* Step 7.4: `setAppearance()` sets the background and border of the cell.
+|Step 8: Done.
+|===
 
 The following sequence diagram illustrates the process outlined above:
 
