@@ -28,7 +28,8 @@ public class MonthCommandTest {
         for (int i = 1; i <= 12; i++) {
             if (i != currMonth) {
                 Month oldMonth = model.getMonth();
-                CommandResult expectedCommandResult = new CommandResult(String.format(MESSAGE_MONTH_CHANGE_SUCCESS, Integer.toString(i)), false, false);
+                CommandResult expectedCommandResult = new CommandResult(String.format(MESSAGE_MONTH_CHANGE_SUCCESS,
+                        Integer.toString(i)), false, false);
                 MonthCommand newMonthCommand = new MonthCommand(Integer.toString(i));
                 assertCommandSuccess(newMonthCommand, model, commandHistory, expectedCommandResult, expectedModel);
                 assertNotSame(oldMonth, model.getMonth());
