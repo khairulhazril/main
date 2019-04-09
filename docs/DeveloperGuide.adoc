@@ -301,24 +301,18 @@ image::SignUpSequenceDiagram.png[width="500"]
 Given below is an example usage scenario of `login`.
 
 |===
-
-Step 1. The user logs in by keying in username and password using the command `login u/USERNAME p/PASSWORD`.
-
-Step 2. The `TaskManagerParser` recognises the command word as a login from `LoginCommand` and calls `LoginCommand`.
-
-Step 3. `LoginCommandParser` will parse the arguments to `LoginCommand`
+|Step 1. The user logs in by keying in username and password using the command `login u/USERNAME p/PASSWORD`.
+|Step 2. The `TaskManagerParser` recognises the command word as a login from `LoginCommand` and calls `LoginCommand`.
+|Step 3. `LoginCommandParser` will parse the arguments to `LoginCommand`
  `LoginCommand` will call the following command which is linked to `LoginEvent`.
 
 `getLoginStatus` to check if the user is already logged in. +
 
 If the arguments passes `getLoginStatus`, `logUser(user)` will be called in `LoginEvent` to
 check for username and password match.
-
-Step 4. In `LoginEvent`, `JsonLoginStorage` retrieves the username and hashed password from the Json file.
-
-Step 5. `loginEvent` will then check if the user inputs matches the username and password stored and
+|Step 4. In `LoginEvent`, `JsonLoginStorage` retrieves the username and hashed password from the Json file.
+|Step 5. `loginEvent` will then check if the user inputs matches the username and password stored and
 will then return to `LoginCommand` and returns the user a successful login output.
-
 |===
 
 The sequence diagram below shows the flow of `login` from Step to Step above.
@@ -332,21 +326,16 @@ image::LoginSequenceDiagram.png[width="500"]
 Given below is an example usage scenario of `logout`.
 
 |===
-
-Step 1. The user logs out by keying in the command `logout`.
-
-Step 2. The `TaskManagerParser` recognises the command word as a logout from `LogoutCommand` and calls `LogoutCommand`.
-
-Step 3. `LogoutCommand` will call the following command which is linked to `LoginEvent`.
+|Step 1. The user logs out by keying in the command `logout`.
+|Step 2. The `TaskManagerParser` recognises the command word as a logout from `LogoutCommand` and calls `LogoutCommand`.
+|Step 3. `LogoutCommand` will call the following command which is linked to `LoginEvent`.
 
 `getLoginStatus` to check if the user is already logged out. +
 `getAdminStatus` to check if the admin is already logged out. +
 
 If the arguments passes `getLoginStatus` and `getAdminStatus`, `logout` will be called in `LoginEvent`.
-
-Step 4. In `LoginEvent`, `getLoginStatus` and `getAdminStatus` will be set to false and will then
+|Step 4. In `LoginEvent`, `getLoginStatus` and `getAdminStatus` will be set to false and will then
 return to `LoginCommand` to return the user a successful logout output.
-
 |===
 
 The sequence diagram below shows the flow of `logout` from Step to Step above.
@@ -360,27 +349,19 @@ image::LogoutSequenceDiagram.png[width="500"]
 Given below is an example usage scenario of `DeleteAcc`.
 
 |===
-
-Step 1. The admin logs in by keying in username and password using the command `login u/USERNAME p/PASSWORD`.
-
-Step 2. The admin keys in `DeleteAcc` to delete the account.
-
-Step 3. The `TaskManagerParser` recognises the command word as delete account
+|Step 1. The admin logs in by keying in username and password using the command `login u/USERNAME p/PASSWORD`.
+|Step 2. The admin keys in `DeleteAcc` to delete the account.
+|Step 3. The `TaskManagerParser` recognises the command word as delete account
 from `DeleteAccountCommand` and calls `DeleteAccountCommand`.
-
-Step 4. `DeleteAccountCommand` will call the following command which is linked to `LoginEvent`.
+|Step 4. `DeleteAccountCommand` will call the following command which is linked to `LoginEvent`.
 
 `getAdminStatus` to check if an admin is logged in. +
 
 If the arguments passes `getAdminStatus`, `deleteAccount()` will be called in `LoginEvent`.
-
-Step 5. In `LoginEvent`, JsonLoginStorage's `deleteAccount()` will be called to delete the JSON file.
-
-Step 6. `LoginEvent` will then call `reinitialise()` to create the Json file
+|Step 5. In `LoginEvent`, JsonLoginStorage's `deleteAccount()` will be called to delete the JSON file.
+|Step 6. `LoginEvent` will then call `reinitialise()` to create the Json file
 without any username and password stored in it. `reinitialise()` is assisted by `JsonLoginStorage` and `writeJson()`.
-
-Step 7. `LoginEvent` will return to `DeleteAccountCommand` and returns the user a successful login output.
-
+|Step 7. `LoginEvent` will return to `DeleteAccountCommand` and returns the user a successful login output.
 |===
 
 The sequence diagram below shows the flow of `deleteacc` from Step to Step above.
