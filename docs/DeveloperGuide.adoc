@@ -274,12 +274,9 @@ The flow on how the commands are executed and their respective sequence diagrams
 Given below is an example usage scenario of `signup`.
 
 |===
-
-Step 1. The user signs up and keys in username and password using the command `signup u/USERNAME p/PASSWORD`.
-
-Step 2. The `TaskManagerParser` recognises the command word as a signup from `SignupCommand` and calls `SignupCommand`.
-
-Step 3. `SignupCommandParser` will parse the arguments to `SignupCommand`.
+|Step 1. The user signs up and keys in username and password using the command `signup u/USERNAME p/PASSWORD`.
+|Step 2. The `TaskManagerParser` recognises the command word as a signup from `SignupCommand` and calls `SignupCommand`.
+|Step 3. `SignupCommandParser` will parse the arguments to `SignupCommand`.
  `SignupCommand` will call the following commands which are linked to `LoginEvent`.
 
 `getLoginStatus` to check if the user is already logged in. +
@@ -289,11 +286,8 @@ Step 3. `SignupCommandParser` will parse the arguments to `SignupCommand`.
 If the arguments passes all the commands, `newUser(user)` will be called to store
 the username and hashed password in a User class.
 It will then pass the User object to `JsonLoginStorage`.
-
-Step 4. `JsonLoginStorage` retrieves the User object to read and write Json files with the correct Json properties.
-
-Step 5. It will then return to `loginEvent` then to `SignupCommand` and returns the user a successful signup output.
-
+|Step 4. `JsonLoginStorage` retrieves the User object to read and write Json files with the correct Json properties.
+|Step 5. It will then return to `loginEvent` then to `SignupCommand` and returns the user a successful signup output.
 |===
 
 The sequence diagram below shows the flow of `signup` from Step 1 to Step 5 above.
@@ -649,22 +643,16 @@ The `month` command allows a user to change what month they are currently viewin
 Given below is an example usage scenario of `month`.
 
 |===
+|Step 1. The user types in `month` with its associated parameter, an integer between 1 and 12 inclusive.
+|Step 2. The `TaskManagerParser` recognises the command word and calls `MonthCommandParser`.
+|Step 3. `MonthCommandParser` will parse the arguments and call `MonthCommand`.
+|Step 4. `MonthCommand` will then return one the following results:
 
-Step 1. The user types in `month` with its associated parameter, an integer between 1 and 12 inclusive.
+ `CommandException(MESSAGE_DUPLICATE_MONTH)` if the requested month and the current month are the same.
+ `CommandException(MESSAGE_INVALID_MONTH)` if the requested month is invalid, for example "aaa" or "0".
 
-Step 2. The `TaskManagerParser` recognises the command word and calls `MonthCommandParser`.
-
-Step 3. `MonthCommandParser` will parse the arguments and call `MonthCommand`.
-
-Step 4. `MonthCommand` will then return one the following results:
-
- CommandException(MESSAGE_DUPLICATE_MONTH) if the requested month and the current month are the same.
- CommandException(MESSAGE_INVALID_MONTH) if the requested month is invalid, for example "aaa" or "0".
-
-If the arguments passes all the checks, the `currMonth` parameter in `Model` will be changed, which will then cause the calendar to be updated.
-
-Step 5. `MonthCommand` will then return a success message to the user.
-
+If the arguments pass all the checks, the `currMonth` parameter in `Model` will be changed, which will then cause the calendar to be updated.
+|Step 5. `MonthCommand` will then return a success message to the user.
 |===
 
 The following diagram illustrates the operation of the `month` command.
