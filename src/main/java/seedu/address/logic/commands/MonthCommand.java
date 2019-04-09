@@ -22,7 +22,7 @@ public class MonthCommand extends Command {
 
     public static final String VALIDATION_REGEX = "[\\d]+";
 
-    public static final String MESSAGE_MONTH_CHANGE_SUCCESS = "Month changed";
+    public static final String MESSAGE_MONTH_CHANGE_SUCCESS = "Month changed to %1$s";
     public static final String MESSAGE_DUPLICATE_MONTH = "The requested month is already being displayed";
     public static final String MESSAGE_INVALID_MONTH = "Invalid month input!\n" + MESSAGE_USAGE;
 
@@ -39,10 +39,6 @@ public class MonthCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        if (!model.getLoginStatus() && !model.getAdminStatus()) {
-            throw new CommandException(MESSAGE_LOGIN_REQUIRED);
-        }
-
         Month newMonth = new Month(month);
 
         if (newMonth.equals(model.getMonth())) {
@@ -54,7 +50,7 @@ public class MonthCommand extends Command {
         }
 
         model.setMonth(newMonth);
-        return new CommandResult(MESSAGE_MONTH_CHANGE_SUCCESS);
+        return new CommandResult(String.format(MESSAGE_MONTH_CHANGE_SUCCESS, newMonth.toString()));
     }
 
     /**
