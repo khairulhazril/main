@@ -8,11 +8,16 @@
 ---
 
 == Overview
+This portfolio serves to document my contributions in a team-based software engineering project for the module CS2113T.
+The team comprises of 4 members ad we were tasked to develop a working application within 8 weeks.
+We decided to morph the existing application into a task manager, called *Student Buddy*.
 
-Student Buddy is a task manager desktop application. It is a GUI app but most of its user interactions happen in the Command Line Interface (CLI). It is targeted to students who have difficulty keeping track of their tasks and additional notes.
+To comply with the module requirements, the team is constrained to start from an existing code base – https://github.com/se-edu/addressbook-level4[Addressbook Level 4] and the user must interact with the application via Command Line interface(CLI).
+
+*Student Buddy* is a desktop application created for students to assist them in managing their schedule.
 
 == Summary of contributions
-This section shows a summary of my coding, documentation, and other helpful contributions to the team project.
+This section shows a summary of my coding, documentation, and other helpful contributions to *Student Buddy*.
 
 * *Major enhancement*: added *the ability to `sort` tasks*
 ** What it does: It allows the user to sort the tasks in the task list based on name, module code, date due or priority level.
@@ -23,7 +28,7 @@ This section shows a summary of my coding, documentation, and other helpful cont
 
 * *Minor enhancement*: created `findname`, `findmodule`, `finddate` and `findpriority` commands to be able to search not only by task name but by other variables.
 
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+* *Code contributed*: https://nuscs2113-ay1819s2.github.io/dashboard-beta/#search=Khairul[Reposense]
 
 * *Other contributions*:
 
@@ -31,19 +36,26 @@ This section shows a summary of my coding, documentation, and other helpful cont
 *** Set up the organization repository and its issue tracker
 *** Managed releases `v1.2` and `v1.3` on GitHub
 ** Documentation:
-*** Update images in the Developer Guide
+*** Updated the content in the User and Developer Guides according to my contribution to the project (https://github.com/CS2113-AY1819S2-M11-2/main/pull/54[#54], https://github.com/CS2113-AY1819S2-M11-2/main/pull/79[#79])
+*** Updated the existing images in the Developer Guide to fit the project (https://github.com/CS2113-AY1819S2-M11-2/main/pull/110/files[#110])
 *** Wrote use cases and user stories
+** Community:
+*** Reported bugs and suggestions for other teams in the class (examples: https://github.com/cs2113-ay1819s2-t08-2/main/issues/56[1], https://github.com/cs2113-ay1819s2-t08-2/main/issues/63[2], https://github.com/cs2113-ay1819s2-t08-2/main/issues/66[3], https://github.com/cs2113-ay1819s2-t08-2/main/issues/77[4])
 
 == Contributions to the User Guide
 
 
 |===
-|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users with the aim of providing clear and concise instructions at a level that is easy for the end-user to follow._
 |===
+(Start of extract from the User Guide)
 
-include::../UserGuide.adoc[tag=undoredo]
 
-include::../UserGuide.adoc[tag=dataencryption]
+include::../UserGuide.adoc[tag=find]
+
+include::../UserGuide.adoc[tag=sort]
+
+(End of extract)
 
 == Contributions to the Developer Guide
 
@@ -51,6 +63,8 @@ include::../UserGuide.adoc[tag=dataencryption]
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-include::../DeveloperGuide.adoc[tag=undoredo]
+(Start of extract from the Developer Guide)
 
-include::../DeveloperGuide.adoc
+include::../DeveloperGuide.adoc[tag=sorttask]
+
+(End of extract)

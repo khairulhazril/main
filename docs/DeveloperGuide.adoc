@@ -541,7 +541,6 @@ image::SortSequenceDiagram.png[width="900"]
 ** Pros: Easy to implement.
 ** Cons: Does not follow OOP coding.
 
-
 // end::sorttask[]
 
 // tag::calendar[]
