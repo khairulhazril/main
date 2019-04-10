@@ -20,7 +20,7 @@ public class SortCommand extends Command {
             + "Parameters: attribute\n"
             + "Example: " + COMMAND_WORD + " name";
 
-    public static final String MESSAGE_SUCCESS = "Task Manager sorted by %1$s";
+    public static final String MESSAGE_SUCCESS = "Task list sorted by %1$s";
 
     private final String toSortBy;
 

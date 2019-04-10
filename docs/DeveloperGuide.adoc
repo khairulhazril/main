@@ -440,7 +440,7 @@ Step 4. The _LogicManager_ will call _execute_ method on the _AddNotesCommand_ o
 
 Step 5. _ModelManager_ is then called and will check if the note already exists.
 
-Step 6. If note already exists, _DuplicateNotesException_ will be thrown. This will return a string message "This note already exists in the task manager".
+Step 6. If note already exists, _DuplicateNotesException_ will be thrown. This will return a string message "This note already exists in the task list".
 
 Step 7. Else, _addNotes(notes)_ method is called and note is added.
 
@@ -1299,7 +1299,7 @@ Use case ends.
 * 3a. The given index is invalid
 +
 [none]
-** 3ai. Task manager shows an error
+** 3ai. Student Buddy returns an error
 +
 Use case resumes at step 2.
 
@@ -1307,7 +1307,7 @@ Use case resumes at step 2.
 * 3b. The given fields are invalid
 +
 [none]
-** 3bi. Task manager shows an error
+** 3bi. Student Buddy returns an error
 +
 Use case resumes at step 2.
 
@@ -1333,7 +1333,7 @@ Use case ends.
 * 2b. The given index is invalid
 +
 [none]
-** 2bi. Task manager shows an error
+** 2bi. Student Buddy returns an error
 +
 Use case resumes at step 2.
 
@@ -1357,7 +1357,7 @@ Use case ends.
 * 2b. The given index is invalid
 +
 [none]
-** 2bi. Task manager shows an error
+** 2bi. Student Buddy returns an error
 +
 Use case resumes at step 2.
 
@@ -1381,7 +1381,7 @@ Use case ends.
 * 2b. The given index is invalid
 +
 [none]
-** 2bi. Task manager shows an error
+** 2bi. Student Buddy returns an error
 +
 Use case resumes at step 2.
 
@@ -1405,7 +1405,7 @@ Use case ends.
 * 2b. The given index is invalid
 +
 [none]
-** 2bi. Task manager shows an error
+** 2bi. Student Buddy returns an error
 +
 Use case resumes at step 2.
 
@@ -1424,7 +1424,7 @@ Use case ends.
 * 1b. The given index is invalid
 +
 [none]
-** 1ai. Task manager shows an error
+** 1ai. Student Buddy returns an error
 +
 Use case resumes at step 1.
 
