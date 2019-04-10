@@ -1,61 +1,80 @@
-= Kayden - Project Portfolio
+= PROJECT: Student Buddy
 :site-section: AboutUs
 :imagesDir: ../images
 :stylesDir: ../stylesheets
 
-== PROJECT: Student Buddy
+== Kayden - Project Portfolio
+This portfolio serves to document my contributions in a team-based software enginnering project CS2113T. My team comprises of 4 memebers and we were tasked to morph a *basic command line interface addressbook* within *8 weeks*. After some discussion, we decided that we will work towards a Task Manager named *Student Buddy*.
 
----
+Note the following symbols and formatting used in the project portfolio:
+
+* `command`: A grey highlight (called a mark-up) indicates that this is a command that can be inputted into the command line and executed by the application.
+
+* *important*: Bold mark-ups emphasize that this is a important word or phrase.
+
+* __method__: Italics mark-ups signify that this is a class or method name and one should take extra note as it will be useful in understanding the concepts or diagrams discussed.
 
 == Overview
 
-This software engineering project requires my team and I to morph a basic command line interface addressbook. After some discussion, we decided to morph it into Task Manager. This enhanced application allows users to manage their tasks and miscellaneous notes; view tasks added easily via a calendar panel display; as well as incorporate a signup and login feature to strengthen the security of this application.
+Our project's ultimate aim is to *help students organise their tasks and notes more efficiently and effectively*. This is done through the following features. Student Buddy allows users to `add` and `delete` their tasks and miscellaneous notes; view tasks added easily via a calendar panel display; as well as incorporate a `signup` and `login` feature to strengthen the security of this application.
 
-My role was to design and implement the `notes` feature which allows user to `add` and `delete` miscellaneous notes as well as display them in a clear and concise manner. The following sections will highlight my enhancements in more detail, as well as illustrating the relevant sections that I have contributed to the user and developer guide.
+*My role was to design and implement the `notes` feature* which allows user to `add` and `delete` miscellaneous notes as well as display them in a clear and concise manner. The following sections will highlight my enhancements in more detail, as well as illustrating the relevant sections that I have contributed to the user and developer guide.
 
 == Summary of contributions
 This section showcases the different aspects in which I have contributed to the project. These aspects include coding and the updating of user and developer guide.
 
-* *Major enhancement*: added *the ability to `add notes` and `delete notes`*
+* *Major enhancement*: added *the ability to `add notes` and `delete notes`*.
 ** What it does: allows the user to add in new notes to help keep track and manage notes. Unwanted notes or notes that are already completed can be removed by deleting the note.
 ** Justification: This feature improves the product significantly because a user can now manage their miscellaneous activities other than school-related tasks which greatly enhances the useablility of Task Manager.
 ** Highlights: This enhancement required an in-depth analysis and understanding of the design of Task Manager to know what are its restrictions and how it can be improved.
 ** Credits: All the team members.
 
-* *Minor enhancement*: added colour codes to depict the importance of a note according to `priority` level.
+* *Minor enhancement*: Added colour codes to depict the importance of a note according to `priority` levels 1 to 3. The highest priority 1 being red-orange followed by yellow for 2 and white for 3.
 
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+* *Sample code contributed*: [https://github.com/Shengkok/main/blob/master/src/main/java/seedu/address/logic/commands/AddNotesCommand.java[Functional code]] [https://github.com[Test code]]
 
 * *Other contributions*:
 
 ** Enhancements to existing features:
-*** Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
-*** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
+*** Updated the GUI of the application by adding a panel to display notes: https://github.com/CS2113-AY1819S2-M11-2/main/pull/56[#56]
 ** Documentation:
-*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
+*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com/CS2113-AY1819S2-M11-2/main/pull/31[#31], https://github.com/CS2113-AY1819S2-M11-2/main/pull/3[#3]
+*** Added notes section into user and developer guides which comprises of add notes and delete notes feature: https://github.com/CS2113-AY1819S2-M11-2/main/pull/56[#56], https://github.com/CS2113-AY1819S2-M11-2/main/pull/110[#110], https://github.com/CS2113-AY1819S2-M11-2/main/pull/123[#123], https://github.com/CS2113-AY1819S2-M11-2/main/pull/125[#125]
 ** Community:
-*** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
-*** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
-*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
-*** Some parts of the history feature I added was adopted by several other class mates (https://github.com[1], https://github.com[2])
+*** PRs reviewed: https://github.com/CS2113-AY1819S2-M11-2/main/pull/36[#36], https://github.com/CS2113-AY1819S2-M11-2/main/pull/39[#39], https://github.com/CS2113-AY1819S2-M11-2/main/pull/122[#122]
+*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com/CS2113-AY1819S2-T09-1/main/issues/189[1], https://github.com/CS2113-AY1819S2-T09-1/main/issues/182[2], https://github.com/CS2113-AY1819S2-T09-1/main/issues/176[3])
+** Project Management
+*** Created new branch v1.4
+*** Spearheaded the discussion of user stories under projects tab in Github: https://github.com/CS2113-AY1819S2-M11-2/main/projects/1[User_Stories]
 
 == Contributions to the User Guide
 
+|===
+|_We had to morph the original user guide for address book to adapt to Student Buddy. This includes all the morphed features as well as the additional features that we had implemented. The following is an extract from our Student Buddy User Guide, showing the instructions that I have added for the *notes* feature._
+|===
 
-|===
-|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
-|===
+{Start of extract}
 
 include::../UserGuide.adoc[tag=notes]
 
-include::../UserGuide.adoc[tag=dataencryption]
+{End of extract}
 
 == Contributions to the Developer Guide
 
 |===
-|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|_We were also tasked to morph the original Developer Guide for address book. Inside the developer guide contains all the *technical information* such as how a feature is implemented, class diagrams as well as sequence diagrams. Given below are sections I contributed to the Developer Guide. They showcase my *ability to write technical documentation* as well as the *depth of my understanding* of this project._
 |===
+
+{Start of extract}
 
 include::../DeveloperGuide.adoc[tag=notes]
 
-include::../DeveloperGuide.adoc
+{End of extract}
+
+== Other Projects
+
+=== EE2026 FPGA Design Project
+
+A project done by my partner Nicholas Lee and I on the Basys 3 FPGA board. It revolves around sound waves and how they can be displayed on various platforms such as on the monitor screen. Check out the link below to find out more.
+
+https://github.com/Nicholas-Kayden/EE2026[EE2026 FPGA Project]

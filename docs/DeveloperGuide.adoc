@@ -252,7 +252,7 @@ The username and hashed password are stored in a JSON file.
 
 The class diagram below illustrates the `account` class.
 
-image::AccountClassDiagram.png[width="450"]
+image::AccountClassDiagram.png[width="200"]
 
 * In `model` class, there are methods to check for +
 `loginStatus` (if the user is logged in), +
@@ -262,7 +262,7 @@ image::AccountClassDiagram.png[width="450"]
 
 * In this feature, there are 4 main commands.
 The flow on how the commands are executed and their respective sequence diagrams will be further elaborated below: +
-1. Section 3.2.2, Signup Command +
+1. Section 4.1.2, Signup Command +
 2. <<Login Command>> +
 3. <<Logout Command>> +
 4. <<DeleteAcc Command>>
@@ -274,12 +274,9 @@ The flow on how the commands are executed and their respective sequence diagrams
 Given below is an example usage scenario of `signup`.
 
 |===
-
-Step 1. The user signs up and keys in username and password using the command `signup u/USERNAME p/PASSWORD`.
-
-Step 2. The `TaskManagerParser` recognises the command word as a signup from `SignupCommand` and calls `SignupCommand`.
-
-Step 3. `SignupCommandParser` will parse the arguments to `SignupCommand`.
+|Step 1. The user signs up and keys in username and password using the command `signup u/USERNAME p/PASSWORD`.
+|Step 2. The `TaskManagerParser` recognises the command word as a signup from `SignupCommand` and calls `SignupCommand`.
+|Step 3. `SignupCommandParser` will parse the arguments to `SignupCommand`.
  `SignupCommand` will call the following commands which are linked to `LoginEvent`.
 
 `getLoginStatus` to check if the user is already logged in. +
@@ -289,16 +286,13 @@ Step 3. `SignupCommandParser` will parse the arguments to `SignupCommand`.
 If the arguments passes all the commands, `newUser(user)` will be called to store
 the username and hashed password in a User class.
 It will then pass the User object to `JsonLoginStorage`.
-
-Step 4. `JsonLoginStorage` retrieves the User object to read and write Json files with the correct Json properties.
-
-Step 5. It will then return to `loginEvent` then to `SignupCommand` and returns the user a successful signup output.
-
+|Step 4. `JsonLoginStorage` retrieves the User object to read and write Json files with the correct Json properties.
+|Step 5. It will then return to `loginEvent` then to `SignupCommand` and returns the user a successful signup output.
 |===
 
 The sequence diagram below shows the flow of `signup` from Step 1 to Step 5 above.
 
-image::SignUpSequenceDiagram.png[width="900"]
+image::SignUpSequenceDiagram.png[width="500"]
 
 ==== Login Command
 
@@ -307,29 +301,23 @@ image::SignUpSequenceDiagram.png[width="900"]
 Given below is an example usage scenario of `login`.
 
 |===
-
-Step 1. The user logs in by keying in username and password using the command `login u/USERNAME p/PASSWORD`.
-
-Step 2. The `TaskManagerParser` recognises the command word as a login from `LoginCommand` and calls `LoginCommand`.
-
-Step 3. `LoginCommandParser` will parse the arguments to `LoginCommand`
+|Step 1. The user logs in by keying in username and password using the command `login u/USERNAME p/PASSWORD`.
+|Step 2. The `TaskManagerParser` recognises the command word as a login from `LoginCommand` and calls `LoginCommand`.
+|Step 3. `LoginCommandParser` will parse the arguments to `LoginCommand`
  `LoginCommand` will call the following command which is linked to `LoginEvent`.
 
 `getLoginStatus` to check if the user is already logged in. +
 
 If the arguments passes `getLoginStatus`, `logUser(user)` will be called in `LoginEvent` to
 check for username and password match.
-
-Step 4. In `LoginEvent`, `JsonLoginStorage` retrieves the username and hashed password from the Json file.
-
-Step 5. `loginEvent` will then check if the user inputs matches the username and password stored and
+|Step 4. In `LoginEvent`, `JsonLoginStorage` retrieves the username and hashed password from the Json file.
+|Step 5. `loginEvent` will then check if the user inputs matches the username and password stored and
 will then return to `LoginCommand` and returns the user a successful login output.
-
 |===
 
 The sequence diagram below shows the flow of `login` from Step to Step above.
 
-image::LoginSequenceDiagram.png[width="900"]
+image::LoginSequenceDiagram.png[width="500"]
 
 ==== Logout Command
 
@@ -338,26 +326,21 @@ image::LoginSequenceDiagram.png[width="900"]
 Given below is an example usage scenario of `logout`.
 
 |===
-
-Step 1. The user logs out by keying in the command `logout`.
-
-Step 2. The `TaskManagerParser` recognises the command word as a logout from `LogoutCommand` and calls `LogoutCommand`.
-
-Step 3. `LogoutCommand` will call the following command which is linked to `LoginEvent`.
+|Step 1. The user logs out by keying in the command `logout`.
+|Step 2. The `TaskManagerParser` recognises the command word as a logout from `LogoutCommand` and calls `LogoutCommand`.
+|Step 3. `LogoutCommand` will call the following command which is linked to `LoginEvent`.
 
 `getLoginStatus` to check if the user is already logged out. +
 `getAdminStatus` to check if the admin is already logged out. +
 
 If the arguments passes `getLoginStatus` and `getAdminStatus`, `logout` will be called in `LoginEvent`.
-
-Step 4. In `LoginEvent`, `getLoginStatus` and `getAdminStatus` will be set to false and will then
+|Step 4. In `LoginEvent`, `getLoginStatus` and `getAdminStatus` will be set to false and will then
 return to `LoginCommand` to return the user a successful logout output.
-
 |===
 
 The sequence diagram below shows the flow of `logout` from Step to Step above.
 
-image::LogoutSequenceDiagram.png[width="900"]
+image::LogoutSequenceDiagram.png[width="500"]
 
 ==== DeleteAcc Command
 
@@ -366,32 +349,24 @@ image::LogoutSequenceDiagram.png[width="900"]
 Given below is an example usage scenario of `DeleteAcc`.
 
 |===
-
-Step 1. The admin logs in by keying in username and password using the command `login u/USERNAME p/PASSWORD`.
-
-Step 2. The admin keys in `DeleteAcc` to delete the account.
-
-Step 3. The `TaskManagerParser` recognises the command word as delete account
+|Step 1. The admin logs in by keying in username and password using the command `login u/USERNAME p/PASSWORD`.
+|Step 2. The admin keys in `DeleteAcc` to delete the account.
+|Step 3. The `TaskManagerParser` recognises the command word as delete account
 from `DeleteAccountCommand` and calls `DeleteAccountCommand`.
-
-Step 4. `DeleteAccountCommand` will call the following command which is linked to `LoginEvent`.
+|Step 4. `DeleteAccountCommand` will call the following command which is linked to `LoginEvent`.
 
 `getAdminStatus` to check if an admin is logged in. +
 
 If the arguments passes `getAdminStatus`, `deleteAccount()` will be called in `LoginEvent`.
-
-Step 5. In `LoginEvent`, JsonLoginStorage's `deleteAccount()` will be called to delete the JSON file.
-
-Step 6. `LoginEvent` will then call `reinitialise()` to create the Json file
+|Step 5. In `LoginEvent`, JsonLoginStorage's `deleteAccount()` will be called to delete the JSON file.
+|Step 6. `LoginEvent` will then call `reinitialise()` to create the Json file
 without any username and password stored in it. `reinitialise()` is assisted by `JsonLoginStorage` and `writeJson()`.
-
-Step 7. `LoginEvent` will return to `DeleteAccountCommand` and returns the user a successful login output.
-
+|Step 7. `LoginEvent` will return to `DeleteAccountCommand` and returns the user a successful login output.
 |===
 
 The sequence diagram below shows the flow of `deleteacc` from Step to Step above.
 
-image::DeleteAccountSequenceDiagram.png[width="900"]
+image::DeleteAccountSequenceDiagram.png[width="500"]
 
 ==== Design Considerations
 
@@ -443,78 +418,80 @@ The password will not be secure.
 // tag::notes[]
 === Add Notes Feature
 
-This feature allow users to `add` notes regarding miscellaneous matters.
+This feature allow users to add notes regarding miscellaneous matters.
 
-The class diagram below illustrates the `Notes` class.
+The class diagram below illustrates the *Notes* class.
 
 image::NotesClassDiagram.png[width="450"]
 
 ==== Current Implementation
 
-The add notes mechanism is facilitated by `AddNotesCommand`. A `Notes` object is instantiated which contains of `Heading`, `Content` and `Priority`.
+The add notes mechanism is facilitated by _AddNotesCommand_. A _Notes_ object is instantiated which contains of _Heading_, _Content_ and _Priority_.
 
 Given below is an example usage scenario and how the add notes mechanism behaves at each step.
 
 Step 1. The user enters in a note with its *associated parameters*. e.g `note h/popular c/buy pilot G-2 blue pens p/2`.
 
-Step 2. The `LogicManager` calls `ParseCommand` with that input.
+Step 2. The _LogicManager_ calls _ParseCommand_ with that input.
 
-Step 3. The `TaskManagerParser` is called and returns a `AddNotesCommand` object to `Logic Manager`.
+Step 3. The _TaskManagerParser_ is called and returns a _AddNotesCommand_ object to _Logic Manager_.
 
-Step 4. The `LogicManage`r will call `execute` method on the `AddNotesCommand` object.
+Step 4. The _LogicManager_ will call _execute_ method on the _AddNotesCommand_ object.
 
-Step 5. `ModelManager` is then called and will check if the note already exists.
+Step 5. _ModelManager_ is then called and will check if the note already exists.
 
-Step 6. If note already exists, `DuplicateNotesException` will be thrown. This will return a string message "This note already exists in the task manager".
+Step 6. If note already exists, _DuplicateNotesException_ will be thrown. This will return a string message "This note already exists in the task manager".
 
-Step 7. Else, `addNotes(notes)` method is called and note is added.
+Step 7. Else, _addNotes(notes)_ method is called and note is added.
 
-The sequence diagram below illustrates how the `AddNotes` mechanism function.
+The sequence diagram below illustrates how the mechanism for adding notes function.
 
 image::AddNotesSequenceDiagram.png[width="800"]
 
 ==== Design Considerations
 
-Aspect: Checking for duplicate notes
+Aspect: Checking for *duplicate notes*
 
 * **Alternative 1(current choice):** Implement a method to check new notes entered. If a new note added is exactly the same as exisitng notes in the Student Buddy, it will be classified as duplicate note and cannot be added.
 ** Pros: Easy to implement
-** Cons: May neglect duplicate notes that mean the same because the check is for the exact same heading and content, co. E.g 1. h/popular c/buy ring file 2.h/popular c/buy ring files
+** Cons: May neglect duplicate notes that mean the same because the check is for the *exact same heading and content*. The following 2 examples shown below will be identified as different notes due to an additional *s* in example 2 +
+1. `h/popular c/buy ring file` +
+2. `h/popular c/buy ring files`
 * **Alternative 2:** Implement a method to check for similarity of notes. If similarity is *more than 90%*, note is classified as same note and cannot be added.
 ** Pros: Can reduce the amount of duplicate notes that are added.
-** Cons: Difficult to implement and cannot eliminate duplicate notes completely.
+** Cons: Difficult to implement and *cannot eliminate duplicate notes completely*.
 
 Final decision: Alternative 1 was chosen due to the *significantly easier* implementation.
 
 === Delete Notes Feature
 
-This feature allow users to `delete` notes that are no longer wanted.
+This feature allow users to delete notes that are no longer wanted.
 
 ==== Current Implementation
 
-The Notes mechanism is facilitated by `DeleteNotesCommand` from the `logic` component. Upon executing the `DeleteNotesCommand`, the unwanted note will be removed from the memory of the Student Buddy.
+The Notes mechanism is facilitated by _DeleteNotesCommand_ from the _Logic_ component. Upon executing the _DeleteNotesCommand_, the unwanted note will be removed from the memory of the Student Buddy.
 
-Given below is an example usage scenario and how the `delete notes` mechanism behaves at each step.
+Given below is an example usage scenario and how the `deletenote` mechanism behaves at each step.
 
-Step 1. The user calls the `DeleteNotesCommand` with the note’s displayed index. e.g `deletenote 1`.
+Step 1. The user calls the _DeleteNotesCommand_ with the note’s displayed index. e.g `deletenote 1`.
 
-Step 2. The `LogicManager` calls `parseCommand` with the user input.
+Step 2. The _LogicManager_ calls _parseCommand_ with the user input.
 
-Step 3. The `TaskManagerParser` is called and it returns a `DeleteNotesCommand` object to the `LogicManager`.
+Step 3. The _TaskManagerParser_ is called and it returns a _DeleteNotesCommand_ object to the _LogicManager_.
 
-Step 4. The `LogicManager` will call execute() on the `DeleteNotesCommand` object. If no note of the corresponding `index` is found, it would return a string of message MESSAGE_INVALID_NOTES_DISPLAYED_INDEX.
+Step 4. The _LogicManager_ will call _execute()_ on the _DeleteNotesCommand_ object. If no note of the corresponding index is found, it would return a string of message `MESSAGE_INVALID_NOTES_DISPLAYED_INDEX`.
 
-Step 5. The `Logic` component then interacts with the `Model` component which then calls `TaskManager` component within it to execute `deleteNotes(target)` to remove the note.
+Step 5. The _Logic_ component then interacts with the `Model` component which then calls `TaskManager` component within it to execute `deleteNotes(target)` to remove the note.
 
 Step 6. The command result would then return the message `MESSAGE_DELETE_NOTE_SUCCESS` in a string.
 
-The following diagram illustrates how the `DeleteNotes` operation works:
+The following diagram illustrates how the `deletenote` operation works:
 
 image::DeleteNotesSequenceDiagram.png[width="800"]
 
 ==== Design Considerations
 
-Aspect: Weighing user experience to convenience of users
+Aspect: Weighing *user experience* to *convenience* of users
 
 * **Alternative 1:** Implement a method to *strike off* notes that are completed so that users can keep track of what notes they have added in as well as the ones they finished.
 ** Pros: Better user experience
@@ -567,7 +544,6 @@ image::SortSequenceDiagram.png[width="900"]
 
 // end::sorttask[]
 
-
 // tag::calendar[]
 === Calendar feature
 ==== Current Implementation
@@ -590,24 +566,27 @@ image::CalendarClassDiagram.png[width="1000"]
 
 The following steps show how the Calendar is built on startup:
 
-* Step 1: The constructor of `CalendarPanel` is called, thereby creating a new instance of `CalendarPanel`.
-* Step 2: buildCalendarPane(taskList) is called, which contains function calls to buildGrid(), createHeaderCells(), writeMonthHeader(), writeDayHeaders(), and createCalendarCells(taskList).
-* Step 3: buildGrid() populates the calendar grid with the correct number of rows and columns.
-* Step 4: createHeaderCells() fills the first two rows of the calendar with the month header cell and day header cells.
-* Step 5: writeMonthHeader() writes the current month of the user's system clock to the month header cell.
-* Step 6: writeDayHeaders() writes the days of the week to the day header cells, using the enumeration HEADERS.
-* Step 7: createCalendarCells(taskList) fills in the remaining calendar cells with `CalendarCell` instances.
-** Step 7.1: `CalendarCell` calls setDate(date) and setMonth(month) to set the date and month of the cell.
-** Step 7.2: getTasks(taskList) is called, which uses the task list stored in the app to create a list of `CalendarCellTask` s applicable for the cell according to the date and month.
-** Step 7.3: addTasksToCell() sorts the list of `CalendarCellTask` s according to their priority, then adds them to the cell.
-** Step 7.4: setAppearance() sets the background and border of the cell.
-* Step 8: Done.
+|===
+|Step 1: The constructor of `CalendarPanel` is called, thereby creating a new instance of `CalendarPanel`.
+|Step 2: `buildCalendarPane(taskList)` is called, which contains function calls to `buildGrid()`, `createHeaderCells()`, `writeMonthHeader()`, `writeDayHeaders()`, and `createCalendarCells(taskList)`.
+|Step 3: `buildGrid()` populates the calendar grid with the correct number of rows and columns.
+|Step 4: `createHeaderCells()` fills the first two rows of the calendar with the month header cell and day header cells.
+|Step 5: `writeMonthHeader()` writes the current month of the user's system clock to the month header cell.
+|Step 6: `writeDayHeaders()` writes the days of the week to the day header cells, using the enumeration HEADERS.
+a|Step 7: `createCalendarCells(taskList)` fills in the remaining calendar cells with `CalendarCell` instances.
+
+* Step 7.1: `CalendarCell` calls `setDate(date)` and `setMonth(month)` to set the date and month of the cell.
+* Step 7.2: `getTasks(taskList)` is called, which uses the task list stored in the app to create a list of `CalendarCellTask` s applicable for the cell according to the date and month.
+* Step 7.3: `addTasksToCell()` sorts the list of `CalendarCellTask` s according to their priority, then adds them to the cell.
+* Step 7.4: `setAppearance()` sets the background and border of the cell.
+|Step 8: Done.
+|===
 
 The following sequence diagram illustrates the process outlined above:
 
 image::CalendarBuildSequenceDiagram.png[width="1000"]
 
-Whenever the task list is updated, or the selected task is changed, the function `createCalendarCells(taskList)` is called, which replaces the `CalendarCell` and `CalendarCellTask` instances in the `CalendarPanel`.
+Whenever the task list is updated, the selected task is changed, or the month to be displayed changes (see <<Month view change feature,month command>>), the function `createCalendarCells(taskList)` is called, which replaces the `CalendarCell` and `CalendarCellTask` instances in the `CalendarPanel`.
 
 ==== Design Considerations
 
@@ -638,6 +617,33 @@ Whenever the task list is updated, or the selected task is changed, the function
 * **Rationale for choice:**
 ** The choice of alternative 1 was made due to time constraints and lack of proper understanding of how to implement alternative 2. Ideally, alternative 2 will be implemented by future maintainers.
 // end::calendar[]
+
+// tag::monthChange[]
+=== Month view change feature
+==== Current Implementation
+
+The `month` command allows a user to change what month they are currently viewing on the calendar. This is facilitated using the `currMonth` parameter in `Model`.
+
+Given below is an example usage scenario of `month`.
+
+|===
+|Step 1. The user types in `month` with its associated parameter, an integer between 1 and 12 inclusive.
+|Step 2. The `TaskManagerParser` recognises the command word and calls `MonthCommandParser`.
+|Step 3. `MonthCommandParser` will parse the arguments and call `MonthCommand`.
+|Step 4. `MonthCommand` will then return one the following results:
+
+ `CommandException(MESSAGE_DUPLICATE_MONTH)` if the requested month and the current month are the same.
+ `CommandException(MESSAGE_INVALID_MONTH)` if the requested month is invalid, for example "aaa" or "0".
+
+If the arguments pass all the checks, the `currMonth` parameter in `Model` will be changed, which will then cause the calendar to be updated.
+|Step 5. `MonthCommand` will then return a success message to the user.
+|===
+
+The following diagram illustrates the operation of the `month` command.
+
+image::MonthCommandSequenceDiagram.png[width="1000"]
+
+// end::monthChange[]
 
 === Logging
 
@@ -1076,7 +1082,7 @@ Implement `Remark` in link:{repoURL}blob/master/src/main/java/seedu/address/mode
 
 . Add `getRemark()` in link:{repoURL}blob/master/src/main/java/seedu/address/model/task/Task.java[`Task`].
 . Assume that the user will not be able to use the `add` and `edit` commands to modify the remarks field (i.e. the task will be created without a remark).
-. Modify link:{repoURL}blob/master/src/main/java/seedu/address/model/util/SampleDataUtil.java/[`SampleDataUtil`] to add remarks for the sample data (delete `data/taskmanager.json` so that the application will load the sample data when launched).
+. Modify link:{repoURL}blob/master/src/main/java/seedu/address/model/util/SampleDataUtil.java/[`SampleDataUtil`] to add remarks for the sample data (delete `data/StudentBuddy.json` so that the application will load the sample data when launched).
 
 ===== [Step 6] Storage: Add `Remark` field to the `JsonAdaptedTask` class
 Modify link:{repoURL}blob/master/src/main/java/seedu/address/storage/JsonAdaptedTask.java[`JsonAdaptedTask`] to include a `Remark` field so that it will be saved when the application is exited.

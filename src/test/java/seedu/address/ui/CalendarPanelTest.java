@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import static seedu.address.testutil.TypicalTasks.getTypicalTasks;
 
+import java.time.YearMonth;
 import java.util.Collections;
 
 import org.junit.Test;
@@ -18,12 +19,11 @@ import seedu.address.model.task.Module;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.Priority;
 import seedu.address.model.task.Task;
+import seedu.address.model.util.Month;
 
 public class CalendarPanelTest extends GuiUnitTest {
     private static final ObservableList<Task> TYPICAL_TASKS =
             FXCollections.observableList(getTypicalTasks());
-
-    private static final long CARD_CREATION_AND_DELETION_TIMEOUT = 2500;
 
     private final SimpleObjectProperty<Task> selectedTask = new SimpleObjectProperty<>();
     private CalendarPanelHandle calendarPanelHandle;
@@ -71,8 +71,10 @@ public class CalendarPanelTest extends GuiUnitTest {
      * Also shows the {@code Stage} that displays only {@code TaskListPanel}.
      */
     private void initUi(ObservableList<Task> backingList) {
+        SimpleObjectProperty<Month> testMonth = new SimpleObjectProperty<>();
+        testMonth.setValue(new Month(Integer.toString(YearMonth.now().getMonthValue())));
         CalendarPanel calendarPanel =
-                new CalendarPanel(backingList, selectedTask, logic);
+                new CalendarPanel(backingList, selectedTask, testMonth, logic);
         uiPartRule.setUiPart(calendarPanel);
 
         calendarPanelHandle = new CalendarPanelHandle(calendarPanel);

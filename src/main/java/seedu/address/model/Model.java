@@ -10,6 +10,7 @@ import seedu.address.model.account.User;
 import seedu.address.model.account.Username;
 import seedu.address.model.notes.Notes;
 import seedu.address.model.task.Task;
+import seedu.address.model.util.Month;
 
 /**
  * The API of the Model component.
@@ -190,6 +191,23 @@ public interface Model {
      * Only admin can access this command.
      */
     void deleteAccount();
+
+    //=====================Calendar========================================================
+
+    /**
+     * Returns an unmodifiable view of the current month property
+     */
+    ReadOnlyProperty<Month> currentMonthProperty();
+
+    /**
+     * Sets the month to display on the calendar
+     */
+    void setMonth(Month month);
+
+    /**
+     * Retrieves the month value of the calendar
+     */
+    Month getMonth();
 
     //=====================Notes========================================================
 

@@ -59,8 +59,16 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 // tag::loginfunction[]
 === Signing up for an account : `signup`
 
-Creates an account for the user +
+Creates an account for the user. To signup, there must be no existing account. +
+
 Format: `signup u/USERNAME p/PASSWORD` +
+
+[TIP]
+Only one account can be created per user.
+
+[TIP]
+Passwords should not have spaces and may only include the following special characters: +
+!#$%&'*+/=?`{|}~^.@-
 
 Example:
 
@@ -68,6 +76,7 @@ Example:
 Signed up: nicholas
 
 ====
+*** Possible Errors +
 * `Logged in: nicholas` +
 You are already logged in and will need to logout in order to signup for a new account. +
 * `Please try another username` +
@@ -76,7 +85,8 @@ The username already exists, signup again with another username.
 
 === Logging into an account : `login`
 
-Logs the user into their account +
+Logs the user into their account. An account has to be created before logging in. +
+
 Format: `login u/USERNAME p/PASSWORD` +
 
 Example:
@@ -85,6 +95,7 @@ Example:
 Logged in as nicholas.
 
 ====
+*** Possible Errors +
 * `You are already logged in!` +
 You are already logged in and will need logout in order to login to another account. +
 * `Please Login again! Command Format: [login u/USERNAME p/PASSWORD]` +
@@ -93,7 +104,8 @@ You have inserted an incorrect username or password. The login command has to be
 
 === Logging out of an account : `logout`
 
-Logs user out of an account +
+Logs user out of an account. +
+
 Format: `logout`
 
 Example:
@@ -102,8 +114,9 @@ Example:
 Logged out of nicholas.
 
 ====
-* `Please Login!` +
-You did not login into any account.
+*** Possible Errors +
+* `You have already logged out. Please Login!` +
+You have already logged out or you did not login into any account.
 ====
 // end::loginfunction[]
 
@@ -289,16 +302,16 @@ Format: `note h/HEADING c/CONTENT p/PRIORITY`
 
 ****
 * Adds the note with the given parameters. +
-* `Priority` can *only take numbers from 1 to 3* with 1 being the most urgent.
-* `Priority` `1` will be in *red* colour followed by `2` in *yellow* and `3` in *white*.
+* _Priority_ can *only take numbers from 1 to 3* with 1 being the most urgent.
+* Notes with _Priority_ 1 will be displayed in *red* colour followed by 2 in *yellow* and 3 in *white*.
 ****
 
 Example:
 
 * `note h/Popular c/buy blue pens p/2` +
-Add a note with heading `Popular`, content `buy blue pens` and priority `2`.
+Add a note with _heading_ Popular, _content_ buy blue pens and _priority_ 2.
 
-The following are 2 diagrams that demostrate the example shown above. One of the diagram shows the state before the command is executed and the other shows the state after it is executed.
+The following are 2 diagrams that demostrate the example shown above. One of the diagram shows the state before the command is executed and the other shows the state after command is executed.
 
 *Before:*
 
@@ -314,17 +327,17 @@ Deletes the specified note from Student Buddy. +
 Format: `deletenote INDEX`
 
 ****
-* Deletes the note at the specified `INDEX`.
-* The index refers to the index number shown in the displayed notes list.
+* Deletes the note at the specified _INDEX_.
+* The index refers to the _index_ number shown in the displayed notes list.
 * The index *must be a positive integer* 1, 2, 3, ...
 ****
 
 Examples:
 
-* `delete 2` +
+* `deletenote 2` +
 Deletes the 2nd note from the displayed notes list in Student Buddy.
 
-The following are 2 diagrams that demostrate the example shown above. One of the diagram shows the state before the command is executed and the other shows the state after it is executed.
+The following are 2 diagrams that demostrate the example shown above. One of the diagram shows the state before the command is executed and the other shows the state after command is executed.
 
 *Before:*
 
@@ -413,11 +426,30 @@ In addition, the calendar comes with the following features:
 * Tasks are automatically listed in order of priority, from high to low.
 * If the task list is modified with `add`, `delete` or `edit`, or it is filtered using `find`, the calendar will update accordingly.
 * Selecting a task will highlight it on the calendar for easy viewing.
+* Calendar cells are scrollable.
 
 A showcase of the calendar's features is displayed below:
 
 image::CalendarDemo.png[width="1000"]
 // end::calendar[]
+
+=== Changing the calendar month : `month`, `m`
+
+Changes the month to be displayed by the calendar. +
+Format: `month MONTH` or `m MONTH`
+
+****
+* Changes the displayed month to the specified `MONTH`.
+* MONTH must be an integer between 1 and 12 inclusive.
+* MONTH must not be the month already being displayed.
+****
+
+Examples:
+
+* `month 2` +
+Changes the month displayed to February.
+* `m 11` +
+Changes the month displayed to November.
 
 === Exiting the program : `exit`
 
@@ -463,6 +495,8 @@ e.g. `findpriority 1`
 * *Login* : `login u/USERNAME p/PASSWORD` +
 e.g. `login u/nicholas p/abcdefg`
 * *Logout* : `logout`
+* *Month Change* : `month MONTH` +
+e.g. `month 11`
 * *Redo* : `redo`
 * *Select* : `select INDEX` +
 e.g.`select 2`
