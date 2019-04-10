@@ -292,11 +292,13 @@ public class SignupCommandTest {
 
         @Override
         public void setMonth(Month month) {
-            throw new AssertionError("This method should not be called"); }
+            throw new AssertionError("This method should not be called");
+        }
 
         @Override
         public Month getMonth() {
-            throw new AssertionError("This method should not be called"); }
+            throw new AssertionError("This method should not be called");
+        }
     }
 
     /**

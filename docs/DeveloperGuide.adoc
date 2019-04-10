@@ -274,12 +274,9 @@ The flow on how the commands are executed and their respective sequence diagrams
 Given below is an example usage scenario of `signup`.
 
 |===
-
-Step 1. The user signs up and keys in username and password using the command `signup u/USERNAME p/PASSWORD`.
-
-Step 2. The `TaskManagerParser` recognises the command word as a signup from `SignupCommand` and calls `SignupCommand`.
-
-Step 3. `SignupCommandParser` will parse the arguments to `SignupCommand`.
+|Step 1. The user signs up and keys in username and password using the command `signup u/USERNAME p/PASSWORD`.
+|Step 2. The `TaskManagerParser` recognises the command word as a signup from `SignupCommand` and calls `SignupCommand`.
+|Step 3. `SignupCommandParser` will parse the arguments to `SignupCommand`.
  `SignupCommand` will call the following commands which are linked to `LoginEvent`.
 
 `getLoginStatus` to check if the user is already logged in. +
@@ -289,11 +286,8 @@ Step 3. `SignupCommandParser` will parse the arguments to `SignupCommand`.
 If the arguments passes all the commands, `newUser(user)` will be called to store
 the username and hashed password in a User class.
 It will then pass the User object to `JsonLoginStorage`.
-
-Step 4. `JsonLoginStorage` retrieves the User object to read and write Json files with the correct Json properties.
-
-Step 5. It will then return to `loginEvent` then to `SignupCommand` and returns the user a successful signup output.
-
+|Step 4. `JsonLoginStorage` retrieves the User object to read and write Json files with the correct Json properties.
+|Step 5. It will then return to `loginEvent` then to `SignupCommand` and returns the user a successful signup output.
 |===
 
 The sequence diagram below shows the flow of `signup` from Step 1 to Step 5 above.
@@ -307,24 +301,18 @@ image::SignUpSequenceDiagram.png[width="500"]
 Given below is an example usage scenario of `login`.
 
 |===
-
-Step 1. The user logs in by keying in username and password using the command `login u/USERNAME p/PASSWORD`.
-
-Step 2. The `TaskManagerParser` recognises the command word as a login from `LoginCommand` and calls `LoginCommand`.
-
-Step 3. `LoginCommandParser` will parse the arguments to `LoginCommand`
+|Step 1. The user logs in by keying in username and password using the command `login u/USERNAME p/PASSWORD`.
+|Step 2. The `TaskManagerParser` recognises the command word as a login from `LoginCommand` and calls `LoginCommand`.
+|Step 3. `LoginCommandParser` will parse the arguments to `LoginCommand`
  `LoginCommand` will call the following command which is linked to `LoginEvent`.
 
 `getLoginStatus` to check if the user is already logged in. +
 
 If the arguments passes `getLoginStatus`, `logUser(user)` will be called in `LoginEvent` to
 check for username and password match.
-
-Step 4. In `LoginEvent`, `JsonLoginStorage` retrieves the username and hashed password from the Json file.
-
-Step 5. `loginEvent` will then check if the user inputs matches the username and password stored and
+|Step 4. In `LoginEvent`, `JsonLoginStorage` retrieves the username and hashed password from the Json file.
+|Step 5. `loginEvent` will then check if the user inputs matches the username and password stored and
 will then return to `LoginCommand` and returns the user a successful login output.
-
 |===
 
 The sequence diagram below shows the flow of `login` from Step to Step above.
@@ -338,21 +326,16 @@ image::LoginSequenceDiagram.png[width="500"]
 Given below is an example usage scenario of `logout`.
 
 |===
-
-Step 1. The user logs out by keying in the command `logout`.
-
-Step 2. The `TaskManagerParser` recognises the command word as a logout from `LogoutCommand` and calls `LogoutCommand`.
-
-Step 3. `LogoutCommand` will call the following command which is linked to `LoginEvent`.
+|Step 1. The user logs out by keying in the command `logout`.
+|Step 2. The `TaskManagerParser` recognises the command word as a logout from `LogoutCommand` and calls `LogoutCommand`.
+|Step 3. `LogoutCommand` will call the following command which is linked to `LoginEvent`.
 
 `getLoginStatus` to check if the user is already logged out. +
 `getAdminStatus` to check if the admin is already logged out. +
 
 If the arguments passes `getLoginStatus` and `getAdminStatus`, `logout` will be called in `LoginEvent`.
-
-Step 4. In `LoginEvent`, `getLoginStatus` and `getAdminStatus` will be set to false and will then
+|Step 4. In `LoginEvent`, `getLoginStatus` and `getAdminStatus` will be set to false and will then
 return to `LoginCommand` to return the user a successful logout output.
-
 |===
 
 The sequence diagram below shows the flow of `logout` from Step to Step above.
@@ -366,27 +349,19 @@ image::LogoutSequenceDiagram.png[width="500"]
 Given below is an example usage scenario of `DeleteAcc`.
 
 |===
-
-Step 1. The admin logs in by keying in username and password using the command `login u/USERNAME p/PASSWORD`.
-
-Step 2. The admin keys in `DeleteAcc` to delete the account.
-
-Step 3. The `TaskManagerParser` recognises the command word as delete account
+|Step 1. The admin logs in by keying in username and password using the command `login u/USERNAME p/PASSWORD`.
+|Step 2. The admin keys in `DeleteAcc` to delete the account.
+|Step 3. The `TaskManagerParser` recognises the command word as delete account
 from `DeleteAccountCommand` and calls `DeleteAccountCommand`.
-
-Step 4. `DeleteAccountCommand` will call the following command which is linked to `LoginEvent`.
+|Step 4. `DeleteAccountCommand` will call the following command which is linked to `LoginEvent`.
 
 `getAdminStatus` to check if an admin is logged in. +
 
 If the arguments passes `getAdminStatus`, `deleteAccount()` will be called in `LoginEvent`.
-
-Step 5. In `LoginEvent`, JsonLoginStorage's `deleteAccount()` will be called to delete the JSON file.
-
-Step 6. `LoginEvent` will then call `reinitialise()` to create the Json file
+|Step 5. In `LoginEvent`, JsonLoginStorage's `deleteAccount()` will be called to delete the JSON file.
+|Step 6. `LoginEvent` will then call `reinitialise()` to create the Json file
 without any username and password stored in it. `reinitialise()` is assisted by `JsonLoginStorage` and `writeJson()`.
-
-Step 7. `LoginEvent` will return to `DeleteAccountCommand` and returns the user a successful login output.
-
+|Step 7. `LoginEvent` will return to `DeleteAccountCommand` and returns the user a successful login output.
 |===
 
 The sequence diagram below shows the flow of `deleteacc` from Step to Step above.
@@ -591,18 +566,21 @@ image::CalendarClassDiagram.png[width="1000"]
 
 The following steps show how the Calendar is built on startup:
 
-* Step 1: The constructor of `CalendarPanel` is called, thereby creating a new instance of `CalendarPanel`.
-* Step 2: buildCalendarPane(taskList) is called, which contains function calls to buildGrid(), createHeaderCells(), writeMonthHeader(), writeDayHeaders(), and createCalendarCells(taskList).
-* Step 3: buildGrid() populates the calendar grid with the correct number of rows and columns.
-* Step 4: createHeaderCells() fills the first two rows of the calendar with the month header cell and day header cells.
-* Step 5: writeMonthHeader() writes the current month of the user's system clock to the month header cell.
-* Step 6: writeDayHeaders() writes the days of the week to the day header cells, using the enumeration HEADERS.
-* Step 7: createCalendarCells(taskList) fills in the remaining calendar cells with `CalendarCell` instances.
-** Step 7.1: `CalendarCell` calls setDate(date) and setMonth(month) to set the date and month of the cell.
-** Step 7.2: getTasks(taskList) is called, which uses the task list stored in the app to create a list of `CalendarCellTask` s applicable for the cell according to the date and month.
-** Step 7.3: addTasksToCell() sorts the list of `CalendarCellTask` s according to their priority, then adds them to the cell.
-** Step 7.4: setAppearance() sets the background and border of the cell.
-* Step 8: Done.
+|===
+|Step 1: The constructor of `CalendarPanel` is called, thereby creating a new instance of `CalendarPanel`.
+|Step 2: `buildCalendarPane(taskList)` is called, which contains function calls to `buildGrid()`, `createHeaderCells()`, `writeMonthHeader()`, `writeDayHeaders()`, and `createCalendarCells(taskList)`.
+|Step 3: `buildGrid()` populates the calendar grid with the correct number of rows and columns.
+|Step 4: `createHeaderCells()` fills the first two rows of the calendar with the month header cell and day header cells.
+|Step 5: `writeMonthHeader()` writes the current month of the user's system clock to the month header cell.
+|Step 6: `writeDayHeaders()` writes the days of the week to the day header cells, using the enumeration HEADERS.
+a|Step 7: `createCalendarCells(taskList)` fills in the remaining calendar cells with `CalendarCell` instances.
+
+* Step 7.1: `CalendarCell` calls `setDate(date)` and `setMonth(month)` to set the date and month of the cell.
+* Step 7.2: `getTasks(taskList)` is called, which uses the task list stored in the app to create a list of `CalendarCellTask` s applicable for the cell according to the date and month.
+* Step 7.3: `addTasksToCell()` sorts the list of `CalendarCellTask` s according to their priority, then adds them to the cell.
+* Step 7.4: `setAppearance()` sets the background and border of the cell.
+|Step 8: Done.
+|===
 
 The following sequence diagram illustrates the process outlined above:
 
@@ -649,22 +627,16 @@ The `month` command allows a user to change what month they are currently viewin
 Given below is an example usage scenario of `month`.
 
 |===
+|Step 1. The user types in `month` with its associated parameter, an integer between 1 and 12 inclusive.
+|Step 2. The `TaskManagerParser` recognises the command word and calls `MonthCommandParser`.
+|Step 3. `MonthCommandParser` will parse the arguments and call `MonthCommand`.
+|Step 4. `MonthCommand` will then return one the following results:
 
-Step 1. The user types in `month` with its associated parameter, an integer between 1 and 12 inclusive.
+ `CommandException(MESSAGE_DUPLICATE_MONTH)` if the requested month and the current month are the same.
+ `CommandException(MESSAGE_INVALID_MONTH)` if the requested month is invalid, for example "aaa" or "0".
 
-Step 2. The `TaskManagerParser` recognises the command word and calls `MonthCommandParser`.
-
-Step 3. `MonthCommandParser` will parse the arguments and call `MonthCommand`.
-
-Step 4. `MonthCommand` will then return one the following results:
-
- CommandException(MESSAGE_DUPLICATE_MONTH) if the requested month and the current month are the same.
- CommandException(MESSAGE_INVALID_MONTH) if the requested month is invalid, for example "aaa" or "0".
-
-If the arguments passes all the checks, the `currMonth` parameter in `Model` will be changed, which will then cause the calendar to be updated.
-
-Step 5. `MonthCommand` will then return a success message to the user.
-
+If the arguments pass all the checks, the `currMonth` parameter in `Model` will be changed, which will then cause the calendar to be updated.
+|Step 5. `MonthCommand` will then return a success message to the user.
 |===
 
 The following diagram illustrates the operation of the `month` command.
