@@ -19,7 +19,6 @@ import seedu.address.logic.commands.FindDateCommand;
 import seedu.address.logic.commands.FindModuleCommand;
 import seedu.address.logic.commands.FindNameCommand;
 import seedu.address.logic.commands.FindPriorityCommand;
-import seedu.address.logic.commands.FindUpcomingCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
@@ -80,11 +79,11 @@ public class TaskManagerParser {
             return new EditCommandParser().parse(arguments);
 
         case SelectCommand.COMMAND_WORD:
+        case SelectCommand.COMMAND_ALIAS:
             return new SelectCommandParser().parse(arguments);
 
         case DeleteCommand.COMMAND_WORD:
         case DeleteCommand.COMMAND_ALIAS:
-
             return new DeleteCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
@@ -107,9 +106,6 @@ public class TaskManagerParser {
         case FindPriorityCommand.COMMAND_ALIAS:
             return new FindPriorityCommandParser().parse(arguments);
 
-        case FindUpcomingCommand.COMMAND_WORD:
-            return new FindDateCommandParser().parse("01-01");
-
         case ListCommand.COMMAND_WORD:
         case ListCommand.COMMAND_ALIAS:
             return new ListCommand();
@@ -118,6 +114,7 @@ public class TaskManagerParser {
             return new HistoryCommand();
 
         case ExitCommand.COMMAND_WORD:
+        case ExitCommand.COMMAND_ALIAS:
             return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:

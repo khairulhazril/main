@@ -163,7 +163,7 @@ Format: `findname KEYWORD [MORE_KEYWORDS]`
 * The order of the keywords does not matter. e.g. `CS2113 Tutorial` will match `Tutorial CS2113`
 * Only the name is searched.
 * Only full words will be matched e.g. `Assignments` will not match `Assignment`
-* Tasks matching at least one keyword will be returned (i.e. `OR` search). e.g. `CS2113 Assignment` will return `CS2113 Homework`, `Assignment 2`
+* Tasks matching at least one of the keywords will be returned (i.e. `OR` search). e.g. `CS2113 Assignment` will return `CS2113 Homework`, `Assignment 2`
 ****
 
 Examples:
