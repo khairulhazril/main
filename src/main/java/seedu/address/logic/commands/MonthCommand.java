@@ -50,6 +50,7 @@ public class MonthCommand extends Command {
         }
 
         model.setMonth(newMonth);
+        model.setSelectedTask(null);
         return new CommandResult(String.format(MESSAGE_MONTH_CHANGE_SUCCESS, newMonth.toString()));
     }
 
