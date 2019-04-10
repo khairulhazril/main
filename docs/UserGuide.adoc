@@ -136,10 +136,10 @@ A task can have any number of tags (including 0)
 
 Examples:
 
-* `add n/Tutorial 3 m/CG1112 d/21-03 t/urgent` +
-Adds a task with the name `Tutorial 3`, module code `CG1112`, date `21-03`, with the tag `urgent`.
-* `add n/Project Version 1 m/CS2113T d/11-03` +
-Adds a task with the name `Project Version 1`, module code `CS2113T` and date `11-03`.
+* `add n/Tutorial 3 m/CG1112 d/21-03 p/2 t/urgent` +
+Adds a task with the name `Tutorial 3`, module code `CG1112`, date `21-03`, priority code `2`, with the tag `urgent`.
+* `add n/Project Version 1 m/CS2113T d/11-03 p/1` +
+Adds a task with the name `Project Version 1`, module code `CS2113T`, date `11-03` and priority code `2`.
 
 === Listing all tasks : `list`
 
@@ -181,10 +181,10 @@ Format: `findname KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 
-* `find CS2113 task` +
-Returns all task with names containing `CS2113` or `task`.
-* `find CS2113 Hw Tutorial` +
-Returns all task having names `CS2113`, `Hw`, or `Tutorial`
+* `findname Project Tutorial` +
+Returns all task with names containing `Project` or `Tutorial`.
+* `findname Project Lab Report` +
+Returns all task having names `Project`, `Lab`, or `Report`
 
 === Locating tasks by module code: `findmodule`
 
@@ -200,9 +200,9 @@ Format: `findmodule KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 
-* `find CS2113T` +
+* `findmodule CS2113T` +
 Returns all tasks containing the module code `CS2113T`.
-* `find CS2113T CS2101` +
+* `findmodule CS2113T CS2101` +
 Returns all tasks containing the module code `CS2113T` or `CS2101`.
 
 === Locating tasks by date: `finddate`
