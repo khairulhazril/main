@@ -586,7 +586,9 @@ The following sequence diagram illustrates the process outlined above:
 
 image::CalendarBuildSequenceDiagram.png[width="1000"]
 
-Whenever the task list is updated, the selected task is changed, or the month to be displayed changes (see <<Month view change feature,month command>>), the function `createCalendarCells(taskList)` is called, which replaces the `CalendarCell` and `CalendarCellTask` instances in the `CalendarPanel`.
+Whenever the task list is updated, the function `createCalendarCells(taskList)` is called, which replaces the `CalendarCell` and `CalendarCellTask` instances in the `CalendarPanel`.
+
+If the selected task is changed, or the month to be displayed changes (see <<Month view change feature>>), the function `resetCalendar()` is called, which clears the calendar grid and resets the row and column constraints. Then `buildCalendarPane(taskList)` is called to rebuild the calendar.
 
 ==== Design Considerations
 

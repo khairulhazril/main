@@ -31,7 +31,7 @@ public class CalendarCell extends UiPart<Region> {
     private static final Border border = new Border(new BorderStroke(Paint.valueOf("#0F0F0F"), BorderStrokeStyle.SOLID,
             CornerRadii.EMPTY, BorderStroke.THIN));
 
-    private static final int CELL_WIDTH = 105;
+    private static final int CELL_WIDTH = 110;
 
     private String date;
     private String month;
