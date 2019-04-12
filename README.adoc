@@ -1,4 +1,4 @@
-= Task Manager
+= Student Buddy
 ifdef::env-github,env-browser[:relfileprefix: docs/]
 
 https://travis-ci.org/CS2113-AY1819S2-M11-2/main[image:https://travis-ci.org/CS2113-AY1819S2-M11-2/main.svg?branch=master[Build Status]]
@@ -12,11 +12,12 @@ ifndef::env-github[]
 image::images/Ui.png[width="1000"]
 endif::[]
 
-== Welcome to Task Manager.
+== Welcome to Student Buddy.
 * A sophisticated event planner for the tech-savvy NUS student.
 * A Command Line Interface (CLI) for quick input, and a pretty Graphical User Interface (GUI) for easy-to-read output.
 * Inbuilt calendar, task list and note-taking.
 * Fast and responsive.
+* Works best on screens with a minimum resolution of 1280x800.
 
 == Site Map
 

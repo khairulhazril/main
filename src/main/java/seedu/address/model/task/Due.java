@@ -15,7 +15,7 @@ import java.util.Date;
 public class Due {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Due must be valid and should only be of the format DD-MM, where D and M are numbers.\n"
+            "Date must be valid and should only be of the format DD-MM, where D and M are numbers.\n"
                     + "DD must range from 01 to 31 and MM must range from 01 to 12";
     public static final String VALIDATION_REGEX = "[\\d]{2}" + "-" + "[\\d]{2}";
 
@@ -97,7 +97,11 @@ public class Due {
      */
     public int daysDifference(Date currentDay, Date taskDay) {
         long duration = taskDay.getTime() - currentDay.getTime();
-        return (int) (duration / (24 * 60 * 60 * 1000));
+        if (duration < 0) {
+            return -1;
+        } else {
+            return (int) ((duration / (24 * 60 * 60 * 1000)) + 1);
+        }
     }
 
     /**

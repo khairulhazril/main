@@ -14,6 +14,8 @@ import seedu.address.model.task.ModuleContainsKeywordsPredicate;
 public class FindModuleCommand extends Command {
 
     public static final String COMMAND_WORD = "findmodule";
+    public static final String COMMAND_ALIAS = "fm";
+
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all tasks whose module code contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"

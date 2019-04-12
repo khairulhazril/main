@@ -12,13 +12,15 @@ import seedu.address.model.Model;
 public class SortCommand extends Command {
 
     public static final String COMMAND_WORD = "sort";
+    public static final String COMMAND_ALIAS = "s";
+
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Sorts the task list in the task manager.\n"
             + "Parameters: attribute\n"
             + "Example: " + COMMAND_WORD + " name";
 
-    public static final String MESSAGE_SUCCESS = "Task Manager sorted by %1$s";
+    public static final String MESSAGE_SUCCESS = "Task list sorted by %1$s";
 
     private final String toSortBy;
 

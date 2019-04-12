@@ -18,6 +18,7 @@ import seedu.address.model.task.Task;
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
+    public static final String COMMAND_ALIAS = "a";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the address book. "
             + "Parameters: "
@@ -34,7 +35,7 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "ungraded ";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
-    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager";
+    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task list";
 
     private final Task toAdd;
 
@@ -60,6 +61,7 @@ public class AddCommand extends Command {
 
         model.addTask(toAdd);
         model.commitTaskManager();
+        model.setSelectedTask(null);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 

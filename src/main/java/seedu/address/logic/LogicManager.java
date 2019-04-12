@@ -20,6 +20,7 @@ import seedu.address.model.notes.Notes;
 
 import seedu.address.model.task.Task;
 
+import seedu.address.model.util.Month;
 import seedu.address.storage.Storage;
 
 /**
@@ -59,7 +60,7 @@ public class LogicManager implements Logic {
         }
 
         if (taskManagerModified) {
-            logger.info("Task manager modified, saving to file.");
+            logger.info("Task list modified, saving to file.");
             try {
                 storage.saveTaskManager(model.getTaskManager());
             } catch (IOException ioe) {
@@ -122,5 +123,14 @@ public class LogicManager implements Logic {
     public ReadOnlyProperty<Notes> selectedNotesProperty() {
         return model.selectedNotesProperty(); }
 
-}
+    @Override
+    public Month getCurrentMonth() {
+        return model.getMonth();
+    }
 
+    @Override
+    public ReadOnlyProperty<Month> currentMonthProperty() {
+        return model.currentMonthProperty();
+    }
+
+}

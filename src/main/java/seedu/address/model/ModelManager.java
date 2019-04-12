@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.time.YearMonth;
 import java.util.Objects;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -21,6 +22,7 @@ import seedu.address.model.notes.Notes;
 import seedu.address.model.notes.exceptions.NotesNotFoundException;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.exceptions.TaskNotFoundException;
+import seedu.address.model.util.Month;
 
 /**
  * Represents the in-memory model of the task manager data.
@@ -34,7 +36,9 @@ public class ModelManager implements Model {
     private final FilteredList<Notes> filteredNotes;
     private final SimpleObjectProperty<Task> selectedTask = new SimpleObjectProperty<>();
     private final LoginEvent loginEvent;
+    private final NotesEvent notesEvent;
     private final SimpleObjectProperty<Notes> selectedNotes = new SimpleObjectProperty<>();
+    private final SimpleObjectProperty<Month> currMonth = new SimpleObjectProperty<>();
 
     /**
      * Initializes a ModelManager with the given taskManager and userPrefs.
@@ -51,6 +55,8 @@ public class ModelManager implements Model {
         filteredTasks.addListener(this::ensureSelectedTaskIsValid);
         filteredNotes = new FilteredList<>(versionedTaskManager.getNotesList());
         loginEvent = new LoginEvent();
+        notesEvent = new NotesEvent();
+        currMonth.setValue(new Month(Integer.toString(YearMonth.now().getMonthValue()))); //set initial month state
     }
 
     public ModelManager() {
@@ -200,6 +206,17 @@ public class ModelManager implements Model {
 
     }
 
+    @Override
+    public void addJsonNotes(Notes notes) {
+        requireNonNull(notes);
+        notesEvent.newNotes(notes);
+    }
+
+    @Override
+    public void deleteNotes(Notes target) {
+        versionedTaskManager.removeNotes(target);
+    }
+
 
     //=========== Filtered Task List Accessors =============================================================
 
@@ -261,6 +278,23 @@ public class ModelManager implements Model {
     @Override
     public void commitTaskManager() {
         versionedTaskManager.commit();
+    }
+
+    //=========== Month ===================================================================================
+
+    @Override
+    public ReadOnlyProperty<Month> currentMonthProperty() {
+        return currMonth;
+    }
+
+    @Override
+    public Month getMonth() {
+        return currMonth.getValue();
+    }
+
+    @Override
+    public void setMonth(Month month) {
+        currMonth.setValue(month);
     }
 
     //=========== Selected task ===========================================================================

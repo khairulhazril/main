@@ -10,6 +10,7 @@ import seedu.address.model.account.User;
 import seedu.address.model.account.Username;
 import seedu.address.model.notes.Notes;
 import seedu.address.model.task.Task;
+import seedu.address.model.util.Month;
 
 /**
  * The API of the Model component.
@@ -191,6 +192,23 @@ public interface Model {
      */
     void deleteAccount();
 
+    //=====================Calendar========================================================
+
+    /**
+     * Returns an unmodifiable view of the current month property
+     */
+    ReadOnlyProperty<Month> currentMonthProperty();
+
+    /**
+     * Sets the month to display on the calendar
+     */
+    void setMonth(Month month);
+
+    /**
+     * Retrieves the month value of the calendar
+     */
+    Month getMonth();
+
     //=====================Notes========================================================
 
     /**
@@ -205,6 +223,10 @@ public interface Model {
      */
     void addNotes(Notes notes);
 
+    /**
+     * Add Notes into Json file
+     */
+    void addJsonNotes(Notes notes);
 
     /**
      * Returns an unmodifiable view of the filtered notes list
@@ -235,4 +257,11 @@ public interface Model {
      * null if no task is selected.
      */
     Notes getSelectedNotes();
+
+    /**
+     * Deletes the given task.
+     * The task must exist in the task manager.
+     */
+    void deleteNotes(Notes target);
+
 }

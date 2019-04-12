@@ -1,7 +1,10 @@
 package seedu.address.ui;
 
 import javafx.scene.paint.Paint;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import seedu.address.model.task.Task;
 
 /**
  * Individual text for filling CalendarCell
@@ -15,14 +18,13 @@ public class CalendarCellTask extends Text {
     /**
      * Creates a text object for CalendarCell
      *
-     * @param text Text to display
-     * @param priority Priority of task
+     * @param task task to display
      */
-    public CalendarCellTask(String text, int priority) {
+    public CalendarCellTask(Task task, boolean selected) {
         super();
-        setPriority(priority);
-        setText(text);
-        setTextColour();
+        setPriority(task.getPriority().toInt());
+        setText(task.getModule().toString() + ": " + task.getName().toString());
+        setTextProperties(selected);
     }
 
     /**
@@ -44,10 +46,14 @@ public class CalendarCellTask extends Text {
     }
 
     /**
-     * Sets the colour of the text based on the priority of the task.
+     * Sets the colour of the text based on the priority of the task. Highlights the task if it is selected.
      */
-    private void setTextColour() {
+    private void setTextProperties(boolean selected) {
         setFill(Paint.valueOf(PRIORITY_COLOURS[priority - 1]));
+        if (selected) {
+            setUnderline(true);
+            setFont(Font.font(Font.getDefault().getName(), FontWeight.BOLD, Font.getDefault().getSize()));
+        }
     }
 
     /**
