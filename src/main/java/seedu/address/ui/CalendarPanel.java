@@ -43,7 +43,7 @@ public class CalendarPanel extends UiPart<Region> {
     private static final int COLS = 7; // 7 Days in a week
     private static final int ROWS = 8; // 6 Rows + Day Header + Month Header
     private static final int ROW_HEIGHT = 80;
-    private static final int COL_WIDTH = 105;
+    private static final int COL_WIDTH = 110;
     private static final int HEADER_HEIGHT = 20;
     private static final String[] DAYS = new String[] { "SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY",
         "FRIDAY", "SATURDAY" };
@@ -79,6 +79,18 @@ public class CalendarPanel extends UiPart<Region> {
             createCalendarCells(newTaskList);
         });
 
+        selectedTask.addListener((ChangeListener<? super Task>) (observable, oldValue, newValue) -> {
+            // Don't modify selection if we are already selecting the selected task,
+            // otherwise we would have an infinite loop.
+            if (Objects.equals(oldValue, newValue)) {
+                return;
+            }
+
+            this.selectedTask = newValue;
+            resetCalendar();
+            buildCalendarPane(taskList);
+        });
+
         currMonth.addListener((ChangeListener<? super Month>) (observable, oldValue, newValue) -> {
             if (Objects.equals(oldValue, newValue)) {
                 return;
@@ -88,26 +100,8 @@ public class CalendarPanel extends UiPart<Region> {
                 return;
             } else {
                 this.currMonth = newValue;
-                this.calendarDate = LocalDate.of(yearMonth.getYear(), this.currMonth.toInt(), 1);
-                taskGridPane.getChildren().clear(); //completely reset the calendar for rebuild
-                taskGridPane.getRowConstraints().clear();
-                taskGridPane.getColumnConstraints().clear();
+                resetCalendar();
                 buildCalendarPane(taskList);
-            }
-        });
-
-        selectedTask.addListener((ChangeListener<? super Task>) (observable, oldValue, newValue) -> {
-            // Don't modify selection if we are already selecting the selected task,
-            // otherwise we would have an infinite loop.
-            if (Objects.equals(oldValue, newValue)) {
-                return;
-            }
-
-            if (newValue == null) {
-                return;
-            } else {
-                this.selectedTask = newValue;
-                createCalendarCells(taskList);
             }
         });
     }
@@ -231,8 +225,21 @@ public class CalendarPanel extends UiPart<Region> {
         calendarDate = LocalDate.of(yearMonth.getYear(), yearMonth.getMonthValue(), 1);
     }
 
+    /**
+     * Returns the calendar GridPane
+     */
     public GridPane getTaskGridPane() {
         return taskGridPane;
+    }
+
+    /**
+     * Clears the GridPane and removes all formatting
+     */
+    private void resetCalendar() {
+        this.calendarDate = LocalDate.of(yearMonth.getYear(), this.currMonth.toInt(), 1);
+        taskGridPane.getChildren().clear(); //completely reset the calendar for rebuild
+        taskGridPane.getRowConstraints().clear();
+        taskGridPane.getColumnConstraints().clear();
     }
 
 }

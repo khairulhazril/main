@@ -270,6 +270,9 @@ Format: `select INDEX`
 * The index *must be a positive integer* `1, 2, 3, ...`
 ****
 
+[TIP]
+Using `add`, `edit`, `delete`, `logout` or `month` will deselect the currently selected task.
+
 Examples:
 
 * `list` +

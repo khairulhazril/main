@@ -28,6 +28,7 @@ public class ClearCommand extends Command {
         requireNonNull(model);
         model.setTaskManager(new TaskManager());
         model.commitTaskManager();
+        model.setSelectedTask(null);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }
