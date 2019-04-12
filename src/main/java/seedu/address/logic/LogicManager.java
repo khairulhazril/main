@@ -60,7 +60,7 @@ public class LogicManager implements Logic {
         }
 
         if (taskManagerModified) {
-            logger.info("Task manager modified, saving to file.");
+            logger.info("Task list modified, saving to file.");
             try {
                 storage.saveTaskManager(model.getTaskManager());
             } catch (IOException ioe) {

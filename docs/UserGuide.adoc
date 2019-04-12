@@ -22,6 +22,9 @@ Student Buddy is for tech-savvy students who *prefer to use a desktop app for ma
 More importantly, Student Buddy is *optimized for those who prefer to work with a keyboard rather than a mouse*, but still has a *graphical display* for easy viewing.
 Do you want to organise, prioritise and never miss a deadline again? Then this app is perfect for you!
 
+[TIP]
+Student Buddy works best with a screen resolution of at least 1280x800.
+
 == Quick Start
 Here are the steps to get you started with the Student Buddy.
 
@@ -30,7 +33,7 @@ Here are the steps to get you started with the Student Buddy.
 .  Copy the file to the folder you want to use as the home folder for Student Buddy.
 .  Double-click the file to start the app. The GUI should appear in a few seconds. It should look like this:
 +
-image::TaskManager.png[width="1000"]
+image::StudentBuddy.png[width="1000"]
 +
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
