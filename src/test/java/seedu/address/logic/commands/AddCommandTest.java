@@ -23,10 +23,11 @@
 //import seedu.address.model.ReadOnlyTaskManager;
 //import seedu.address.model.ReadOnlyUserPrefs;
 //import seedu.address.model.TaskManager;
-//import seedu.address.model.login.User;
-//import seedu.address.model.login.Username;
+//import seedu.address.model.account.User;
+//import seedu.address.model.account.Username;
 //import seedu.address.model.notes.Notes;
 //import seedu.address.model.task.Task;
+//import seedu.address.model.util.Month;
 //import seedu.address.testutil.TaskBuilder;
 //
 //
@@ -256,6 +257,21 @@
 //        }
 //
 //        @Override
+//        public ReadOnlyProperty<Month> currentMonthProperty() {
+//            return null;
+//        }
+//
+//        @Override
+//        public void setMonth(Month month) {
+//
+//        }
+//
+//        @Override
+//        public Month getMonth() {
+//            return null;
+//        }
+//
+//        @Override
 //        public boolean hasNotes(Notes notes) {
 //            throw new AssertionError("This method should not be called.");
 //        }
@@ -263,6 +279,11 @@
 //        @Override
 //        public void addNotes(Notes notes) {
 //            throw new AssertionError("This method should not be called.");
+//        }
+//
+//        @Override
+//        public void addJsonNotes(Notes notes) {
+//
 //        }
 //
 //        @Override
@@ -288,6 +309,11 @@
 //        @Override
 //        public Notes getSelectedNotes() {
 //            throw new AssertionError("This method should not be called.");
+//        }
+//
+//        @Override
+//        public void deleteNotes(Notes target) {
+//
 //        }
 //    }
 //
