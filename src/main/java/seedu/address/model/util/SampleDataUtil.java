@@ -19,15 +19,27 @@ import seedu.address.model.task.Task;
 public class SampleDataUtil {
     public static Task[] getSampleTasks() {
         return new Task[]{
-            new Task(new Name("Revision"), new Module("CG2023"), new Due("06-03"),
+            new Task(new Name("Revision"), new Module("CG2023"), new Due("16-04"),
                     new Priority("1"),
                     getTagSet("examNextDay")),
-            new Task(new Name("Oral Presentation"), new Module("CS2101"), new Due("12-02"),
+            new Task(new Name("Oral Presentation"), new Module("CS2101"), new Due("12-04"),
                     new Priority("2"),
                     getTagSet("classParticipation")),
-            new Task(new Name("Tutorial 3"), new Module("GE1003"), new Due("05-03"),
+            new Task(new Name("Tutorial 3"), new Module("GES1003"), new Due("20-04"),
                     new Priority("3"),
                     getTagSet("ungraded")),
+            new Task(new Name("Lecture 6 Notes"), new Module("CG2023"), new Due("30-04"),
+                    new Priority("3"),
+                    getTagSet("")),
+            new Task(new Name("Optimise Project"), new Module("CG2028"), new Due("19-04"),
+                    new Priority("1"),
+                    getTagSet("")),
+            new Task(new Name("Plot Bode Plot"), new Module("CG2023"), new Due("12-04"),
+                    new Priority("1"),
+                    getTagSet("")),
+            new Task(new Name("Rewatch Lecture 2"), new Module("CS2113T"), new Due("21-04"),
+                    new Priority("2"),
+                    getTagSet("")),
         };
     }
 
