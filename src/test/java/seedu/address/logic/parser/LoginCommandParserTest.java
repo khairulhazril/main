@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static org.junit.Assert.assertEquals;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PASSWORD_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_USERNAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.PASSWORD_DESC;
@@ -23,6 +24,8 @@ import org.junit.rules.ExpectedException;
 import javafx.beans.property.ReadOnlyProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.LoginCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -34,21 +37,21 @@ import seedu.address.model.account.Username;
 import seedu.address.model.notes.Notes;
 import seedu.address.model.task.Task;
 import seedu.address.model.util.Month;
+import seedu.address.testutil.AccountBuilder;
 
 public class LoginCommandParserTest {
 
-    //private static final CommandHistory emptyCommandHistory = new CommandHistory();
+    private static final CommandHistory emptyCommandHistory = new CommandHistory();
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    //private CommandHistory commandHistory = new CommandHistory();
+    private CommandHistory commandHistory = new CommandHistory();
     private LoginCommandParser parserTest = new LoginCommandParser();
 
     @Test
     public void parseSuccess() throws CommandException {
 
-        /*
         User user = new AccountBuilder().build();
         ModelStubTestUser modelStubTestUser;
         modelStubTestUser = new ModelStubTestUser(user);
@@ -59,10 +62,10 @@ public class LoginCommandParserTest {
                 commandResult.getFeedbackToUser());
 
         assertEquals(emptyCommandHistory, commandHistory);
-        */
+
 
         // Parses correct username and password but wrong command id
-
+        /*
         Username username = new Username(VALID_USERNAME);
         Password password = new Password(VALID_PASSWORD);
         User currentUser = new User(username, password);
@@ -72,6 +75,8 @@ public class LoginCommandParserTest {
 
         assertParseSuccess(parserTest, USERNAME_DESC + PASSWORD_DESC,
                 new LoginCommand(currentUser));
+        */
+
     }
 
     /**
