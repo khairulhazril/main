@@ -1,12 +1,15 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalAccounts.NICHOLAS;
 
 import org.junit.Test;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.account.User;
+import seedu.address.testutil.AccountBuilder;
 
 public class HistoryCommandTest {
     private CommandHistory history = new CommandHistory();
@@ -15,6 +18,9 @@ public class HistoryCommandTest {
 
     @Test
     public void execute() {
+        User user = new AccountBuilder(NICHOLAS).build();
+        model.newUser(user);
+        model.loginUser(user);
         assertCommandSuccess(new HistoryCommand(), model, history, HistoryCommand.MESSAGE_NO_HISTORY, expectedModel);
 
         String command1 = "clear";

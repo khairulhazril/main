@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showTaskAtIndex;
+import static seedu.address.testutil.TypicalAccounts.NICHOLAS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TASK;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_TASK;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
@@ -18,6 +19,8 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.account.User;
+import seedu.address.testutil.AccountBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code SelectCommand}.
@@ -29,6 +32,9 @@ public class SelectCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
+        User user = new AccountBuilder(NICHOLAS).build();
+        model.newUser(user);
+        model.loginUser(user);
         Index lastPersonIndex = Index.fromOneBased(model.getFilteredTaskList().size());
 
         assertExecutionSuccess(INDEX_FIRST_TASK);
@@ -38,6 +44,9 @@ public class SelectCommandTest {
 
     @Test
     public void execute_invalidIndexUnfilteredList_failure() {
+        User user = new AccountBuilder(NICHOLAS).build();
+        model.newUser(user);
+        model.loginUser(user);
         Index outOfBoundsIndex = Index.fromOneBased(model.getFilteredTaskList().size() + 1);
 
         assertExecutionFailure(outOfBoundsIndex, Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
@@ -45,6 +54,9 @@ public class SelectCommandTest {
 
     @Test
     public void execute_validIndexFilteredList_success() {
+        User user = new AccountBuilder(NICHOLAS).build();
+        model.newUser(user);
+        model.loginUser(user);
         showTaskAtIndex(model, INDEX_FIRST_TASK);
         showTaskAtIndex(expectedModel, INDEX_FIRST_TASK);
 
@@ -53,6 +65,9 @@ public class SelectCommandTest {
 
     @Test
     public void execute_invalidIndexFilteredList_failure() {
+        User user = new AccountBuilder(NICHOLAS).build();
+        model.newUser(user);
+        model.loginUser(user);
         showTaskAtIndex(model, INDEX_FIRST_TASK);
         showTaskAtIndex(expectedModel, INDEX_FIRST_TASK);
 

@@ -23,7 +23,7 @@ public class LoginCommand extends Command {
     public static final String MESSAGE_LOGGED_USER = "You are already logged in! You need to logout"
                                                    + " if you want to login into another account.";
     public static final String MESSAGE_LOGGED_ADMIN = "You are logged in as admin.";
-
+    public static final String MESSAGE_NO_ACCOUNT = "Please sign up!";
     public static final String MESSAGE_INVALID_FORMAT = "Please Login again! Invalid username or password "
                                                + "Command Format: [login u/USERNAME p/PASSWORD]";
 

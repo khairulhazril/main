@@ -6,11 +6,13 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_PASSWORD_DESC
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_USERNAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.PASSWORD_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
+import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.USERNAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PASSWORD;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_USERNAME;
 import static seedu.address.logic.commands.SignupCommand.MESSAGE_INVALID_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalAccounts.NICHOLAS;
 
 import java.nio.file.Path;
@@ -36,21 +38,21 @@ import seedu.address.model.account.Username;
 import seedu.address.model.notes.Notes;
 import seedu.address.model.task.Task;
 import seedu.address.model.util.Month;
-import seedu.address.testutil.AccountBuilder;
 
 public class SignupCommandParserTest {
 
-    private static final CommandHistory emptyCommandHistory = new CommandHistory();
+    //private static final CommandHistory emptyCommandHistory = new CommandHistory();
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    private CommandHistory commandHistory = new CommandHistory();
+    //private CommandHistory commandHistory = new CommandHistory();
     private SignupCommandParser parserTest = new SignupCommandParser();
-    
-    @Test
-    public void parseSuccess() throws CommandException {
 
+   @Test
+    public void parseSuccess(){
+
+        /*
         User user = new AccountBuilder(NICHOLAS).build();
         User currentUser = new AccountBuilder().build();
         ModelStubTestUser modelStubTestUser = new ModelStubTestUser(currentUser);
@@ -61,17 +63,18 @@ public class SignupCommandParserTest {
                 commandResult.getFeedbackToUser());
 
         assertEquals(emptyCommandHistory, commandHistory);
+        */
 
-        // Parses Correctly but fails with size of User
-        // Username username = new Username(VALID_USERNAME);
-        // Password password = new Password(VALID_PASSWORD);
-        // User currentUser = new User(username,password);
+         //Parses correct username and password but wrong command id
+         Username username = new Username(VALID_USERNAME);
+         Password password = new Password(VALID_PASSWORD);
+         User currentUser = new User(username,password);
 
-        //  assertParseSuccess(parserTest, PREAMBLE_WHITESPACE + USERNAME_DESC + PASSWORD_DESC,
-        //        new SignupCommand(currentUser));
+          assertParseSuccess(parserTest, PREAMBLE_WHITESPACE + USERNAME_DESC + PASSWORD_DESC,
+                new SignupCommand(currentUser));
 
-        //  assertParseSuccess(parserTest, USERNAME_DESC + PASSWORD_DESC,
-        //        new SignupCommand(currentUser));
+          assertParseSuccess(parserTest, USERNAME_DESC + PASSWORD_DESC,
+                new SignupCommand(currentUser));
 
     }
 
