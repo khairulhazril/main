@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static org.junit.Assert.assertEquals;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PASSWORD_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_USERNAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.PASSWORD_DESC;
@@ -13,7 +12,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_USERNAME;
 import static seedu.address.logic.commands.SignupCommand.MESSAGE_INVALID_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalAccounts.NICHOLAS;
 
 import java.nio.file.Path;
 import java.util.function.Predicate;
@@ -25,10 +23,7 @@ import org.junit.rules.ExpectedException;
 import javafx.beans.property.ReadOnlyProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.CommandHistory;
-import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.SignupCommand;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyTaskManager;
 import seedu.address.model.ReadOnlyUserPrefs;
@@ -49,7 +44,7 @@ public class SignupCommandParserTest {
     //private CommandHistory commandHistory = new CommandHistory();
     private SignupCommandParser parserTest = new SignupCommandParser();
 
-   @Test
+    @Test
     public void parseSuccess(){
 
         /*
@@ -65,16 +60,16 @@ public class SignupCommandParserTest {
         assertEquals(emptyCommandHistory, commandHistory);
         */
 
-         //Parses correct username and password but wrong command id
-         Username username = new Username(VALID_USERNAME);
-         Password password = new Password(VALID_PASSWORD);
-         User currentUser = new User(username,password);
+        //Parses correct username and password but wrong command id
 
-          assertParseSuccess(parserTest, PREAMBLE_WHITESPACE + USERNAME_DESC + PASSWORD_DESC,
-                new SignupCommand(currentUser));
+        Username username = new Username(VALID_USERNAME);
+        Password password = new Password(VALID_PASSWORD);
+        User currentUser = new User(username,password);
 
-          assertParseSuccess(parserTest, USERNAME_DESC + PASSWORD_DESC,
-                new SignupCommand(currentUser));
+        assertParseSuccess(parserTest, PREAMBLE_WHITESPACE + USERNAME_DESC + PASSWORD_DESC,
+               new SignupCommand(currentUser));
+        assertParseSuccess(parserTest, USERNAME_DESC + PASSWORD_DESC,
+               new SignupCommand(currentUser));
 
     }
 

@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static org.junit.Assert.assertEquals;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PASSWORD_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_USERNAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.PASSWORD_DESC;
@@ -63,14 +62,15 @@ public class LoginCommandParserTest {
         */
 
         // Parses correct username and password but wrong command id
-         Username username = new Username(VALID_USERNAME);
-         Password password = new Password(VALID_PASSWORD);
-         User currentUser = new User(username, password);
 
-         assertParseSuccess(parserTest, PREAMBLE_WHITESPACE + USERNAME_DESC +PASSWORD_DESC,
+        Username username = new Username(VALID_USERNAME);
+        Password password = new Password(VALID_PASSWORD);
+        User currentUser = new User(username, password);
+
+        assertParseSuccess(parserTest, PREAMBLE_WHITESPACE + USERNAME_DESC + PASSWORD_DESC,
                 new LoginCommand(currentUser));
 
-         assertParseSuccess(parserTest, USERNAME_DESC + PASSWORD_DESC,
+        assertParseSuccess(parserTest, USERNAME_DESC + PASSWORD_DESC,
                 new LoginCommand(currentUser));
     }
 
