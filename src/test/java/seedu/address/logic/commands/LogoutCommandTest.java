@@ -1,20 +1,18 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalAccounts.NICHOLAS;
+
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.ExpectedException;
+
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.account.User;
 import seedu.address.testutil.AccountBuilder;
-
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
-
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PASSWORD;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_USERNAME;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalAccounts.NICHOLAS;
 
 public class LogoutCommandTest {
 
@@ -36,12 +34,11 @@ public class LogoutCommandTest {
     public void successfulLogout() {
 
         User user = new AccountBuilder(NICHOLAS).build();
-
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
+
         model.newUser(user);
         expectedModel.newUser(user);
-
         model.loginUser(user);
         expectedModel.loginUser(user);
         expectedModel.logout();

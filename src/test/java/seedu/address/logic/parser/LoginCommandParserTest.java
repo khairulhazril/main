@@ -1,32 +1,5 @@
 package seedu.address.logic.parser;
 
-import javafx.beans.property.ReadOnlyProperty;
-import javafx.collections.ObservableList;
-import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.CommandHistory;
-import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.LoginCommand;
-import seedu.address.logic.commands.LoginCommandTest;
-import seedu.address.logic.commands.LogoutCommand;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyTaskManager;
-import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.account.Password;
-import seedu.address.model.account.User;
-import seedu.address.model.account.Username;
-import seedu.address.model.notes.Notes;
-import seedu.address.model.task.Task;
-import seedu.address.model.util.Month;
-import seedu.address.testutil.AccountBuilder;
-
-import java.nio.file.Path;
-import java.util.function.Predicate;
-
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
-
 import static java.util.Objects.requireNonNull;
 import static org.junit.Assert.assertEquals;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PASSWORD_DESC;
@@ -38,6 +11,31 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PASSWORD;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_USERNAME;
 import static seedu.address.logic.commands.LoginCommand.MESSAGE_INVALID_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
+
+import java.nio.file.Path;
+import java.util.function.Predicate;
+
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.ExpectedException;
+
+import javafx.beans.property.ReadOnlyProperty;
+import javafx.collections.ObservableList;
+import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.LoginCommand;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
+import seedu.address.model.ReadOnlyTaskManager;
+import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.account.Password;
+import seedu.address.model.account.User;
+import seedu.address.model.account.Username;
+import seedu.address.model.notes.Notes;
+import seedu.address.model.task.Task;
+import seedu.address.model.util.Month;
+import seedu.address.testutil.AccountBuilder;
 
 public class LoginCommandParserTest {
 
@@ -58,7 +56,8 @@ public class LoginCommandParserTest {
 
         CommandResult commandResult = new LoginCommand(user).execute(modelStubTestUser, commandHistory);
 
-        assertEquals(String.format(LoginCommand.MESSAGE_SUCCESS, user.getUsername().toString()), commandResult.getFeedbackToUser());
+        assertEquals(String.format(LoginCommand.MESSAGE_SUCCESS, user.getUsername().toString()),
+                commandResult.getFeedbackToUser());
 
         assertEquals(EMPTY_HISTORY, commandHistory);
 
@@ -93,7 +92,7 @@ public class LoginCommandParserTest {
      * Test for invalid username or password
      */
     @Test
-    public void parse_invalidDetails_failure(){
+    public void parse_invalidDetails_failure() {
 
         assertParseFailure(parserTest, INVALID_USERNAME_DESC + PASSWORD_DESC,
                 Username.MESSAGE_USERNAME_CONSTRAINTS);

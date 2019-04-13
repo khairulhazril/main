@@ -6,17 +6,15 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_PASSWORD_DESC
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_USERNAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.PASSWORD_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
-import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.USERNAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PASSWORD;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_USERNAME;
 import static seedu.address.logic.commands.SignupCommand.MESSAGE_INVALID_FORMAT;
-import static seedu.address.logic.commands.SignupCommand.MESSAGE_SUCCESS;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.AccountBuilder.SET_PASSWORD;
-import static seedu.address.testutil.AccountBuilder.SET_USERNAME;
 import static seedu.address.testutil.TypicalAccounts.NICHOLAS;
+
+import java.nio.file.Path;
+import java.util.function.Predicate;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -28,11 +26,8 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.SignupCommand;
-import seedu.address.logic.commands.SignupCommandTest;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.LoginEvent;
 import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyTaskManager;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.account.Password;
@@ -42,9 +37,6 @@ import seedu.address.model.notes.Notes;
 import seedu.address.model.task.Task;
 import seedu.address.model.util.Month;
 import seedu.address.testutil.AccountBuilder;
-
-import java.nio.file.Path;
-import java.util.function.Predicate;
 
 public class SignupCommandParserTest {
 
