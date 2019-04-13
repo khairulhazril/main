@@ -11,7 +11,10 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PASSWORD;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_USERNAME;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalAccounts.NICHOLAS;
 
 public class LogoutCommandTest {
 
@@ -31,14 +34,22 @@ public class LogoutCommandTest {
 
     @Test
     public void successfulLogout() {
-        User user = new AccountBuilder().build();
+
+        User user = new AccountBuilder(NICHOLAS).build();
+
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
+        model.newUser(user);
+        expectedModel.newUser(user);
+
         model.loginUser(user);
         expectedModel.loginUser(user);
         expectedModel.logout();
 
         assertCommandSuccess(new LogoutCommand(), model, commandHistory,
                 String.format(LogoutCommand.MESSAGE_SUCCESS, user.getUsername().toString()), expectedModel);
+
     }
+
+
 }

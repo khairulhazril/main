@@ -44,7 +44,4 @@ public class UsernameTest {
         assertTrue(Username.isValidUsername("Nicholas The Great"));
 
     }
-
-
-
 }
