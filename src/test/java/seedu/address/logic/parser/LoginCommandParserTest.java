@@ -39,10 +39,10 @@ import seedu.address.testutil.AccountBuilder;
 
 public class LoginCommandParserTest {
 
-    private static final CommandHistory EMPTY_HISTORY = new CommandHistory();
-
     private LoginCommandParser parserTest = new LoginCommandParser();
-    
+
+    private static final CommandHistory emptyCommandHistory = new CommandHistory();
+
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
@@ -60,7 +60,7 @@ public class LoginCommandParserTest {
         assertEquals(String.format(LoginCommand.MESSAGE_SUCCESS, user.getUsername().toString()),
                 commandResult.getFeedbackToUser());
 
-        assertEquals(EMPTY_HISTORY, commandHistory);
+        assertEquals(emptyCommandHistory, commandHistory);
 
         // Parses Correctly but fails with size of User
         // Username username = new Username(VALID_USERNAME);
