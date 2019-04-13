@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 import static seedu.address.testutil.TypicalAccounts.NICHOLAS;
 
 import java.nio.file.Path;
@@ -66,7 +66,7 @@ public class SignupCommandTest {
     }
 
     @Test
-    public void failedSignup_loggedOut() throws Exception {
+    public void failedSignup_loggedIn() throws Exception {
         User user = new AccountBuilder().build();
         ModelStubTestUser modelStubTestUser = new ModelStubTestUser();
         SignupCommand failcommand = new SignupCommand(user);
@@ -92,6 +92,36 @@ public class SignupCommandTest {
 
         @Override
         public void deleteAccount() {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public boolean getLoginStatus() {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public boolean getAdminStatus() {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public boolean userExists(User user) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public void loginUser(User user) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public Username getUsername() {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public void logout() {
             throw new AssertionError("This method should not be called");
         }
 
@@ -137,36 +167,6 @@ public class SignupCommandTest {
 
         @Override
         public void deleteNotes(Notes target) {
-            throw new AssertionError("This method should not be called");
-        }
-
-        @Override
-        public boolean getLoginStatus() {
-            throw new AssertionError("This method should not be called");
-        }
-
-        @Override
-        public boolean getAdminStatus() {
-            throw new AssertionError("This method should not be called");
-        }
-
-        @Override
-        public boolean userExists(User user) {
-            throw new AssertionError("This method should not be called");
-        }
-
-        @Override
-        public void loginUser(User user) {
-            throw new AssertionError("This method should not be called");
-        }
-
-        @Override
-        public Username getUsername() {
-            throw new AssertionError("This method should not be called");
-        }
-
-        @Override
-        public void logout() {
             throw new AssertionError("This method should not be called");
         }
 
@@ -227,8 +227,8 @@ public class SignupCommandTest {
 
         @Override
         public void setTask(Task target, Task editedTask) {
-            throw new AssertionError("This method should not be called");
-        }
+
+            throw new AssertionError("This method should not be called"); }
 
         @Override
         public void sortTask(String attribute) {
@@ -287,14 +287,17 @@ public class SignupCommandTest {
 
         @Override
         public ReadOnlyProperty<Month> currentMonthProperty() {
+            throw new AssertionError("This method should not be called"); }
+
+        @Override
+        public void setMonth(Month month) {
             throw new AssertionError("This method should not be called");
         }
 
         @Override
-        public void setMonth(Month month) { throw new AssertionError("This method should not be called"); }
-
-        @Override
-        public Month getMonth() { throw new AssertionError("This method should not be called"); }
+        public Month getMonth() {
+            throw new AssertionError("This method should not be called");
+        }
     }
 
     /**
@@ -303,12 +306,14 @@ public class SignupCommandTest {
     private class ModelStubTestUser extends ModelStub {
         private User user;
         private boolean isLoggedIn;
+        //private boolean isAdminLoggedIn;
         private boolean accountExist = false;
 
         ModelStubTestUser(User user) {
             requireNonNull(user);
             this.user = user;
             isLoggedIn = false;
+            //isAdminLoggedIn = false;
         }
 
         ModelStubTestUser() {
@@ -327,11 +332,6 @@ public class SignupCommandTest {
         }
 
         @Override
-        public void loginUser(User user) {
-            isLoggedIn = user.equals(this.user);
-        }
-
-        @Override
         public void newUser(User user) {
             requireNonNull(user);
         }
@@ -340,6 +340,9 @@ public class SignupCommandTest {
         public boolean getLoginStatus() {
             return isLoggedIn;
         }
+//
+//        @Override
+//        public boolean getAdminStatus() { return isAdminLoggedIn; }
 
         @Override
         public Username getUsername() {

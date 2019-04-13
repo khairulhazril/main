@@ -98,7 +98,7 @@ Logged in as nicholas.
 *** Possible Errors +
 * `You are already logged in!` +
 You are already logged in and will need logout in order to login to another account. +
-* `Please Login again! Command Format: [login u/USERNAME p/PASSWORD]` +
+* `Please Login again! Invalid username or password. Command Format: [login u/USERNAME p/PASSWORD]` +
 You have inserted an incorrect username or password. The login command has to be executed again
 ====
 
