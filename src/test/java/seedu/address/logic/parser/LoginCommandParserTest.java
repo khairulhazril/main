@@ -39,14 +39,13 @@ import seedu.address.testutil.AccountBuilder;
 
 public class LoginCommandParserTest {
 
-    private LoginCommandParser parserTest = new LoginCommandParser();
-
     private static final CommandHistory emptyCommandHistory = new CommandHistory();
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
     private CommandHistory commandHistory = new CommandHistory();
+    private LoginCommandParser parserTest = new LoginCommandParser();
 
     @Test
     public void parseSuccess() throws CommandException {
