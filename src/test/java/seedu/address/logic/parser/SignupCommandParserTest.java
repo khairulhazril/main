@@ -45,7 +45,7 @@ public class SignupCommandParserTest {
     private SignupCommandParser parserTest = new SignupCommandParser();
 
     @Test
-    public void parseSuccess(){
+    public void parseSuccess() {
 
         /*
         User user = new AccountBuilder(NICHOLAS).build();
@@ -64,7 +64,7 @@ public class SignupCommandParserTest {
 
         Username username = new Username(VALID_USERNAME);
         Password password = new Password(VALID_PASSWORD);
-        User currentUser = new User(username,password);
+        User currentUser = new User(username, password);
 
         assertParseSuccess(parserTest, PREAMBLE_WHITESPACE + USERNAME_DESC + PASSWORD_DESC,
                new SignupCommand(currentUser));
