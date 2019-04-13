@@ -22,6 +22,9 @@ Student Buddy is for tech-savvy students who *prefer to use a desktop app for ma
 More importantly, Student Buddy is *optimized for those who prefer to work with a keyboard rather than a mouse*, but still has a *graphical display* for easy viewing.
 Do you want to organise, prioritise and never miss a deadline again? Then this app is perfect for you!
 
+[TIP]
+Student Buddy works best with a screen resolution of at least 1280x800.
+
 == Quick Start
 Here are the steps to get you started with the Student Buddy.
 
@@ -30,7 +33,7 @@ Here are the steps to get you started with the Student Buddy.
 .  Copy the file to the folder you want to use as the home folder for Student Buddy.
 .  Double-click the file to start the app. The GUI should appear in a few seconds. It should look like this:
 +
-image::TaskManager.png[width="1000"]
+image::StudentBuddy.png[width="1000"]
 +
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
@@ -136,10 +139,10 @@ A task can have any number of tags (including 0)
 
 Examples:
 
-* `add n/Tutorial 3 m/CG1112 d/21-03 t/urgent` +
-Adds a task with the name `Tutorial 3`, module code `CG1112`, date `21-03`, with the tag `urgent`.
-* `add n/Project Version 1 m/CS2113T d/11-03` +
-Adds a task with the name `Project Version 1`, module code `CS2113T` and date `11-03`.
+* `add n/Tutorial 3 m/CG1112 d/21-03 p/2 t/urgent` +
+Adds a task with the name `Tutorial 3`, module code `CG1112`, date `21-03`, priority code `2`, with the tag `urgent`.
+* `add n/Project Version 1 m/CS2113T d/11-03 p/1` +
+Adds a task with the name `Project Version 1`, module code `CS2113T`, date `11-03` and priority code `2`.
 
 === Listing all tasks : `list`
 
@@ -181,10 +184,10 @@ Format: `findname KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 
-* `find CS2113 task` +
-Returns all task with names containing `CS2113` or `task`.
-* `find CS2113 Hw Tutorial` +
-Returns all task having names `CS2113`, `Hw`, or `Tutorial`
+* `findname Project Tutorial` +
+Returns all task with names containing `Project` or `Tutorial`.
+* `findname Project Lab Report` +
+Returns all task having names `Project`, `Lab`, or `Report`
 
 === Locating tasks by module code: `findmodule`
 
@@ -200,9 +203,9 @@ Format: `findmodule KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 
-* `find CS2113T` +
+* `findmodule CS2113T` +
 Returns all tasks containing the module code `CS2113T`.
-* `find CS2113T CS2101` +
+* `findmodule CS2113T CS2101` +
 Returns all tasks containing the module code `CS2113T` or `CS2101`.
 
 === Locating tasks by date: `finddate`
@@ -267,6 +270,9 @@ Format: `select INDEX`
 * The index refers to the index number shown in the displayed task list.
 * The index *must be a positive integer* `1, 2, 3, ...`
 ****
+
+[TIP]
+Using `add`, `edit`, `delete`, `logout` or `month` will deselect the currently selected task.
 
 Examples:
 
@@ -426,11 +432,30 @@ In addition, the calendar comes with the following features:
 * Tasks are automatically listed in order of priority, from high to low.
 * If the task list is modified with `add`, `delete` or `edit`, or it is filtered using `find`, the calendar will update accordingly.
 * Selecting a task will highlight it on the calendar for easy viewing.
+* Calendar cells are scrollable.
 
 A showcase of the calendar's features is displayed below:
 
 image::CalendarDemo.png[width="1000"]
 // end::calendar[]
+
+=== Changing the calendar month : `month`, `m`
+
+Changes the month to be displayed by the calendar. +
+Format: `month MONTH` or `m MONTH`
+
+****
+* Changes the displayed month to the specified `MONTH`.
+* MONTH must be an integer between 1 and 12 inclusive.
+* MONTH must not be the month already being displayed.
+****
+
+Examples:
+
+* `month 2` +
+Changes the month displayed to February.
+* `m 11` +
+Changes the month displayed to November.
 
 === Exiting the program : `exit`
 
@@ -476,6 +501,8 @@ e.g. `findpriority 1`
 * *Login* : `login u/USERNAME p/PASSWORD` +
 e.g. `login u/nicholas p/abcdefg`
 * *Logout* : `logout`
+* *Month Change* : `month MONTH` +
+e.g. `month 11`
 * *Redo* : `redo`
 * *Select* : `select INDEX` +
 e.g.`select 2`

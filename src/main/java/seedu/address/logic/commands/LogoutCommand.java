@@ -27,7 +27,7 @@ public class LogoutCommand extends Command {
         Username loginUsername = model.getUsername();
         // Clear user
         model.logout();
-
+        model.setSelectedTask(null);
         return new CommandResult(String.format(MESSAGE_SUCCESS, loginUsername.toString()));
     }
 }
