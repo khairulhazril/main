@@ -49,7 +49,8 @@ public class LoginCommandTest {
 
         CommandResult commandResult = new LoginCommand(user).execute(modelStubTestUser, commandHistory);
 
-        assertEquals(String.format(LoginCommand.MESSAGE_SUCCESS, user.getUsername().toString()), commandResult.getFeedbackToUser());
+        assertEquals(String.format(LoginCommand.MESSAGE_SUCCESS, user.getUsername().toString()),
+                commandResult.getFeedbackToUser());
 
         assertEquals(EMPTY_HISTORY, commandHistory);
     }

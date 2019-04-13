@@ -340,9 +340,9 @@ public class SignupCommandTest {
         public boolean getLoginStatus() {
             return isLoggedIn;
         }
-//
-//        @Override
-//        public boolean getAdminStatus() { return isAdminLoggedIn; }
+
+        // @Override
+        // public boolean getAdminStatus() { return isAdminLoggedIn; }
 
         @Override
         public Username getUsername() {

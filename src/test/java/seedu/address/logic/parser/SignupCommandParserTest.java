@@ -40,9 +40,9 @@ import seedu.address.testutil.AccountBuilder;
 
 public class SignupCommandParserTest {
 
-    private static final CommandHistory emptyCommandHistory = new CommandHistory();
-
     private SignupCommandParser parserTest = new SignupCommandParser();
+
+    private static final CommandHistory emptyCommandHistory = new CommandHistory();
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
