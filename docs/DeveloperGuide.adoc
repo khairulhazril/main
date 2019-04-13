@@ -1168,6 +1168,10 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* *` |user |sort my tasks by the attributes |can view my tasks by urgency etc.
 
+|`* *` |user |view all the months of the year on the calendar
+
+|`* *` |user |select a task to have it highlighted in the app for easy viewing
+
 |`* *` |user |secure my task manager via a username and password to keep my events safe |keep my events and due dates private and secure to minimize the chances of someone deleting them
 
 |`* *` |user | have my password hashed | keep my password safe without anyone easily retrieving them through my computer
