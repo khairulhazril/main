@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static seedu.address.testutil.TypicalAccounts.NICHOLAS;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.LoginEvent;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyTaskManager;
 import seedu.address.model.ReadOnlyUserPrefs;
@@ -28,6 +30,7 @@ import seedu.address.model.account.Username;
 import seedu.address.model.notes.Notes;
 import seedu.address.model.task.Task;
 import seedu.address.model.util.Month;
+import seedu.address.testutil.AccountBuilder;
 import seedu.address.testutil.NotesBuilder;
 
 public class AddNotesCommandTest {
@@ -50,6 +53,10 @@ public class AddNotesCommandTest {
         ModelStubAcceptingNotesAdded modelStub = new ModelStubAcceptingNotesAdded();
         Notes validNotes = new NotesBuilder().build();
 
+        User user = new AccountBuilder(NICHOLAS).build();
+        modelStub.newUser(user);
+        modelStub.loginUser(user);
+
         CommandResult commandResult = new AddNotesCommand(validNotes).execute(modelStub, commandHistory);
 
         assertEquals(String.format(AddNotesCommand.MESSAGE_SUCCESS, validNotes), commandResult.getFeedbackToUser());
@@ -62,6 +69,10 @@ public class AddNotesCommandTest {
         Notes validNotes = new NotesBuilder().build();
         AddNotesCommand addnotesCommand = new AddNotesCommand(validNotes);
         ModelStub modelStub = new ModelStubWithNotes(validNotes);
+
+        User user = new AccountBuilder(NICHOLAS).build();
+        modelStub.newUser(user);
+        modelStub.loginUser(user);
 
         thrown.expect(CommandException.class);
         thrown.expectMessage(AddNotesCommand.MESSAGE_DUPLICATE_NOTE);
@@ -96,6 +107,7 @@ public class AddNotesCommandTest {
      * A default model stub that have all of the methods failing.
      */
     private class ModelStub implements Model {
+        private final LoginEvent loginEvent = new LoginEvent();
 
         @Override
         public ReadOnlyUserPrefs getUserPrefs() {
@@ -232,7 +244,8 @@ public class AddNotesCommandTest {
 
         @Override
         public void loginUser(User loginInfo) {
-            throw new AssertionError("This method should not be called.");
+            requireNonNull(loginInfo);
+            loginEvent.loginUser(loginInfo);
         }
 
         @Override
@@ -242,12 +255,13 @@ public class AddNotesCommandTest {
 
         @Override
         public void newUser(User user) {
-            throw new AssertionError("This method should not be called.");
+            requireNonNull(user);
+            loginEvent.newUser(user);
         }
 
         @Override
         public boolean accountExists() {
-            return false;
+            return loginEvent.accountExists();
         }
 
         @Override

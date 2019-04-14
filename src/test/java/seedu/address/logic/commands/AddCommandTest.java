@@ -20,7 +20,11 @@
 //import seedu.address.commons.core.GuiSettings;
 //import seedu.address.logic.CommandHistory;
 //import seedu.address.logic.commands.exceptions.CommandException;
-//import seedu.address.model.*;
+//import seedu.address.model.Model;
+//import seedu.address.model.ModelManager;
+//import seedu.address.model.ReadOnlyTaskManager;
+//import seedu.address.model.ReadOnlyUserPrefs;
+//import seedu.address.model.TaskManager;
 //import seedu.address.model.account.User;
 //import seedu.address.model.account.Username;
 //import seedu.address.model.notes.Notes;
@@ -65,6 +69,11 @@
 //
 //    @Test
 //    public void execute_duplicateTask_throwsCommandException() throws Exception {
+//        Model model = new ModelManager();
+//        User user = new AccountBuilder(NICHOLAS).build();
+//        model.newUser(user);
+//        model.loginUser(user);
+//
 //        Task validTask = new TaskBuilder().build();
 //        AddCommand addCommand = new AddCommand(validTask);
 //        ModelStub modelStub = new ModelStubWithTask(validTask);

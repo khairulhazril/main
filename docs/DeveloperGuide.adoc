@@ -236,7 +236,7 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 == Implementation
 
 This section describes some noteworthy details on how certain features are implemented.
-
+//@@author nicholasleeeee
 // tag::loginfunction[]
 === Login Feature
 
@@ -247,9 +247,9 @@ The login feature is mainly supported by the `Command` class and `account` class
 There are two types of accounts in login feature which are implemented in the `account` class: +
 A normal user account and an admin account. All username and hashed password are stored in a JSON file.
 
-image::AccountClassDiagram.png[width="180"]
+image::AccountClassDiagram.png[width="350"]
 
-The class diagram on the right illustrates the `account` class. +
+The class diagram on the above illustrates the `account` class. +
 
 In `model` class, there are methods to check for:
 `loginStatus` (if the user is logged in), `adminStatus` (if the admin is logged in),
@@ -287,8 +287,8 @@ It will then pass the User object to `JsonLoginStorage`.
 The following sequence diagram below shows the flow of `signup` and `login` respectively from Step 1 to Step 5 above.
 
 [.left]
-image::SignUpSequenceDiagram.png[width="400"]
-image::LoginSequenceDiagram.png[width="400"]
+image::SignUpSequenceDiagram.png[width="500"]
+image::LoginSequenceDiagram.png[width="500"]
 [.right]
 
 ==== Logout Command
@@ -310,7 +310,7 @@ return to `LoginCommand` to return the user a successful logout output.
 
 The sequence diagram below shows the flow of `logout` from Step to Step above.
 
-image::LogoutSequenceDiagram.png[width="400"]
+image::LogoutSequenceDiagram.png[width="500"]
 
 ==== DeleteAcc Command
 
@@ -334,7 +334,7 @@ without any username and password stored in it. `reinitialise()` is assisted by 
 
 The sequence diagram below shows the flow of `deleteacc` from Step to Step above.
 
-image::DeleteAccountSequenceDiagram.png[width="400"]
+image::DeleteAccountSequenceDiagram.png[width="500"]
 
 ==== Design Considerations
 
@@ -373,6 +373,7 @@ The password will not be secure. MD5 is not suitable for sensitive information.
 Collisions exist with the algorithm, and there have been successful attacks against it.
 
 // end::loginfunction[]
+//@@author
 
 // tag::notes[]
 === Add Notes Feature
@@ -456,6 +457,17 @@ Aspect: Weighing *user experience* to *convenience* of users
 Final decision: Alternative 2 was chosen due to it being *more practical and convenient* to users so that users will continue to use it in the future.
 // end::notes[]
 
+// tag::task[]
+=== Task Feature
+
+Current Implementation
+
+The task list is created by refactoring the existing code in the https://github.com/se-edu/addressbook-level4[Address Book Level 4]
+
+The class diagram below illustrates the *task* class.
+
+image::TaskClassDiagram.png[width="450"]
+// end::task[]
 
 // tag::sorttask[]
 === Sort Task List Feature
@@ -466,17 +478,15 @@ The sorting mechanism is facilitated by `TaskManager`, `Model` and `SortTaskList
 
 Given below is an example usage scenario.
 
-Step 1. The user keys in `sort ATTRIBUTE`, the `SortCommandParser` will trim the command to get the attribute.
-
-Step 2. If the attribute is valid, it will then create a new `SortCommand` and execute with the given attribute.
-
-Step 3. `SortCommand` will then call `ModelManager#sortTask(toSortBy)`.
-
-Step 4. It will then call `TaskManager#sortTask(attribute)`.
+|===
+|Step 1. The user keys in `sort ATTRIBUTE`, the `SortCommandParser` will trim the command to get the attribute.
+|Step 2. If the attribute is valid, it will then create a new `SortCommand` and execute with the given attribute.
+|Step 3. `SortCommand` will then call `ModelManager#sortTask(toSortBy)`.
+|Step 4. It will then call `TaskManager#sortTask(attribute)`.
 Then we convert the relevant attributes of the tasks in the Task List to string to compare using `string#compareTo()`.
-
-Step 5. Then, we use `setTasks()` in `UniqueTaskList` to update the Task List.
+|Step 5. Then, we use `setTasks()` in `UniqueTaskList` to update the Task List.
 After returning the sorted Task List, the Task Manager is then committed.
+|===
 
 The Sequence Diagram below illustrates how the sort mechanism functions. More specifically, sorting by module code.
 
@@ -496,11 +506,22 @@ image::SortSequenceDiagram.png[width="900"]
 
 // end::sorttask[]
 
-// tag::upcoming[]
+// tag::overdue[]
 === [Proposed] Delete overdue
 ==== Proposed Implementation
+Using the existing `daysRemaining` variable, upon entering `DeleteOverdue` in the command line, the command will iterate through all the tasks and check the value of `daysRemaining`.
+If it is less than 0, the command will call the `DeleteCommand` to delete the overdue task.
 
-// end::upcoming[]
+==== Design Considerations
+
+==== Aspect: How the delete overdue command executes
+* **Alternative 1 (current choice):** Write the command such that whenever there is an overdue task, it will call the `delete` command.
+** Pros: Easy to use as it does not require changing the existing code much.
+** Cons: Will need to iterate through all the tasks.
+* **Alternative 2:** Create a new class to store all overdue tasks that updates itself whenever a task is overdue.
+** Pros: Faster as it does not require iterating through all tasks.
+** Cons: Requires more space to store all the overdue tasks
+// end::overdue[]
 
 // tag::calendar[]
 === Calendar feature

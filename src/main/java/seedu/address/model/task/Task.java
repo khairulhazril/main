@@ -73,22 +73,25 @@ public class Task {
     }
 
     /**
-     * Returns true if tasks are identical in all parameters
+     * Returns true if both tasks are identical except for tags
      */
     public boolean isSameTask(Task otherTask) {
+        if (otherTask == null) {
+            return false;
+        }
+
         if (otherTask == this) {
             return true;
         }
 
-        return otherTask != null
-                && otherTask.getName().equals(getName())
+        return otherTask.getName().equals(getName())
                 && otherTask.getModule().equals(getModule())
-                && otherTask.getDue().equals(getDue());
+                && otherTask.getDue().equals(getDue())
+                && otherTask.getPriority().equals(getPriority());
     }
 
     /**
-     * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * Returns true if both tasks are identical
      */
     @Override
     public boolean equals(Object other) {
