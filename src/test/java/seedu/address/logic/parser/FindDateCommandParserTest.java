@@ -8,28 +8,28 @@ import java.util.Arrays;
 
 import org.junit.Test;
 
-import seedu.address.logic.commands.FindNameCommand;
-import seedu.address.model.task.NameContainsKeywordsPredicate;
+import seedu.address.logic.commands.FindDateCommand;
+import seedu.address.model.task.DueContainsKeywordsPredicate;
 
-public class FindNameCommandParserTest {
+public class FindDateCommandParserTest {
 
-    private FindNameCommandParser parser = new FindNameCommandParser();
+    private FindDateCommandParser parser = new FindDateCommandParser();
 
     @Test
     public void parse_emptyArg_throwsParseException() {
         assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                FindNameCommand.MESSAGE_USAGE));
+                FindDateCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_validArgs_returnsFindCommand() {
         // no leading and trailing whitespaces
-        FindNameCommand expectedFindNameCommand =
-                new FindNameCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")));
-        assertParseSuccess(parser, "Alice Bob", expectedFindNameCommand);
+        FindDateCommand expectedFindDateCommand =
+                new FindDateCommand(new DueContainsKeywordsPredicate(Arrays.asList("01-04", "21-04")));
+        assertParseSuccess(parser, "01-04 21-04", expectedFindDateCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, " \n Alice \n \t Bob  \t", expectedFindNameCommand);
+        assertParseSuccess(parser, " \n 01-04 \n \t 21-04  \t", expectedFindDateCommand);
     }
 
 }
