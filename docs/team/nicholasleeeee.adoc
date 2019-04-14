@@ -104,7 +104,90 @@ _Integrated a third party library (GSON) to the project_ (https://github.com/CS2
 
 _Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 
-include::../UserGuide.adoc[tag=loginfunction]
+=== Signing up for an account : `signup`
+
+*Creates an account for the user. To `signup`, there must be no existing account.* +
+
+* Only one account can be created per user.
+
+* Passwords should not have spaces and may only include the following special characters: +
+!#$%&'*+/=?`{|}~^.@-
+
+Format: `signup u/USERNAME p/PASSWORD` +
+
+Example:
+
+|===
+`signup u/nicholas p/lee` +
+Signed up: nicholas
+|===
+
+Possible Errors:
+
+|===
+|`You are logged in as nicholas!`: You are already logged in and will need to logout in order to signup for a new account. +
+|`Please try another username`: The username already exists, signup again with another username. +
+|`Account has already been created!` : There is an existing account. You can login or sign in as an admin to delete the account. +
+|===
+
+=== Logging into an account : `login`
+
+*Logs the user into their account. An account has to be created before logging in.*
+Format: `login u/USERNAME p/PASSWORD` +
+
+Example:
+
+|===
+`login u/nicholas p/lee` +
+Logged in as nicholas.
+|===
+
+Possible Errors:
+
+|===
+|`You are already logged in!` : You are already logged in and will need logout in order to login to another account. +
+|`Please Login again! Invalid username or password.
+ Command Format: [login u/USERNAME p/PASSWORD]`: You have inserted an incorrect username or password. The login command has to be executed again +
+|===
+
+=== Logging out of an account : `logout`
+
+*Logs user out of an account.* +
+Format: `logout`
+
+Example:
+
+|===
+`logout` +
+Logged out of nicholas.
+|===
+
+Possible Errors:
+
+|===
+|`You have already logged out. Please Login!`:
+You have already logged out or you did not login into any account. +
+|===
+
+=== Deleting an account : `deleteacc`
+
+*As an administrator, you can delete accounts.* +
+Format: `deleteacc`
+
+Example:
+
+|===
+`deleteacc` +
+Account has been deleted!
+|===
+
+Possible Errors: +
+
+|===
+|`You need to log in as an admin to use this command` :
+You are not logged in as an admin. Please login as an admin before using this command. +
+|===
+
 
 === Contributions to the Developer Guide
 
