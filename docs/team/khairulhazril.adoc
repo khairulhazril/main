@@ -177,7 +177,7 @@ Deletes all the task in the results of the `findname` command.
 // tag::task[]
 === Task Feature
 
-==== Current Implementation
+Current Implementation
 
 The task list is created by refactoring the existing code in the https://github.com/se-edu/addressbook-level4[Address Book Level 4]
 
@@ -229,7 +229,7 @@ image::SortSequenceDiagram.png[width="900"]
 Using the existing `daysRemaining` variable, upon entering `DeleteOverdue` in the command line, the command will iterate through all the tasks and check the value of `daysRemaining`.
 If it is less than 0, the command will call the `DeleteCommand` to delete the overdue task.
 
-=== Design Considerations
+==== Design Considerations
 
 ==== Aspect: How the delete overdue command executes
 * **Alternative 1 (current choice):** Write the command such that whenever there is an overdue task, it will call the `delete` command.
@@ -239,6 +239,7 @@ If it is less than 0, the command will call the `DeleteCommand` to delete the ov
 ** Pros: Faster as it does not require iterating through all tasks.
 ** Cons: Requires more space to store all the overdue tasks
 // end::overdue[]
+
 
 
 (End of extract)
