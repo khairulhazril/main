@@ -40,7 +40,7 @@ public class MonthCommand extends Command {
         requireNonNull(model);
 
         //@@author nicholasleeeee
-        if (!model.accountExists()) {
+        if (!model.accountExists() && !model.getAdminStatus()) {
             throw new CommandException(MESSAGE_ACCOUNT_DOES_NOT_EXIST);
         }
 
