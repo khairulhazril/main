@@ -1,5 +1,12 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CONTENT_MARKET;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CONTENT_POPULAR;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_HEADING_MARKET;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_HEADING_POPULAR;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PRIORITY_MARKET;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PRIORITY_POPULAR;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -28,6 +35,12 @@ public class TypicalNotes {
             .withContent("Watch Avengers endgame")
             .withPriority("1").build();
 
+    public static final Notes MARKET = new NotesBuilder().withHeading(VALID_HEADING_MARKET)
+            .withContent(VALID_CONTENT_MARKET).withPriority(VALID_PRIORITY_MARKET).build();
+
+    public static final Notes POPULAR = new NotesBuilder().withHeading(VALID_HEADING_POPULAR)
+            .withContent(VALID_CONTENT_POPULAR).withPriority(VALID_PRIORITY_POPULAR).build();
+
 
     private TypicalNotes() {
     } // prevents instantiation
@@ -45,7 +58,7 @@ public class TypicalNotes {
 
     public static List<Notes> getTypicalNotes() {
 
-        return new ArrayList<>(Arrays.asList(MEETUP, ERRAND, BUSINESS, LEISURE));
+        return new ArrayList<>(Arrays.asList(MEETUP, ERRAND, BUSINESS, LEISURE, POPULAR, MARKET));
     }
 
 }
