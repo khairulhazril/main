@@ -180,7 +180,7 @@ Examples:
 * `edit 1 n/Tutorial 4 d/21-03 t/urgent` +
 Edits the name and date of the 1st task to be `Tutorial 4` and `21-03` with the tag `urgent` respectively.
 * `edit 2 n/Project t/` +
-Edits the name of the 2nd person to be `Project` and clears all existing tags.
+Edits the name of the 2nd task to be `Project` and clears all existing tags.
 
 //tag::find[]
 === Locating tasks by name: `findname`, `fn`
