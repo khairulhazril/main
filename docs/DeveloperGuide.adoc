@@ -501,7 +501,7 @@ image::SortSequenceDiagram.png[width="900"]
 
 // end::sorttask[]
 
-// tag::upcoming[]
+// tag::overdue[]
 === [Proposed] Delete overdue
 ==== Proposed Implementation
 Using the existing `daysRemaining` variable, upon entering `DeleteOverdue` in the command line, the command will iterate through all the tasks and check the value of `daysRemaining`.
@@ -510,7 +510,13 @@ If it is less than 0, the command will call the `DeleteCommand` to delete the ov
 === Design Considerations
 
 ==== Aspect: How the delete overdue command executes
-// end::upcoming[]
+* **Alternative 1 (current choice):** Write a class separately for handling the sorting of the task list.
+** Pros: Easy to read and debug, Follows OOP coding and thus easier for other coders to modify.
+** Cons: Difficult to implement.
+* **Alternative 2:** Write a method for each attribute in `TaskManager`.
+** Pros: Easy to implement.
+** Cons: Does not follow OOP coding.
+// end::overdue[]
 
 // tag::calendar[]
 === Calendar feature
