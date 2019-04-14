@@ -490,6 +490,12 @@ There is no need to save manually.
 _{explain how the user can enable/disable data encryption}_
 // end::dataencryption[]
 
+// tag::notestorage[]
+=== Retrieving of notes from storage `[coming in v2.0]
+
+Student Buddy's notes will be stored inside *notes.json* file. Upon starting up Student Buddy, the notes will be retrieved from *notes.json* and displayed on the notes section of the GUI.
+
+// end::notestorage[]
 == FAQ
 
 *Q*: How do I transfer my data to another Computer? +
@@ -499,9 +505,13 @@ _{explain how the user can enable/disable data encryption}_
 
 * *Add* `add n/NAME m/MODULE d/DATE p/PRIORITY [t/TAG]...` +
 e.g. `add n/Tutorial 3 m/CG2023 d/21-02 p/3 t/urgent`
+* *Add Note* `note note h/HEADING c/CONTENT p/PRIORITY` +
+e.g. `note h/Popular c/buy blue pens p/2`
 * *Clear* : `clear`
 * *Delete* : `delete INDEX` +
 e.g. `delete 3`
+* *Delete Note* `delete INDEX` +
+e.g. `delete 1`
 * *Edit* : `edit INDEX [n/NAME] [m/MODULE] [d/DATE] [p/PRIORITY] [t/TAG]...` +
 e.g. `edit 2 n/CG2027 Hw d/23-04`
 * *Find Date* : `finddate KEYWORD [MORE_KEYWORDS]` +
