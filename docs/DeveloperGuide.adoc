@@ -382,7 +382,7 @@ This feature allow users to add notes regarding miscellaneous matters.
 
 The class diagram below illustrates the *Notes* class.
 
-image::ClassDiagramForNotes.png[width="450"]
+image::ClassDiagramForNotes.png[width="400"]
 
 ==== Current Implementation
 
@@ -402,7 +402,7 @@ Given below is an example usage scenario and how the add notes mechanism behaves
 
 The sequence diagram below illustrates how the mechanism for adding notes function.
 
-image::AddNotesSequenceDiagram.png[width="800"]
+image::AddNotesSequenceDiagram.png[width="700"]
 
 ==== Design Considerations
 
@@ -440,7 +440,7 @@ Given below is an example usage scenario and how the `deletenote` mechanism beha
 
 The following diagram illustrates how the `deletenote` operation works:
 
-image::DeleteNotesSequenceDiagram.png[width="800"]
+image::DeleteNotesSequenceDiagram.png[width="700"]
 
 ==== Design Considerations
 
