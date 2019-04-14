@@ -13,12 +13,12 @@ public class DeleteAccountCommand extends Command {
 
     public static final String COMMAND_WORD = "deleteacc";
     public static final String MESSAGE_SUCCESS = "Account has been deleted!";
-    public static final String MESSAGE_ADMIN_LOGIN = "You need to be an admin to use this command";
+    public static final String MESSAGE_ADMIN_LOGIN = "You need to log in as an admin to use this command";
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
 
-        // Not an admin loggin in
+        // Not an admin logging in
         if (!model.getAdminStatus()) {
             throw new CommandException(MESSAGE_ADMIN_LOGIN);
         }

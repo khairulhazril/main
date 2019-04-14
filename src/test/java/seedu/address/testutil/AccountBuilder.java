@@ -45,6 +45,9 @@ public class AccountBuilder {
         return this;
     }
 
+    /**
+     * Builds the stub account
+     */
     public User build() {
         return new User(username, password);
     }
