@@ -41,6 +41,14 @@ public class MonthCommand extends Command {
 
         Month newMonth = new Month(month);
 
+        if (!model.accountExists()) {
+            throw new CommandException(MESSAGE_ACCOUNT_DOES_NOT_EXIST);
+        }
+
+        if (!model.getLoginStatus() && !model.getAdminStatus()) {
+            throw new CommandException(MESSAGE_LOGIN_REQUIRED);
+        }
+
         if (newMonth.equals(model.getMonth())) {
             throw new CommandException(MESSAGE_DUPLICATE_MONTH);
         }

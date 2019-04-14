@@ -37,6 +37,14 @@ public class SelectCommand extends Command {
 
         List<Task> filteredTaskList = model.getFilteredTaskList();
 
+        if (!model.accountExists()) {
+            throw new CommandException(MESSAGE_ACCOUNT_DOES_NOT_EXIST);
+        }
+
+        if (!model.getLoginStatus() && !model.getAdminStatus()) {
+            throw new CommandException(MESSAGE_LOGIN_REQUIRED);
+        }
+
         if (targetIndex.getZeroBased() >= filteredTaskList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }

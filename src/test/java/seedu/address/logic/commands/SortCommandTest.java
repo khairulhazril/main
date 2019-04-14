@@ -5,7 +5,9 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.SortCommand.MESSAGE_INVALID;
 import static seedu.address.logic.commands.SortCommand.MESSAGE_USAGE;
+import static seedu.address.testutil.TypicalAccounts.NICHOLAS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TASK;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_TASK;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_TASK;
@@ -19,7 +21,9 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.account.User;
 import seedu.address.model.task.Task;
+import seedu.address.testutil.AccountBuilder;
 
 public class SortCommandTest {
 
@@ -30,29 +34,102 @@ public class SortCommandTest {
     private Model expectedModel = new ModelManager(getTypicalTaskManager(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
 
-//    @Test
-//    public void execute_sortName_success() {
-//        String method = "name";
-//        SortCommand sortCommand = new SortCommand(method);
-//        String expectedMessage = String.format(sortCommand.MESSAGE_SUCCESS, method);
-//
-//        ModelManager expectedModel = new ModelManager(getTypicalTaskManager(), new UserPrefs());
-//        expectedModel.sortTask(method);
-//        expectedModel.commitTaskManager();
-//        assertCommandSuccess(sortCommand, model, commandHistory, expectedMessage, expectedModel);
-//        Task task1 = model.getFilteredTaskList().get(INDEX_FIRST_TASK.getZeroBased());
-//        Task task2 = model.getFilteredTaskList().get(INDEX_SECOND_TASK.getZeroBased());
-//        Task task3 = model.getFilteredTaskList().get(INDEX_THIRD_TASK.getZeroBased());
-//        assertEquals("CS2113T", task1.getModule().toString());
-//        assertEquals("CS2101", task2.getModule().toString());
-//        assertEquals("CG2023", task3.getModule().toString());
-//    }
+    @Test
+    public void execute_sortName_success() {
+        User user = new AccountBuilder(NICHOLAS).build();
+        model.newUser(user);
+        model.loginUser(user);
+
+        String method = "name";
+        SortCommand sortCommand = new SortCommand(method);
+        String expectedMessage = String.format(sortCommand.MESSAGE_SUCCESS, method);
+
+        ModelManager expectedModel = new ModelManager(getTypicalTaskManager(), new UserPrefs());
+        expectedModel.sortTask(method);
+        expectedModel.commitTaskManager();
+        assertCommandSuccess(sortCommand, model, commandHistory, expectedMessage, expectedModel);
+        Task task1 = model.getFilteredTaskList().get(INDEX_FIRST_TASK.getZeroBased());
+        Task task2 = model.getFilteredTaskList().get(INDEX_SECOND_TASK.getZeroBased());
+        Task task3 = model.getFilteredTaskList().get(INDEX_THIRD_TASK.getZeroBased());
+        assertEquals("CG2027", task1.getModule().toString());
+        assertEquals("CG2023", task2.getModule().toString());
+        assertEquals("CS2113", task3.getModule().toString());
+    }
+
+    @Test
+    public void execute_sortDate_success() {
+        User user = new AccountBuilder(NICHOLAS).build();
+        model.newUser(user);
+        model.loginUser(user);
+
+        String method = "date";
+        SortCommand sortCommand = new SortCommand(method);
+        String expectedMessage = String.format(sortCommand.MESSAGE_SUCCESS, method);
+
+        ModelManager expectedModel = new ModelManager(getTypicalTaskManager(), new UserPrefs());
+        expectedModel.sortTask(method);
+        expectedModel.commitTaskManager();
+        assertCommandSuccess(sortCommand, model, commandHistory, expectedMessage, expectedModel);
+        Task task1 = model.getFilteredTaskList().get(INDEX_FIRST_TASK.getZeroBased());
+        Task task2 = model.getFilteredTaskList().get(INDEX_SECOND_TASK.getZeroBased());
+        Task task3 = model.getFilteredTaskList().get(INDEX_THIRD_TASK.getZeroBased());
+        assertEquals("CG2023", task1.getModule().toString());
+        assertEquals("CS2113", task2.getModule().toString());
+        assertEquals("CG2027", task3.getModule().toString());
+    }
+
+    @Test
+    public void execute_sortPriority_success() {
+        User user = new AccountBuilder(NICHOLAS).build();
+        model.newUser(user);
+        model.loginUser(user);
+
+        String method = "priority";
+        SortCommand sortCommand = new SortCommand(method);
+        String expectedMessage = String.format(sortCommand.MESSAGE_SUCCESS, method);
+
+        ModelManager expectedModel = new ModelManager(getTypicalTaskManager(), new UserPrefs());
+        expectedModel.sortTask(method);
+        expectedModel.commitTaskManager();
+        assertCommandSuccess(sortCommand, model, commandHistory, expectedMessage, expectedModel);
+        Task task1 = model.getFilteredTaskList().get(INDEX_FIRST_TASK.getZeroBased());
+        Task task2 = model.getFilteredTaskList().get(INDEX_SECOND_TASK.getZeroBased());
+        Task task3 = model.getFilteredTaskList().get(INDEX_THIRD_TASK.getZeroBased());
+        assertEquals("CS2113", task1.getModule().toString());
+        assertEquals("CG2023", task2.getModule().toString());
+        assertEquals("CG2027", task3.getModule().toString());
+    }
+
+    @Test
+    public void execute_sortModule_success() {
+        User user = new AccountBuilder(NICHOLAS).build();
+        model.newUser(user);
+        model.loginUser(user);
+
+        String method = "module";
+        SortCommand sortCommand = new SortCommand(method);
+        String expectedMessage = String.format(sortCommand.MESSAGE_SUCCESS, method);
+
+        ModelManager expectedModel = new ModelManager(getTypicalTaskManager(), new UserPrefs());
+        expectedModel.sortTask(method);
+        expectedModel.commitTaskManager();
+        assertCommandSuccess(sortCommand, model, commandHistory, expectedMessage, expectedModel);
+        Task task1 = model.getFilteredTaskList().get(INDEX_FIRST_TASK.getZeroBased());
+        Task task2 = model.getFilteredTaskList().get(INDEX_SECOND_TASK.getZeroBased());
+        Task task3 = model.getFilteredTaskList().get(INDEX_THIRD_TASK.getZeroBased());
+        assertEquals("CG2023", task1.getModule().toString());
+        assertEquals("CG2027", task2.getModule().toString());
+        assertEquals("CS2113", task3.getModule().toString());
+    }
 
     @Test
     public void invalid_input() {
+        User user = new AccountBuilder(NICHOLAS).build();
+        model.newUser(user);
+        model.loginUser(user);
         SortCommand sortCommand = new SortCommand("help");
 
-        assertCommandFailure(sortCommand, model, commandHistory, MESSAGE_USAGE);
+        assertCommandFailure(sortCommand, model, commandHistory, MESSAGE_INVALID);
 
     }
 }
