@@ -463,6 +463,16 @@ Aspect: Weighing *user experience* to *convenience* of users
 Final decision: Alternative 2 was chosen due to it being *more practical and convenient* to users so that users will continue to use it in the future.
 // end::notes[]
 
+// tag::task[]
+=== Task Feature
+
+==== Current Implementation
+
+The task list is created by refactoring the existing code in the https://github.com/se-edu/addressbook-level4[Address Book Level 4]
+
+The class diagram below illustrates the *task* class.
+image::TaskClassDiagram.png[width="450"]
+// end::task[]
 
 // tag::sorttask[]
 === Sort Task List Feature
@@ -510,12 +520,12 @@ If it is less than 0, the command will call the `DeleteCommand` to delete the ov
 === Design Considerations
 
 ==== Aspect: How the delete overdue command executes
-* **Alternative 1 (current choice):** Write a class separately for handling the sorting of the task list.
-** Pros: Easy to read and debug, Follows OOP coding and thus easier for other coders to modify.
-** Cons: Difficult to implement.
-* **Alternative 2:** Write a method for each attribute in `TaskManager`.
-** Pros: Easy to implement.
-** Cons: Does not follow OOP coding.
+* **Alternative 1 (current choice):** Write the command such that whenever there is an overdue task, it will call the `delete` command.
+** Pros: Easy to use as it does not require changing the existing code much.
+** Cons: Will need to iterate through all the tasks.
+* **Alternative 2:** Create a new class to store all overdue tasks that updates itself whenever a task is overdue.
+** Pros: Faster as it does not require iterating through all tasks.
+** Cons: Requires more space to store all the overdue tasks
 // end::overdue[]
 
 // tag::calendar[]

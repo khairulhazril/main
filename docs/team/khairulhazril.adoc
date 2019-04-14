@@ -66,6 +66,8 @@ include::../UserGuide.adoc[tag=sort]
 
 (Start of extract from the Developer Guide)
 
+include::../DeveloperGuide.adoc[tag=task]
+
 include::../DeveloperGuide.adoc[tag=sorttask]
 
 include::../DeveloperGuide.adoc[tag=overdue]
