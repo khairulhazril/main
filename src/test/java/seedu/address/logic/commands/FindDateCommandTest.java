@@ -11,6 +11,7 @@ import static seedu.address.testutil.TypicalTasks.getTypicalTaskManager;
 import java.util.Arrays;
 import java.util.Collections;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import seedu.address.logic.CommandHistory;
@@ -25,9 +26,16 @@ import seedu.address.testutil.AccountBuilder;
  * Contains integration tests (interaction with the Model) for {@code FindDateCommand}.
  */
 public class FindDateCommandTest {
-    private Model model = new ModelManager(getTypicalTaskManager(), new UserPrefs());
+    private Model model;
     private Model expectedModel = new ModelManager(getTypicalTaskManager(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
+
+    @Before
+    public void setUp() {
+        User user = new AccountBuilder(NICHOLAS).build();
+        model = new ModelManager(getTypicalTaskManager(), new UserPrefs());
+        model.loginUser(user);
+    }
 
     @Test
     public void equals() {
@@ -58,9 +66,7 @@ public class FindDateCommandTest {
 
     @Test
     public void execute_zeroKeywords_noTaskFound() {
-        User user = new AccountBuilder(NICHOLAS).build();
-        model.newUser(user);
-        model.loginUser(user);
+
         String expectedMessage = String.format(MESSAGE_TASKS_LISTED_OVERVIEW, 0);
         DueContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindDateCommand command = new FindDateCommand(predicate);

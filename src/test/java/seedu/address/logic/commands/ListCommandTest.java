@@ -25,10 +25,13 @@ public class ListCommandTest {
     private Model expectedModel;
     private CommandHistory commandHistory = new CommandHistory();
 
+
     @Before
     public void setUp() {
         model = new ModelManager(getTypicalTaskManager(), new UserPrefs());
         expectedModel = new ModelManager(model.getTaskManager(), new UserPrefs());
+        User user = new AccountBuilder(NICHOLAS).build();
+        model.loginUser(user);
     }
 
     @Test

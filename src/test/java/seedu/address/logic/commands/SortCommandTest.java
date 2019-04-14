@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_TASK;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_TASK;
 import static seedu.address.testutil.TypicalTasks.getTypicalTaskManager;
 
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -31,11 +32,15 @@ public class SortCommandTest {
     private Model expectedModel = new ModelManager(getTypicalTaskManager(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
 
+    @Before
+    public void setUp() {
+        User user = new AccountBuilder(NICHOLAS).build();
+        model = new ModelManager(getTypicalTaskManager(), new UserPrefs());
+        model.loginUser(user);
+    }
+
     @Test
     public void execute_sortName_success() {
-        User user = new AccountBuilder(NICHOLAS).build();
-        model.newUser(user);
-        model.loginUser(user);
 
         String method = "name";
         SortCommand sortCommand = new SortCommand(method);
@@ -55,9 +60,6 @@ public class SortCommandTest {
 
     @Test
     public void execute_sortDate_success() {
-        User user = new AccountBuilder(NICHOLAS).build();
-        model.newUser(user);
-        model.loginUser(user);
 
         String method = "date";
         SortCommand sortCommand = new SortCommand(method);
@@ -77,9 +79,6 @@ public class SortCommandTest {
 
     @Test
     public void execute_sortPriority_success() {
-        User user = new AccountBuilder(NICHOLAS).build();
-        model.newUser(user);
-        model.loginUser(user);
 
         String method = "priority";
         SortCommand sortCommand = new SortCommand(method);
@@ -99,9 +98,6 @@ public class SortCommandTest {
 
     @Test
     public void execute_sortModule_success() {
-        User user = new AccountBuilder(NICHOLAS).build();
-        model.newUser(user);
-        model.loginUser(user);
 
         String method = "module";
         SortCommand sortCommand = new SortCommand(method);
@@ -121,9 +117,7 @@ public class SortCommandTest {
 
     @Test
     public void invalid_input() {
-        User user = new AccountBuilder(NICHOLAS).build();
-        model.newUser(user);
-        model.loginUser(user);
+
         SortCommand sortCommand = new SortCommand("help");
 
         assertCommandFailure(sortCommand, model, commandHistory, MESSAGE_INVALID);
