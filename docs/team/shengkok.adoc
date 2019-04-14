@@ -31,7 +31,8 @@ This section showcases the different aspects in which I have contributed to the 
 
 * *Minor enhancement*: Added colour codes to depict the importance of a note according to `priority` levels 1 to 3. The highest priority 1 being red-orange followed by yellow for 2 and white for 3.
 
-* *Sample code contributed*: [https://github.com/Shengkok/main/blob/master/src/main/java/seedu/address/logic/commands/AddNotesCommand.java[Functional code]] [https://github.com[Test code]]
+* *Sample code contributed*: [https://github.com/Shengkok/main/blob/master/src/main/java/seedu/address/logic/commands/AddNotesCommand.java[Functional code]] [https://github.com/CS2113-AY1819S2-M11-2/main/tree/master/src/test/java/seedu/address/model/notes[Test code]]
+[https://nuscs2113-ay1819s2.github.io/dashboard-beta/#search=Lew%20Sheng%20Kok[Reposense]]
 
 * *Other contributions*:
 
@@ -68,6 +69,8 @@ include::../UserGuide.adoc[tag=notes]
 {Start of extract}
 
 include::../DeveloperGuide.adoc[tag=notes]
+
+include::../DeveloperGuide.adoc[tag=notesstorage]
 
 {End of extract}
 
