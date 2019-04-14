@@ -32,11 +32,10 @@ import seedu.address.testutil.AccountBuilder;
 
 public class DeleteAccountCommandTest {
 
-    private Model model;
-
     @Rule
     public ExpectedException thrown = ExpectedException.none();
-
+    
+    private Model model;
     private CommandHistory commandHistory = new CommandHistory();
 
     @Before
@@ -59,7 +58,7 @@ public class DeleteAccountCommandTest {
     @Test
     public void failedDeleteAccount_notAdmin() throws Exception {
 
-        ModelStubUser_NotAdmin modelStubUser = new ModelStubUser_NotAdmin();
+        ModelStubUser_notAdmin modelStubUser = new ModelStubUser_notAdmin();
 
         DeleteAccountCommand deleteAccountCommand = new DeleteAccountCommand();
 
@@ -71,7 +70,7 @@ public class DeleteAccountCommandTest {
     @Test
     public void failedDeleteAccount_notLogged() throws Exception {
 
-        ModelStubUser_NotLogged modelStubUser = new ModelStubUser_NotLogged();
+        ModelStubUser_notLogged modelStubUser = new ModelStubUser_notLogged();
 
         DeleteAccountCommand deleteAccountCommand = new DeleteAccountCommand();
 
@@ -325,7 +324,7 @@ public class DeleteAccountCommandTest {
     /**
      * A Model stub account not logged in as admin
      */
-    private class ModelStubUser_NotAdmin extends ModelStub {
+    private class ModelStubUser_notAdmin extends ModelStub {
 
         @Override
         public void deleteAccount() {
@@ -354,7 +353,7 @@ public class DeleteAccountCommandTest {
     /**
      * A Model stub account not logged in
      */
-    private class ModelStubUser_NotLogged extends ModelStub {
+    private class ModelStubUser_notLogged extends ModelStub {
 
         @Override
         public void deleteAccount() {
