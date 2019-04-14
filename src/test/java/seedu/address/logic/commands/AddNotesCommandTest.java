@@ -46,9 +46,9 @@ public class AddNotesCommandTest {
     }
 
     @Test
-    public void execute_NotesAcceptedByModel_addSuccessful() throws Exception {
+    public void execute_NotesAcceptedByModel() throws Exception {
         ModelStubAcceptingNotesAdded modelStub = new ModelStubAcceptingNotesAdded();
-        Notes validNotes = new NotesBuilder(). build();
+        Notes validNotes = new NotesBuilder().build();
 
         CommandResult commandResult = new AddNotesCommand(validNotes).execute(modelStub, commandHistory);
 
@@ -63,7 +63,7 @@ public class AddNotesCommandTest {
         AddNotesCommand addnotesCommand = new AddNotesCommand(validNotes);
         ModelStub modelStub = new ModelStubWithNotes(validNotes);
 
-       thrown.expect(CommandException.class);
+        thrown.expect(CommandException.class);
         thrown.expectMessage(AddNotesCommand.MESSAGE_DUPLICATE_NOTE);
         addnotesCommand.execute(modelStub, commandHistory);
     }
@@ -79,27 +79,27 @@ public class AddNotesCommandTest {
         assertTrue(addMarketCommand.equals(addMarketCommand));
 
        // same values -> returns true
-       AddNotesCommand addMarketCopy = new AddNotesCommand(market);
+        AddNotesCommand addMarketCopy = new AddNotesCommand(market);
         assertTrue(addMarketCommand.equals(addMarketCopy));
 
         // different types -> returns false
         assertFalse(addPopularCommand.equals(1));
 
-       // null -> returns false
+        // null -> returns false
         assertFalse(addPopularCommand.equals(null));
 
-      // different task -> returns false
+        // different task -> returns false
         assertFalse(addMarketCommand.equals(addPopularCommand));
-   }
+    }
 
     /**
      * A default model stub that have all of the methods failing.
      */
-    private class ModelStub implements Model{
+    private class ModelStub implements Model {
 
         @Override
         public ReadOnlyUserPrefs getUserPrefs() {
-           throw new AssertionError("This method should not be called.");
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
@@ -117,13 +117,13 @@ public class AddNotesCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
-       @Override
+        @Override
         public Path getTaskManagerFilePath() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-       public void setTaskManagerFilePath(Path taskManagerFilePath) {
+        public void setTaskManagerFilePath(Path taskManagerFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -133,7 +133,7 @@ public class AddNotesCommandTest {
         }
 
         @Override
-       public ReadOnlyTaskManager getTaskManager() {
+        public ReadOnlyTaskManager getTaskManager() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -147,7 +147,7 @@ public class AddNotesCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
-       @Override
+        @Override
         public void deleteTask(Task target) {
             throw new AssertionError("This method should not be called.");
         }
@@ -157,7 +157,7 @@ public class AddNotesCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
-       @Override
+        @Override
         public void sortTask(String attribute) { }
 
         @Override
@@ -166,11 +166,11 @@ public class AddNotesCommandTest {
         }
 
         @Override
-       public void updateFilteredTaskList(Predicate<Task> predicate) {
+        public void updateFilteredTaskList(Predicate<Task> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
-       @Override
+        @Override
         public boolean canUndoTaskManager() {
             throw new AssertionError("This method should not be called.");
         }
@@ -183,7 +183,7 @@ public class AddNotesCommandTest {
         @Override
         public void undoTaskManager() {
             throw new AssertionError("This method should not be called.");
-       }
+        }
 
         @Override
         public void redoTaskManager() {
@@ -208,7 +208,7 @@ public class AddNotesCommandTest {
         @Override
         public void setSelectedTask(Task task) {
             throw new AssertionError("This method should not be called.");
-       }
+        }
 
         @Override
         public boolean getLoginStatus() {
@@ -271,7 +271,7 @@ public class AddNotesCommandTest {
         }
 
         public boolean hasNotes(Notes notes) {
-           throw new AssertionError("This method should not be called.");
+            throw new AssertionError("This method should not be called.");
         }
 
         public void addNotes(Notes notes) {
@@ -287,10 +287,10 @@ public class AddNotesCommandTest {
         }
 
         public ObservableList<Notes> getFilteredNotesList() {
-         throw new AssertionError("This method should not be called.");
+            throw new AssertionError("This method should not be called.");
         }
 
-       public void updateFilteredNotesList(Predicate<Notes> predicate) {
+        public void updateFilteredNotesList(Predicate<Notes> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -299,7 +299,7 @@ public class AddNotesCommandTest {
         }
 
         public void setSelectedNotes(Notes notes) {
-           throw new AssertionError("This method should not be called.");
+            throw new AssertionError("This method should not be called.");
         }
 
         public Notes getSelectedNotes() {
@@ -320,8 +320,8 @@ public class AddNotesCommandTest {
 
         public boolean hasNotes(Notes notes) {
             requireNonNull(notes);
-           return this.notes.isSameNotes(notes);
-       }
+            return this.notes.isSameNotes(notes);
+        }
     }
 
     /**
@@ -337,15 +337,15 @@ public class AddNotesCommandTest {
 
         public void addNotes(Notes notes) {
             requireNonNull(notes);
-           notesAdded.add(notes);
+            notesAdded.add(notes);
         }
 
-       public void commitTaskManager() {
+        public void commitTaskManager() {
            // called by {@code AddCommand#execute()}
         }
 
         public ReadOnlyTaskManager getTaskManager() {
-           return new TaskManager();
+            return new TaskManager();
         }
     }
 }

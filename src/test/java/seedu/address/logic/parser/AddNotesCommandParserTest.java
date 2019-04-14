@@ -58,31 +58,39 @@ public class AddNotesCommandParserTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddNotesCommand.MESSAGE_USAGE);
 
         // missing name prefix
-        assertParseFailure(parser, VALID_HEADING_MARKET + CONTENT_DESC_MARKET + PRIORITY_DESC_MARKET, expectedMessage);
+        assertParseFailure(parser, VALID_HEADING_MARKET + CONTENT_DESC_MARKET
+                + PRIORITY_DESC_MARKET, expectedMessage);
 
         // missing phone prefix
-        assertParseFailure(parser, HEADING_DESC_MARKET+ VALID_CONTENT_MARKET + PRIORITY_DESC_MARKET, expectedMessage);
+        assertParseFailure(parser, HEADING_DESC_MARKET + VALID_CONTENT_MARKET
+                + PRIORITY_DESC_MARKET, expectedMessage);
 
         // missing email prefix
-        assertParseFailure(parser, HEADING_DESC_MARKET + CONTENT_DESC_MARKET + VALID_PRIORITY_MARKET, expectedMessage);
+        assertParseFailure(parser, HEADING_DESC_MARKET + CONTENT_DESC_MARKET
+                + VALID_PRIORITY_MARKET, expectedMessage);
 
         // all prefixes missing
-        assertParseFailure(parser, VALID_HEADING_MARKET + VALID_CONTENT_MARKET + VALID_PRIORITY_TUTORIAL, expectedMessage);
+        assertParseFailure(parser, VALID_HEADING_MARKET + VALID_CONTENT_MARKET
+                + VALID_PRIORITY_TUTORIAL, expectedMessage);
     }
 
 
     @Test
     public void parse_invalidValue_failure() {
         // invalid name
-        assertParseFailure(parser, INVALID_HEADING_DESC + CONTENT_DESC_MARKET + PRIORITY_DESC_MARKET, Heading.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, INVALID_HEADING_DESC + CONTENT_DESC_MARKET
+                + PRIORITY_DESC_MARKET, Heading.MESSAGE_CONSTRAINTS);
 
         // invalid phone
-        assertParseFailure(parser, HEADING_DESC_MARKET+ INVALID_CONTENT_DESC + PRIORITY_DESC_MARKET, Content.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, HEADING_DESC_MARKET + INVALID_CONTENT_DESC
+                + PRIORITY_DESC_MARKET, Content.MESSAGE_CONSTRAINTS);
 
         // invalid email
-        assertParseFailure(parser, HEADING_DESC_MARKET+ CONTENT_DESC_MARKET + INVALID_PRIORITY_DESC, Priority.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, HEADING_DESC_MARKET + CONTENT_DESC_MARKET
+                + INVALID_PRIORITY_DESC, Priority.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
-        assertParseFailure(parser, INVALID_HEADING_DESC + CONTENT_DESC_MARKET + INVALID_PRIORITY_DESC, Heading.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, INVALID_HEADING_DESC + CONTENT_DESC_MARKET
+                + INVALID_PRIORITY_DESC, Heading.MESSAGE_CONSTRAINTS);
     }
 }

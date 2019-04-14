@@ -177,8 +177,15 @@ public class CommandTestUtil {
         model.commitTaskManager();
     }
 
-    public static void assertNotesCommandFailure(Command command, Model actualModel, CommandHistory actualCommandHistory,
-                                            String expectedMessage) {
+    /**
+     * Executes the given {@code command}, confirms that <br>
+     * - a {@code CommandException} is thrown <br>
+     * - the CommandException message matches {@code expectedMessage} <br>
+     * - the address book, filtered notes list and selected notes in {@code actualModel} remain unchanged <br>
+     * - {@code actualCommandHistory} remains unchanged.
+     */
+    public static void assertNotesCommandFailure(Command command, Model actualModel,
+                                                 CommandHistory actualCommandHistory, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
         TaskManager expectedTaskManager = new TaskManager(actualModel.getTaskManager());
