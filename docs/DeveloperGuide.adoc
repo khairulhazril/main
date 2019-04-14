@@ -1238,6 +1238,26 @@ Use case resumes at step 1.
 Use case resumes at step 1.
 
 [discrete]
+=== Use case: Add notes
+
+*MSS*
+
+1. User requests to add a new event with given fields
+2. Student Buddy adds the event
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. The given fields are invalid
++
+[none]
+** 1ai. Student Buddy shows an error message
++
+Use case resumes at step 1.
+
+[discrete]
 === Use case: Delete task
 
 *MSS*
@@ -1261,6 +1281,26 @@ Use case ends.
 +
 [none]
 ** 3ai. Student Buddy shows an error message.
++
+Use case resumes at step 2.
+
+[discrete]
+=== Use case: Delete notes
+
+*MSS*
+
+1.  User requests to delete a specific note in the notes list by its index.
+2.  Student Buddy deletes the note.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The given index is invalid.
++
+[none]
+** 2ai. Student Buddy shows an error message.
 +
 Use case resumes at step 2.
 
