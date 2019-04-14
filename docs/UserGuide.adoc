@@ -273,7 +273,7 @@ Examples:
 Deletes the 2nd task in Student Buddy.
 * `findname Project` +
 `d 1` +
-Deletes the 1st task in the results of the `find` command.
+Deletes the 1st task in the results of the `findname` command.
 
 === Selecting a task : `select`, `sl`
 
@@ -296,7 +296,7 @@ Examples:
 Selects the 2nd task in Student Buddy.
 * `findmodule CS2113` +
 `sl 1` +
-Selects the 1st task in the results of the `find` command.
+Selects the 1st task in the results of the `findmodule` command.
 
 //tag::sort[]
 === Sorting the task list : `sort`, `s`
@@ -484,11 +484,21 @@ Format: `exit`
 Student Buddy's data is saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
-// tag::dataencryption[]
-=== Encrypting data files `[coming in v2.0]`
+// tag::deleteoverdue[]
+=== Deleting Overdue Tasks : `deleteoverdue`, `delod` `[coming in v2.0]`
 
-_{explain how the user can enable/disable data encryption}_
-// end::dataencryption[]
+Deletes all tasks that are overdue.
+Format: `deleteoverdue` or `delod`
+
+Examples:
+
+* `list` +
+`deleteoverdue` +
+Deletes all the overdue tasks in Student Buddy.
+* `findname Project` +
+`delod` +
+Deletes all the task in the results of the `findname` command.
+// end::deleteoverdue[]
 
 == FAQ
 

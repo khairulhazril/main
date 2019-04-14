@@ -471,6 +471,7 @@ Final decision: Alternative 2 was chosen due to it being *more practical and con
 The task list is created by refactoring the existing code in the https://github.com/se-edu/addressbook-level4[Address Book Level 4]
 
 The class diagram below illustrates the *task* class.
+
 image::TaskClassDiagram.png[width="450"]
 // end::task[]
 
