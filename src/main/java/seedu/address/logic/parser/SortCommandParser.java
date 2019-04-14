@@ -22,6 +22,16 @@ public class SortCommandParser implements Parser<SortCommand> {
 
         String sort = args.trim();
 
+        if (sort.equals("n")) {
+            sort = "name";
+        } else if (sort.equals("d")) {
+            sort = "date";
+        } else if (sort.equals("p")) {
+            sort = "priority";
+        } else if (sort.equals("m")) {
+            sort = "module";
+        }
+
         if (sort.isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         }
