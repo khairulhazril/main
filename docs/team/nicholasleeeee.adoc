@@ -1,40 +1,40 @@
-== Nicholas Lee - Project Portfolio
 :site-section: AboutUs
 :imagesDir: ../images
 :stylesDir: ../stylesheets
 
-== PROJECT: Student Buddy
-=== Overview
+=== Nicholas Lee - Project Portfolio
+==== PROJECT: Student Buddy
+
+==== Overview
 
 |===
-This portfolio serves to document my contributions in a Software Engineering project for 2113T.
+This portfolio serves to document my contributions in a Software Engineering project for CS2113T.
 The team consist of 4 members and we were tasked to develop a working application within 12 weeks.
 Throughout the project, we were challenged to incorporate a Software Engineering project into a product of our own.
 
-Our team have decided to come up with Student Buddy. Student Buddy is an application that is used for university students to view, sort and manage their tasks effectively.
+Our team have decided to come up with Student Buddy.
+Student Buddy is an application that is used for university students to view, sort and manage their tasks effectively, all on a single screen.
+So stop stressing out about forgetting important deadlines and let Student Buddy handle it for you.
 
 In Student Buddy, students interact via the CLI or GUI that is created with JavaFX.
 It is written in Java, and has about 10kLoC.
 |===
+
 === Summary of contributions
 
-*Major enhancement: added login feature*
-
+*Major enhancement: added login feature* +
 _What it does:_ +
 Allows the user to create a personal account by signing up.
 Upon signing up, the user is able to sign in and logout whenever they want to.
 Subsequent login will allow the user to access their personal Student Buddy.
-With an normal account, only a logged in user will be able to add, edit or delete tasks in their Student Buddy.
-
+With a normal account, a logged in user will be able to add, edit or delete tasks in their Student Buddy. +
 _Justification:_ +
 This feature improves the product significantly because a user
-can have their tasks secured without anyone messing with it.
-
+can have their tasks secured without anyone messing with it. +
 _Highlights:_ +
 This enhancement affects existing commands and commands to be added in future.
 It requires an in-depth analysis of design alternatives.
-The implementation too was challenging as it required changes to existing commands.
-
+The implementation too was challenging as it required changes to existing commands. +
 _Credits: GSON Java library_ +
 Gson is a Java library that can be used to convert Java Objects into their JSON representation.
 It can also be used to convert a JSON string to an equivalent Java object.
@@ -53,7 +53,7 @@ into Java Objects to be read by other classes.
 [https://nuscs2113-ay1819s2.github.io/dashboard-beta/#search=nicholasleeeee[Reposense]] +
 
 *Project management:* +
-1. Managed merge and release of `v1.4` on GitHub +
+1. Managed merge and release of `v1.4` on GitHub. +
 2. Added labels for organising and prioritising issues, pull request, merging.
 This makes project management more efficient and effective. +
 3. PRs reviewed and merged (with non-trivial review comments):
@@ -75,7 +75,7 @@ https://github.com/CS2113-AY1819S2-M11-2/main/pull/152[#152],
 https://github.com/CS2113-AY1819S2-M11-2/main/pull/158[#158]
 
 *Enhancements to existing features:* +
-Wrote additional tests for existing features to increase coverage of 4.2%
+Wrote additional tests for existing features to increase coverage of 4.2%.
 (Pull requests
 https://github.com/CS2113-AY1819S2-M11-2/main/pull/160[#160],
 https://github.com/CS2113-AY1819S2-M11-2/main/pull/170[#170])
@@ -84,14 +84,12 @@ https://github.com/CS2113-AY1819S2-M11-2/main/pull/170[#170])
 1. Updated User Guide:
 https://github.com/CS2113-AY1819S2-M11-2/main/pull/77[#77],
 https://github.com/CS2113-AY1819S2-M11-2/main/pull/78[#78],
-https://github.com/CS2113-AY1819S2-M11-2/main/pull/160[#160],
-
+https://github.com/CS2113-AY1819S2-M11-2/main/pull/160[#160] +
 2. Updated Developer Guide:
 https://github.com/CS2113-AY1819S2-M11-2/main/pull/87[#87],
 https://github.com/CS2113-AY1819S2-M11-2/main/pull/103[#103],
 https://github.com/CS2113-AY1819S2-M11-2/main/pull/107[#107],
-https://github.com/CS2113-AY1819S2-M11-2/main/pull/170[#170]
-
+https://github.com/CS2113-AY1819S2-M11-2/main/pull/170[#170] +
 3. Did About Us Documentation:
 https://github.com/CS2113-AY1819S2-M11-2/main/blob/master/docs/AboutUs.adoc[AboutUs]
 
@@ -124,29 +122,29 @@ Signed up: nicholas +
 Possible Errors:
 
 |===
-|`You are logged in as nicholas!`: You are already logged in and will need to logout in order to signup for a new account. +
-|`Please try another username`: The username already exists, signup again with another username. +
-|`Account has already been created!` : There is an existing account. You can login or sign in as an admin to delete the account. +
+|`You are logged in as nicholas!`: You are already logged in. You need to logout in order to signup for a new account. +
+|`Please try another username`: The username already exists. You need to signup again with another username. +
+|`Account has already been created!` : There is an existing account. You can login as an admin to delete the account. +
 |===
 
 === Logging into an account : `login`
 
-*Logs the user into their account. An account has to be created before logging in.*
+*Logs the user into their account. An account has to be created before logging in.* +
 Format: `login u/USERNAME p/PASSWORD` +
 
 Example:
 
 |===
 `login u/nicholas p/lee` +
-Logged in as nicholas. +
+Logged in as nicholas +
 |===
 
 Possible Errors:
 
 |===
-|`You are already logged in!` : You are already logged in and will need logout in order to login to another account. +
+|`You are already logged in!` : You are already logged in. You need logout in order to login to another account. +
 |`Please Login again! Invalid username or password.
- Command Format: [login u/USERNAME p/PASSWORD]`: You have inserted an incorrect username or password. The login command has to be executed again +
+ Command Format: [login u/USERNAME p/PASSWORD]`: You have inserted an incorrect username or password. The login command has to be executed again. +
 |===
 
 === Logging out of an account : `logout`
@@ -158,7 +156,7 @@ Example:
 
 |===
 `logout` +
-Logged out of nicholas. +
+Logged out of nicholas +
 |===
 
 Possible Errors:
@@ -170,7 +168,8 @@ You have already logged out or you did not login into any account. +
 
 === Deleting an account : `deleteacc`
 
-*As an administrator, you can delete accounts.* +
+*Deletes account in the system.* Only an admin is allowed to use this command. +
+
 Format: `deleteacc`
 
 Example:
@@ -203,7 +202,7 @@ A normal user account and an admin account. All username and hashed password are
 
 image::AccountClassDiagram.png[width="180"]
 
-The class diagram on the above illustrates the `account` class. +
+The class diagram above illustrates the `account` class. +
 
 In `model` class, there are methods to check for:
 `loginStatus` (if the user is logged in), `adminStatus` (if the admin is logged in),
@@ -219,7 +218,7 @@ The flow on how the commands are executed and their respective sequence diagrams
 
 *`Signup Command` creates an account for the user and stores their username and password in a JSON file.* +
 *`Login Command` logs in the account for the user by checking the username and password stored in the JSON file.* +
-Given below is an example usage scenario of `signup`. The command word can be swapped for `login`.
+Given below is an example usage scenario of `signup`. The command word can be swapped to `login` for `Login Command`.
 
 |===
 |Step 1. The user signs up and keys in username and password using the command `signup u/USERNAME p/PASSWORD`.
@@ -231,7 +230,7 @@ Given below is an example usage scenario of `signup`. The command word can be sw
 `userExists` to check if there is already an account with the same username. +
 `accountExists` to check if an account has already been created. +
 
-If the arguments passes all the commands, `newUser(user)` will be called to store
+If the arguments passes all the commands, `newUser(user)` {`loginUser(user)` for `Login Command`} will be called to store
 the username and hashed password in a User class.
 It will then pass the User object to `JsonLoginStorage`.
 |Step 4. `JsonLoginStorage` retrieves the User object to read and write Json files with the correct Json properties.
@@ -241,18 +240,18 @@ It will then pass the User object to `JsonLoginStorage`.
 The following sequence diagram below shows the flow of `signup` and `login` respectively from Step 1 to Step 5 above.
 
 [.left]
-image::SignUpSequenceDiagram.png[width="400"]
-image::LoginSequenceDiagram.png[width="400"]
+image::SignUpSequenceDiagram.png[width="350"]
+image::LoginSequenceDiagram.png[width="350"]
 [.right]
 
 ==== Logout Command
 
-*Logout Command logs the user out of their account.* Given below is an example usage scenario of `logout`.
+*`Logout Command` logs the user out of their account.* Given below is an example usage scenario of `logout`.
 
 |===
 |Step 1. The user logs out by keying in the command `logout`.
 |Step 2. The `TaskManagerParser` recognises the command word as a logout from `LogoutCommand` and calls `LogoutCommand`.
-|Step 3. `LogoutCommand` will call the following command which is linked to `LoginEvent`.
+|Step 3. `LogoutCommand` will call the following commands which is linked to `LoginEvent`.
 
 `getLoginStatus` to check if the user is already logged out. +
 `getAdminStatus` to check if the admin is already logged out. +
@@ -262,7 +261,7 @@ If the arguments passes `getLoginStatus` and `getAdminStatus`, `logout` will be 
 return to `LoginCommand` to return the user a successful logout output.
 |===
 
-The sequence diagram below shows the flow of `logout` from Step to Step above.
+The sequence diagram below shows the flow of `logout` from Step 1 to Step 4 above.
 
 image::LogoutSequenceDiagram.png[width="400"]
 
@@ -286,7 +285,7 @@ without any username and password stored in it. `reinitialise()` is assisted by 
 |Step 7. `LoginEvent` will return to `DeleteAccountCommand` and returns the user a successful login output.
 |===
 
-The sequence diagram below shows the flow of `deleteacc` from Step to Step above.
+The sequence diagram below shows the flow of `deleteacc` from Step 1 to Step 7 above.
 
 image::DeleteAccountSequenceDiagram.png[width="400"]
 
@@ -326,17 +325,5 @@ Cons: Encryption is a two-way function. Encrypted strings can be decrypted with 
 The password will not be secure. MD5 is not suitable for sensitive information.
 Collisions exist with the algorithm, and there have been successful attacks against it.
 
-
 === PROJECTS:
----
-
-|===
-https://github.com/nicholasleeeee/01-04-02[CG1112] +
-In CG1112, we came up with Vincent. Vincent is a search and rescue robot designed to locate survivors. It will be tele-operated by the operator remotely though a secure connection from a remote desktop. The operator on the remote site will be presented with an environment map of Vincent, which can be used to navigate the simulated environment. The operator will use a Master Control Program (MCP) to command Vincent to move forward/backwards, turn left/right, mark the current location and start autonomous backtracking. +
-|===
-
-|===
-https://github.com/Nicholas-Kayden/EE2026[EE2026] +
-
-In EE2026 FPGA Design Project, we created a real time voice scope (audio visualizer)! We were provided with a MEMs microphone to capture human voice and display our voice signal on a VGA monitor. +
-|===
+https://github.com/nicholasleeeee/01-04-02[CG1112] https://github.com/Nicholas-Kayden/EE2026[EE2026]
