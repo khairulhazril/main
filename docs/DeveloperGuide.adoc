@@ -454,7 +454,7 @@ Aspect: Weighing *user experience* to *convenience* of users
 ** Pros: Easy for users to manage completed notes.
 ** Cons: No sense of achievement as users are unable to view the amount of work completed.
 
-Final decision: Alternative 2 was chosen due to it being *more practical and convenient* to users so that users will continue to use it in the future.
+Final decision: Alternative 2 was chosen due to it being *more practical and convenient* to users.
 // end::notes[]
 
 // tag::task[]
