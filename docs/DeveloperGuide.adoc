@@ -1497,7 +1497,95 @@ Use case ends.
 [none]
 ** 1bi. Student Buddy returns an error
 
-_{More to be added}_
+=== Use case: Signup
+
+*MSS*
+
+1. User requests to sign up an account
+2. Student Buddy signs up user with an account
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. The given username and password are invalid
++
+[none]
+** 1ai. Student Buddy shows an error message
++
+[none]
+* 1b. The account exists
++
+[none]
+** 1bi. Student Buddy shows an error message
+
+=== Use case: Login
+
+*MSS*
+
+1. User requests to login into account
+2. Student Buddy logs user in with account
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. The given username and password are invalid
++
+[none]
+** 1ai. Student Buddy shows an error message
++
+[none]
++
+* 1b. The user is logged in
++
+[none]
+** 1bi. Student Buddy shows an error message
+
+=== Use case: Logout
+
+*MSS*
+
+1. User requests to logout of account
+2. Student Buddy logs user out of account
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. The user is logged out
++
+[none]
+** 1ai. Student Buddy shows an error message
+
+=== Use case: Deleteacc
+
+*MSS*
+
+1. User requests to delete account
+2. Student Buddy deletes account
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. User is not logged in
++
+[none]
+** 1ai. Student Buddy shows an error message
++
+[none]
+* 1b. User is not an admin
++
+[none]
+** 1bi. Student Buddy shows an error message
++
+
+_{More to be added in V2.0}_
 
 [appendix]
 == Non Functional Requirements
