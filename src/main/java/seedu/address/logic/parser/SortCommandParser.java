@@ -26,11 +26,6 @@ public class SortCommandParser implements Parser<SortCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         }
 
-        if (sort.equals("name") || sort.equals("module") || sort.equals("date")
-                || sort.equals("priority")) {
-            return new SortCommand(sort);
-        } else {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
-        }
+        return new SortCommand(sort);
     }
 }

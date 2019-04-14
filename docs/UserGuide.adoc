@@ -76,7 +76,6 @@ Example:
 `signup u/nicholas p/lee` +
 Signed up: nicholas
 |===
-
 Possible Errors:
 |===
 |`You are logged in as nicholas!`: You are already logged in and will need to logout in order to signup for a new account. +
@@ -94,7 +93,6 @@ Example:
 `login u/nicholas p/lee` +
 Logged in as nicholas.
 |===
-
 Possible Errors:
 |===
 |`You are already logged in!` : You are already logged in and will need logout in order to login to another account. +
@@ -112,7 +110,6 @@ Example:
 `logout` +
 Logged out of nicholas.
 |===
-
 Possible Errors:
 |===
 |`You have already logged out. Please Login!`:
@@ -138,16 +135,17 @@ You are not logged in as an admin. Please login as an admin before using this co
 
 // end::loginfunction[]
 //@@author
-=== Viewing help : `help`
+
+=== Viewing help : `help`, `h`
 
 Displays a list of commands +
-Format: `help`
+Format: `help` or `h`
 
-=== Adding a task: `add`
+=== Adding a task: `add`, `a`
 
 
 Adds a task to Student Buddy. +
-Format: `add n/NAME m/MODULE d/DATE p/PRIORITY [t/TAG]...`
+Format: `add n/NAME m/MODULE d/DATE p/PRIORITY [t/TAG]...` or `a n/NAME m/MODULE d/DATE p/PRIORITY [t/TAG]...`
 
 [TIP]
 A task can have any number of tags (including 0)
@@ -156,18 +154,19 @@ Examples:
 
 * `add n/Tutorial 3 m/CG1112 d/21-03 p/2 t/urgent` +
 Adds a task with the name `Tutorial 3`, module code `CG1112`, date `21-03`, priority code `2`, with the tag `urgent`.
-* `add n/Project Version 1 m/CS2113T d/11-03 p/1` +
+* `a n/Project Version 1 m/CS2113T d/11-03 p/1` +
 Adds a task with the name `Project Version 1`, module code `CS2113T`, date `11-03` and priority code `2`.
 
-=== Listing all tasks : `list`
+=== Listing all tasks : `list`, `l`
 
 Shows a list of all tasks in Student Buddy. +
-Format: `list`
+Format: `list` or `l`
 
-=== Editing a task : `edit`
+=== Editing a task : `edit`, `e`
 
 Edits an existing task in Student Buddy. +
 Format: `edit INDEX [n/NAME] [m/MODULE] [d/DATE] [p/PRIORITY] [t/TAG]...`
+or `e INDEX [n/NAME] [m/MODULE] [d/DATE] [p/PRIORITY] [t/TAG]...`
 
 ****
 * Edits the task at the specified `INDEX`. The index refers to the index number shown in the displayed task list. The index *must be a positive integer* 1, 2, 3, ...
@@ -184,30 +183,31 @@ Edits the name and date of the 1st task to be `Tutorial 4` and `21-03` with the 
 * `edit 2 n/Project t/` +
 Edits the name of the 2nd person to be `Project` and clears all existing tags.
 
-=== Locating tasks by name: `findname`
+//tag::find[]
+=== Locating tasks by name: `findname`, `fn`
 
 Finds tasks with names containing any of the given keywords. +
-Format: `findname KEYWORD [MORE_KEYWORDS]`
+Format: `findname KEYWORD [MORE_KEYWORDS]` or `fn KEYWORD [MORE_KEYWORDS]`
 
 ****
 * The search is case insensitive. e.g `HOMEWORK` will match `homework`
 * The order of the keywords does not matter. e.g. `CS2113 Tutorial` will match `Tutorial CS2113`
 * Only the name is searched.
 * Only full words will be matched e.g. `Assignments` will not match `Assignment`
-* Tasks matching at least one keyword will be returned (i.e. `OR` search). e.g. `CS2113 Assignment` will return `CS2113 Homework`, `Assignment 2`
+* Tasks matching at least one of the keywords will be returned (i.e. `OR` search). e.g. `CS2113 Assignment` will return `CS2113 Homework`, `Assignment 2`
 ****
 
 Examples:
 
 * `findname Project Tutorial` +
 Returns all task with names containing `Project` or `Tutorial`.
-* `findname Project Lab Report` +
+* `fn Project Lab Report` +
 Returns all task having names `Project`, `Lab`, or `Report`
 
-=== Locating tasks by module code: `findmodule`
+=== Locating tasks by module code: `findmodule`, `fm`
 
 Finds tasks with module codes containing any of the given keywords. +
-Format: `findmodule KEYWORD [MORE_KEYWORDS]`
+Format: `findmodule KEYWORD [MORE_KEYWORDS]` or `fm KEYWORD [MORE_KEYWORDS]`
 
 ****
 * The search is case insensitive. e.g `CS2113T` will match `cs2113t`
@@ -220,13 +220,13 @@ Examples:
 
 * `findmodule CS2113T` +
 Returns all tasks containing the module code `CS2113T`.
-* `findmodule CS2113T CS2101` +
+* `fm CS2113T CS2101` +
 Returns all tasks containing the module code `CS2113T` or `CS2101`.
 
-=== Locating tasks by date: `finddate`
+=== Locating tasks by date: `finddate`, `fd`
 
 Finds tasks with dates containing any of the given keywords. +
-Format: `finddate KEYWORD [MORE_KEYWORDS]`
+Format: `finddate KEYWORD [MORE_KEYWORDS]` or `fd KEYWORD [MORE_KEYWORDS]`
 
 ****
 * The order of the keywords does not matter. e.g. `03-03 21-03` will match `21-03 03-03`
@@ -236,13 +236,13 @@ Examples:
 
 * `finddate 20-03` +
 Returns all task with date 20-03.
-* `finddate 20-03 30-03` +
+* `fd 20-03 30-03` +
 Returns all task with date 20-03 or 30-03.
 
-=== Locating tasks by priority code: `findpriority`
+=== Locating tasks by priority code: `findpriority`, `fp`
 
 Finds tasks with priority code containing any of the given keywords. +
-Format: `findpriority KEYWORD [MORE_KEYWORDS]`
+Format: `findpriority KEYWORD [MORE_KEYWORDS]` or `fp KEYWORD [MORE_KEYWORDS]`
 
 ****
 * The order of the keywords does not matter. e.g. `1 2` will match `2 1`
@@ -252,13 +252,14 @@ Examples:
 
 * `findpriority 1` +
 Returns all task with priority code 1.
-* `findpriority 1 3` +
+* `fp 1 3` +
 Returns all task with priority code 1 or 3.
+//end::find[]
 
-=== Deleting a task : `delete`
+=== Deleting a task : `delete`, `d`
 
 Deletes the specified task from Student Buddy. +
-Format: `delete INDEX`
+Format: `delete INDEX` or `d INDEX`
 
 ****
 * Deletes the task at the specified `INDEX`.
@@ -272,13 +273,13 @@ Examples:
 `delete 2` +
 Deletes the 2nd task in Student Buddy.
 * `findname Project` +
-`delete 1` +
+`d 1` +
 Deletes the 1st task in the results of the `find` command.
 
-=== Selecting a task : `select`
+=== Selecting a task : `select`, `sl`
 
 Selects the task identified by the index number used in the displayed task list. +
-Format: `select INDEX`
+Format: `select INDEX` or `sl INDEX`
 
 ****
 * Selects the task and displays the task on the calendar.
@@ -295,13 +296,14 @@ Examples:
 `select 2` +
 Selects the 2nd task in Student Buddy.
 * `findmodule CS2113` +
-`select 1` +
+`sl 1` +
 Selects the 1st task in the results of the `find` command.
 
-=== Sorting the task list : `sort`
+//tag::sort[]
+=== Sorting the task list : `sort`, `s`
 
 Sorts the task list in Student Buddy according to an input parameter.
-Format: `sort PARAMETER`
+Format: `sort PARAMETER` or `s PARAMETER`
 
 ****
 * Sorts the task list according to the `PARAMETER`.
@@ -312,8 +314,9 @@ Examples:
 
 * `sort module` +
 Sorts the task list lexicographically by module code.
-* `sort priority` +
+* `s priority` +
 Sorts the task list in descending order by priority.
+// end::sort[]
 
 // tag::notes[]
 === Adding miscellaneous notes : `note`
@@ -380,10 +383,10 @@ Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and 
 ====
 
 // tag::undoredo[]
-=== Undoing previous command : `undo`
+=== Undoing previous command : `undo`, `u`
 
 Restores Student Buddy to the state before the previous _undoable_ command was executed. +
-Format: `undo`
+Format: `undo` or `u`
 
 [NOTE]
 ====
@@ -404,14 +407,14 @@ The `undo` command fails as there are no undoable commands executed previously.
 
 * `delete 1` +
 `clear` +
-`undo` (reverses the `clear` command) +
-`undo` (reverses the `delete 1` command) +
+`u` (reverses the `clear` command) +
+`u` (reverses the `delete 1` command) +
 This reverses the `clear` command and the `delete 1` command.
 
-=== Redoing the previously undone command : `redo`
+=== Redoing the previously undone command : `redo`, `r`
 
 Reverses the most recent `undo` command. +
-Format: `redo`
+Format: `redo` or `r`
 
 Examples:
 
@@ -425,16 +428,16 @@ The `redo` command fails as there are no `undo` commands executed previously.
 
 * `delete 1` +
 `clear` +
-`undo` (reverses the `clear` command) +
-`undo` (reverses the `delete 1` command) +
-`redo` (reapplies the `delete 1` command) +
-`redo` (reapplies the `clear` command) +
+`u` (reverses the `clear` command) +
+`u` (reverses the `delete 1` command) +
+`r` (reapplies the `delete 1` command) +
+`r` (reapplies the `clear` command) +
 // end::undoredo[]
 
-=== Clearing all entries : `clear`
+=== Clearing all entries : `clear` , `c`
 
 Clears all entries from Student Buddy. +
-Format: `clear`
+Format: `clear` or `c`
 
 // tag::calendar[]
 === Viewing tasks on a calendar
