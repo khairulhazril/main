@@ -76,7 +76,6 @@ Example:
 `signup u/nicholas p/lee` +
 Signed up: nicholas
 |===
-
 Possible Errors:
 |===
 |`You are logged in as nicholas!`: You are already logged in and will need to logout in order to signup for a new account. +
@@ -94,7 +93,6 @@ Example:
 `login u/nicholas p/lee` +
 Logged in as nicholas.
 |===
-
 Possible Errors:
 |===
 |`You are already logged in!` : You are already logged in and will need logout in order to login to another account. +
@@ -112,7 +110,6 @@ Example:
 `logout` +
 Logged out of nicholas.
 |===
-
 Possible Errors:
 |===
 |`You have already logged out. Please Login!`:

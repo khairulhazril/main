@@ -23,7 +23,7 @@ public class SampleDataUtil {
         if (currMonth.length() == 1) {
             currMonth = "0" + currMonth;
         }
-        
+
         return new Task[]{
             new Task(new Name("Revision"), new Module("CG2023"), new Due("06-" + currMonth),
                     new Priority("1"),
