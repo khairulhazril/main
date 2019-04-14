@@ -1138,15 +1138,13 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 [width="59%",cols="22%,<23%,<25%,<30%",options="header",]
 |=======================================================================
 |Priority |As a ... |I want to ... |So that I can...
-|`* * *` |new user |see usage instructions |remember how to accomplish tasks in the program
+|`* * *` |new user | see usage instructions |remember how to accomplish tasks in the program
 
 |`* * *` |user |add a new task |keep track of tasks and deadlines
 
 |`* * *` |user |delete a task |remove tasks that I no longer need
 
 |`* * *` |user |edit an task |keep tasks up to date
-
-|`* * *` |user |find a task by name |locate details of a task without having to go through the entire list
 
 |`* * *` |user |have an intuitive and easy-to-read calender |view upcoming tasks quickly and easily
 
@@ -1158,37 +1156,31 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |user |secure my task manager via a username and password to keep my events safe |keep my events and due dates private and secure to minimize the chances of someone deleting them
 
+|`* * *` |user | have my password hashed | keep my password safe without anyone easily retrieving them through my computer
+
+|`* * *` |administrator | be able to delete an account  | assist the user by resetting their account if they forget their password
+
 |`* *` |user |sort my tasks by the attributes |can view my tasks by urgency etc.
 
-|`* *` |user |view all the months of the year on the calendar
+|`* *` |user |view all the months of the year on the calendar | can see my tasks that are not on the current month
 
-|`* *` |user |select a task to have it highlighted in the app for easy viewing
-
-|`* *` |user | have my password hashed | keep my password safe without anyone easily retrieving them through my computer
+|`* *` |user |select a task to have it highlighted in the app for easy viewing | so that I can see where it is on the calendar with ease
 
 |`* *` |user | have admins to be able to access over my account | allow them to add or edit any tasks
 
 |`* *` |user | have just one task manager account | make things simple and minimal
 
-|`* *` |administrator | be able to delete an account  | assist the user by resetting their account if they forget their password
+|`* *` |user |have tasks on the calendar sorted in order of priority |easily see which tasks are the most urgent
 
-|`* *` |user |have an tasks on the calendar sorted in order of priority |easily see which tasks are the most urgent
-
-|`* *` |user |have an tasks on the calendar colour-coded in order of priority |easily see which tasks are the most urgent
+|`* *` |user |have tasks on the calendar colour-coded in order of priority |easily see which tasks are the most urgent
 
 |`* *` |user |have the selected task highlighted on the calendar |easily view the selected task's deadline
 
 |`* *` |user |find a task by name |locate details of event without having to go through the entire list
 
-|`* *` |user |have multiple tasks with different tags for a single entry |combine duplicate events and prevent confusion for multiple same events
-
 |`* *` |user |find tasks by due date, tags, etc. |still find an important task if I forget their name
 
-|`* *` |user |find a task even if I mistype (e.g. incorrect capitalisation) |save time by not having to rewrite the query
-
-|`* *` |user |have just one task manager account |make things simple and minimal
-
-|`* *` |administrator |be able to use commands like the user |assign task and deadlines to the user
+|`* *` |administrator | be able to use commands like the user |assign task and deadlines to the user
 
 |`*` |user |change the theme of the GUI |allow me to customise the app's appearance to my liking
 
@@ -1197,6 +1189,8 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |`*` |user |change the colours and sizes of the text |make things easier to read
 
 |`*` |user |play mini games on the application |keep myself occupied while deciding which tasks to add and delete.
+
+|`*` |user |find a task even if I mistype (e.g. incorrect capitalisation) |save time by not having to rewrite the query
 
 |=======================================================================
 
