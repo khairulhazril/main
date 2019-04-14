@@ -54,9 +54,9 @@ public class TaskTest {
                 .withTags(VALID_TAG_GRADED).build();
         assertFalse(SLIDES.isSameTask(editedAlice));
 
-        // same name, same phone, same email, different attributes -> returns true
+        // same name, same phone, same email, different attributes -> returns false
         editedAlice = new TaskBuilder(SLIDES).withPriority(VALID_PRIORITY_TUTORIAL).withTags(VALID_TAG_GRADED).build();
-        assertTrue(SLIDES.isSameTask(editedAlice));
+        assertFalse(SLIDES.isSameTask(editedAlice));
     }
 
     @Test

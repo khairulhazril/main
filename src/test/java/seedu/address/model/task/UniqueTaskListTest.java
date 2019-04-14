@@ -46,8 +46,10 @@ public class UniqueTaskListTest {
     @Test
     public void contains_personWithSameIdentityFieldsInList_returnsTrue() {
         uniqueTaskList.add(SLIDES);
-        Task editedAlice = new TaskBuilder(SLIDES).withPriority(VALID_PRIORITY_TUTORIAL).withTags(VALID_TAG_GRADED)
-                .build();
+        Task editedAlice = new TaskBuilder(SLIDES).withName("Slides")
+                .withPriority("1").withDate("03-03")
+                .withModule("CS2113")
+                .withTags("ungraded").build();
         assertTrue(uniqueTaskList.contains(editedAlice));
     }
 
