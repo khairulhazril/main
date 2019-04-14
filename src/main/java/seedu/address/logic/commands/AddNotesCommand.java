@@ -29,7 +29,7 @@ public class AddNotesCommand extends Command {
         + PREFIX_PRIORITY + "3 ";
 
     public static final String MESSAGE_SUCCESS = "New note added: %1$s";
-    public static final String MESSAGE_DUPLICATE_NOTE = "This note already exists in the task list";
+    public static final String MESSAGE_DUPLICATE_NOTE = "This note already exists in the notes list";
 
     private final Notes wantAdd;
 
