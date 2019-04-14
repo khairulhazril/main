@@ -510,7 +510,7 @@ e.g. `note h/Popular c/buy blue pens p/2`
 * *Clear* : `clear`
 * *Delete* : `delete INDEX` +
 e.g. `delete 3`
-* *Delete Note* `delete INDEX` +
+* *Delete Note* `deletenote INDEX` +
 e.g. `delete 1`
 * *Edit* : `edit INDEX [n/NAME] [m/MODULE] [d/DATE] [p/PRIORITY] [t/TAG]...` +
 e.g. `edit 2 n/CG2027 Hw d/23-04`
