@@ -346,12 +346,12 @@ public class LoginCommandTest {
     private class ModelStubUser extends ModelStub {
         private boolean isLogged;
         private boolean isCreated;
-        //private boolean isNotAdmin;
+        private boolean isAdmin;
 
         ModelStubUser() {
             isLogged = true;
             isCreated = true;
-            //isNotAdmin = false;
+            isAdmin = false;
         }
 
         @Override
@@ -361,16 +361,24 @@ public class LoginCommandTest {
         }
 
         @Override
+        public Username getUsername() {
+            return new Username("user");
+        }
+
+        @Override
         public boolean getLoginStatus() {
             return isLogged;
         }
 
         @Override
-        public Username getUsername() {
-            return new Username("user");
+        public boolean getAdminStatus() {
+            return isAdmin;
         }
 
-
+        @Override
+        public boolean accountExists() {
+            return isCreated;
+        }
     }
 
 
