@@ -402,7 +402,7 @@ Given below is an example usage scenario and how the add notes mechanism behaves
 
 The sequence diagram below illustrates how the mechanism for adding notes function.
 
-image::AddNotesSequenceDiagram.png[width="700"]
+image::AddNotesSequenceDiagram.png[width="650"]
 
 ==== Design Considerations
 
@@ -440,7 +440,7 @@ Given below is an example usage scenario and how the `deletenote` mechanism beha
 
 The following diagram illustrates how the `deletenote` operation works:
 
-image::DeleteNotesSequenceDiagram.png[width="700"]
+image::DeleteNotesSequenceDiagram.png[width="650"]
 
 ==== Design Considerations
 
