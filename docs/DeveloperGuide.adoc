@@ -1232,7 +1232,6 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 (For all use cases below, the *System* is `Student Buddy` and the *Actor* is the `user`, unless specified otherwise)
 
-[discrete]
 === Use case: Help
 
 *MSS*
@@ -1242,7 +1241,6 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 +
 Use case ends.
 
-[discrete]
 === Use case: Add task
 
 *MSS*
@@ -1262,7 +1260,6 @@ Use case ends.
 +
 Use case resumes at step 1.
 
-[discrete]
 === Use case: Delete task
 
 *MSS*
@@ -1289,7 +1286,6 @@ Use case ends.
 +
 Use case resumes at step 2.
 
-[discrete]
 === Use case: Edit task
 
 *MSS*
@@ -1325,7 +1321,6 @@ Use case resumes at step 2.
 Use case resumes at step 2.
 
 
-[discrete]
 === Use case: Find task by name
 
 *MSS*
