@@ -46,7 +46,7 @@ public class AddNotesCommand extends Command {
         requireNonNull(model);
 
         if (!model.accountExists()) {
-//            throw new CommandException(MESSAGE_ACCOUNT_DOES_NOT_EXIST);
+            //throw new CommandException(MESSAGE_ACCOUNT_DOES_NOT_EXIST);
         }
 
         if (!model.getLoginStatus() && !model.getAdminStatus()) {
