@@ -320,7 +320,7 @@ Sorts the task list lexicographically by module code.
 * `s priority` +
 Sorts the task list in descending order by priority.
 * `s d` +
-Sorts the task list in choronological order by date
+Sorts the task list in chronological order by date
 // end::sort[]
 
 // tag::notes[]
