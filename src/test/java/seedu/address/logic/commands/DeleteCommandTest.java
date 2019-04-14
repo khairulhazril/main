@@ -35,7 +35,6 @@ public class DeleteCommandTest {
 
     @Before
     public void setUp() {
-
         User user = new AccountBuilder(NICHOLAS).build();
         model = new ModelManager(getTypicalTaskManager(), new UserPrefs());
         model.loginUser(user);
