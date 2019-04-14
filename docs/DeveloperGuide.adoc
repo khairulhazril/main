@@ -463,6 +463,17 @@ Aspect: Weighing *user experience* to *convenience* of users
 Final decision: Alternative 2 was chosen due to it being *more practical and convenient* to users so that users will continue to use it in the future.
 // end::notes[]
 
+// tag::task[]
+=== Task Feature
+
+==== Current Implementation
+
+The task list is created by refactoring the existing code in the https://github.com/se-edu/addressbook-level4[Address Book Level 4]
+
+The class diagram below illustrates the *task* class.
+
+image::TaskClassDiagram.png[width="450"]
+// end::task[]
 
 // tag::sorttask[]
 === Sort Task List Feature
@@ -473,17 +484,15 @@ The sorting mechanism is facilitated by `TaskManager`, `Model` and `SortTaskList
 
 Given below is an example usage scenario.
 
-Step 1. The user keys in `sort ATTRIBUTE`, the `SortCommandParser` will trim the command to get the attribute.
-
-Step 2. If the attribute is valid, it will then create a new `SortCommand` and execute with the given attribute.
-
-Step 3. `SortCommand` will then call `ModelManager#sortTask(toSortBy)`.
-
-Step 4. It will then call `TaskManager#sortTask(attribute)`.
+|===
+|Step 1. The user keys in `sort ATTRIBUTE`, the `SortCommandParser` will trim the command to get the attribute.
+|Step 2. If the attribute is valid, it will then create a new `SortCommand` and execute with the given attribute.
+|Step 3. `SortCommand` will then call `ModelManager#sortTask(toSortBy)`.
+|Step 4. It will then call `TaskManager#sortTask(attribute)`.
 Then we convert the relevant attributes of the tasks in the Task List to string to compare using `string#compareTo()`.
-
-Step 5. Then, we use `setTasks()` in `UniqueTaskList` to update the Task List.
+|Step 5. Then, we use `setTasks()` in `UniqueTaskList` to update the Task List.
 After returning the sorted Task List, the Task Manager is then committed.
+|===
 
 The Sequence Diagram below illustrates how the sort mechanism functions. More specifically, sorting by module code.
 
@@ -503,11 +512,22 @@ image::SortSequenceDiagram.png[width="900"]
 
 // end::sorttask[]
 
-// tag::upcoming[]
+// tag::overdue[]
 === [Proposed] Delete overdue
 ==== Proposed Implementation
+Using the existing `daysRemaining` variable, upon entering `DeleteOverdue` in the command line, the command will iterate through all the tasks and check the value of `daysRemaining`.
+If it is less than 0, the command will call the `DeleteCommand` to delete the overdue task.
 
-// end::upcoming[]
+=== Design Considerations
+
+==== Aspect: How the delete overdue command executes
+* **Alternative 1 (current choice):** Write the command such that whenever there is an overdue task, it will call the `delete` command.
+** Pros: Easy to use as it does not require changing the existing code much.
+** Cons: Will need to iterate through all the tasks.
+* **Alternative 2:** Create a new class to store all overdue tasks that updates itself whenever a task is overdue.
+** Pros: Faster as it does not require iterating through all tasks.
+** Cons: Requires more space to store all the overdue tasks
+// end::overdue[]
 
 // tag::calendar[]
 === Calendar feature
