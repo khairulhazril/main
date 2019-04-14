@@ -136,6 +136,7 @@ Format: `sort PARAMETER` or `s PARAMETER`
 ****
 * Sorts the task list according to the `PARAMETER`.
 * The parameter *must be one of the following* `name, module, date, priority`.
+* You can also use the initials of the parameter i.e `n`, `m`, `d` or `p`.
 ****
 
 Examples:
@@ -144,6 +145,8 @@ Examples:
 Sorts the task list lexicographically by module code.
 * `s priority` +
 Sorts the task list in descending order by priority.
+* `s d` +
+Sorts the task list in choronological order by date
 // end::sort[]
 
 // tag::deleteoverdue[]
