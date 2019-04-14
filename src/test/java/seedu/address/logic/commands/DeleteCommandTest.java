@@ -14,26 +14,15 @@ import static seedu.address.testutil.TypicalTasks.getTypicalTaskManager;
 import org.junit.Before;
 import org.junit.Test;
 
-import javafx.beans.property.ReadOnlyProperty;
-import javafx.collections.ObservableList;
-import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyTaskManager;
-import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.account.User;
-import seedu.address.model.account.Username;
-import seedu.address.model.notes.Notes;
 import seedu.address.model.task.Task;
-import seedu.address.model.util.Month;
 import seedu.address.testutil.AccountBuilder;
-
-import java.nio.file.Path;
-import java.util.function.Predicate;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for

@@ -1,10 +1,9 @@
-//@@author nicholasleeeee
-== PROJECT: Student Buddy
+== Nicholas Lee - Project Portfolio
 :site-section: AboutUs
 :imagesDir: ../images
 :stylesDir: ../stylesheets
 
-== Nicholas Lee - Project Portfolio
+== PROJECT: Student Buddy
 === Overview
 
 |===

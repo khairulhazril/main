@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.testutil.TypicalAccounts.NICHOLAS;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -20,7 +19,6 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.LoginEvent;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyTaskManager;
 import seedu.address.model.ReadOnlyUserPrefs;
@@ -30,7 +28,6 @@ import seedu.address.model.account.Username;
 import seedu.address.model.notes.Notes;
 import seedu.address.model.task.Task;
 import seedu.address.model.util.Month;
-import seedu.address.testutil.AccountBuilder;
 import seedu.address.testutil.NotesBuilder;
 
 public class AddNotesCommandTest {
