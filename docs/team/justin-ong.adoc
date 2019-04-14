@@ -9,7 +9,7 @@
 
 == Overview
 
-This portfolio serves to document my contributions in a team-based software engineering project for the module CS2113/T, Software Engineering and Object-Oriented Programming. My team comprised 4 members, including myself, and we were tasked with morphing or enhancing the https://github.com/se-edu/addressbook-level4[Addressbook Level 4 project] (AB4) by https://github.com/se-edu[SE-EDU] within *8 weeks*. We decided to morph AB4 into a task management app named *Student Buddy*.
+This portfolio serves to document my contributions to a team-based software engineering project for the module CS2113/T, Software Engineering and Object-Oriented Programming. My team comprised 4 members, including myself, and we were tasked with morphing or enhancing the https://github.com/se-edu/addressbook-level4[Addressbook Level 4 project] (AB4) by https://github.com/se-edu[SE-EDU] within *8 weeks*. We decided to morph AB4 into a task management app named *Student Buddy*.
 
 *Student Buddy* is a desktop application tailored to the needs of students at the National University of Singapore. Specifically, it is meant for students who are comfortable with using a Command Line Interface (CLI). The use of a CLI for user input allows users to input commands more efficiently than when using a conventional user interface, thereby allowing them to better manage their tasks and their time. The app does, however, retain a Graphical User Interface (GUI) for easy viewing of information.
 
