@@ -32,6 +32,10 @@ public class SortCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
 
+        if (!model.accountExists()) {
+            throw new CommandException(MESSAGE_ACCOUNT_DOES_NOT_EXIST);
+        }
+
         if (!model.getLoginStatus() && !model.getAdminStatus()) {
             throw new CommandException(MESSAGE_LOGIN_REQUIRED);
         }

@@ -1,74 +1,62 @@
-= Nicholas Lee - Project Portfolio
+== PROJECT: Student Buddy
 :site-section: AboutUs
 :imagesDir: ../images
 :stylesDir: ../stylesheets
 
-== PROJECT: Student Buddy
----
-
-== Overview
+== Nicholas Lee - Project Portfolio
+=== Overview
 
 |===
 This portfolio serves to document my contributions in a Software Engineering project for 2113T.
-The team consist of 4 members and we were tasked to develop a working applicaiton within 12 weeks.
-Throughout the project, we were challenged to incoporate a Software Engineering project into a product of our own.
+The team consist of 4 members and we were tasked to develop a working application within 12 weeks.
+Throughout the project, we were challenged to incorporate a Software Engineering project into a product of our own.
 
 Our team have decided to come up with Student Buddy. Student Buddy is an application that is used for university students to view, sort and manage their tasks effectively.
 
 In Student Buddy, students interact via the CLI or GUI that is created with JavaFX.
 It is written in Java, and has about 10kLoC.
 |===
+=== Summary of contributions
 
-== Summary of contributions
+*Major enhancement: added login feature*
 
-* *Major enhancement*: added *login feature*
+_What it does:_ +
+Allows the user to create a personal account by signing up.
+Upon signing up, the user is able to sign in and logout whenever they want to.
+Subsequent login will allow the user to access their personal Student Buddy.
+With an normal account, only a logged in user will be able to add, edit or delete tasks in their Student Buddy.
 
-** What it does:
-*** Allows the user to create a personal account by signing up.
-*** Upon signing up, the user is able to sign in and logout whenever they want to.
-*** Subsequent logins will allow the user to access their personal Student Buddy.
-*** With an normal account, only a logged in user will be able to add, edit or delete tasks in their Student Buddy.
-
-
-** Justification:
-*** This feature improves the product significantly because a user
+_Justification:_ +
+This feature improves the product significantly because a user
 can have their tasks secured without anyone messing with it.
 
-
-** Highlights:
-*** This enhancement affects existing commands and commands to be added in future.
+_Highlights:_ +
+This enhancement affects existing commands and commands to be added in future.
 It requires an in-depth analysis of design alternatives.
 The implementation too was challenging as it required changes to existing commands.
 
-
-** Credits: GSON Java library.
-*** Gson is a Java library that can be used to convert Java Objects into their JSON representation.
-*** It can also be used to convert a JSON string to an equivalent Java object.
-*** In taskmanager, GSON Java library is used to convert the account's username and password,
+_Credits: GSON Java library_ +
+Gson is a Java library that can be used to convert Java Objects into their JSON representation.
+It can also be used to convert a JSON string to an equivalent Java object.
+In Student Buddy, GSON Java library is used to convert the account's username and password,
 which is in Java Object form, into JSON representation to be stored in a JSON file.
 Vice versa, for retrieving the JSON representation in the JSON file and converting
 into Java Objects to be read by other classes.
 
+*Minor enhancement:* +
+1. All passwords are hashed before storing. +
+2. Added admin feature. +
+3. An admin is able to delete user accounts. +
+4. An admin is able to use any commands like a normal user.
 
-* *Minor enhancement*:
-*** All passwords are hashed before storing
-*** Added admin feature
-**** An admin is able to delete user accounts
-**** An admin is able to use any commands like a normal user
-*** Changed files to binary file
-
-
-* *Code contributed*:
+*Code contributed:*
 [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
 
-
-* *Other contributions*:
-
-** Project management:
-*** Managed merge and release of `v1.4` on GitHub
-*** Added labels for organising and prioritising issues, pull request, merging.
-This makes project management more efficient and effective.
-*** PRs reviewed and merged (with non-trivial review comments):
+*Project management:* +
+1. Managed merge and release of `v1.4` on GitHub +
+2. Added labels for organising and prioritising issues, pull request, merging.
+This makes project management more efficient and effective. +
+3. PRs reviewed and merged (with non-trivial review comments):
 https://github.com/CS2113-AY1819S2-M11-2/main/pull/32[#32],
 https://github.com/CS2113-AY1819S2-M11-2/main/pull/80[#80],
 https://github.com/CS2113-AY1819S2-M11-2/main/pull/82[#82],
@@ -81,53 +69,40 @@ https://github.com/CS2113-AY1819S2-M11-2/main/pull/119[#119],
 https://github.com/CS2113-AY1819S2-M11-2/main/pull/120[#120],
 https://github.com/CS2113-AY1819S2-M11-2/main/pull/121[#121],
 
-
-** Enhancements to existing features:
-*** Wrote additional tests for existing features to increase coverage from 88% to 92%
+*Enhancements to existing features:* +
+Wrote additional tests for existing features to increase coverage from 88% to 92%
 (Pull requests
 https://github.com/CS2113-AY1819S2-M11-2/main/pull/63[#63],
 https://github.com/CS2113-AY1819S2-M11-2/main/pull/100[#100])
 
-** Documentation:
-*** Updated User Guide:
+*Documentation:* +
+1. Updated User Guide:
 https://github.com/CS2113-AY1819S2-M11-2/main/pull/77[#77]
-https://github.com/CS2113-AY1819S2-M11-2/main/pull/78[#78]
-*** Updated Developer Guide:
+https://github.com/CS2113-AY1819S2-M11-2/main/pull/78[#78] +
+2. Updated Developer Guide:
 https://github.com/CS2113-AY1819S2-M11-2/main/pull/87[#87]
 https://github.com/CS2113-AY1819S2-M11-2/main/pull/103[#103]
-https://github.com/CS2113-AY1819S2-M11-2/main/pull/107[#107]
-*** Did About Us Documentation:
+https://github.com/CS2113-AY1819S2-M11-2/main/pull/107[#107] +
+3. Did About Us Documentation:
 https://github.com/CS2113-AY1819S2-M11-2/main/blob/master/docs/AboutUs.adoc[AboutUs]
 
-** Integrate major feature into entire application
-*** The login feature I added was implemented in all other commands which worked together with my class mates work
-(https://github.com/CS2113-AY1819S2-M11-2/main/pull/101[#101])
+*Tools:* +
+_Integrated a third party library (GSON) to the project_ (https://github.com/CS2113-AY1819S2-M11-2/main/pull/83[#83])
 
 
-** Tools:
-*** Integrated a third party library (GSON) to the project (https://github.com/CS2113-AY1819S2-M11-2/main/pull/83[#83])
+=== Contributions to the User Guide
 
-
-== Contributions to the User Guide
-
-|===
-|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
-|===
+_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 
 include::../UserGuide.adoc[tag=loginfunction]
 
+=== Contributions to the Developer Guide
 
-== Contributions to the Developer Guide
-
-|===
-|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
-|===
+_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 
 include::../DeveloperGuide.adoc[tag=loginfunction]
 
-
-== PROJECTS:
-
+=== PROJECTS:
 ---
 
 |===
