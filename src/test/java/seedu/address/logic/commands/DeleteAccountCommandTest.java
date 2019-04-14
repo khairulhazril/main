@@ -34,7 +34,7 @@ public class DeleteAccountCommandTest {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
-    
+
     private Model model;
     private CommandHistory commandHistory = new CommandHistory();
 
