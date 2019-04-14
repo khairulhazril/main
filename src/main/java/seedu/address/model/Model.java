@@ -143,6 +143,7 @@ public interface Model {
      */
     void setSelectedTask(Task task);
 
+    //@@author nicholasleeeee
     //===================== Login Information ========================================================
 
     /**
@@ -191,6 +192,7 @@ public interface Model {
      * Only admin can access this command.
      */
     void deleteAccount();
+    //@@author
 
     //=====================Calendar========================================================
 

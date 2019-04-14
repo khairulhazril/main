@@ -58,7 +58,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * Parameters can be in any order e.g. if the command specifies `n/NAME d/DATE`, `d/DATE n/NAME` is also acceptable.
 * Dates are in the format DD-MM.
 ====
-
+//@@author nicholasleeeee
 // tag::loginfunction[]
 === Signing up for an account : `signup`
 
@@ -137,7 +137,7 @@ You are not logged in as an admin. Please login as an admin before using this co
 |===
 
 // end::loginfunction[]
-
+//@@author
 === Viewing help : `help`
 
 Displays a list of commands +

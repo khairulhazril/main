@@ -32,6 +32,7 @@ public class SortCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
 
+        //@@author nicholasleeeee
         if (!model.accountExists()) {
             throw new CommandException(MESSAGE_ACCOUNT_DOES_NOT_EXIST);
         }
@@ -39,6 +40,7 @@ public class SortCommand extends Command {
         if (!model.getLoginStatus() && !model.getAdminStatus()) {
             throw new CommandException(MESSAGE_LOGIN_REQUIRED);
         }
+        //@@author
 
         requireNonNull(model);
         model.sortTask(toSortBy);

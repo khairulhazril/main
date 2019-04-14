@@ -39,8 +39,7 @@ public class MonthCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        Month newMonth = new Month(month);
-
+        //@@author nicholasleeeee
         if (!model.accountExists()) {
             throw new CommandException(MESSAGE_ACCOUNT_DOES_NOT_EXIST);
         }
@@ -48,6 +47,9 @@ public class MonthCommand extends Command {
         if (!model.getLoginStatus() && !model.getAdminStatus()) {
             throw new CommandException(MESSAGE_LOGIN_REQUIRED);
         }
+        //@@author
+
+        Month newMonth = new Month(month);
 
         if (newMonth.equals(model.getMonth())) {
             throw new CommandException(MESSAGE_DUPLICATE_MONTH);

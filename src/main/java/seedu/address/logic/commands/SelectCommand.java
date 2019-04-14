@@ -35,8 +35,7 @@ public class SelectCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        List<Task> filteredTaskList = model.getFilteredTaskList();
-
+        //@@author nicholasleeeee
         if (!model.accountExists()) {
             throw new CommandException(MESSAGE_ACCOUNT_DOES_NOT_EXIST);
         }
@@ -44,6 +43,9 @@ public class SelectCommand extends Command {
         if (!model.getLoginStatus() && !model.getAdminStatus()) {
             throw new CommandException(MESSAGE_LOGIN_REQUIRED);
         }
+        //@@author
+
+        List<Task> filteredTaskList = model.getFilteredTaskList();
 
         if (targetIndex.getZeroBased() >= filteredTaskList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
