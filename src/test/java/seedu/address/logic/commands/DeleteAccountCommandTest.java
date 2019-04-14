@@ -58,7 +58,7 @@ public class DeleteAccountCommandTest {
     @Test
     public void failedDeleteAccount_notAdmin() throws Exception {
 
-        ModelStubUser_notAdmin modelStubUser = new ModelStubUser_notAdmin();
+        ModelStubUserNotAdmin modelStubUser = new ModelStubUserNotAdmin();
 
         DeleteAccountCommand deleteAccountCommand = new DeleteAccountCommand();
 
@@ -70,7 +70,7 @@ public class DeleteAccountCommandTest {
     @Test
     public void failedDeleteAccount_notLogged() throws Exception {
 
-        ModelStubUser_notLogged modelStubUser = new ModelStubUser_notLogged();
+        ModelStubUserNotLogged modelStubUser = new ModelStubUserNotLogged();
 
         DeleteAccountCommand deleteAccountCommand = new DeleteAccountCommand();
 
@@ -324,7 +324,7 @@ public class DeleteAccountCommandTest {
     /**
      * A Model stub account not logged in as admin
      */
-    private class ModelStubUser_notAdmin extends ModelStub {
+    private class ModelStubUserNotAdmin extends ModelStub {
 
         @Override
         public void deleteAccount() {
@@ -353,7 +353,7 @@ public class DeleteAccountCommandTest {
     /**
      * A Model stub account not logged in
      */
-    private class ModelStubUser_notLogged extends ModelStub {
+    private class ModelStubUserNotLogged extends ModelStub {
 
         @Override
         public void deleteAccount() {
