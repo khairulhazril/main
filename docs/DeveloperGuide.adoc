@@ -415,7 +415,7 @@ This feature allow users to add notes regarding miscellaneous matters.
 
 The class diagram below illustrates the *Notes* class.
 
-image::NotesClassDiagram.png[width="450"]
+image::ClassDiagramForNotes.png[width="400"]
 
 ==== Current Implementation
 
@@ -423,23 +423,19 @@ The add notes mechanism is facilitated by _AddNotesCommand_. A _Notes_ object is
 
 Given below is an example usage scenario and how the add notes mechanism behaves at each step.
 
-Step 1. The user enters in a note with its *associated parameters*. e.g `note h/popular c/buy pilot G-2 blue pens p/2`.
-
-Step 2. The _LogicManager_ calls _ParseCommand_ with that input.
-
-Step 3. The _TaskManagerParser_ is called and returns a _AddNotesCommand_ object to _Logic Manager_.
-
-Step 4. The _LogicManager_ will call _execute_ method on the _AddNotesCommand_ object.
-
-Step 5. _ModelManager_ is then called and will check if the note already exists.
-
-Step 6. If note already exists, _DuplicateNotesException_ will be thrown. This will return a string message "This note already exists in the task list".
-
-Step 7. Else, _addNotes(notes)_ method is called and note is added.
+|===
+|Step 1. The user enters in a note with its *associated parameters*. e.g `note h/popular c/buy pilot G-2 blue pens p/2`.
+|Step 2. The _LogicManager_ calls _ParseCommand_ with that input.
+|Step 3. The _TaskManagerParser_ is called and returns a _AddNotesCommand_ object to _Logic Manager_.
+|Step 4. The _LogicManager_ will call _execute_ method on the _AddNotesCommand_ object.
+|Step 5. _ModelManager_ is then called and will check if the note already exists.
+|Step 6. If note already exists, _DuplicateNotesException_ will be thrown. This will return a string message "This note already exists in the task list".
+|Step 7. Else, _addNotes(notes)_ method is called and note is added.
+|===
 
 The sequence diagram below illustrates how the mechanism for adding notes function.
 
-image::AddNotesSequenceDiagram.png[width="800"]
+image::AddNotesSequenceDiagram.png[width="600"]
 
 ==== Design Considerations
 
@@ -466,21 +462,18 @@ The Notes mechanism is facilitated by _DeleteNotesCommand_ from the _Logic_ comp
 
 Given below is an example usage scenario and how the `deletenote` mechanism behaves at each step.
 
-Step 1. The user calls the _DeleteNotesCommand_ with the note’s displayed index. e.g `deletenote 1`.
-
-Step 2. The _LogicManager_ calls _parseCommand_ with the user input.
-
-Step 3. The _TaskManagerParser_ is called and it returns a _DeleteNotesCommand_ object to the _LogicManager_.
-
-Step 4. The _LogicManager_ will call _execute()_ on the _DeleteNotesCommand_ object. If no note of the corresponding index is found, it would return a string of message `MESSAGE_INVALID_NOTES_DISPLAYED_INDEX`.
-
-Step 5. The _Logic_ component then interacts with the `Model` component which then calls `TaskManager` component within it to execute `deleteNotes(target)` to remove the note.
-
-Step 6. The command result would then return the message `MESSAGE_DELETE_NOTE_SUCCESS` in a string.
+|===
+|Step 1. The user calls the _DeleteNotesCommand_ with the note’s displayed index. e.g `deletenote 1`.
+|Step 2. The _LogicManager_ calls _parseCommand_ with the user input.
+|Step 3. The _TaskManagerParser_ is called and it returns a _DeleteNotesCommand_ object to the _LogicManager_.
+|Step 4. The _LogicManager_ will call _execute()_ on the _DeleteNotesCommand_ object. If no note of the corresponding index is found, |it would return a string of message `MESSAGE_INVALID_NOTES_DISPLAYED_INDEX`.
+|Step 5. The _Logic_ component then interacts with the `Model` component which then calls `TaskManager` component within it to execute |`deleteNotes(target)` to remove the note.
+|Step 6. The command result would then return the message `MESSAGE_DELETE_NOTE_SUCCESS` in a string.
+|===
 
 The following diagram illustrates how the `deletenote` operation works:
 
-image::DeleteNotesSequenceDiagram.png[width="800"]
+image::DeleteNotesSequenceDiagram.png[width="550"]
 
 ==== Design Considerations
 
@@ -494,7 +487,7 @@ Aspect: Weighing *user experience* to *convenience* of users
 ** Pros: Easy for users to manage completed notes.
 ** Cons: No sense of achievement as users are unable to view the amount of work completed.
 
-Final decision: Alternative 2 was chosen due to it being *more practical and convenient* to users so that users will continue to use it in the future.
+Final decision: Alternative 2 was chosen due to it being *more practical and convenient* to users.
 // end::notes[]
 
 // tag::task[]
@@ -665,6 +658,13 @@ The following diagram illustrates the operation of the `month` command.
 image::MonthCommandSequenceDiagram.png[width="1000"]
 
 // end::monthChange[]
+
+// tag::notesstorage[]
+=== Retrieving of notes from storage [coming in V2.0]
+==== Current Implementation
+* Notes added are currently being stored in notes.json file.
+* Retrieving from notes.json file is still in progress.
+// end::notesstorage[]
 
 === Logging
 
@@ -1155,13 +1155,13 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 
 *Target user profile*:
 
-* has a need to manage a significant number of tasks
+* Students who hava a need to manage a significant number of tasks
 * prefer desktop apps over other apps on other platforms
 * can type fast
 * prefers typing over mouse input
 * is reasonably comfortable using CLI apps
 
-*Value proposition*: manage tasks faster than a typical mouse/GUI driven app
+*Value proposition*: Allow students with huge amount of workload to better manage their tasks and notes more effectively using our user-friendly Student Buddy.
 
 [appendix]
 == User Stories
@@ -1171,7 +1171,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 [width="59%",cols="22%,<23%,<25%,<30%",options="header",]
 |=======================================================================
 |Priority |As a ... |I want to ... |So that I can...
-|`* * *` |new user |see usage instructions |remember how to accomplish tasks in the program
+|`* * *` |new user | see usage instructions |remember how to accomplish tasks in the program
 
 |`* * *` |user |add a new task |keep track of tasks and deadlines
 
@@ -1179,25 +1179,25 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |user |edit an task |keep tasks up to date
 
-|`* * *` |user |find a task by name |locate details of a task without having to go through the entire list
-
 |`* * *` |user |have an intuitive and easy-to-read calender |view upcoming tasks quickly and easily
 
 |`* * *` |user |have the calender update in real time as tasks are added or removed |instantly view changes made to the list of tasks
 
+|`* * *` |user |store miscellaneous notes |keep track of important events other than tasks
+
+|`* * *` |user |delete notes that are no longer wanted |view the relevant notes easily
+
+|`* * *` |user |secure my task manager via a username and password to keep my events safe |keep my events and due dates private and secure to minimize the chances of someone deleting them
+
 |`* * *` |user | have my password hashed | keep my password safe without anyone easily retrieving them through my computer
 
 |`* * *` |administrator | be able to delete an account  | assist the user by resetting their account if they forget their password
-
-|`* * *` |user |store miscellaneous notes |keep track of important events other than tasks
 
 |`* *` |user |sort my tasks by the attributes |can view my tasks by urgency etc.
 
 |`* *` |user |view all the months of the year on the calendar | can see my tasks that are not on the current month
 
 |`* *` |user |select a task to have it highlighted in the app for easy viewing | so that I can see where it is on the calendar with ease
-
-|`* *` |user |secure my task manager via a username and password to keep my events safe |keep my events and due dates private and secure to minimize the chances of someone deleting them
 
 |`* *` |user | have admins to be able to access over my account | allow them to add or edit any tasks
 
@@ -1213,15 +1213,17 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* *` |user |find tasks by due date, tags, etc. |still find an important task if I forget their name
 
-|`* *` |user |find a task even if I mistype (e.g. incorrect capitalisation) |save time by not having to rewrite the query
-
-|`* *` |administrator |be able to use commands like the user |assign task and deadlines to the user
+|`* *` |administrator | be able to use commands like the user |assign task and deadlines to the user
 
 |`*` |user |change the theme of the GUI |allow me to customise the app's appearance to my liking
 
 |`*` |user |have the program automatically complete my inputs |save time by not having to write out the entire command or search query
 
 |`*` |user |change the colours and sizes of the text |make things easier to read
+
+|`*` |user |play mini games on the application |keep myself occupied while deciding which tasks to add and delete.
+
+|`*` |user |find a task even if I mistype (e.g. incorrect capitalisation) |save time by not having to rewrite the query
 
 |=======================================================================
 

@@ -319,6 +319,7 @@ Format: `sort PARAMETER` or `s PARAMETER`
 ****
 * Sorts the task list according to the `PARAMETER`.
 * The parameter *must be one of the following* `name, module, date, priority`.
+* You can also use the initials of the parameter i.e `n`, `m`, `d` or `p`.
 ****
 
 Examples:
@@ -327,6 +328,8 @@ Examples:
 Sorts the task list lexicographically by module code.
 * `s priority` +
 Sorts the task list in descending order by priority.
+* `s d` +
+Sorts the task list in chronological order by date
 // end::sort[]
 
 // tag::notes[]
@@ -350,11 +353,11 @@ The following are 2 diagrams that demostrate the example shown above. One of the
 
 *Before:*
 
-image::AddNotesBefore.png[width="800"]
+image::AddNotesBefore.png[width="700"]
 
 *After:*
 
-image::AddNotesAfter.png[width="800"]
+image::AddNotesAfter.png[width="700"]
 
 === Deleting miscellaneous notes : `deletenote`
 
@@ -376,11 +379,11 @@ The following are 2 diagrams that demostrate the example shown above. One of the
 
 *Before:*
 
-image::DeleteNoteBefore.png[width="800"]
+image::DeleteNoteBefore.png[width="700"]
 
 *After:*
 
-image::DeleteNoteAfter.png[width="800"]
+image::DeleteNoteAfter.png[width="700"]
 // end::notes[]
 
 === Listing entered commands : `history`
@@ -512,6 +515,12 @@ Deletes all the overdue tasks in Student Buddy.
 Deletes all the task in the results of the `findname` command.
 // end::deleteoverdue[]
 
+// tag::notestorage[]
+=== Retrieving of notes from storage `[coming in v2.0]`
+
+Student Buddy's notes will be stored inside *notes.json* file. Upon starting up Student Buddy, the notes will be retrieved from *notes.json* and displayed on the notes section of the GUI.
+
+// end::notestorage[]
 == FAQ
 
 *Q*: How do I transfer my data to another Computer? +
@@ -521,9 +530,13 @@ Deletes all the task in the results of the `findname` command.
 
 * *Add* `add n/NAME m/MODULE d/DATE p/PRIORITY [t/TAG]...` +
 e.g. `add n/Tutorial 3 m/CG2023 d/21-02 p/3 t/urgent`
+* *Add Note* `note note h/HEADING c/CONTENT p/PRIORITY` +
+e.g. `note h/Popular c/buy blue pens p/2`
 * *Clear* : `clear`
 * *Delete* : `delete INDEX` +
 e.g. `delete 3`
+* *Delete Note* `deletenote INDEX` +
+e.g. `delete 1`
 * *Edit* : `edit INDEX [n/NAME] [m/MODULE] [d/DATE] [p/PRIORITY] [t/TAG]...` +
 e.g. `edit 2 n/CG2027 Hw d/23-04`
 * *Find Date* : `finddate KEYWORD [MORE_KEYWORDS]` +
