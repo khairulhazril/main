@@ -516,7 +516,7 @@ Deletes all the task in the results of the `findname` command.
 // end::deleteoverdue[]
 
 // tag::notestorage[]
-=== Retrieving of notes from storage `[coming in v2.0]`
+=== Retrieving of notes from storage: `[coming in v2.0]`
 
 Student Buddy's notes will be stored inside *notes.json* file. Upon starting up Student Buddy, the notes will be retrieved from *notes.json* and displayed on the notes section of the GUI.
 
