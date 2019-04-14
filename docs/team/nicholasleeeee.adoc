@@ -51,7 +51,7 @@ into Java Objects to be read by other classes.
 4. An admin is able to use any commands like a normal user.
 
 *Code contributed:*
-[https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+[https://nuscs2113-ay1819s2.github.io/dashboard-beta/#search=nicholasleeeee[Reposense]] +
 
 *Project management:* +
 1. Managed merge and release of `v1.4` on GitHub +
@@ -119,7 +119,7 @@ Example:
 
 |===
 `signup u/nicholas p/lee` +
-Signed up: nicholas
+Signed up: nicholas +
 |===
 
 Possible Errors:
@@ -139,7 +139,7 @@ Example:
 
 |===
 `login u/nicholas p/lee` +
-Logged in as nicholas.
+Logged in as nicholas. +
 |===
 
 Possible Errors:
@@ -159,7 +159,7 @@ Example:
 
 |===
 `logout` +
-Logged out of nicholas.
+Logged out of nicholas. +
 |===
 
 Possible Errors:
@@ -178,7 +178,7 @@ Example:
 
 |===
 `deleteacc` +
-Account has been deleted!
+Account has been deleted! +
 |===
 
 Possible Errors: +
@@ -333,13 +333,11 @@ Collisions exist with the algorithm, and there have been successful attacks agai
 
 |===
 https://github.com/nicholasleeeee/01-04-02[CG1112] +
-In CG1112, we came up with Vincent. Vincent is a search and rescue robot designed to locate survivors. It will be tele-operated by the operator remotely though a secure connection from a remote desktop. The operator on the remote site will be presented with an environment map of Vincent, which can be used to navigate the simulated environment. The operator will use a Master Control Program (MCP) to command Vincent to move forward/backwards, turn left/right, mark the current location and start autonomous backtracking.
+In CG1112, we came up with Vincent. Vincent is a search and rescue robot designed to locate survivors. It will be tele-operated by the operator remotely though a secure connection from a remote desktop. The operator on the remote site will be presented with an environment map of Vincent, which can be used to navigate the simulated environment. The operator will use a Master Control Program (MCP) to command Vincent to move forward/backwards, turn left/right, mark the current location and start autonomous backtracking. +
 |===
 
 |===
 https://github.com/Nicholas-Kayden/EE2026[EE2026] +
 
-In EE2026 FPGA Design Project, we created a real time voice scope (audio visualizer)! We were provided with a MEMs microphone to capture human voice and display our voice signal on a VGA monitor.
+In EE2026 FPGA Design Project, we created a real time voice scope (audio visualizer)! We were provided with a MEMs microphone to capture human voice and display our voice signal on a VGA monitor. +
 |===
-
-
