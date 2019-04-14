@@ -8,7 +8,6 @@ import java.util.Arrays;
 
 import org.junit.Test;
 
-import seedu.address.logic.commands.FindDateCommand;
 import seedu.address.logic.commands.FindModuleCommand;
 import seedu.address.model.task.ModuleContainsKeywordsPredicate;
 

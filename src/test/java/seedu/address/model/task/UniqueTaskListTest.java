@@ -21,10 +21,10 @@ import seedu.address.model.task.exceptions.TaskNotFoundException;
 import seedu.address.testutil.TaskBuilder;
 
 public class UniqueTaskListTest {
-    private final UniqueTaskList uniqueTaskList = new UniqueTaskList();
-
     @Rule
     public ExpectedException thrown = ExpectedException.none();
+
+    private final UniqueTaskList uniqueTaskList = new UniqueTaskList();
 
     @Test
     public void contains_nullPerson_throwsNullPointerException() {
