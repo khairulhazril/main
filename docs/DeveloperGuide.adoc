@@ -467,7 +467,7 @@ Final decision: Alternative 2 was chosen due to it being *more practical and con
 // tag::task[]
 === Task Feature
 
-==== Current Implementation
+Current Implementation
 
 The task list is created by refactoring the existing code in the https://github.com/se-edu/addressbook-level4[Address Book Level 4]
 
@@ -519,7 +519,7 @@ image::SortSequenceDiagram.png[width="900"]
 Using the existing `daysRemaining` variable, upon entering `DeleteOverdue` in the command line, the command will iterate through all the tasks and check the value of `daysRemaining`.
 If it is less than 0, the command will call the `DeleteCommand` to delete the overdue task.
 
-=== Design Considerations
+==== Design Considerations
 
 ==== Aspect: How the delete overdue command executes
 * **Alternative 1 (current choice):** Write the command such that whenever there is an overdue task, it will call the `delete` command.
@@ -1152,39 +1152,35 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |user |have the calender update in real time as tasks are added or removed |instantly view changes made to the list of tasks
 
+|`* * *` |user | have my password hashed | keep my password safe without anyone easily retrieving them through my computer
+
+|`* * *` |administrator | be able to delete an account  | assist the user by resetting their account if they forget their password
+
+|`* * *` |user |store miscellaneous notes |keep track of important events other than tasks
+
 |`* *` |user |sort my tasks by the attributes |can view my tasks by urgency etc.
 
-|`* *` |user |view all the months of the year on the calendar
+|`* *` |user |view all the months of the year on the calendar | can see my tasks that are not on the current month
 
-|`* *` |user |select a task to have it highlighted in the app for easy viewing
+|`* *` |user |select a task to have it highlighted in the app for easy viewing | so that I can see where it is on the calendar with ease
 
 |`* *` |user |secure my task manager via a username and password to keep my events safe |keep my events and due dates private and secure to minimize the chances of someone deleting them
-
-|`* *` |user | have my password hashed | keep my password safe without anyone easily retrieving them through my computer
 
 |`* *` |user | have admins to be able to access over my account | allow them to add or edit any tasks
 
 |`* *` |user | have just one task manager account | make things simple and minimal
 
-|`* *` |administrator | be able to delete an account  | assist the user by resetting their account if they forget their password
+|`* *` |user |have tasks on the calendar sorted in order of priority |easily see which tasks are the most urgent
 
-|`* *` |user |have an tasks on the calendar sorted in order of priority |easily see which tasks are the most urgent
-
-|`* *` |user |have an tasks on the calendar colour-coded in order of priority |easily see which tasks are the most urgent
+|`* *` |user |have tasks on the calendar colour-coded in order of priority |easily see which tasks are the most urgent
 
 |`* *` |user |have the selected task highlighted on the calendar |easily view the selected task's deadline
 
 |`* *` |user |find a task by name |locate details of event without having to go through the entire list
 
-|`* *` |user |have multiple tasks with different tags for a single entry |combine duplicate events and prevent confusion for multiple same events
-
 |`* *` |user |find tasks by due date, tags, etc. |still find an important task if I forget their name
 
 |`* *` |user |find a task even if I mistype (e.g. incorrect capitalisation) |save time by not having to rewrite the query
-
-|`* *` |user |store miscellaneous notes |keep track of important events other than tasks
-
-|`* *` |user |have just one task manager account |make things simple and minimal
 
 |`* *` |administrator |be able to use commands like the user |assign task and deadlines to the user
 
