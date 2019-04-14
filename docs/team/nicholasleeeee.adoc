@@ -69,6 +69,11 @@ https://github.com/CS2113-AY1819S2-M11-2/main/pull/111[#111],
 https://github.com/CS2113-AY1819S2-M11-2/main/pull/119[#119],
 https://github.com/CS2113-AY1819S2-M11-2/main/pull/120[#120],
 https://github.com/CS2113-AY1819S2-M11-2/main/pull/121[#121],
+https://github.com/CS2113-AY1819S2-M11-2/main/pull/123[#123],
+https://github.com/CS2113-AY1819S2-M11-2/main/pull/125[#125],
+https://github.com/CS2113-AY1819S2-M11-2/main/pull/151[#151],
+https://github.com/CS2113-AY1819S2-M11-2/main/pull/152[#152],
+https://github.com/CS2113-AY1819S2-M11-2/main/pull/158[#158]
 
 *Enhancements to existing features:* +
 Wrote additional tests for existing features to increase coverage of 4.2%
@@ -78,12 +83,16 @@ https://github.com/CS2113-AY1819S2-M11-2/main/pull/170[#170])
 
 *Documentation:* +
 1. Updated User Guide:
-https://github.com/CS2113-AY1819S2-M11-2/main/pull/77[#77]
-https://github.com/CS2113-AY1819S2-M11-2/main/pull/78[#78] +
+https://github.com/CS2113-AY1819S2-M11-2/main/pull/77[#77],
+https://github.com/CS2113-AY1819S2-M11-2/main/pull/78[#78],
+https://github.com/CS2113-AY1819S2-M11-2/main/pull/160[#160],
+
 2. Updated Developer Guide:
-https://github.com/CS2113-AY1819S2-M11-2/main/pull/87[#87]
-https://github.com/CS2113-AY1819S2-M11-2/main/pull/103[#103]
-https://github.com/CS2113-AY1819S2-M11-2/main/pull/107[#107] +
+https://github.com/CS2113-AY1819S2-M11-2/main/pull/87[#87],
+https://github.com/CS2113-AY1819S2-M11-2/main/pull/103[#103],
+https://github.com/CS2113-AY1819S2-M11-2/main/pull/107[#107],
+https://github.com/CS2113-AY1819S2-M11-2/main/pull/170[#170]
+
 3. Did About Us Documentation:
 https://github.com/CS2113-AY1819S2-M11-2/main/blob/master/docs/AboutUs.adoc[AboutUs]
 
