@@ -21,6 +21,8 @@ public class SortCommand extends Command {
             + "Example: " + COMMAND_WORD + " name";
 
     public static final String MESSAGE_SUCCESS = "Task list sorted by %1$s";
+    public static final String MESSAGE_INVALID =
+            "Attribute should be one of the following: name, date, module or priority\n" + MESSAGE_USAGE;
 
     private final String toSortBy;
 
@@ -41,9 +43,14 @@ public class SortCommand extends Command {
         }
 
         requireNonNull(model);
-        model.sortTask(toSortBy);
-        model.commitTaskManager();
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toSortBy));
+        if (toSortBy.equals("name") || toSortBy.equals("module") || toSortBy.equals("date")
+                || toSortBy.equals("priority")) {
+            model.sortTask(toSortBy);
+            model.commitTaskManager();
+            return new CommandResult(String.format(MESSAGE_SUCCESS, toSortBy));
+        } else {
+            throw new CommandException(MESSAGE_INVALID);
+        }
     }
 
     @Override
