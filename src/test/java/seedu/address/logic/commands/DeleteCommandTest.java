@@ -11,17 +11,29 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TASK;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_TASK;
 import static seedu.address.testutil.TypicalTasks.getTypicalTaskManager;
 
+import org.junit.Before;
 import org.junit.Test;
 
+import javafx.beans.property.ReadOnlyProperty;
+import javafx.collections.ObservableList;
+import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.ReadOnlyTaskManager;
+import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.account.User;
+import seedu.address.model.account.Username;
+import seedu.address.model.notes.Notes;
 import seedu.address.model.task.Task;
+import seedu.address.model.util.Month;
 import seedu.address.testutil.AccountBuilder;
+
+import java.nio.file.Path;
+import java.util.function.Predicate;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
@@ -29,14 +41,18 @@ import seedu.address.testutil.AccountBuilder;
  */
 public class DeleteCommandTest {
 
-    private Model model = new ModelManager(getTypicalTaskManager(), new UserPrefs());
+    private Model model;
     private CommandHistory commandHistory = new CommandHistory();
+
+    @Before
+    public void setUp() {
+        User user = new AccountBuilder(NICHOLAS).build();
+        model = new ModelManager(getTypicalTaskManager(), new UserPrefs());
+        model.loginUser(user);
+    }
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        User user = new AccountBuilder(NICHOLAS).build();
-        model.newUser(user);
-        model.loginUser(user);
 
         Task taskToDelete = model.getFilteredTaskList().get(INDEX_FIRST_TASK.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_TASK);
@@ -52,9 +68,6 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
-        User user = new AccountBuilder(NICHOLAS).build();
-        model.newUser(user);
-        model.loginUser(user);
 
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredTaskList().size() + 1);
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
@@ -64,9 +77,6 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_validIndexFilteredList_success() {
-        User user = new AccountBuilder(NICHOLAS).build();
-        model.newUser(user);
-        model.loginUser(user);
 
         showTaskAtIndex(model, INDEX_FIRST_TASK);
 
@@ -85,9 +95,6 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
-        User user = new AccountBuilder(NICHOLAS).build();
-        model.newUser(user);
-        model.loginUser(user);
 
         showTaskAtIndex(model, INDEX_FIRST_TASK);
 
@@ -102,9 +109,6 @@ public class DeleteCommandTest {
 
     @Test
     public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
-        User user = new AccountBuilder(NICHOLAS).build();
-        model.newUser(user);
-        model.loginUser(user);
 
         Task taskToDelete = model.getFilteredTaskList().get(INDEX_FIRST_TASK.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_TASK);
@@ -126,9 +130,6 @@ public class DeleteCommandTest {
 
     @Test
     public void executeUndoRedo_invalidIndexUnfilteredList_failure() {
-        User user = new AccountBuilder(NICHOLAS).build();
-        model.newUser(user);
-        model.loginUser(user);
 
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredTaskList().size() + 1);
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
@@ -150,9 +151,6 @@ public class DeleteCommandTest {
      */
     @Test
     public void executeUndoRedo_validIndexFilteredList_samePersonDeleted() throws Exception {
-        User user = new AccountBuilder(NICHOLAS).build();
-        model.newUser(user);
-        model.loginUser(user);
 
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_TASK);
         Model expectedModel = new ModelManager(model.getTaskManager(), new UserPrefs());

@@ -53,10 +53,6 @@ public class AddNotesCommandTest {
         ModelStubAcceptingNotesAdded modelStub = new ModelStubAcceptingNotesAdded();
         Notes validNotes = new NotesBuilder().build();
 
-        User user = new AccountBuilder(NICHOLAS).build();
-        modelStub.newUser(user);
-        modelStub.loginUser(user);
-
         CommandResult commandResult = new AddNotesCommand(validNotes).execute(modelStub, commandHistory);
 
         assertEquals(String.format(AddNotesCommand.MESSAGE_SUCCESS, validNotes), commandResult.getFeedbackToUser());
@@ -69,10 +65,6 @@ public class AddNotesCommandTest {
         Notes validNotes = new NotesBuilder().build();
         AddNotesCommand addnotesCommand = new AddNotesCommand(validNotes);
         ModelStub modelStub = new ModelStubWithNotes(validNotes);
-
-        User user = new AccountBuilder(NICHOLAS).build();
-        modelStub.newUser(user);
-        modelStub.loginUser(user);
 
         thrown.expect(CommandException.class);
         thrown.expectMessage(AddNotesCommand.MESSAGE_DUPLICATE_NOTE);
@@ -107,7 +99,6 @@ public class AddNotesCommandTest {
      * A default model stub that have all of the methods failing.
      */
     private class ModelStub implements Model {
-        private final LoginEvent loginEvent = new LoginEvent();
 
         @Override
         public ReadOnlyUserPrefs getUserPrefs() {
@@ -224,12 +215,12 @@ public class AddNotesCommandTest {
 
         @Override
         public boolean getLoginStatus() {
-            return true;
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public boolean getAdminStatus() {
-            return false;
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
@@ -244,8 +235,7 @@ public class AddNotesCommandTest {
 
         @Override
         public void loginUser(User loginInfo) {
-            requireNonNull(loginInfo);
-            loginEvent.loginUser(loginInfo);
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
@@ -255,13 +245,12 @@ public class AddNotesCommandTest {
 
         @Override
         public void newUser(User user) {
-            requireNonNull(user);
-            loginEvent.newUser(user);
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public boolean accountExists() {
-            return loginEvent.accountExists();
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
@@ -336,6 +325,21 @@ public class AddNotesCommandTest {
             requireNonNull(notes);
             return this.notes.isSameNotes(notes);
         }
+
+        @Override
+        public boolean getLoginStatus() {
+            return true;
+        }
+
+        @Override
+        public boolean getAdminStatus() {
+            return true;
+        }
+
+        @Override
+        public boolean accountExists() {
+            return true;
+        }
     }
 
     /**
@@ -361,5 +365,21 @@ public class AddNotesCommandTest {
         public ReadOnlyTaskManager getTaskManager() {
             return new TaskManager();
         }
+
+        @Override
+        public boolean getLoginStatus() {
+            return true;
+        }
+
+        @Override
+        public boolean getAdminStatus() {
+            return true;
+        }
+
+        @Override
+        public boolean accountExists() {
+            return true;
+        }
     }
+
 }

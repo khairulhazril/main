@@ -16,6 +16,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TASK;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_TASK;
 import static seedu.address.testutil.TypicalTasks.getTypicalTaskManager;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import seedu.address.commons.core.Messages;
@@ -38,14 +39,18 @@ import seedu.address.testutil.TaskBuilder;
  */
 public class EditCommandTest {
 
-    private Model model = new ModelManager(getTypicalTaskManager(), new UserPrefs());
+    private Model model;
     private CommandHistory commandHistory = new CommandHistory();
+
+    @Before
+    public void setUp() {
+        User user = new AccountBuilder(NICHOLAS).build();
+        model = new ModelManager(getTypicalTaskManager(), new UserPrefs());
+        model.loginUser(user);
+    }
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        User user = new AccountBuilder(NICHOLAS).build();
-        model.newUser(user);
-        model.loginUser(user);
 
         Task editedTask = new TaskBuilder().build();
         EditCommand.EditTaskDescriptor descriptor = new EditTaskDescriptorBuilder(editedTask).build();
@@ -62,9 +67,6 @@ public class EditCommandTest {
 
     @Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
-        User user = new AccountBuilder(NICHOLAS).build();
-        model.newUser(user);
-        model.loginUser(user);
 
         Index indexLastPerson = Index.fromOneBased(model.getFilteredTaskList().size());
         Task lastTask = model.getFilteredTaskList().get(indexLastPerson.getZeroBased());
@@ -88,9 +90,6 @@ public class EditCommandTest {
 
     @Test
     public void execute_filteredList_success() {
-        User user = new AccountBuilder(NICHOLAS).build();
-        model.newUser(user);
-        model.loginUser(user);
 
         showTaskAtIndex(model, INDEX_FIRST_TASK);
 
@@ -110,9 +109,6 @@ public class EditCommandTest {
 
     @Test
     public void execute_duplicatePersonUnfilteredList_failure() {
-        User user = new AccountBuilder(NICHOLAS).build();
-        model.newUser(user);
-        model.loginUser(user);
 
         Task firstTask = model.getFilteredTaskList().get(INDEX_FIRST_TASK.getZeroBased());
         EditCommand.EditTaskDescriptor descriptor = new EditTaskDescriptorBuilder(firstTask).build();
@@ -123,9 +119,6 @@ public class EditCommandTest {
 
     @Test
     public void execute_duplicatePersonFilteredList_failure() {
-        User user = new AccountBuilder(NICHOLAS).build();
-        model.newUser(user);
-        model.loginUser(user);
 
         showTaskAtIndex(model, INDEX_FIRST_TASK);
 
@@ -139,9 +132,6 @@ public class EditCommandTest {
 
     @Test
     public void execute_invalidPersonIndexUnfilteredList_failure() {
-        User user = new AccountBuilder(NICHOLAS).build();
-        model.newUser(user);
-        model.loginUser(user);
 
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredTaskList().size() + 1);
         EditCommand.EditTaskDescriptor descriptor = new EditTaskDescriptorBuilder()
@@ -157,9 +147,6 @@ public class EditCommandTest {
      */
     @Test
     public void execute_invalidPersonIndexFilteredList_failure() {
-        User user = new AccountBuilder(NICHOLAS).build();
-        model.newUser(user);
-        model.loginUser(user);
 
         showTaskAtIndex(model, INDEX_FIRST_TASK);
         Index outOfBoundIndex = INDEX_SECOND_TASK;
@@ -174,9 +161,6 @@ public class EditCommandTest {
 
     @Test
     public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
-        User user = new AccountBuilder(NICHOLAS).build();
-        model.newUser(user);
-        model.loginUser(user);
 
         Task editedTask = new TaskBuilder().build();
         Task taskToEdit = model.getFilteredTaskList().get(INDEX_FIRST_TASK.getZeroBased());
@@ -200,9 +184,6 @@ public class EditCommandTest {
 
     @Test
     public void executeUndoRedo_invalidIndexUnfilteredList_failure() {
-        User user = new AccountBuilder(NICHOLAS).build();
-        model.newUser(user);
-        model.loginUser(user);
 
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredTaskList().size() + 1);
         EditCommand.EditTaskDescriptor descriptor = new EditTaskDescriptorBuilder()
@@ -226,9 +207,6 @@ public class EditCommandTest {
      */
     @Test
     public void executeUndoRedo_validIndexFilteredList_samePersonEdited() throws Exception {
-        User user = new AccountBuilder(NICHOLAS).build();
-        model.newUser(user);
-        model.loginUser(user);
 
         Task editedTask = new TaskBuilder().build();
         EditCommand.EditTaskDescriptor descriptor = new EditTaskDescriptorBuilder(editedTask).build();
