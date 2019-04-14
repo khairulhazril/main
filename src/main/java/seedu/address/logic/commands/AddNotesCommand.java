@@ -44,15 +44,15 @@ public class AddNotesCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        //@@author nicholasleeeee
-        if (!model.accountExists()) {
-            //throw new CommandException(MESSAGE_ACCOUNT_DOES_NOT_EXIST);
+
+        if (!model.accountExists() && !model.getAdminStatus()) {
+            throw new CommandException(MESSAGE_ACCOUNT_DOES_NOT_EXIST);
         }
 
         if (!model.getLoginStatus() && !model.getAdminStatus()) {
             throw new CommandException(MESSAGE_LOGIN_REQUIRED);
         }
-        //@@author
+
         if (model.hasNotes(wantAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_NOTE);
         }
