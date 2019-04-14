@@ -53,7 +53,6 @@
 //
 //    @Test
 //    public void execute_taskAcceptedByModel_addSuccessful() throws Exception {
-//        Model model = new ModelManager();
 //        User user = new AccountBuilder(NICHOLAS).build();
 //        model.newUser(user);
 //        model.loginUser(user);
