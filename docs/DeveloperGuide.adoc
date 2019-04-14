@@ -440,7 +440,7 @@ Given below is an example usage scenario and how the `deletenote` mechanism beha
 
 The following diagram illustrates how the `deletenote` operation works:
 
-image::DeleteNotesSequenceDiagram.png[width="600"]
+image::DeleteNotesSequenceDiagram.png[width="550"]
 
 ==== Design Considerations
 
