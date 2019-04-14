@@ -243,6 +243,122 @@ If it is less than 0, the command will call the `DeleteCommand` to delete the ov
 ** Cons: Requires more space to store all the overdue tasks
 // end::overdue[]
 
+== Use Cases
 
+[discrete]
+=== Use case: Find task by name
+
+*MSS*
+
+1. User requests to find a task by name
+2. Student Buddy shows the tasks according to user's input
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The list is empty
++
+Use case ends.
+
+[none]
+* 2b. The given index is invalid
++
+[none]
+** 2bi. Student Buddy returns an error
++
+Use case resumes at step 2.
+
+=== Use case: Find task by module
+
+*MSS*
+
+1. User requests to find a task by module
+2. Student Buddy shows the tasks according to user's input
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The list is empty
++
+Use case ends.
+
+[none]
+* 2b. The given index is invalid
++
+[none]
+** 2bi. Student Buddy returns an error
++
+Use case resumes at step 2.
+
+=== Use case: Find task by date
+
+*MSS*
+
+1. User requests to find a task by date
+2. Student Buddy shows the tasks according to user's input
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The list is empty
++
+Use case ends.
+
+[none]
+* 2b. The given index is invalid
++
+[none]
+** 2bi. Student Buddy returns an error
++
+Use case resumes at step 2.
+
+=== Use case: Find task by priority
+
+*MSS*
+
+1. User requests to find a task by priority
+2. Student Buddy shows the tasks according to user's input
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The list is empty
++
+Use case ends.
+
+[none]
+* 2b. The given index is invalid
++
+[none]
+** 2bi. Student Buddy returns an error
++
+Use case resumes at step 2.
+
+=== Use case: Sort tasks
+
+*MSS*
+
+1. User requests to sort tasks by an attribute
+2. Student Buddy sorts the tasks according to user's input
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1b. The given index is invalid
++
+[none]
+** 1ai. Student Buddy returns an error
++
+Use case resumes at step 1.
 
 (End of extract)
