@@ -473,17 +473,15 @@ The sorting mechanism is facilitated by `TaskManager`, `Model` and `SortTaskList
 
 Given below is an example usage scenario.
 
-Step 1. The user keys in `sort ATTRIBUTE`, the `SortCommandParser` will trim the command to get the attribute.
-
-Step 2. If the attribute is valid, it will then create a new `SortCommand` and execute with the given attribute.
-
-Step 3. `SortCommand` will then call `ModelManager#sortTask(toSortBy)`.
-
-Step 4. It will then call `TaskManager#sortTask(attribute)`.
+|===
+|Step 1. The user keys in `sort ATTRIBUTE`, the `SortCommandParser` will trim the command to get the attribute.
+|Step 2. If the attribute is valid, it will then create a new `SortCommand` and execute with the given attribute.
+|Step 3. `SortCommand` will then call `ModelManager#sortTask(toSortBy)`.
+|Step 4. It will then call `TaskManager#sortTask(attribute)`.
 Then we convert the relevant attributes of the tasks in the Task List to string to compare using `string#compareTo()`.
-
-Step 5. Then, we use `setTasks()` in `UniqueTaskList` to update the Task List.
+|Step 5. Then, we use `setTasks()` in `UniqueTaskList` to update the Task List.
 After returning the sorted Task List, the Task Manager is then committed.
+|===
 
 The Sequence Diagram below illustrates how the sort mechanism functions. More specifically, sorting by module code.
 
@@ -506,7 +504,12 @@ image::SortSequenceDiagram.png[width="900"]
 // tag::upcoming[]
 === [Proposed] Delete overdue
 ==== Proposed Implementation
+Using the existing `daysRemaining` variable, upon entering `DeleteOverdue` in the command line, the command will iterate through all the tasks and check the value of `daysRemaining`.
+If it is less than 0, the command will call the `DeleteCommand` to delete the overdue task.
 
+=== Design Considerations
+
+==== Aspect: How the delete overdue command executes
 // end::upcoming[]
 
 // tag::calendar[]
