@@ -178,7 +178,9 @@ The `UI` component,
 === Logic component
 
 [[fig-LogicClassDiagram]]
+
 .Structure of the Logic Component
+
 image::LogicClassDiagram.png[width="800"]
 
 *API* :
@@ -238,34 +240,46 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 This section describes some noteworthy details on how certain features are implemented.
 //@@author nicholasleeeee
 // tag::loginfunction[]
+
 === Login Feature
 
 ==== Current Implementation
 
-The login mechanism is facilitated by `TaskManager`, `SignupCommand`, `LoginCommand`, `LogoutCommand`, `DeleteAccountCommand`, `LoginEvent`, `GenerateHash`, `JsonLoginStorage`.
-The login feature is mainly supported by the `Command` class and `account` class.
+The login mechanism is facilitated by `TaskManager`, `SignupCommand`, `LoginCommand`, `LogoutCommand`, `DeleteAccountCommand`, `LoginEvent`, `GenerateHash`, `JsonLoginStorage`. +
+
+The login feature is mainly supported by the `Command` class and `account` class. +
+
 There are two types of accounts in login feature which are implemented in the `account` class: +
-A normal user account and an admin account. All username and hashed password are stored in a JSON file.
+
+* A normal user account.
+* An admin account.
+
+All username and hashed password are stored in a JSON file.
 
 image::AccountClassDiagram.png[width="350"]
 
-The class diagram on the above illustrates the `account` class. +
+The class diagram above illustrates the `account` class. +
 
-In `model` class, there are methods to check for:
-`loginStatus` (if the user is logged in), `adminStatus` (if the admin is logged in),
-`userExists` (if the username is already taken), `accountExists` (if there is already an account created).
+In `model` class, there are methods to check for: +
 
-In this feature, there are 4 main commands.
+* `loginStatus` (if the user is logged in) +
+* `adminStatus` (if the admin is logged in) +
+* `userExists` (if the username is already taken) +
+* `accountExists` (if there is already an account created)
+
+In this feature, there are 4 main commands. +
 The flow on how the commands are executed and their respective sequence diagrams will be further elaborated below: +
 1. Signup and Login Command +
 2. <<Logout Command>> +
-3. <<DeleteAcc Command>>
+3. <<DeleteAcc Command>> +
 
 ==== Signup and Login Command
 
 *`Signup Command` creates an account for the user and stores their username and password in a JSON file.* +
+
 *`Login Command` logs in the account for the user by checking the username and password stored in the JSON file.* +
-Given below is an example usage scenario of `signup`. The command word can be swapped for `login`.
+
+Given below is an example usage scenario of `signup`. The command word can be swapped to `login` for `Login Command`.
 
 |===
 |Step 1. The user signs up and keys in username and password using the command `signup u/USERNAME p/PASSWORD`.
@@ -277,7 +291,7 @@ Given below is an example usage scenario of `signup`. The command word can be sw
 `userExists` to check if there is already an account with the same username. +
 `accountExists` to check if an account has already been created. +
 
-If the arguments passes all the commands, `newUser(user)` will be called to store
+If the arguments passes all the commands, `newUser(user)` {`loginUser(user)` for `Login Command`} will be called to store
 the username and hashed password in a User class.
 It will then pass the User object to `JsonLoginStorage`.
 |Step 4. `JsonLoginStorage` retrieves the User object to read and write Json files with the correct Json properties.
@@ -293,12 +307,14 @@ image::LoginSequenceDiagram.png[width="500"]
 
 ==== Logout Command
 
-*Logout Command logs the user out of their account.* Given below is an example usage scenario of `logout`.
+*`Logout Command` logs the user out of their account.* +
+
+Given below is an example usage scenario of `logout`.
 
 |===
 |Step 1. The user logs out by keying in the command `logout`.
 |Step 2. The `TaskManagerParser` recognises the command word as a logout from `LogoutCommand` and calls `LogoutCommand`.
-|Step 3. `LogoutCommand` will call the following command which is linked to `LoginEvent`.
+|Step 3. `LogoutCommand` will call the following commands which is linked to `LoginEvent`.
 
 `getLoginStatus` to check if the user is already logged out. +
 `getAdminStatus` to check if the admin is already logged out. +
@@ -308,13 +324,15 @@ If the arguments passes `getLoginStatus` and `getAdminStatus`, `logout` will be 
 return to `LoginCommand` to return the user a successful logout output.
 |===
 
-The sequence diagram below shows the flow of `logout` from Step to Step above.
+The sequence diagram below shows the flow of `logout` from Step 1 to Step 4 above.
 
 image::LogoutSequenceDiagram.png[width="500"]
 
 ==== DeleteAcc Command
 
-*`DeleteAcc` only accessible to admins. `DeleteAcc` deletes the entire account.* Given below is an example usage scenario of `DeleteAcc`.
+*`DeleteAcc` only accessible to admins. `DeleteAcc` deletes the entire account.* +
+
+Given below is an example usage scenario of `DeleteAcc`.
 
 |===
 |Step 1. The admin logs in by keying in username and password using the command `login u/admin p/admin`.
@@ -332,7 +350,7 @@ without any username and password stored in it. `reinitialise()` is assisted by 
 |Step 7. `LoginEvent` will return to `DeleteAccountCommand` and returns the user a successful login output.
 |===
 
-The sequence diagram below shows the flow of `deleteacc` from Step to Step above.
+The sequence diagram below shows the flow of `deleteacc` from Step 1 to Step 7 above.
 
 image::DeleteAccountSequenceDiagram.png[width="500"]
 
@@ -341,34 +359,49 @@ image::DeleteAccountSequenceDiagram.png[width="500"]
 ===== Aspect: How `LoginEvent` and `JsonLoginStorage` works together
 
 *Alternative 1 (current choice): `LoginEvent` and `JsonLoginStorage` are in separate classes.* +
-Pros: Follows OOP coding. The codes will look more organised and clean. +
-Cons: Coders will have to look at both files to code or debug as both calls each other frequently. +
+
+* Pros: Follows OOP coding. The codes will look more organised and clean. +
+
+* Cons: Coders will have to look at both files to code or debug as both calls each other frequently. +
+
 *Alternative 2: `LoginEvent` and `JsonLoginStorage` are in the same class.* +
-Pros: Easy to read and debug, all codes are in one file and thus easier for other coders to modify. +
-Cons: Does not follow OOP coding. The codes in the file will look messy.
+
+* Pros: Easy to read and debug, all codes are in one file and thus easier for other coders to modify. +
+
+* Cons: Does not follow OOP coding. The codes in the file will look messy.
 
 ===== Aspect: How `LoginEvent` fits into the code
 
 *Alternative 1 (current choice): `LoginEvent` is implemented into the logic.* +
-Pros: The code will be efficient and effective. It will be neat and the flow will be well structured.
+
+* Pros: The code will be efficient and effective. It will be neat and the flow will be well structured.
 Single Responsibility Principle and Separation of Concerns is maintained in the code. +
-Cons: Might be confusing as `LoginEvent` is used frequently.
+
+* Cons: Might be confusing as `LoginEvent` is used frequently.
 Coders might need to fully understand how other classes work before looking at `LoginEvent`. +
+
 *Alternative 2: `LoginEvent` is implemented on its own.* +
-Pros: It would be easier for coders to visualise and debug. `LoginEvent` can still run the entire Taskmanager. +
-Cons: There would be a lot of repeated and redundant codes.
+
+* Pros: It would be easier for coders to visualise and debug. `LoginEvent` can still run the entire Taskmanager. +
+
+* Cons: There would be a lot of repeated and redundant codes.
 Most of the functions in the `logic` component will be repeated. This will violate Single Responsibility Principle and Separation of Concerns.
 
 ===== Aspect: How the securing of password is implemented
 
 *Alternative 1 (current choice): Create my own hashing function to secure password.* +
-Pros: Hashing is a one way function. With a proper hashing design, there is no way to reverse
+
+* Pros: Hashing is a one way function. With a proper hashing design, there is no way to reverse
 the hashing process to reveal the original password. +
-Cons: Need to code out my own hashing function. More logic and function have to be written.
+
+* Cons: Need to code out my own hashing function. More logic and function have to be written.
 The code will be more complex. +
+
 *Alternative 2: Use encryption library to secure password. Eg. MD5 hashing* +
-Pros: Do not need to code much. Most of the function are one line. Easy to implement. +
-Cons: Encryption is a two-way function. Encrypted strings can be decrypted with a proper key.
+
+* Pros: Do not need to code much. Most of the function are one line. Easy to implement. +
+
+* Cons: Encryption is a two-way function. Encrypted strings can be decrypted with a proper key.
 The password will not be secure. MD5 is not suitable for sensitive information.
 Collisions exist with the algorithm, and there have been successful attacks against it.
 
@@ -1229,14 +1262,6 @@ Use case ends.
 +
 Use case resumes at step 1.
 
-[none]
-* 1b. The given fields are invalid
-+
-[none]
-** 1bi. Student Buddy shows an error message
-+
-Use case resumes at step 1.
-
 [discrete]
 === Use case: Add notes
 
@@ -1530,8 +1555,6 @@ These instructions only provide a starting point for testers to work on; testers
 .. Re-launch the app by double-clicking the jar file. +
    Expected: The most recent window size and location is retained.
 
-_{ more test cases ... }_
-
 === Deleting a task
 
 . Deleting a task while all tasks are listed
@@ -1543,13 +1566,3 @@ _{ more test cases ... }_
    Expected: No task is deleted. Error details shown in the status message. Status bar remains the same.
 .. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) _{give more}_ +
    Expected: Similar to previous.
-
-_{ more test cases ... }_
-
-=== Saving data
-
-. Dealing with missing/corrupted data files
-
-.. _{explain how to simulate a missing/corrupted file and the expected behavior}_
-
-_{ more test cases ... }_
