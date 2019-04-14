@@ -46,7 +46,7 @@ public class AddNotesCommandTest {
     }
 
     @Test
-    public void execute_NotesAcceptedByModel() throws Exception {
+    public void execute_notes_accepted_byModel() throws Exception {
         ModelStubAcceptingNotesAdded modelStub = new ModelStubAcceptingNotesAdded();
         Notes validNotes = new NotesBuilder().build();
 
@@ -78,7 +78,7 @@ public class AddNotesCommandTest {
         // same object -> returns true
         assertTrue(addMarketCommand.equals(addMarketCommand));
 
-       // same values -> returns true
+        // same values -> returns true
         AddNotesCommand addMarketCopy = new AddNotesCommand(market);
         assertTrue(addMarketCommand.equals(addMarketCopy));
 
