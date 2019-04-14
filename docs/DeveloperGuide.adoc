@@ -382,7 +382,7 @@ This feature allow users to add notes regarding miscellaneous matters.
 
 The class diagram below illustrates the *Notes* class.
 
-image::ClassDiagramForNotes.png[width="450"]
+image::ClassDiagramForNotes.png[width="400"]
 
 ==== Current Implementation
 
@@ -402,7 +402,7 @@ Given below is an example usage scenario and how the add notes mechanism behaves
 
 The sequence diagram below illustrates how the mechanism for adding notes function.
 
-image::AddNotesSequenceDiagram.png[width="800"]
+image::AddNotesSequenceDiagram.png[width="600"]
 
 ==== Design Considerations
 
@@ -440,7 +440,7 @@ Given below is an example usage scenario and how the `deletenote` mechanism beha
 
 The following diagram illustrates how the `deletenote` operation works:
 
-image::DeleteNotesSequenceDiagram.png[width="800"]
+image::DeleteNotesSequenceDiagram.png[width="550"]
 
 ==== Design Considerations
 
@@ -454,7 +454,7 @@ Aspect: Weighing *user experience* to *convenience* of users
 ** Pros: Easy for users to manage completed notes.
 ** Cons: No sense of achievement as users are unable to view the amount of work completed.
 
-Final decision: Alternative 2 was chosen due to it being *more practical and convenient* to users so that users will continue to use it in the future.
+Final decision: Alternative 2 was chosen due to it being *more practical and convenient* to users.
 // end::notes[]
 
 // tag::task[]

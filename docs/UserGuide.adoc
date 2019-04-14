@@ -341,11 +341,11 @@ The following are 2 diagrams that demostrate the example shown above. One of the
 
 *Before:*
 
-image::AddNotesBefore.png[width="800"]
+image::AddNotesBefore.png[width="700"]
 
 *After:*
 
-image::AddNotesAfter.png[width="800"]
+image::AddNotesAfter.png[width="700"]
 
 === Deleting miscellaneous notes : `deletenote`
 
@@ -367,11 +367,11 @@ The following are 2 diagrams that demostrate the example shown above. One of the
 
 *Before:*
 
-image::DeleteNoteBefore.png[width="800"]
+image::DeleteNoteBefore.png[width="700"]
 
 *After:*
 
-image::DeleteNoteAfter.png[width="800"]
+image::DeleteNoteAfter.png[width="700"]
 // end::notes[]
 
 === Listing entered commands : `history`
