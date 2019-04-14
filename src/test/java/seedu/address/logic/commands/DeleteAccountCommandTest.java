@@ -2,10 +2,13 @@
 package seedu.address.logic.commands;
 
 import static org.junit.Assert.assertEquals;
+import static seedu.address.testutil.TypicalAccounts.NICHOLAS;
+import static seedu.address.testutil.TypicalTasks.getTypicalTaskManager;
 
 import java.nio.file.Path;
 import java.util.function.Predicate;
 
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -16,27 +19,39 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyTaskManager;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.account.User;
 import seedu.address.model.account.Username;
 import seedu.address.model.notes.Notes;
 import seedu.address.model.task.Task;
 import seedu.address.model.util.Month;
+import seedu.address.testutil.AccountBuilder;
 
 public class DeleteAccountCommandTest {
+
+    private Model model;
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
     private CommandHistory commandHistory = new CommandHistory();
 
+    @Before
+    public void setUp() {
+        User user = new AccountBuilder(NICHOLAS).build();
+        model = new ModelManager(getTypicalTaskManager(), new UserPrefs());
+        model.newUser(user);
+        User admin = new AccountBuilder().setUsername("admin").setPassword("admin").build();
+        model.loginUser(admin);
+    }
+
     @Test
     public void successfulDeleteAccount() throws CommandException {
 
-        ModelStubUser modelStubUser = new ModelStubUser();
-
-        CommandResult commandResult = new DeleteAccountCommand().execute(modelStubUser, commandHistory);
+        CommandResult commandResult = new DeleteAccountCommand().execute(model, commandHistory);
 
         assertEquals(String.format(DeleteAccountCommand.MESSAGE_SUCCESS), commandResult.getFeedbackToUser());
     }
