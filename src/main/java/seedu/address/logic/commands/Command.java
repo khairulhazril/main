@@ -18,6 +18,7 @@ public abstract class Command {
      * @throws CommandException If an error occurs during command execution.
      */
     public static final String MESSAGE_LOGIN_REQUIRED = "You need to login to use this command.";
+    public static final String MESSAGE_ACCOUNT_DOES_NOT_EXIST = "Please sign up and login to use this command.";
 
     public abstract CommandResult execute(Model model, CommandHistory history) throws CommandException;
 

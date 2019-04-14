@@ -1,6 +1,6 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.commands.LoginCommand.MESSAGE_FAILURE;
+import static seedu.address.logic.commands.LoginCommand.MESSAGE_INVALID_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
 import static seedu.address.logic.parser.ParserUtil.parsePassword;
@@ -32,7 +32,7 @@ public class LoginCommandParser implements Parser<LoginCommand> {
         ArgumentMultimap map = ArgumentTokenizer.tokenize(args, PREFIX_USERNAME, PREFIX_PASSWORD);
 
         if (!invalidPrefix(map, PREFIX_USERNAME, PREFIX_PASSWORD) || !map.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_FAILURE));
+            throw new ParseException(String.format(MESSAGE_INVALID_FORMAT));
         }
 
         Username username = parseUsername(map.getValue(PREFIX_USERNAME).get());

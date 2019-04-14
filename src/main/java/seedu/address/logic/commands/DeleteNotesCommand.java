@@ -36,6 +36,10 @@ public class DeleteNotesCommand extends Command {
         requireNonNull(model);
         List<Notes> lastShownList = model.getFilteredNotesList();
 
+        if (!model.accountExists()) {
+            throw new CommandException(MESSAGE_ACCOUNT_DOES_NOT_EXIST);
+        }
+
         if (!model.getLoginStatus() && !model.getAdminStatus()) {
             throw new CommandException(MESSAGE_LOGIN_REQUIRED);
         }
