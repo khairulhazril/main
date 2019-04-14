@@ -1128,7 +1128,7 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 * prefers typing over mouse input
 * is reasonably comfortable using CLI apps
 
-*Value proposition*: Allow students with huge amount of workload to better manage their tasks and notes more effectively using our user-friendly Student Buddy.   
+*Value proposition*: Allow students with huge amount of workload to better manage their tasks and notes more effectively using our user-friendly Student Buddy.
 
 [appendix]
 == User Stories
