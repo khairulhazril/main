@@ -21,6 +21,7 @@ public class UndoCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
+        //@@author nicholasleeeee
         if (!model.accountExists()) {
             throw new CommandException(MESSAGE_ACCOUNT_DOES_NOT_EXIST);
         }
@@ -28,6 +29,7 @@ public class UndoCommand extends Command {
         if (!model.getLoginStatus() && !model.getAdminStatus()) {
             throw new CommandException(MESSAGE_LOGIN_REQUIRED);
         }
+        //@@author
 
         if (!model.canUndoTaskManager()) {
             throw new CommandException(MESSAGE_FAILURE);

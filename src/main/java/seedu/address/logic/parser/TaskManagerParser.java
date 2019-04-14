@@ -59,6 +59,7 @@ public class TaskManagerParser {
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
 
+        //@@author nicholasleeeee
         case SignupCommand.COMMAND_WORD:
             return new SignupCommandParser().parse(arguments);
 
@@ -70,6 +71,7 @@ public class TaskManagerParser {
 
         case LogoutCommand.COMMAND_WORD:
             return new LogoutCommand();
+        //@@author
 
         case AddCommand.COMMAND_WORD:
         case AddCommand.COMMAND_ALIAS:

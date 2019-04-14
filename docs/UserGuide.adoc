@@ -58,7 +58,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * Parameters can be in any order e.g. if the command specifies `n/NAME d/DATE`, `d/DATE n/NAME` is also acceptable.
 * Dates are in the format DD-MM.
 ====
-
+//@@author nicholasleeeee
 // tag::loginfunction[]
 === Signing up for an account : `signup`
 
@@ -79,11 +79,9 @@ Signed up: nicholas
 Possible Errors:
 
 ====
-
 * *You are logged in as nicholas!*: You are already logged in and will need to logout in order to signup for a new account. +
 * *Please try another username*: The username already exists, signup again with another username. +
 * *Account has already been created!* : There is an existing account. You can login or sign in as an admin to delete the account. +
-
 ====
 
 === Logging into an account : `login`
@@ -100,8 +98,8 @@ Possible Errors:
 ====
 *You are already logged in!* : You are already logged in and will need logout in order to login to another account. +
 
-*Please Login again! Invalid username or password.
- Command Format: [login u/USERNAME p/PASSWORD]*: You have inserted an incorrect username or password. The login command has to be executed again +
+*Please Login again! Invalid username or password. Command Format: [login u/USERNAME p/PASSWORD]*: +
+ You have inserted an incorrect username or password. The login command has to be executed again +
 ====
 
 === Logging out of an account : `logout`
@@ -126,16 +124,19 @@ You have already logged out or you did not login into any account. +
 Format: `deleteacc`
 
 Example:
+
 * `deleteacc` +
 Account has been deleted!
 
+
 Possible Errors:
 ====
-*You need to log in as an admin to use this command* :
+*You need to log in as an admin to use this command* : +
 You are not logged in as an admin. Please login as an admin before using this command. +
 ====
 
 // end::loginfunction[]
+//@@author
 
 === Viewing help : `help`, `h`
 
