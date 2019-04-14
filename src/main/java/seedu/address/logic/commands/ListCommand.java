@@ -24,7 +24,7 @@ public class ListCommand extends Command {
         requireNonNull(model);
         model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
 
-        if (!model.accountExists()) {
+        if (!model.accountExists() && !model.getAdminStatus()) {
             throw new CommandException(MESSAGE_ACCOUNT_DOES_NOT_EXIST);
         }
 

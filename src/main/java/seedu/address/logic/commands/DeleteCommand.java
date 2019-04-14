@@ -38,7 +38,7 @@ public class DeleteCommand extends Command {
         requireNonNull(model);
         List<Task> lastShownList = model.getFilteredTaskList();
 
-        if (!model.accountExists()) {
+        if (!model.accountExists() && !model.getAdminStatus()) {
             throw new CommandException(MESSAGE_ACCOUNT_DOES_NOT_EXIST);
         }
 
