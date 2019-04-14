@@ -503,6 +503,12 @@ image::SortSequenceDiagram.png[width="900"]
 
 // end::sorttask[]
 
+// tag::upcoming[]
+=== [Proposed] Delete overdue
+==== Proposed Implementation
+
+// end::upcoming[]
+
 // tag::calendar[]
 === Calendar feature
 ==== Current Implementation
