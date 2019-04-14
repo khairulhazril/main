@@ -18,6 +18,7 @@ public class SortCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Sorts the task list in the task manager.\n"
             + "Parameters: attribute\n"
+            + "Attribute should be one of the following: name, date, module or priority\n"
             + "Example: " + COMMAND_WORD + " name";
 
     public static final String MESSAGE_SUCCESS = "Task list sorted by %1$s";

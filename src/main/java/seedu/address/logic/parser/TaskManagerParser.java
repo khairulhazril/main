@@ -19,7 +19,6 @@ import seedu.address.logic.commands.FindDateCommand;
 import seedu.address.logic.commands.FindModuleCommand;
 import seedu.address.logic.commands.FindNameCommand;
 import seedu.address.logic.commands.FindPriorityCommand;
-import seedu.address.logic.commands.FindUpcomingCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
@@ -106,9 +105,6 @@ public class TaskManagerParser {
         case FindPriorityCommand.COMMAND_WORD:
         case FindPriorityCommand.COMMAND_ALIAS:
             return new FindPriorityCommandParser().parse(arguments);
-
-        case FindUpcomingCommand.COMMAND_WORD:
-            return new FindDateCommandParser().parse("01-01");
 
         case ListCommand.COMMAND_WORD:
         case ListCommand.COMMAND_ALIAS:
