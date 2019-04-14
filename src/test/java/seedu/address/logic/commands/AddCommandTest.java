@@ -4,6 +4,7 @@
 //import static org.junit.Assert.assertEquals;
 //import static org.junit.Assert.assertFalse;
 //import static org.junit.Assert.assertTrue;
+//import static seedu.address.testutil.TypicalAccounts.NICHOLAS;
 //
 //import java.nio.file.Path;
 //import java.util.ArrayList;
@@ -19,14 +20,13 @@
 //import seedu.address.commons.core.GuiSettings;
 //import seedu.address.logic.CommandHistory;
 //import seedu.address.logic.commands.exceptions.CommandException;
-//import seedu.address.model.Model;
-//import seedu.address.model.ReadOnlyTaskManager;
-//import seedu.address.model.ReadOnlyUserPrefs;
-//import seedu.address.model.TaskManager;
-//import seedu.address.model.login.User;
-//import seedu.address.model.login.Username;
+//import seedu.address.model.*;
+//import seedu.address.model.account.User;
+//import seedu.address.model.account.Username;
 //import seedu.address.model.notes.Notes;
 //import seedu.address.model.task.Task;
+//import seedu.address.model.util.Month;
+//import seedu.address.testutil.AccountBuilder;
 //import seedu.address.testutil.TaskBuilder;
 //
 //
@@ -34,6 +34,7 @@
 //public class AddCommandTest {
 //
 //    private static final CommandHistory EMPTY_COMMAND_HISTORY = new CommandHistory();
+//    private Model model = new ModelManager();
 //
 //    @Rule
 //    public ExpectedException thrown = ExpectedException.none();
@@ -48,6 +49,10 @@
 //
 //    @Test
 //    public void execute_taskAcceptedByModel_addSuccessful() throws Exception {
+//        User user = new AccountBuilder(NICHOLAS).build();
+//        model.newUser(user);
+//        model.loginUser(user);
+//
 //        ModelStubAcceptingTaskAdded modelStub = new ModelStubAcceptingTaskAdded();
 //        Task validTask = new TaskBuilder().build();
 //
@@ -256,6 +261,21 @@
 //        }
 //
 //        @Override
+//        public ReadOnlyProperty<Month> currentMonthProperty() {
+//            return null;
+//        }
+//
+//        @Override
+//        public void setMonth(Month month) {
+//
+//        }
+//
+//        @Override
+//        public Month getMonth() {
+//            return null;
+//        }
+//
+//        @Override
 //        public boolean hasNotes(Notes notes) {
 //            throw new AssertionError("This method should not be called.");
 //        }
@@ -263,6 +283,11 @@
 //        @Override
 //        public void addNotes(Notes notes) {
 //            throw new AssertionError("This method should not be called.");
+//        }
+//
+//        @Override
+//        public void addJsonNotes(Notes notes) {
+//
 //        }
 //
 //        @Override
@@ -288,6 +313,11 @@
 //        @Override
 //        public Notes getSelectedNotes() {
 //            throw new AssertionError("This method should not be called.");
+//        }
+//
+//        @Override
+//        public void deleteNotes(Notes target) {
+//
 //        }
 //    }
 //

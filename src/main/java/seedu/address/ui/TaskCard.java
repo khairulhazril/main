@@ -51,8 +51,10 @@ public class TaskCard extends UiPart<Region> {
         due.setText(task.getDue().value);
         priority.setText(PRIORITYNAMES[Integer.parseInt(task.getPriority().value) - 1]);
         name.setWrapText(true);
-        if (task.getDaysRemaining() < 0) {
+        if (task.getDaysRemaining() == -1) {
             daysLeft.setText("Task is overdue!!!");
+        } else if (task.getDaysRemaining() == 0) {
+            daysLeft.setText("Task is due today!");
         } else {
             daysLeft.setText("Days Left: " + Integer.toString(task.getDaysRemaining()));
         }
@@ -67,6 +69,14 @@ public class TaskCard extends UiPart<Region> {
             due.setStyle("-fx-text-fill: grey");
             priority.setStyle("-fx-text-fill: grey");
             daysLeft.setStyle("-fx-text-fill: red");
+
+        } else if (daysRemaining == 0) {
+            id.setStyle("-fx-text-fill: orange");
+            name.setStyle("-fx-text-fill: orange");
+            module.setStyle("-fx-text-fill: orange");
+            due.setStyle("-fx-text-fill: orange");
+            priority.setStyle("-fx-text-fill: orange");
+            daysLeft.setStyle("-fx-text-fill: orange");
 
         } else if (daysRemaining <= 7) {
             id.setStyle("-fx-text-fill: lightgreen");
