@@ -381,7 +381,7 @@ This feature allow users to add notes regarding miscellaneous matters.
 
 The class diagram below illustrates the *Notes* class.
 
-image::NotesClassDiagram.png[width="450"]
+image::ClassDiagramForNotes.png[width="450"]
 
 ==== Current Implementation
 
@@ -611,6 +611,16 @@ The following diagram illustrates the operation of the `month` command.
 image::MonthCommandSequenceDiagram.png[width="1000"]
 
 // end::monthChange[]
+
+// tag::notesstorage[]
+=== Retrieving of notes from storage [coming in V2.0]
+==== Current assumptions
+* Notes added are minor notes that can be completed in a day (E.g Buying eggs from market).
+* Student Buddy is turned off at the end of the day when user's personal computer is turned off.
+==== Current Implementation
+* Notes added are currently being stored in notes.json file.
+* Retrieving from notes.json file is still in progress.
+// end::notesstorage[]
 
 === Logging
 
