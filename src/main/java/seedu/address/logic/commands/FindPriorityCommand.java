@@ -32,15 +32,18 @@ public class FindPriorityCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        model.updateFilteredTaskList(predicate);
 
-        if (!model.accountExists() && !model.getAdminStatus()) {
+        //@@author nicholasleeeee
+        if (!model.accountExists()) {
             throw new CommandException(MESSAGE_ACCOUNT_DOES_NOT_EXIST);
         }
 
         if (!model.getLoginStatus() && !model.getAdminStatus()) {
             throw new CommandException(MESSAGE_LOGIN_REQUIRED);
         }
+        //@@author
+
+        model.updateFilteredTaskList(predicate);
 
         return new CommandResult(
                 String.format(Messages.MESSAGE_TASKS_LISTED_OVERVIEW, model.getFilteredTaskList().size()));

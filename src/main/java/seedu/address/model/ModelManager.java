@@ -63,6 +63,7 @@ public class ModelManager implements Model {
         this(new TaskManager(), new UserPrefs());
     }
 
+    //@@author nicholasleeeee
     //=========== Login Information ==================================================================================
 
     @Override
@@ -113,6 +114,7 @@ public class ModelManager implements Model {
     public void logout() {
         loginEvent.logout();
     }
+    //@@author
 
     //=========== UserPrefs ==================================================================================
 

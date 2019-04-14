@@ -1,3 +1,4 @@
+//@@author nicholasleeeee
 package seedu.address.logic.commands;
 
 import seedu.address.logic.CommandHistory;
@@ -18,15 +19,12 @@ public class DeleteAccountCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
 
-        // Not an admin logging in
         if (!model.getAdminStatus()) {
             throw new CommandException(MESSAGE_ADMIN_LOGIN);
         }
 
-        // Get username for printout statement
         Username loginUsername = model.getUsername();
 
-        // Delete JSON file
         model.deleteAccount();
 
         model.setSelectedTask(null);

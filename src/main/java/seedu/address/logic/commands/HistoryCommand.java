@@ -21,15 +21,18 @@ public class HistoryCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(history);
-        ArrayList<String> previousCommands = new ArrayList<>(history.getHistory());
 
-        if (!model.accountExists() && !model.getAdminStatus()) {
+        //@@author nicholasleeeee
+        if (!model.accountExists()) {
             throw new CommandException(MESSAGE_ACCOUNT_DOES_NOT_EXIST);
         }
 
         if (!model.getLoginStatus() && !model.getAdminStatus()) {
             throw new CommandException(MESSAGE_LOGIN_REQUIRED);
         }
+        //@@author
+
+        ArrayList<String> previousCommands = new ArrayList<>(history.getHistory());
 
         if (previousCommands.isEmpty()) {
             return new CommandResult(MESSAGE_NO_HISTORY);
