@@ -4,7 +4,7 @@
 :stylesDir: ../stylesheets
 
 == Kayden - Project Portfolio
-This portfolio serves to document my contributions in a team-based software enginnering project CS2113T. My team comprises of 4 memebers and we were tasked to morph a *basic command line interface addressbook* within *8 weeks*. After some discussion, we decided that we will work towards a Task Manager named *Student Buddy*.
+This portfolio serves to document my contributions in a team-based software engineering project CS2113T. My team comprises of 4 members and we were tasked to morph a *basic command line interface address book* within *8 weeks*. After some discussion, we decided that we will work towards a Task Manager named *Student Buddy*.
 
 Note the following symbols and formatting used in the project portfolio:
 
@@ -25,7 +25,7 @@ This section showcases the different aspects in which I have contributed to the 
 
 * *Major enhancement*: added *the ability to `add notes` and `delete notes`*.
 ** What it does: allows the user to add in new notes to help keep track and manage notes. Unwanted notes or notes that are already completed can be removed by deleting the note.
-** Justification: This feature improves the product significantly because a user can now manage their miscellaneous activities other than school-related tasks which greatly enhances the useablility of Task Manager.
+** Justification: This feature improves the product significantly because a user can now manage their miscellaneous activities other than school-related tasks which greatly enhances the usablility of Task Manager.
 ** Highlights: This enhancement required an in-depth analysis and understanding of the design of Task Manager to know what are its restrictions and how it can be improved.
 ** Credits: All the team members.
 
