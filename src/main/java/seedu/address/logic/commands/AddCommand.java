@@ -51,6 +51,7 @@ public class AddCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
+        //@@author nicholasleeeee
         if (!model.accountExists()) {
             throw new CommandException(MESSAGE_ACCOUNT_DOES_NOT_EXIST);
         }
@@ -58,6 +59,7 @@ public class AddCommand extends Command {
         if (!model.getLoginStatus() && !model.getAdminStatus()) {
             throw new CommandException(MESSAGE_LOGIN_REQUIRED);
         }
+        //@@author
 
         if (model.hasTask(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
