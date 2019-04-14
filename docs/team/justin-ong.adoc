@@ -34,12 +34,14 @@ The following list is a summary of my contributions to the project *Student Budd
 
 ** Project management:
 *** Set up milestones in the team repo for tracking our progress on the project
+*** Set up tags for the team repo's issue tracker
 *** Deployed release v1.3.1
 ** Enhancements to other features:
 *** Assisted in adding a due date display to the task card list in the GUI (Pull request https://github.com/CS2113-AY1819S2-M11-2/main/pull/94[#94])
 *** Assisted in formatting and presentation of notes function in the GUI (https://github.com/CS2113-AY1819S2-M11-2/main/pull/119[#119])
+*** Added functionality to select feature, causing selected tasks to be cleared upon modification of the task list (https://github.com/CS2113-AY1819S2-M11-2/main/pull/166[#166])
 ** Documentation:
-*** Updated contents of the User and Developer Guides with my contributions, as well as cleaning up tone, grammar, etc: (https://github.com/CS2113-AY1819S2-M11-2/main/pull/36[#36], https://github.com/CS2113-AY1819S2-M11-2/main/pull/84[#84], https://github.com/CS2113-AY1819S2-M11-2/main/pull/90[#90], https://github.com/CS2113-AY1819S2-M11-2/main/pull/108[#108], https://github.com/CS2113-AY1819S2-M11-2/main/pull/109[#109], https://github.com/CS2113-AY1819S2-M11-2/main/pull/119[#119], https://github.com/CS2113-AY1819S2-M11-2/main/pull/163[#163])
+*** Updated contents of the User and Developer Guides with my contributions, as well as cleaning up tone, grammar, formatting, etc (https://github.com/CS2113-AY1819S2-M11-2/main/pull/36[#36], https://github.com/CS2113-AY1819S2-M11-2/main/pull/84[#84], https://github.com/CS2113-AY1819S2-M11-2/main/pull/90[#90], https://github.com/CS2113-AY1819S2-M11-2/main/pull/108[#108], https://github.com/CS2113-AY1819S2-M11-2/main/pull/109[#109], https://github.com/CS2113-AY1819S2-M11-2/main/pull/119[#119], https://github.com/CS2113-AY1819S2-M11-2/main/pull/163[#163], https://github.com/CS2113-AY1819S2-M11-2/main/pull/167[#167], https://github.com/CS2113-AY1819S2-M11-2/main/pull/169[#169])
 ** Community:
 *** Reported bugs and suggestions for other teams in the class (examples:  https://github.com/cs2113-ay1819s2-t08-1/main/issues/89[1], https://github.com/cs2113-ay1819s2-t08-1/main/issues/99[2], https://github.com/cs2113-ay1819s2-t08-1/main/issues/95[3], https://github.com/cs2113-ay1819s2-t08-1/main/issues/91[4])
 ** Tools:
@@ -56,7 +58,7 @@ include::../UserGuide.adoc[tag=calendar]
 == Contributions to the Developer Guide
 
 |===
-|_The AB4 project also came with a Developer Guide, which we also modified to match our project. For my part, I wrote about the implementation of my calendar panel and the month changing feature. I also contributed towards cleaning up some grammar mistakes in the guide, as well as adjusting the tone to be more consistent. Below is a sample of my contributions._
+|_The AB4 project also came with a Developer Guide, which we also modified to match our project. For my part, I wrote about the implementation of my calendar panel and the month changing feature. I also contributed towards cleaning up some grammar mistakes in the guide, as well as adjusting the tone and formatting to be more consistent. Below is a sample of my contributions._
 |===
 
 include::../DeveloperGuide.adoc[tag=calendar]
