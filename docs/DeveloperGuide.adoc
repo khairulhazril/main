@@ -1262,7 +1262,6 @@ Use case ends.
 +
 Use case resumes at step 1.
 
-[discrete]
 === Use case: Add notes
 
 *MSS*
@@ -1309,7 +1308,6 @@ Use case ends.
 +
 Use case resumes at step 2.
 
-[discrete]
 === Use case: Delete notes
 
 *MSS*
