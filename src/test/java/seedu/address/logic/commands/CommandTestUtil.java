@@ -2,7 +2,9 @@ package seedu.address.logic.commands;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HEADING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
@@ -19,6 +21,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.TaskManager;
+import seedu.address.model.notes.Notes;
 import seedu.address.model.task.NameContainsKeywordsPredicate;
 import seedu.address.model.task.Task;
 import seedu.address.testutil.EditTaskDescriptorBuilder;
@@ -30,6 +33,13 @@ public class CommandTestUtil {
 
     public static final String VALID_USERNAME = "Wonder Woman";
     public static final String VALID_PASSWORD = "Why-1s-Zeu5-my-f4ther";
+
+    public static final String VALID_HEADING_MARKET = "Market";
+    public static final String VALID_CONTENT_MARKET = "Buy eggs";
+    public static final String VALID_PRIORITY_MARKET = "2";
+    public static final String VALID_HEADING_POPULAR = "Popular";
+    public static final String VALID_CONTENT_POPULAR = "Buy blue pens";
+    public static final String VALID_PRIORITY_POPULAR = "1";
 
     public static final String VALID_NAME_PROJECT = "Project";
     public static final String VALID_NAME_TUTORIAL = "Tutorial";
@@ -44,6 +54,12 @@ public class CommandTestUtil {
 
     public static final String USERNAME_DESC = " " + PREFIX_USERNAME + VALID_USERNAME;
     public static final String PASSWORD_DESC = " " + PREFIX_PASSWORD + VALID_PASSWORD;
+    public static final String HEADING_DESC_MARKET = " " + PREFIX_HEADING + VALID_HEADING_MARKET;
+    public static final String CONTENT_DESC_MARKET = " " + PREFIX_CONTENT + VALID_CONTENT_MARKET;
+    public static final String PRIORITY_DESC_MARKET = " " + PREFIX_PRIORITY + VALID_PRIORITY_MARKET;
+    public static final String HEADING_DESC_POPULAR = " " + PREFIX_HEADING + VALID_HEADING_POPULAR;
+    public static final String CONTENT_DESC_POPULAR = " " + PREFIX_CONTENT + VALID_CONTENT_POPULAR;
+    public static final String PRIORITY_DESC_POPULAR = " " + PREFIX_PRIORITY + VALID_PRIORITY_POPULAR;
     public static final String NAME_DESC_PROJECT = " " + PREFIX_NAME + VALID_NAME_PROJECT;
     public static final String NAME_DESC_TUTORIAL = " " + PREFIX_NAME + VALID_NAME_TUTORIAL;
     public static final String MODULE_DESC_PROJECT = " " + PREFIX_MODULE + VALID_MODULE_PROJECT;
@@ -57,6 +73,8 @@ public class CommandTestUtil {
 
     public static final String INVALID_USERNAME_DESC = " " + PREFIX_USERNAME + "N!";
     public static final String INVALID_PASSWORD_DESC = " " + PREFIX_PASSWORD + "no space";
+    public static final String INVALID_HEADING_DESC = " " + PREFIX_HEADING + "Jordan's 21st";
+    public static final String INVALID_CONTENT_DESC = " " + PREFIX_CONTENT + "Buy cake and presents!!!";
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; //'&' not allowed in names
     public static final String INVALID_MODULE_DESC = " " + PREFIX_MODULE + "CS21a3"; //Module must be in the form AAXXXX
     public static final String INVALID_DATE_DESC = " " + PREFIX_DATE + "01-20"; //Month must between 1 to 12
@@ -157,6 +175,28 @@ public class CommandTestUtil {
         Task firstTask = model.getFilteredTaskList().get(0);
         model.deleteTask(firstTask);
         model.commitTaskManager();
+    }
+
+    public static void assertNotesCommandFailure(Command command, Model actualModel, CommandHistory actualCommandHistory,
+                                            String expectedMessage) {
+        // we are unable to defensively copy the model for comparison later, so we can
+        // only do so by copying its components.
+        TaskManager expectedTaskManager = new TaskManager(actualModel.getTaskManager());
+        List<Notes> expectedFilteredNotesList = new ArrayList<>(actualModel.getFilteredNotesList());
+        Notes expectedSelectedNotes = actualModel.getSelectedNotes();
+
+        CommandHistory expectedCommandHistory = new CommandHistory(actualCommandHistory);
+
+        try {
+            command.execute(actualModel, actualCommandHistory);
+            throw new AssertionError("The expected CommandException was not thrown.");
+        } catch (CommandException e) {
+            assertEquals(expectedMessage, e.getMessage());
+            assertEquals(expectedTaskManager, actualModel.getTaskManager());
+            assertEquals(expectedFilteredNotesList, actualModel.getFilteredNotesList());
+            assertEquals(expectedSelectedNotes, actualModel.getSelectedNotes());
+            assertEquals(expectedCommandHistory, actualCommandHistory);
+        }
     }
 
 }

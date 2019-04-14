@@ -1,11 +1,29 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CONTENT_MARKET;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CONTENT_POPULAR;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_PROJECT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_TUTORIAL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_HEADING_MARKET;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_HEADING_POPULAR;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_PROJECT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_TUTORIAL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_PROJECT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_TUTORIAL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PRIORITY_MARKET;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PRIORITY_POPULAR;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PRIORITY_PROJECT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PRIORITY_TUTORIAL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_GRADED;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_UNGRADED;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.TaskManager;
 import seedu.address.model.notes.Notes;
+import seedu.address.model.task.Task;
 
 /**
  * A utility class containing a list of notes used in tests.
@@ -28,6 +46,12 @@ public class TypicalNotes {
             .withContent("Watch Avengers endgame")
             .withPriority("1").build();
 
+    public static final Notes MARKET = new NotesBuilder().withHeading(VALID_HEADING_MARKET).withContent(VALID_CONTENT_MARKET)
+            .withPriority(VALID_PRIORITY_MARKET).build();
+
+    public static final Notes POPULAR = new NotesBuilder().withHeading(VALID_HEADING_POPULAR)
+            .withContent(VALID_CONTENT_POPULAR).withPriority(VALID_PRIORITY_POPULAR).build();
+
 
     private TypicalNotes() {
     } // prevents instantiation
@@ -45,7 +69,7 @@ public class TypicalNotes {
 
     public static List<Notes> getTypicalNotes() {
 
-        return new ArrayList<>(Arrays.asList(MEETUP, ERRAND, BUSINESS, LEISURE));
+        return new ArrayList<>(Arrays.asList(MEETUP, ERRAND, BUSINESS, LEISURE, POPULAR, MARKET));
     }
 
 }
