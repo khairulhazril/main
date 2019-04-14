@@ -1127,6 +1127,10 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* *` |user |sort my tasks by the attributes |can view my tasks by urgency etc.
 
+|`* *` |user |view all the months of the year on the calendar
+
+|`* *` |user |select a task to have it highlighted in the app for easy viewing
+
 |`* *` |user |secure my task manager via a username and password to keep my events safe |keep my events and due dates private and secure to minimize the chances of someone deleting them
 
 |`* *` |user | have my password hashed | keep my password safe without anyone easily retrieving them through my computer
@@ -1168,7 +1172,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 [appendix]
 == Use Cases
 
-(For all use cases below, the *System* is the `TaskManager` and the *Actor* is the `user`, unless specified otherwise)
+(For all use cases below, the *System* is `Student Buddy` and the *Actor* is the `user`, unless specified otherwise)
 
 [discrete]
 === Use case: Help
@@ -1386,6 +1390,29 @@ Use case ends.
 ** 1ai. Student Buddy returns an error
 +
 Use case resumes at step 1.
+
+=== Use case: Change month
+
+*MSS*
+
+1. User requests to change the month being displayed on the calendar
+2. Student Buddy displays a different month on the calendar according to the user's input
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. The given month is invalid
++
+[none]
+** 1ai. Student Buddy returns an error
+
+[none]
+* 1b. The given month is already being displayed
++
+[none]
+** 1bi. Student Buddy returns an error
 
 _{More to be added}_
 
