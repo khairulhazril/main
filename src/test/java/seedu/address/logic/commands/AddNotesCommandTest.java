@@ -46,7 +46,7 @@ public class AddNotesCommandTest {
     }
 
     @Test
-    public void execute_notes_accepted_byModel() throws Exception {
+    public void execute_notesAccepted() throws Exception {
         ModelStubAcceptingNotesAdded modelStub = new ModelStubAcceptingNotesAdded();
         Notes validNotes = new NotesBuilder().build();
 
