@@ -110,6 +110,7 @@ Possible Errors:
 Format: `logout`
 
 Example:
+
 * `logout` +
 Logged out of nicholas.
 
