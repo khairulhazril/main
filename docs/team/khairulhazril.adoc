@@ -37,6 +37,8 @@ This section shows a summary of my coding, documentation, and other helpful cont
 ** Project management:
 *** Set up the organization repository and its issue tracker
 *** Managed releases `v1.2` and `v1.3` on GitHub
+** Enhancement to existing features:
+*** Wrote tests for existing features to increase coverage by 10.48% (Pull Requests: https://github.com/CS2113-AY1819S2-M11-2/main/pull/110[110], https://github.com/CS2113-AY1819S2-M11-2/main/pull/171[171], https://github.com/CS2113-AY1819S2-M11-2/main/pull/173[#173])
 ** Documentation:
 *** Updated the content in the User and Developer Guides according to my contribution to the project (https://github.com/CS2113-AY1819S2-M11-2/main/pull/54[#54], https://github.com/CS2113-AY1819S2-M11-2/main/pull/79[#79])
 *** Updated the existing images in the Developer Guide to fit the project (https://github.com/CS2113-AY1819S2-M11-2/main/pull/110/files[#110])
