@@ -73,10 +73,21 @@ public class Task {
     }
 
     /**
-     * Returns true if both tasks are identical
+     * Returns true if both tasks are identical except for tags
      */
     public boolean isSameTask(Task otherTask) {
-        return (equals(otherTask));
+        if (otherTask == null) {
+            return false;
+        }
+
+        if (otherTask == this) {
+            return true;
+        }
+
+        return otherTask.getName().equals(getName())
+                && otherTask.getModule().equals(getModule())
+                && otherTask.getDue().equals(getDue())
+                && otherTask.getPriority().equals(getPriority());
     }
 
     /**

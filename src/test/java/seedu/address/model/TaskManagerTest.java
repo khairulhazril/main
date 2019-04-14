@@ -54,8 +54,10 @@ public class TaskManagerTest {
     @Test
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
         // Two tasks with the same identity fields
-        Task editedAlice = new TaskBuilder(SLIDES).withPriority(VALID_PRIORITY_TUTORIAL).withTags(VALID_TAG_GRADED)
-                .build();
+        Task editedAlice = new TaskBuilder(SLIDES).withName("Slides")
+                .withPriority("1").withDate("03-03")
+                .withModule("CS2113")
+                .withTags("ungraded").build();
         List<Task> newTasks = Arrays.asList(SLIDES, editedAlice);
         TaskManagerStub newData = new TaskManagerStub(newTasks);
 
@@ -83,8 +85,10 @@ public class TaskManagerTest {
     @Test
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
         taskManager.addTask(SLIDES);
-        Task editedAlice = new TaskBuilder(SLIDES).withPriority(VALID_PRIORITY_TUTORIAL).withTags(VALID_TAG_GRADED)
-                .build();
+        Task editedAlice = new TaskBuilder(SLIDES).withName("Slides")
+                .withPriority("1").withDate("03-03")
+                .withModule("CS2113")
+                .withTags("ungraded").build();
         assertTrue(taskManager.hasTask(editedAlice));
     }
 
